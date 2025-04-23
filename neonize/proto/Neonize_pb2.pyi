@@ -640,6 +640,7 @@ class GroupInfo(google.protobuf.message.Message):
 
     OWNERJID_FIELD_NUMBER: builtins.int
     JID_FIELD_NUMBER: builtins.int
+    OWNERPN_FIELD_NUMBER: builtins.int
     GROUPNAME_FIELD_NUMBER: builtins.int
     GROUPTOPIC_FIELD_NUMBER: builtins.int
     GROUPLOCKED_FIELD_NUMBER: builtins.int
@@ -658,6 +659,8 @@ class GroupInfo(google.protobuf.message.Message):
     def OwnerJID(self) -> global___JID: ...
     @property
     def JID(self) -> global___JID: ...
+    @property
+    def OwnerPN(self) -> global___JID: ...
     @property
     def GroupName(self) -> global___GroupName: ...
     @property
@@ -683,6 +686,7 @@ class GroupInfo(google.protobuf.message.Message):
         *,
         OwnerJID: global___JID | None = ...,
         JID: global___JID | None = ...,
+        OwnerPN: global___JID | None = ...,
         GroupName: global___GroupName | None = ...,
         GroupTopic: global___GroupTopic | None = ...,
         GroupLocked: global___GroupLocked | None = ...,
@@ -696,8 +700,8 @@ class GroupInfo(google.protobuf.message.Message):
         ParticipantVersionID: builtins.str | None = ...,
         Participants: collections.abc.Iterable[global___GroupParticipant] | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["GroupAnnounce", b"GroupAnnounce", "GroupCreated", b"GroupCreated", "GroupEphemeral", b"GroupEphemeral", "GroupIncognito", b"GroupIncognito", "GroupIsDefaultSub", b"GroupIsDefaultSub", "GroupLinkedParent", b"GroupLinkedParent", "GroupLocked", b"GroupLocked", "GroupName", b"GroupName", "GroupParent", b"GroupParent", "GroupTopic", b"GroupTopic", "JID", b"JID", "OwnerJID", b"OwnerJID", "ParticipantVersionID", b"ParticipantVersionID"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["GroupAnnounce", b"GroupAnnounce", "GroupCreated", b"GroupCreated", "GroupEphemeral", b"GroupEphemeral", "GroupIncognito", b"GroupIncognito", "GroupIsDefaultSub", b"GroupIsDefaultSub", "GroupLinkedParent", b"GroupLinkedParent", "GroupLocked", b"GroupLocked", "GroupName", b"GroupName", "GroupParent", b"GroupParent", "GroupTopic", b"GroupTopic", "JID", b"JID", "OwnerJID", b"OwnerJID", "ParticipantVersionID", b"ParticipantVersionID", "Participants", b"Participants"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["GroupAnnounce", b"GroupAnnounce", "GroupCreated", b"GroupCreated", "GroupEphemeral", b"GroupEphemeral", "GroupIncognito", b"GroupIncognito", "GroupIsDefaultSub", b"GroupIsDefaultSub", "GroupLinkedParent", b"GroupLinkedParent", "GroupLocked", b"GroupLocked", "GroupName", b"GroupName", "GroupParent", b"GroupParent", "GroupTopic", b"GroupTopic", "JID", b"JID", "OwnerJID", b"OwnerJID", "OwnerPN", b"OwnerPN", "ParticipantVersionID", b"ParticipantVersionID"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["GroupAnnounce", b"GroupAnnounce", "GroupCreated", b"GroupCreated", "GroupEphemeral", b"GroupEphemeral", "GroupIncognito", b"GroupIncognito", "GroupIsDefaultSub", b"GroupIsDefaultSub", "GroupLinkedParent", b"GroupLinkedParent", "GroupLocked", b"GroupLocked", "GroupName", b"GroupName", "GroupParent", b"GroupParent", "GroupTopic", b"GroupTopic", "JID", b"JID", "OwnerJID", b"OwnerJID", "OwnerPN", b"OwnerPN", "ParticipantVersionID", b"ParticipantVersionID", "Participants", b"Participants"]) -> None: ...
 
 global___GroupInfo = GroupInfo
 
