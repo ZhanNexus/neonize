@@ -24,6 +24,21 @@ else:
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+class _AddressingMode:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _AddressingModeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_AddressingMode.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    PN: _AddressingMode.ValueType  # 1
+    LID: _AddressingMode.ValueType  # 2
+
+class AddressingMode(_AddressingMode, metaclass=_AddressingModeEnumTypeWrapper): ...
+
+PN: AddressingMode.ValueType  # 1
+LID: AddressingMode.ValueType  # 2
+global___AddressingMode = AddressingMode
+
 class _NewsletterRole:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
@@ -223,7 +238,7 @@ class MessageSource(google.protobuf.message.Message):
     BROADCASTLISTOWNER_FIELD_NUMBER: builtins.int
     IsFromMe: builtins.bool
     IsGroup: builtins.bool
-    AddressingMode: builtins.str
+    AddressingMode: global___AddressingMode.ValueType
     @property
     def Chat(self) -> global___JID: ...
     @property
@@ -241,7 +256,7 @@ class MessageSource(google.protobuf.message.Message):
         Sender: global___JID | None = ...,
         IsFromMe: builtins.bool | None = ...,
         IsGroup: builtins.bool | None = ...,
-        AddressingMode: builtins.str | None = ...,
+        AddressingMode: global___AddressingMode.ValueType | None = ...,
         SenderAlt: global___JID | None = ...,
         RecipientAlt: global___JID | None = ...,
         BroadcastListOwner: global___JID | None = ...,
