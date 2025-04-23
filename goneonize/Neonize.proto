@@ -44,7 +44,10 @@ message MessageSource {
     required JID Sender = 2;
     required bool IsFromMe = 3;
     required bool IsGroup = 4;
-    required JID BroadcastListOwner = 5;
+    required string AddressingMode = 5;
+    required JID SenderAlt = 6;
+    required JID RecipientAlt = 7;
+    required JID BroadcastListOwner = 8;
 }
 message DeviceSentMeta {
     required string DestinationJID = 1;
