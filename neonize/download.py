@@ -4,8 +4,8 @@ import requests
 from pathlib import Path
 from tqdm import tqdm
 
-__GONEONIZE_VERSION__ = "0.3.9"
-__GIT_RELEASE_URL__ = "https://github.com/krypton-byte/neonize"
+__GONEONIZE_VERSION__ = "0.3.9.1"
+__GIT_RELEASE_URL__ = "https://github.com/nubuki-all/neonize"
 
 
 class UnsupportedPlatform(Exception):

@@ -7,6 +7,7 @@ from asyncio import get_event_loop
 import asyncio
 import ctypes
 from datetime import timedelta
+from os import urandom
 from requests.exceptions import HTTPError
 from typing import (
     Any,
@@ -462,7 +463,7 @@ class NewAClient:
         """
         if text is None:
             return []
-
+        
         gc_mentions = []
         for jid in re.finditer(r"@([0-9-]{11,26}|0)@g\.us", text):
             try:
@@ -473,9 +474,11 @@ class NewAClient:
                 log.info(traceback.format_exc())
                 continue
             gc_mentions.append(
-                GroupMention(groupJID=Jid2String(group.JID), groupSubject=group.GroupName.Name)
+                GroupMention(
+                    groupJID=Jid2String(group.JID),
+                    groupSubject=group.GroupName.Name
+                )
             )
-
         return gc_mentions
 
     async def _generate_link_preview(self, text: str) -> ExtendedTextMessage | None:
@@ -546,6 +549,7 @@ class NewAClient:
         message: typing.Union[Message, str],
         link_preview: bool = False,
         ghost_mentions: Optional[str] = None,
+        add_msg_secret: bool = False,
     ) -> SendResponse:
         """Send a message to the specified JID.
 
@@ -557,8 +561,8 @@ class NewAClient:
         :type link_preview: bool, optional
         :param ghost_mentions: List of users to tag silently (Takes precedence over auto detected mentions)
         :type ghost_mentions: str, optional
-        :param ghost_mentions: List of users to tag silently (Takes precedence over auto detected mentions)
-        :type ghost_mentions: str, optional
+        :param add_msg_secret: Whether to generate 32 random bytes for messageSecret inside MessageContextInfo before sending, defaults to False
+        :type add_msg_secret: bool, optional
         :raises SendMessageError: If there was an error sending the message.
         :return: The response from the server.
         :rtype: SendResponse
@@ -566,10 +570,9 @@ class NewAClient:
         to_bytes = to.SerializeToString()
         if isinstance(message, str):
             mentioned_groups = await self._parse_group_mention(message)
-            mentioned_jid = self._parse_mention(ghost_mentions or ghost_mentions or message)
+            mentioned_jid = self._parse_mention(ghost_mentions or message)
             partial_msg = ExtendedTextMessage(
-                text=message,
-                contextInfo=ContextInfo(mentionedJID=mentioned_jid, groupMentions=mentioned_groups),
+                text=message, contextInfo=ContextInfo(mentionedJID=mentioned_jid, groupMentions=mentioned_groups)
             )
             if link_preview:
                 preview = await self._generate_link_preview(message)
@@ -581,6 +584,10 @@ class NewAClient:
                 msg = Message(extendedTextMessage=partial_msg)
         else:
             msg = message
+        if add_msg_secret:
+            # optionally patch message with messageSecret to allow reactions and replies to messages sent to community announcements
+            # see: https://github.com/tulir/whatsmeow/issues/509#issuecomment-1842732773
+            msg.messageContextInfo.messageSecret = urandom(32)
         message_bytes = msg.SerializeToString()
         sendresponse = (
             await self.__client.SendMessage(
@@ -621,8 +628,8 @@ class NewAClient:
                 text=message,
                 contextInfo=ContextInfo(
                     mentionedJID=self._parse_mention(ghost_mentions or message),
-                    groupMentions=(await self._parse_group_mention(ghost_mentions or message)),
-                ),
+                    groupMentions=(await self._parse_group_mention(message)),
+                    ),
             )
             if link_preview:
                 preview = await self._generate_link_preview(message)
@@ -645,6 +652,7 @@ class NewAClient:
         link_preview: bool = False,
         reply_privately: bool = False,
         ghost_mentions: Optional[str] = None,
+        add_msg_secret: bool = False,
     ) -> SendResponse:
         """Send a reply message to a specified JID.
 
@@ -660,8 +668,8 @@ class NewAClient:
         :type reply_privately: bool, optional
         :param ghost_mentions: List of users to tag silently (Takes precedence over auto detected mentions)
         :type ghost_mentions: str, optional
-        :param ghost_mentions: List of users to tag silently (Takes precedence over auto detected mentions)
-        :type ghost_mentions: str, optional
+        :param add_msg_secret: If set to True generate 32 random bytes for messageSecret inside MessageContextInfo before sending, defaults to False
+        :type add_msg_secret: bool, optional
         :return: Response of the send operation.
         :rtype: SendResponse
         """
@@ -680,6 +688,7 @@ class NewAClient:
                 ghost_mentions=ghost_mentions,
             ),
             link_preview,
+            add_msg_secret=add_msg_secret,
         )
 
     async def edit_message(self, chat: JID, message_id: str, new_message: Message) -> SendResponse:
@@ -711,7 +720,11 @@ class NewAClient:
         return await self.send_message(chat, await self.build_revoke(chat, sender, message_id))
 
     async def build_poll_vote_creation(
-        self, name: str, options: List[str], selectable_count: int
+        self,
+        name: str,
+        options: List[str],
+        selectable_count: int,
+        quoted: Optional[neonize_proto.Message] = None,
     ) -> Message:
         """Build a poll vote creation message.
 
@@ -721,11 +734,13 @@ class NewAClient:
         :type options: List[str]
         :param selectable_count: The number of selectable options.
         :type selectable_count: int
+        :param quoted: A message that the poll message is a reply to, defaults to None
+        :type quoted: Optional[neonize_proto.Message], optional
         :return: The poll vote creation message.
         :rtype: Message
         """
         options_buf = neonize_proto.ArrayString(data=options).SerializeToString()
-        return Message.FromString(
+        message = Message.FromString(
             (
                 await self.__client.BuildPollVoteCreation(
                     self.uuid,
@@ -736,6 +751,9 @@ class NewAClient:
                 )
             ).get_bytes()
         )
+        if quoted:
+            message.pollCreationMessage.contextInfo.MergeFrom(self._make_quoted_message(quoted))
+        return message
 
     async def build_poll_vote(self, poll_info: MessageInfo, option_names: List[str]) -> Message:
         """Builds a poll vote.
@@ -893,6 +911,7 @@ class NewAClient:
         packname: str = "",
         crop: bool = False,
         enforce_not_broken: bool = False,
+        add_msg_secret: bool = False,
     ) -> SendResponse:
         """
         Send a sticker to a specific JID.
@@ -907,10 +926,12 @@ class NewAClient:
         :type name: str, optional
         :param packname: The name of the sticker pack, defaults to "".
         :type packname: str, optional
-        :param crop: Crop-center the image, defaults to False
+        :param crop: Whether to crop-center the image, defaults to False
         :type crop: bool, optional
-        :param enforce_not_broken: Enforce non-broken stickers by constraining sticker size to WA limits, defaults to False
+        :param enforce_not_broken: Whether to enforce non-broken stickers by constraining sticker size to WA limits, defaults to False
         :type enforce_not_broken: bool, optional
+        :param add_msg_secret: Whether to generate 32 random bytes for messageSecret inside MessageContextInfo before sending, defaults to False
+        :type add_msg_secret: bool, optional
         :return: The response from the send message function.
         :rtype: SendResponse
         """
@@ -919,6 +940,7 @@ class NewAClient:
             await self.build_sticker_message(
                 file, quoted, name, packname, crop, enforce_not_broken
             ),
+            add_msg_secret=add_msg_secret,
         )
 
     async def build_video_message(
@@ -947,8 +969,6 @@ class NewAClient:
         :type gifplayback: bool, optional
         :param is_gif: Optional. Whether the video to be sent is a gif. Defaults to False.
         :type is_gif: bool, optional
-        :param ghost_mentions: List of users to tag silently (Takes precedence over auto detected mentions)
-        :type ghost_mentions: str, optional
         :return: A video message with the given parameters.
         :param ghost_mentions: List of users to tag silently (Takes precedence over auto detected mentions)
         :type ghost_mentions: str, optional
@@ -982,7 +1002,7 @@ class NewAClient:
                 thumbnailSHA256=upload.FileSHA256,
                 viewOnce=viewonce,
                 contextInfo=ContextInfo(
-                    mentionedJID=self._parse_mention(ghost_mentions or ghost_mentions or caption),
+                    mentionedJID=self._parse_mention(ghost_mentions or caption),
                     groupMentions=(await self._parse_group_mention(caption)),
                 ),
             )
@@ -1001,6 +1021,7 @@ class NewAClient:
         gifplayback: bool = False,
         is_gif: bool = False,
         ghost_mentions: Optional[str] = None,
+        add_msg_secret: bool = False,
     ) -> SendResponse:
         """Sends a video to the specified recipient.
 
@@ -1020,16 +1041,15 @@ class NewAClient:
         :type is_gif: bool, optional
         :param ghost_mentions: List of users to tag silently (Takes precedence over auto detected mentions)
         :type ghost_mentions: str, optional
-        :param ghost_mentions: List of users to tag silently (Takes precedence over auto detected mentions)
-        :type ghost_mentions: str, optional
+        :param add_msg_secret: Optional. Whether to generate 32 random bytes for messageSecret inside MessageContextInfo before sending, defaults to False
+        :type add_msg_secret: bool, optional
         :return: A function for handling the result of the video sending process.
         :rtype: SendResponse
         """
         return await self.send_message(
             to,
-            await self.build_video_message(
-                file, caption, quoted, viewonce, gifplayback, is_gif, ghost_mentions
-            ),
+            await self.build_video_message(file, caption, quoted, viewonce, gifplayback, is_gif, ghost_mentions),
+            add_msg_secret=add_msg_secret,
         )
 
     async def build_image_message(
@@ -1055,8 +1075,6 @@ class NewAClient:
         :type quoted: Optional[neonize_proto.Message], optional
         :param viewonce: Whether the image message should be viewable only once, defaults to False.
         :type viewonce: bool, optional
-        :param ghost_mentions: List of users to tag silently (Takes precedence over auto detected mentions)
-        :type ghost_mentions: str, optional
         :param ghost_mentions: List of users to tag silently (Takes precedence over auto detected mentions)
         :type ghost_mentions: str, optional
         :return: The constructed image message.
@@ -1085,7 +1103,7 @@ class NewAClient:
                 thumbnailSHA256=upload.FileSHA256,
                 viewOnce=viewonce,
                 contextInfo=ContextInfo(
-                    mentionedJID=self._parse_mention(ghost_mentions or ghost_mentions or caption),
+                    mentionedJID=self._parse_mention(ghost_mentions or caption),
                     groupMentions=(await self._parse_group_mention(caption)),
                 ),
             )
@@ -1102,6 +1120,7 @@ class NewAClient:
         quoted: Optional[neonize_proto.Message] = None,
         viewonce: bool = False,
         ghost_mentions: Optional[str] = None,
+        add_msg_secret: bool = False,
     ) -> SendResponse:
         """Sends an image to the specified recipient.
 
@@ -1117,16 +1136,15 @@ class NewAClient:
         :type viewonce: bool, optional
         :param ghost_mentions: List of users to tag silently (Takes precedence over auto detected mentions)
         :type ghost_mentions: str, optional
-        :param ghost_mentions: List of users to tag silently (Takes precedence over auto detected mentions)
-        :type ghost_mentions: str, optional
+        :param add_msg_secret: Optional. Whether to generate 32 random bytes for messageSecret inside MessageContextInfo before sending, defaults to False
+        :type add_msg_secret: bool, optional
         :return: A function for handling the result of the image sending process.
         :rtype: SendResponse
         """
         return await self.send_message(
             to,
-            await self.build_image_message(
-                file, caption, quoted, viewonce=viewonce, ghost_mentions=ghost_mentions
-            ),
+            await self.build_image_message(file, caption, quoted, viewonce=viewonce, ghost_mentions=ghost_mentions),
+            add_msg_secret=add_msg_secret,
         )
 
     async def build_audio_message(
@@ -1176,6 +1194,7 @@ class NewAClient:
         file: str | bytes,
         ptt: bool = False,
         quoted: Optional[neonize_proto.Message] = None,
+        add_msg_secret: bool = False,
     ) -> SendResponse:
         """Sends an audio to the specified recipient.
 
@@ -1187,11 +1206,17 @@ class NewAClient:
         :type ptt: bool, optional
         :param quoted: Optional. The message to which the audio is a reply. Defaults to None.
         :type quoted: Optional[Message], optional
+        :param add_msg_secret: Optional. Whether to  generate 32 random bytes for messageSecret inside MessageContextInfo before sending, defaults to False
+        :type add_msg_secret: bool, optional
         :return: A function for handling the result of the audio sending process.
         :rtype: SendResponse
         """
 
-        return await self.send_message(to, await self.build_audio_message(file, ptt, quoted))
+        return await self.send_message(
+            to,
+            await self.build_audio_message(file, ptt, quoted),
+            add_msg_secret=add_msg_secret,
+        )
 
     async def build_document_message(
         self,
@@ -1220,7 +1245,7 @@ class NewAClient:
                 title=title,
                 fileName=filename,
                 contextInfo=ContextInfo(
-                    mentionedJID=self._parse_mention(ghost_mentions or ghost_mentions or caption),
+                    mentionedJID=self._parse_mention(ghost_mentions or caption),
                     groupMentions=(await self._parse_group_mention(caption)),
                 ),
             )
@@ -1239,6 +1264,7 @@ class NewAClient:
         mimetype: Optional[str] = None,
         quoted: Optional[neonize_proto.Message] = None,
         ghost_mentions: Optional[str] = None,
+        add_msg_secret: bool = False,
     ) -> SendResponse:
         """Sends a document to the specified recipient.
 
@@ -1256,16 +1282,15 @@ class NewAClient:
         :type quoted: Optional[Message], optional
         :param ghost_mentions: List of users to tag silently (Takes precedence over auto detected mentions)
         :type ghost_mentions: str, optional
-        :param ghost_mentions: List of users to tag silently (Takes precedence over auto detected mentions)
-        :type ghost_mentions: str, optional
+        :param add_msg_secret: Optional. Whether to generate 32 random bytes for messageSecret inside MessageContextInfo before sending, defaults to False
+        :type add_msg_secret: bool, optional
         :return: A function for handling the result of the document sending process.
         :rtype: SendResponse
         """
         return await self.send_message(
             to,
-            await self.build_document_message(
-                file, caption, title, filename, mimetype, quoted, ghost_mentions
-            ),
+            await self.build_document_message(file, caption, title, filename, mimetype, quoted),
+            add_msg_secret=add_msg_secret,
         )
 
     async def send_contact(
@@ -1618,7 +1643,9 @@ class NewAClient:
         :rtype: str
         """
         data = get_bytes_from_name_or_url(file_or_bytes)
-        response = await self.__client.SetProfilePhoto(self.uuid, data, len(data))
+        response = await self.__client.SetProfilePhoto(
+            self.uuid, data, len(data)
+        )
         model = SetGroupPhotoReturnFunction.FromString(response.get_bytes())
         if model.Error:
             raise SetGroupPhotoError(model.Error)
@@ -2705,9 +2732,7 @@ class NewAClient:
     async def decrypt_poll_vote(self, message: neonize_proto.Message) -> PollVoteMessage:
         """Decrypt PollMessage"""
         msg_buff = message.SerializeToString()
-        response = await self.__client.DecryptPollVote(
-            self.uuid, msg_buff, len(msg_buff), len(msg_buff)
-        )
+        response = await self.__client.DecryptPollVote(self.uuid, msg_buff, len(msg_buff))
         model = ReturnFunctionWithError.FromString(response.get_bytes())
         if model.Error:
             raise DecryptPollVoteError(model.Error)

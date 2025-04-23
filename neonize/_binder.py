@@ -254,7 +254,7 @@ if not os.environ.get("SPHINX"):
     gocode.GetSubscribedNewsletters.restype = Bytes
     gocode.GetUserDevices.argtypes = [ctypes.c_char_p, ctypes.c_char_p, ctypes.c_int]
     gocode.GetUserDevices.restype = Bytes
-    gocode.JoinGroupWithLink.argtypes = [
+    gocode.JoinGroupWithInvite.argtypes = [
         ctypes.c_char_p,
         ctypes.c_char_p,
         ctypes.c_int,
