@@ -592,6 +592,7 @@ class GroupParticipant(google.protobuf.message.Message):
 
     JID_FIELD_NUMBER: builtins.int
     LID_FIELD_NUMBER: builtins.int
+    PHONENUMBER_FIELD_NUMBER: builtins.int
     ISADMIN_FIELD_NUMBER: builtins.int
     ISSUPERADMIN_FIELD_NUMBER: builtins.int
     DISPLAYNAME_FIELD_NUMBER: builtins.int
@@ -606,20 +607,23 @@ class GroupParticipant(google.protobuf.message.Message):
     @property
     def LID(self) -> global___JID: ...
     @property
+    def PhoneNumber(self) -> global___JID: ...
+    @property
     def AddRequest(self) -> global___GroupParticipantAddRequest: ...
     def __init__(
         self,
         *,
         JID: global___JID | None = ...,
         LID: global___JID | None = ...,
+        PhoneNumber: global___JID | None = ...,
         IsAdmin: builtins.bool | None = ...,
         IsSuperAdmin: builtins.bool | None = ...,
         DisplayName: builtins.str | None = ...,
         Error: builtins.int | None = ...,
         AddRequest: global___GroupParticipantAddRequest | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["AddRequest", b"AddRequest", "DisplayName", b"DisplayName", "Error", b"Error", "IsAdmin", b"IsAdmin", "IsSuperAdmin", b"IsSuperAdmin", "JID", b"JID", "LID", b"LID"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["AddRequest", b"AddRequest", "DisplayName", b"DisplayName", "Error", b"Error", "IsAdmin", b"IsAdmin", "IsSuperAdmin", b"IsSuperAdmin", "JID", b"JID", "LID", b"LID"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["AddRequest", b"AddRequest", "DisplayName", b"DisplayName", "Error", b"Error", "IsAdmin", b"IsAdmin", "IsSuperAdmin", b"IsSuperAdmin", "JID", b"JID", "LID", b"LID", "PhoneNumber", b"PhoneNumber"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["AddRequest", b"AddRequest", "DisplayName", b"DisplayName", "Error", b"Error", "IsAdmin", b"IsAdmin", "IsSuperAdmin", b"IsSuperAdmin", "JID", b"JID", "LID", b"LID", "PhoneNumber", b"PhoneNumber"]) -> None: ...
 
 global___GroupParticipant = GroupParticipant
 
