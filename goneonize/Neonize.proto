@@ -151,18 +151,19 @@ message GroupParticipant {
 message GroupInfo{
     required JID OwnerJID=2;
     required JID JID=1;
-    required GroupName GroupName = 3;
-    required GroupTopic GroupTopic = 4;
-    required GroupLocked GroupLocked = 5;
-    required GroupAnnounce GroupAnnounce = 6;
-    required GroupEphemeral GroupEphemeral = 7;
-    required GroupIncognito GroupIncognito = 8;
-    required GroupParent GroupParent = 9;
-    required GroupLinkedParent GroupLinkedParent = 10;
-    required GroupIsDefaultSub GroupIsDefaultSub = 11;
-    required float GroupCreated = 12;
-    required string ParticipantVersionID = 13;
-    repeated GroupParticipant Participants = 14;
+    required JID OwnerPN=3;
+    required GroupName GroupName = 4;
+    required GroupTopic GroupTopic = 5;
+    required GroupLocked GroupLocked = 6;
+    required GroupAnnounce GroupAnnounce = 7;
+    required GroupEphemeral GroupEphemeral = 8;
+    required GroupIncognito GroupIncognito = 9;
+    required GroupParent GroupParent = 10;
+    required GroupLinkedParent GroupLinkedParent = 11;
+    required GroupIsDefaultSub GroupIsDefaultSub = 12;
+    required float GroupCreated = 13;
+    required string ParticipantVersionID = 14;
+    repeated GroupParticipant Participants = 15;
     enum GroupMemberAddMode {
         GroupMemberAddModeAdmin = 1;
     }

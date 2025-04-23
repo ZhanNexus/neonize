@@ -57,7 +57,7 @@ func DecodeReqCreateGroup(reqCreateGroup *defproto.ReqCreateGroup) whatsmeow.Req
 	return new_type
 }
 
-func DecodeAddressingMode(mode_types *defproto.AddressingMode) *types.AddressingMode {
+func DecodeAddressingMode(mode_types *defproto.AddressingMode) types.AddressingMode {
 	var AddressingMode types.AddressingMode
 	switch mode_types {
 	case defproto.AddressingMode_PN.Enum():
@@ -65,7 +65,7 @@ func DecodeAddressingMode(mode_types *defproto.AddressingMode) *types.Addressing
 	case defproto.AddressingMode_LID.Enum():
 		AddressingMode = types.AddressingModeLID
 	}
-	return *AddressingMode
+	return AddressingMode
 }
 func DecodeMessageSource(messageSource *defproto.MessageSource) types.MessageSource {
 	return types.MessageSource{
