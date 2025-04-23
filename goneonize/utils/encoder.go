@@ -203,6 +203,11 @@ func EncodeMessageSource(messageSource types.MessageSource) *defproto.MessageSou
 		Sender:             EncodeJidProto(messageSource.Sender),
 		IsFromMe:           &messageSource.IsFromMe,
 		IsGroup:            &messageSource.IsGroup,
+		
+		AddressingMode:     &messageSource.AddressingMode,
+		SenderAlt:          EncodeJidProto(messageSource.SenderAlt),
+		RecipientAlt:       EncodeJidProto(messageSource.RecipientAlt),
+
 		BroadcastListOwner: EncodeJidProto(messageSource.BroadcastListOwner),
 	}
 }

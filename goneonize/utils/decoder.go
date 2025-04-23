@@ -62,6 +62,10 @@ func DecodeMessageSource(messageSource *defproto.MessageSource) types.MessageSou
 		Sender:             DecodeJidProto(messageSource.Sender),
 		IsFromMe:           *messageSource.IsFromMe,
 		IsGroup:            *messageSource.IsGroup,
+		
+		AddressingMode:     *messageSource.AddressingMode,
+		SenderAlt:          DecodeJidProto(messageSource.SenderAlt),
+		RecipientAlt:       DecodeJidProto(messageSource.RecipientAlt),
 		BroadcastListOwner: DecodeJidProto(messageSource.BroadcastListOwner),
 	}
 }
