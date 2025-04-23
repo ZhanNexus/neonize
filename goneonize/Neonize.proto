@@ -91,10 +91,11 @@ message UserInfo {
 
 message Device {
     optional JID JID = 1;
-    required string Platform = 2;
-    required string BussinessName = 3;
-    required string PushName = 4;
-    required bool Initialized = 5;
+    optional JID LID = 2;
+    required string Platform = 3;
+    required string BussinessName = 4;
+    required string PushName = 5;
+    required bool Initialized = 6;
 }
 
 

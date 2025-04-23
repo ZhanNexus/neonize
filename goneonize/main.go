@@ -1918,9 +1918,12 @@ func GetMe(id *C.char) C.struct_BytesReturn {
 	if cli.ID != nil {
 		device.JID = utils.EncodeJidProto(*cli.ID)
 	}
+	if cli.LID != nil {
+		device.LID = utils.EncodeJidProto(cli.LID)
+	}
 	DeviceBuf, err := proto.Marshal(&device)
 	if err != nil {
-		panic(DeviceBuf)
+		panic(err)
 	}
 	return ReturnBytes(DeviceBuf)
 }
