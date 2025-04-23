@@ -39,12 +39,17 @@ message UploadResponse {
     required bytes FileSHA256 = 6;
     required uint32 FileLength = 7;
 }
+
+enum AddressingMode {
+    PN = 1;
+    LID = 2;
+}
 message MessageSource {
     required JID Chat = 1;
     required JID Sender = 2;
     required bool IsFromMe = 3;
     required bool IsGroup = 4;
-    required string AddressingMode = 5;
+    required AddressingMode AddressingMode = 5;
     required JID SenderAlt = 6;
     required JID RecipientAlt = 7;
     required JID BroadcastListOwner = 8;

@@ -56,6 +56,17 @@ func DecodeReqCreateGroup(reqCreateGroup *defproto.ReqCreateGroup) whatsmeow.Req
 	}
 	return new_type
 }
+
+func DecodeAddressingMode(mode_types *defproto.AddressingMode) *types.AddressingMode {
+	var AddressingMode types.AddressingMode
+	switch mode_types {
+	case defproto.AddressingMode_PN.Enum():
+		AddressingMode = types.AddressingModePN
+	case defproto.AddressingMode_LID.Enum():
+		AddressingMode = types.AddressingModeLID
+	}
+	return *AddressingMode
+}
 func DecodeMessageSource(messageSource *defproto.MessageSource) types.MessageSource {
 	return types.MessageSource{
 		Chat:               DecodeJidProto(messageSource.Chat),
@@ -63,7 +74,7 @@ func DecodeMessageSource(messageSource *defproto.MessageSource) types.MessageSou
 		IsFromMe:           *messageSource.IsFromMe,
 		IsGroup:            *messageSource.IsGroup,
 		
-		AddressingMode:     *messageSource.AddressingMode,
+		AddressingMode:     DecodeAddressingMode(messageSource.AddressingMode),
 		SenderAlt:          DecodeJidProto(messageSource.SenderAlt),
 		RecipientAlt:       DecodeJidProto(messageSource.RecipientAlt),
 		BroadcastListOwner: DecodeJidProto(messageSource.BroadcastListOwner),
@@ -149,7 +160,7 @@ func DecodePatchInfo(patchInfo *defproto.PatchInfo) *appstate.PatchInfo {
 		Type = appstate.WAPatchCriticalBlock
 	case defproto.PatchInfo_CRITICAL_UNBLOCK_LOW.Enum():
 		Type = appstate.WAPatchCriticalUnblockLow
-	case defproto.PatchInfo_REGULAR.Enum():
+		case defproto.PatchInfo_REGULAR.Enum():
 		Type = appstate.WAPatchRegular
 	}
 	mutationInfo := []appstate.MutationInfo{}

@@ -123,6 +123,7 @@ func EncodeGroupInfo(info *types.GroupInfo) *defproto.GroupInfo {
 	return &defproto.GroupInfo{
 		JID:                  EncodeJidProto(info.JID),
 		OwnerJID:             EncodeJidProto(info.OwnerJID),
+		OwnerPN:              EncodeJidProto(info.OwnerPN),
 		GroupName:            EncodeGroupName(info.GroupName),
 		GroupTopic:           EncodeGroupTopic(info.GroupTopic),
 		GroupLocked:          EncodeGroupLocked(info.GroupLocked),
@@ -197,6 +198,17 @@ func EncodeUserInfo(userInfo types.UserInfo) *defproto.UserInfo {
 	}
 	return models
 }
+
+func EncodeAddressingMode(mode_types types.AddressingMode) *defproto.AddressingMode {
+	var AddressingMode *defproto.AddressingMode
+	switch mode_types {
+	case types.AddressingModePN:
+		AddressingMode = defproto.AddressingMode_PN.Enum()
+	case types.AddressingModeLID:
+		AddressingMode = defproto.AddressingMode_LID.Enum()
+	}
+	return AddressingMode
+}
 func EncodeMessageSource(messageSource types.MessageSource) *defproto.MessageSource {
 	return &defproto.MessageSource{
 		Chat:               EncodeJidProto(messageSource.Chat),
@@ -204,7 +216,7 @@ func EncodeMessageSource(messageSource types.MessageSource) *defproto.MessageSou
 		IsFromMe:           &messageSource.IsFromMe,
 		IsGroup:            &messageSource.IsGroup,
 		
-		AddressingMode:     &messageSource.AddressingMode,
+		AddressingMode:     EncodeAddressingMode(messageSource.AddressingMode),
 		SenderAlt:          EncodeJidProto(messageSource.SenderAlt),
 		RecipientAlt:       EncodeJidProto(messageSource.RecipientAlt),
 
