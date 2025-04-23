@@ -211,21 +211,18 @@ func EncodeAddressingMode(mode_types types.AddressingMode) *defproto.AddressingM
 	return AddressingMode
 }
 func EncodeMessageSource(messageSource types.MessageSource) *defproto.MessageSource {
-	model := &defproto.MessageSource{
+	return &defproto.MessageSource{
 		Chat:               EncodeJidProto(messageSource.Chat),
 		Sender:             EncodeJidProto(messageSource.Sender),
 		IsFromMe:           &messageSource.IsFromMe,
 		IsGroup:            &messageSource.IsGroup,
 
+		AddressingMode:     EncodeAddressingMode(messageSource.AddressingMode),
 		SenderAlt:          EncodeJidProto(messageSource.SenderAlt),
 		RecipientAlt:       EncodeJidProto(messageSource.RecipientAlt),
 
 		BroadcastListOwner: EncodeJidProto(messageSource.BroadcastListOwner),
 	}
-	if messageSource.AddressingMode != nil {
-		model.AddressingMode = EncodeAddressingMode(messageSource.AddressingMode)
-	}
-	return model
 }
 func EncodeDeviceSentMeta(deviceSentMeta *types.DeviceSentMeta) *defproto.DeviceSentMeta {
 	return &defproto.DeviceSentMeta{

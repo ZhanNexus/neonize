@@ -79,7 +79,7 @@ func DecodeMessageSource(messageSource *defproto.MessageSource) types.MessageSou
 
 		BroadcastListOwner: DecodeJidProto(messageSource.BroadcastListOwner),
 	}
-	if messageSource.AddressingMode  != nil {
+	if messageSource.AddressingMode != nil {
 		model.AddressingMode = DecodeAddressingMode(messageSource.AddressingMode)
 	}
 	return model
