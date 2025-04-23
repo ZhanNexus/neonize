@@ -68,17 +68,21 @@ func DecodeAddressingMode(mode_types *defproto.AddressingMode) types.AddressingM
 	return AddressingMode
 }
 func DecodeMessageSource(messageSource *defproto.MessageSource) types.MessageSource {
-	return types.MessageSource{
+	model := types.MessageSource{
 		Chat:               DecodeJidProto(messageSource.Chat),
 		Sender:             DecodeJidProto(messageSource.Sender),
 		IsFromMe:           *messageSource.IsFromMe,
 		IsGroup:            *messageSource.IsGroup,
 		
-		AddressingMode:     DecodeAddressingMode(messageSource.AddressingMode),
 		SenderAlt:          DecodeJidProto(messageSource.SenderAlt),
 		RecipientAlt:       DecodeJidProto(messageSource.RecipientAlt),
+
 		BroadcastListOwner: DecodeJidProto(messageSource.BroadcastListOwner),
 	}
+	if messageSource.AddressingMode  != nil {
+		model.AddressingMode = DecodeAddressingMode(messageSource.AddressingMode)
+	}
+	return model
 }
 func DecodeVerifiedNameCertificate(verifiedNameCertificate *waVname.VerifiedNameCertificate) *waVname.VerifiedNameCertificate {
 	//passing types through protobuf

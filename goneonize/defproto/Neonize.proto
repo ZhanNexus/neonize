@@ -49,7 +49,7 @@ message MessageSource {
     required JID Sender = 2;
     required bool IsFromMe = 3;
     required bool IsGroup = 4;
-    required AddressingMode AddressingMode = 5;
+    optional AddressingMode AddressingMode = 5;
     required JID SenderAlt = 6;
     required JID RecipientAlt = 7;
     required JID BroadcastListOwner = 8;
@@ -142,11 +142,12 @@ message GroupParticipantAddRequest {
 message GroupParticipant {
     optional JID JID = 1;
     required JID LID = 2;
-    required bool IsAdmin = 3;
-    required bool IsSuperAdmin = 4;
-    required string DisplayName = 5;
-    required int32 Error = 6;
-    optional GroupParticipantAddRequest AddRequest = 7;
+    required JID PhoneNumber = 3;
+    required bool IsAdmin = 4;
+    required bool IsSuperAdmin = 5;
+    required string DisplayName = 6;
+    required int32 Error = 7;
+    optional GroupParticipantAddRequest AddRequest = 8;
 }
 message GroupInfo{
     required JID OwnerJID=2;

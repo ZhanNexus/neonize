@@ -348,7 +348,6 @@ func Neonize(db *C.char, id *C.char, JIDByte *C.uchar, JIDSize C.int, logLevel *
 				if err != nil {
 					panic(err)
 				}
-				fmt.Println(v)
 				data, size := getBytesAndSize(messageSourceBytes)
 				go C.call_c_func_callback_bytes(event, data, size, C.int(17))
 			}

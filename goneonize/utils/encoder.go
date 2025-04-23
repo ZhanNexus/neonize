@@ -103,6 +103,7 @@ func EncodeGroupParticipant(participant types.GroupParticipant) *defproto.GroupP
 	participant_group := defproto.GroupParticipant{
 		LID:          EncodeJidProto(participant.LID),
 		JID:          EncodeJidProto(participant.JID),
+		PhoneNumber:  EncodeJidProto(participant.PhoneNumber),
 		IsAdmin:      &participant.IsAdmin,
 		IsSuperAdmin: &participant.IsSuperAdmin,
 		DisplayName:  &participant.DisplayName,
@@ -210,18 +211,21 @@ func EncodeAddressingMode(mode_types types.AddressingMode) *defproto.AddressingM
 	return AddressingMode
 }
 func EncodeMessageSource(messageSource types.MessageSource) *defproto.MessageSource {
-	return &defproto.MessageSource{
+	model := &defproto.MessageSource{
 		Chat:               EncodeJidProto(messageSource.Chat),
 		Sender:             EncodeJidProto(messageSource.Sender),
 		IsFromMe:           &messageSource.IsFromMe,
 		IsGroup:            &messageSource.IsGroup,
-		
-		AddressingMode:     EncodeAddressingMode(messageSource.AddressingMode),
+
 		SenderAlt:          EncodeJidProto(messageSource.SenderAlt),
 		RecipientAlt:       EncodeJidProto(messageSource.RecipientAlt),
 
 		BroadcastListOwner: EncodeJidProto(messageSource.BroadcastListOwner),
 	}
+	if messageSource.AddressingMode != nil {
+		model.AddressingMode = EncodeAddressingMode(messageSource.AddressingMode)
+	}
+	return model
 }
 func EncodeDeviceSentMeta(deviceSentMeta *types.DeviceSentMeta) *defproto.DeviceSentMeta {
 	return &defproto.DeviceSentMeta{
