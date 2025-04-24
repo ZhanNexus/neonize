@@ -454,7 +454,7 @@ class NewAClient:
         # Definitely need a better method 
         # WIP 
         server = "@s.whatsapp.net" if not are_lids else "@lid"
-        return [jid.group(1) + sever for jid in re.finditer(r"@([0-9]{5,16}|0)", text)]
+        return [jid.group(1) + server for jid in re.finditer(r"@([0-9]{5,16}|0)", text)]
 
     async def _parse_group_mention(self, text: Optional[str] = None) -> list[GroupMention]:
         """
