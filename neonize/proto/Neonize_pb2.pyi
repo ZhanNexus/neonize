@@ -367,6 +367,7 @@ class Device(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     JID_FIELD_NUMBER: builtins.int
+    LID_FIELD_NUMBER: builtins.int
     PLATFORM_FIELD_NUMBER: builtins.int
     BUSSINESSNAME_FIELD_NUMBER: builtins.int
     PUSHNAME_FIELD_NUMBER: builtins.int
@@ -377,17 +378,20 @@ class Device(google.protobuf.message.Message):
     Initialized: builtins.bool
     @property
     def JID(self) -> global___JID: ...
+    @property
+    def LID(self) -> global___JID: ...
     def __init__(
         self,
         *,
         JID: global___JID | None = ...,
+        LID: global___JID | None = ...,
         Platform: builtins.str | None = ...,
         BussinessName: builtins.str | None = ...,
         PushName: builtins.str | None = ...,
         Initialized: builtins.bool | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["BussinessName", b"BussinessName", "Initialized", b"Initialized", "JID", b"JID", "Platform", b"Platform", "PushName", b"PushName"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["BussinessName", b"BussinessName", "Initialized", b"Initialized", "JID", b"JID", "Platform", b"Platform", "PushName", b"PushName"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["BussinessName", b"BussinessName", "Initialized", b"Initialized", "JID", b"JID", "LID", b"LID", "Platform", b"Platform", "PushName", b"PushName"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["BussinessName", b"BussinessName", "Initialized", b"Initialized", "JID", b"JID", "LID", b"LID", "Platform", b"Platform", "PushName", b"PushName"]) -> None: ...
 
 global___Device = Device
 
