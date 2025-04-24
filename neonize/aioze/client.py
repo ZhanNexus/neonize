@@ -437,19 +437,24 @@ class NewAClient:
         loop.run_until_complete(self.event._qr(self, ctypes.string_at(qr_protoaddr)))
         loop.close()
 
-    def _parse_mention(self, text: Optional[str] = None) -> list[str]:
+    def _parse_mention(self, text: Optional[str] = None, are_lids: bool = False) -> list[str]:
         """
         This function parses a given text and returns a list of 'mentions' in the format of 'mention@s.whatsapp.net'.
         A 'mention' is defined as a sequence of numbers (5 to 16 digits long) that is prefixed by '@' in the text.
 
         :param text: The text to be parsed for mentions, defaults to None
         :type text: Optional[str], optional
+        :param are_lids: whether the mentions are lids defaults to False
+        :type are_lids: bool, optional
         :return: A list of mentions in the format of 'mention@s.whatsapp.net'
         :rtype: list[str]
         """
         if text is None:
             return []
-        return [jid.group(1) + "@s.whatsapp.net" for jid in re.finditer(r"@([0-9]{5,16}|0)", text)]
+        # Definitely need a better method 
+        # WIP 
+        server = "@s.whatsapp.net" if not are_lids else "@lid"
+        return [jid.group(1) + sever for jid in re.finditer(r"@([0-9]{5,16}|0)", text)]
 
     async def _parse_group_mention(self, text: Optional[str] = None) -> list[GroupMention]:
         """
@@ -549,6 +554,7 @@ class NewAClient:
         message: typing.Union[Message, str],
         link_preview: bool = False,
         ghost_mentions: Optional[str] = None,
+        mentions_are_lids: bool = False,
         add_msg_secret: bool = False,
     ) -> SendResponse:
         """Send a message to the specified JID.
@@ -570,7 +576,7 @@ class NewAClient:
         to_bytes = to.SerializeToString()
         if isinstance(message, str):
             mentioned_groups = await self._parse_group_mention(message)
-            mentioned_jid = self._parse_mention(ghost_mentions or message)
+            mentioned_jid = self._parse_mention((ghost_mentions or message), mentions_are_lids)
             partial_msg = ExtendedTextMessage(
                 text=message, contextInfo=ContextInfo(mentionedJID=mentioned_jid, groupMentions=mentioned_groups)
             )
@@ -606,6 +612,7 @@ class NewAClient:
         link_preview: bool = False,
         reply_privately: bool = False,
         ghost_mentions: Optional[str] = None,
+        mentions_are_lids: bool = False,
     ) -> Message:
         """Send a reply message to a specified JID.
 
@@ -627,7 +634,7 @@ class NewAClient:
             partial_message = ExtendedTextMessage(
                 text=message,
                 contextInfo=ContextInfo(
-                    mentionedJID=self._parse_mention(ghost_mentions or message),
+                    mentionedJID=self._parse_mention((ghost_mentions or message), mentions_are_lids),
                     groupMentions=(await self._parse_group_mention(message)),
                     ),
             )
@@ -652,6 +659,7 @@ class NewAClient:
         link_preview: bool = False,
         reply_privately: bool = False,
         ghost_mentions: Optional[str] = None,
+        mentions_are_lids: bool = False,
         add_msg_secret: bool = False,
     ) -> SendResponse:
         """Send a reply message to a specified JID.
@@ -686,6 +694,7 @@ class NewAClient:
                 link_preview=link_preview,
                 reply_privately=reply_privately,
                 ghost_mentions=ghost_mentions,
+                mentions_are_lids=mentions_are_lids,
             ),
             link_preview,
             add_msg_secret=add_msg_secret,
@@ -952,6 +961,7 @@ class NewAClient:
         gifplayback: bool = False,
         is_gif: bool = False,
         ghost_mentions: Optional[str] = None,
+        mentions_are_lids: bool = False,
     ) -> Message:
         """
         This function is used to build a video message. It uploads a video file, extracts necessary information,
@@ -1002,7 +1012,7 @@ class NewAClient:
                 thumbnailSHA256=upload.FileSHA256,
                 viewOnce=viewonce,
                 contextInfo=ContextInfo(
-                    mentionedJID=self._parse_mention(ghost_mentions or caption),
+                    mentionedJID=self._parse_mention((ghost_mentions or caption), mentions_are_lids),
                     groupMentions=(await self._parse_group_mention(caption)),
                 ),
             )
@@ -1021,6 +1031,7 @@ class NewAClient:
         gifplayback: bool = False,
         is_gif: bool = False,
         ghost_mentions: Optional[str] = None,
+        mentions_are_lids: bool = False,
         add_msg_secret: bool = False,
     ) -> SendResponse:
         """Sends a video to the specified recipient.
@@ -1048,7 +1059,7 @@ class NewAClient:
         """
         return await self.send_message(
             to,
-            await self.build_video_message(file, caption, quoted, viewonce, gifplayback, is_gif, ghost_mentions),
+            await self.build_video_message(file, caption, quoted, viewonce, gifplayback, is_gif, ghost_mentions, mentions_are_lids),
             add_msg_secret=add_msg_secret,
         )
 
@@ -1059,6 +1070,7 @@ class NewAClient:
         quoted: Optional[neonize_proto.Message] = None,
         viewonce: bool = False,
         ghost_mentions: Optional[str] = None,
+        mentions_are_lids: bool = False,
     ) -> Message:
         """
         This function builds an image message. It takes a file (either a string or bytes),
@@ -1103,7 +1115,7 @@ class NewAClient:
                 thumbnailSHA256=upload.FileSHA256,
                 viewOnce=viewonce,
                 contextInfo=ContextInfo(
-                    mentionedJID=self._parse_mention(ghost_mentions or caption),
+                    mentionedJID=self._parse_mention((ghost_mentions or caption), mentions_are_lids),
                     groupMentions=(await self._parse_group_mention(caption)),
                 ),
             )
@@ -1120,6 +1132,7 @@ class NewAClient:
         quoted: Optional[neonize_proto.Message] = None,
         viewonce: bool = False,
         ghost_mentions: Optional[str] = None,
+        mentions_are_lids: bool = False,
         add_msg_secret: bool = False,
     ) -> SendResponse:
         """Sends an image to the specified recipient.
@@ -1143,7 +1156,7 @@ class NewAClient:
         """
         return await self.send_message(
             to,
-            await self.build_image_message(file, caption, quoted, viewonce=viewonce, ghost_mentions=ghost_mentions),
+            await self.build_image_message(file, caption, quoted, viewonce=viewonce, ghost_mentions=ghost_mentions, mentions_are_lids=mentions_are_lids,),
             add_msg_secret=add_msg_secret,
         )
 
@@ -1227,6 +1240,7 @@ class NewAClient:
         mimetype: Optional[str] = None,
         quoted: Optional[neonize_proto.Message] = None,
         ghost_mentions: Optional[str] = None,
+        mentions_are_lids: bool = False,
     ):
         io = BytesIO(await get_bytes_from_name_or_url_async(file))
         io.seek(0)
@@ -1245,7 +1259,7 @@ class NewAClient:
                 title=title,
                 fileName=filename,
                 contextInfo=ContextInfo(
-                    mentionedJID=self._parse_mention(ghost_mentions or caption),
+                    mentionedJID=self._parse_mention((ghost_mentions or caption), mentions_are_lids),
                     groupMentions=(await self._parse_group_mention(caption)),
                 ),
             )
@@ -1264,6 +1278,7 @@ class NewAClient:
         mimetype: Optional[str] = None,
         quoted: Optional[neonize_proto.Message] = None,
         ghost_mentions: Optional[str] = None,
+        mentions_are_lids: bool = False,
         add_msg_secret: bool = False,
     ) -> SendResponse:
         """Sends a document to the specified recipient.
@@ -1289,7 +1304,7 @@ class NewAClient:
         """
         return await self.send_message(
             to,
-            await self.build_document_message(file, caption, title, filename, mimetype, quoted),
+            await self.build_document_message(file, caption, title, filename, mimetype, quoted, mentions_are_lids),
             add_msg_secret=add_msg_secret,
         )
 
