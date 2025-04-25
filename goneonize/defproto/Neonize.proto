@@ -186,6 +186,7 @@ message SendResponse {
     required string ID = 2;
     required int64 ServerID = 3;
     required MessageDebugTimings DebugTimings = 4;
+    optional WAWebProtobufsE2E.Message Message = 5;
 }
 
 message SendMessageReturnFunction {

@@ -528,6 +528,11 @@ class NewClient:
         model = SendMessageReturnFunction.FromString(sendresponse)
         if model.Error:
             raise SendMessageError(model.Error)
+        model.SendResponse.MergeFrom(
+            model.SendResponse.__class__(
+                Message=msg
+            )
+        )
         return model.SendResponse
 
     def build_reply_message(
