@@ -761,11 +761,14 @@ class SendResponse(google.protobuf.message.Message):
     ID_FIELD_NUMBER: builtins.int
     SERVERID_FIELD_NUMBER: builtins.int
     DEBUGTIMINGS_FIELD_NUMBER: builtins.int
+    MESSAGE_FIELD_NUMBER: builtins.int
     Timestamp: builtins.int
     ID: builtins.str
     ServerID: builtins.int
     @property
     def DebugTimings(self) -> global___MessageDebugTimings: ...
+    @property
+    def Message(self) -> waE2E.WAWebProtobufsE2E_pb2.Message: ...
     def __init__(
         self,
         *,
@@ -773,9 +776,10 @@ class SendResponse(google.protobuf.message.Message):
         ID: builtins.str | None = ...,
         ServerID: builtins.int | None = ...,
         DebugTimings: global___MessageDebugTimings | None = ...,
+        Message: waE2E.WAWebProtobufsE2E_pb2.Message | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["DebugTimings", b"DebugTimings", "ID", b"ID", "ServerID", b"ServerID", "Timestamp", b"Timestamp"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["DebugTimings", b"DebugTimings", "ID", b"ID", "ServerID", b"ServerID", "Timestamp", b"Timestamp"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["DebugTimings", b"DebugTimings", "ID", b"ID", "Message", b"Message", "ServerID", b"ServerID", "Timestamp", b"Timestamp"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["DebugTimings", b"DebugTimings", "ID", b"ID", "Message", b"Message", "ServerID", b"ServerID", "Timestamp", b"Timestamp"]) -> None: ...
 
 global___SendResponse = SendResponse
 

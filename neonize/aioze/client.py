@@ -451,8 +451,8 @@ class NewAClient:
         """
         if text is None:
             return []
-        # Definitely need a better method 
-        # WIP 
+        # Definitely need a better method
+        # WIP
         server = "@s.whatsapp.net" if not are_lids else "@lid"
         return [jid.group(1) + server for jid in re.finditer(r"@([0-9]{5,16}|0)", text)]
 
@@ -468,7 +468,7 @@ class NewAClient:
         """
         if text is None:
             return []
-        
+
         gc_mentions = []
         for jid in re.finditer(r"@([0-9-]{11,26}|0)@g\.us", text):
             try:
@@ -479,10 +479,7 @@ class NewAClient:
                 log.info(traceback.format_exc())
                 continue
             gc_mentions.append(
-                GroupMention(
-                    groupJID=Jid2String(group.JID),
-                    groupSubject=group.GroupName.Name
-                )
+                GroupMention(groupJID=Jid2String(group.JID), groupSubject=group.GroupName.Name)
             )
         return gc_mentions
 
@@ -578,7 +575,8 @@ class NewAClient:
             mentioned_groups = await self._parse_group_mention(message)
             mentioned_jid = self._parse_mention((ghost_mentions or message), mentions_are_lids)
             partial_msg = ExtendedTextMessage(
-                text=message, contextInfo=ContextInfo(mentionedJID=mentioned_jid, groupMentions=mentioned_groups)
+                text=message,
+                contextInfo=ContextInfo(mentionedJID=mentioned_jid, groupMentions=mentioned_groups),
             )
             if link_preview:
                 preview = await self._generate_link_preview(message)
@@ -603,11 +601,7 @@ class NewAClient:
         model = SendMessageReturnFunction.FromString(sendresponse)
         if model.Error:
             raise SendMessageError(model.Error)
-        model.SendResponse.MergeFrom(
-            model.SendResponse.__class__(
-                Message=msg
-            )
-        )
+        model.SendResponse.MergeFrom(model.SendResponse.__class__(Message=msg))
         return model.SendResponse
 
     async def build_reply_message(
@@ -639,9 +633,11 @@ class NewAClient:
             partial_message = ExtendedTextMessage(
                 text=message,
                 contextInfo=ContextInfo(
-                    mentionedJID=self._parse_mention((ghost_mentions or message), mentions_are_lids),
-                    groupMentions=(await self._parse_group_mention(message)),
+                    mentionedJID=self._parse_mention(
+                        (ghost_mentions or message), mentions_are_lids
                     ),
+                    groupMentions=(await self._parse_group_mention(message)),
+                ),
             )
             if link_preview:
                 preview = await self._generate_link_preview(message)
@@ -1017,7 +1013,9 @@ class NewAClient:
                 thumbnailSHA256=upload.FileSHA256,
                 viewOnce=viewonce,
                 contextInfo=ContextInfo(
-                    mentionedJID=self._parse_mention((ghost_mentions or caption), mentions_are_lids),
+                    mentionedJID=self._parse_mention(
+                        (ghost_mentions or caption), mentions_are_lids
+                    ),
                     groupMentions=(await self._parse_group_mention(caption)),
                 ),
             )
@@ -1064,7 +1062,16 @@ class NewAClient:
         """
         return await self.send_message(
             to,
-            await self.build_video_message(file, caption, quoted, viewonce, gifplayback, is_gif, ghost_mentions, mentions_are_lids),
+            await self.build_video_message(
+                file,
+                caption,
+                quoted,
+                viewonce,
+                gifplayback,
+                is_gif,
+                ghost_mentions,
+                mentions_are_lids,
+            ),
             add_msg_secret=add_msg_secret,
         )
 
@@ -1120,7 +1127,9 @@ class NewAClient:
                 thumbnailSHA256=upload.FileSHA256,
                 viewOnce=viewonce,
                 contextInfo=ContextInfo(
-                    mentionedJID=self._parse_mention((ghost_mentions or caption), mentions_are_lids),
+                    mentionedJID=self._parse_mention(
+                        (ghost_mentions or caption), mentions_are_lids
+                    ),
                     groupMentions=(await self._parse_group_mention(caption)),
                 ),
             )
@@ -1161,7 +1170,14 @@ class NewAClient:
         """
         return await self.send_message(
             to,
-            await self.build_image_message(file, caption, quoted, viewonce=viewonce, ghost_mentions=ghost_mentions, mentions_are_lids=mentions_are_lids,),
+            await self.build_image_message(
+                file,
+                caption,
+                quoted,
+                viewonce=viewonce,
+                ghost_mentions=ghost_mentions,
+                mentions_are_lids=mentions_are_lids,
+            ),
             add_msg_secret=add_msg_secret,
         )
 
@@ -1264,7 +1280,9 @@ class NewAClient:
                 title=title,
                 fileName=filename,
                 contextInfo=ContextInfo(
-                    mentionedJID=self._parse_mention((ghost_mentions or caption), mentions_are_lids),
+                    mentionedJID=self._parse_mention(
+                        (ghost_mentions or caption), mentions_are_lids
+                    ),
                     groupMentions=(await self._parse_group_mention(caption)),
                 ),
             )
@@ -1309,7 +1327,9 @@ class NewAClient:
         """
         return await self.send_message(
             to,
-            await self.build_document_message(file, caption, title, filename, mimetype, quoted, mentions_are_lids),
+            await self.build_document_message(
+                file, caption, title, filename, mimetype, quoted, mentions_are_lids
+            ),
             add_msg_secret=add_msg_secret,
         )
 
@@ -1663,9 +1683,7 @@ class NewAClient:
         :rtype: str
         """
         data = get_bytes_from_name_or_url(file_or_bytes)
-        response = await self.__client.SetProfilePhoto(
-            self.uuid, data, len(data)
-        )
+        response = await self.__client.SetProfilePhoto(self.uuid, data, len(data))
         model = SetGroupPhotoReturnFunction.FromString(response.get_bytes())
         if model.Error:
             raise SetGroupPhotoError(model.Error)
