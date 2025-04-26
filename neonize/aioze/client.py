@@ -40,7 +40,7 @@ from ..utils.iofile import (
     get_bytes_from_name_or_url,
     get_bytes_from_name_or_url_async,
 )
-from ..utils.jid import JIDToNonAD, Jid2String, build_jid
+from ..utils.jid import JIDToNonAD, Jid2String, build_jid, jid_is_lid
 from .._binder import func, func_string, func_callback_bytes
 from ..proto.waE2E.WAWebProtobufsE2E_pb2 import (
     Message,
@@ -538,9 +538,12 @@ class NewAClient:
     ) -> ContextInfo:
         if not isinstance((msg := get_message_type(message.Message)), str):
             msg.contextInfo.Clear()
+        sender = message.Info.MessageSource.Sender
+        if jid_is_lid(sender):
+            sender = message.Info.MessageSource.SenderAlt
         return ContextInfo(
             stanzaID=message.Info.ID,
-            participant=Jid2String(JIDToNonAD(message.Info.MessageSource.Sender)),
+            participant=Jid2String(JIDToNonAD(sender)),
             quotedMessage=message.Message,
             remoteJID=Jid2String(JIDToNonAD(message.Info.MessageSource.Chat))
             if reply_privately
@@ -686,7 +689,10 @@ class NewAClient:
         """
         if to is None:
             if reply_privately:
-                to = JIDToNonAD(quoted.Info.MessageSource.Sender)
+                sender = quoted.Info.MessageSource.Sender
+                if jid_is_lid(sender):
+                    sender = quoted.Info.MessageSource.SenderAlt
+                to = JIDToNonAD(sender)
             else:
                 to = quoted.Info.MessageSource.Chat
         return await self.send_message(
