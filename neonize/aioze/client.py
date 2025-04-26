@@ -70,7 +70,7 @@ from ..utils.enum import (
     PrivacySettingType,
 )
 from ..proto import Neonize_pb2 as neonize_proto
-from ..utils import validate_link
+from ..utils import get_message_type, validate_link
 from ..exc import (
     BuildPollVoteError,
     ContactStoreError,
@@ -536,6 +536,8 @@ class NewAClient:
     def _make_quoted_message(
         self, message: neonize_proto.Message, reply_privately: bool = False
     ) -> ContextInfo:
+        if not isinstance((msg := get_message_type(message.Message)), str):
+            msg.contextInfo.Clear()
         return ContextInfo(
             stanzaID=message.Info.ID,
             participant=Jid2String(JIDToNonAD(message.Info.MessageSource.Sender)),
@@ -648,7 +650,6 @@ class NewAClient:
         field_name = (
             partial_message.__class__.__name__[0].lower() + partial_message.__class__.__name__[1:]
         )  # type: ignore
-        getattr(quoted.Message, field_name).contextInfo.Clear()
         partial_message.contextInfo.MergeFrom(self._make_quoted_message(quoted, reply_privately))
         getattr(build_message, field_name).MergeFrom(partial_message)
         return build_message
