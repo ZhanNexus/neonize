@@ -644,6 +644,7 @@ class NewAClient:
                 if preview is not None:
                     partial_message.MergeFrom(preview)
         else:
+            message.contextInfo.Clear()
             partial_message = message
         field_name = (
             partial_message.__class__.__name__[0].lower() + partial_message.__class__.__name__[1:]
