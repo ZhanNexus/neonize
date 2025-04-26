@@ -648,7 +648,8 @@ class NewAClient:
         field_name = (
             partial_message.__class__.__name__[0].lower() + partial_message.__class__.__name__[1:]
         )  # type: ignore
-        quoted.contextInfo.Clear()
+        if quoted.HasField("contextInfo"):
+            quoted.contextInfo.Clear()
         partial_message.contextInfo.MergeFrom(self._make_quoted_message(quoted, reply_privately))
         getattr(build_message, field_name).MergeFrom(partial_message)
         return build_message
