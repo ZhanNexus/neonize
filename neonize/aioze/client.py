@@ -901,7 +901,7 @@ class NewAClient:
                 sticker = await ffmpeg.cv_to_webp(enforce_not_broken=enforce_not_broken)
                 io_save = BytesIO(sticker)
                 img = Image.open(io_save)
-                io_save.seek(0)
+                io_save = BytesIO()
                 img.save(io_save, format="webp", exif=add_exif(name, packname), save_all=True)
         upload = await self.upload(io_save.getvalue())
         message = Message(
