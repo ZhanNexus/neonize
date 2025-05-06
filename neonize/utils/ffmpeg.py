@@ -249,6 +249,8 @@ class AFFmpeg:
                 duration = 1
             if duration > 6 and animated:
                 duration = 6
+            elif duration < 6:
+                animated = False
             bitrate = f"{MAX_STICKER_FILESIZE // duration}k"
             ffmpeg_command.extend(
                 [
