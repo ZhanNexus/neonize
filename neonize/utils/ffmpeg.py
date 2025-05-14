@@ -235,7 +235,7 @@ class AFFmpeg:
             "-i",
             self.filepath,
             "-vcodec",
-            "libwebp",
+            "libwebp_anim",
             "-vf",
             (
                 "scale='if(gt(iw,ih),512,-1)':'if(gt(iw,ih),-1,512)',fps=15, "
