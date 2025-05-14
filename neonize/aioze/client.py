@@ -899,7 +899,7 @@ class NewAClient:
         else:
             async with AFFmpeg(sticker) as ffmpeg:
                 animated = True
-                sticker = await ffmpeg.cv_to_webp(enforce_not_broken=enforce_not_broken)
+                sticker = await ffmpeg.cv_to_webp(enforce_not_broken=enforce_not_broken, animated_gif=animated_gif)
                 io_save = BytesIO(sticker)
                 img = Image.open(io_save)
                 io_save = BytesIO()

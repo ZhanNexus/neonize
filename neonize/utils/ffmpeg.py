@@ -216,7 +216,7 @@ class AFFmpeg:
             return self.filename
         return self.filename.path.__str__()
 
-    async def cv_to_webp(self, animated: bool = True, enforce_not_broken: bool = False) -> bytes:
+    async def cv_to_webp(self, animated: bool = True, enforce_not_broken: bool = False, animated_gif: bool = False) -> bytes:
         """
         This function converts a given file to webp format using ffmpeg.
         If the animated flag is set to True, it will only convert the first 6 seconds of the file.
@@ -254,7 +254,7 @@ class AFFmpeg:
         ffmpeg_command.extend(
             [
                 "-vcodec",
-                "libwebp_anim",
+                "libwebp_anim" if animated_gif else "libwebp",
                 "-vf",
                 (
                     "scale='if(gt(iw,ih),512,-1)':'if(gt(iw,ih),-1,512)',fps=15, "
