@@ -230,7 +230,7 @@ class AFFmpeg:
         """
         MAX_STICKER_FILESIZE = 512000
         temp = tempfile.gettempdir() + "/" + time.time().__str__() + ".webp"
-        duration = int((await self.extract_info()).format.duration)
+        duration = int((await self.extract_info()).format.duration or 0)
         if not duration:
             duration = 1
         if duration > 6 and animated:
