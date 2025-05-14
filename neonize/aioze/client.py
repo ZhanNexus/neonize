@@ -859,6 +859,7 @@ class NewAClient:
         packname: str = "",
         crop: bool = False,
         enforce_not_broken: bool = False,
+        animated_gif: bool = False,
     ) -> Message:
         """
         This function builds a sticker message from a given image or video file.
@@ -883,7 +884,7 @@ class NewAClient:
         sticker = await get_bytes_from_name_or_url_async(file)
         animated = False
         mime = magic.from_buffer(sticker, mime=True).split("/")
-        if mime[0] == "image":
+        if mime[0] == "image" and not animated_gif:
             io_save = BytesIO(sticker)
             stk = auto_sticker(io_save) if crop else original_sticker(io_save)
             io_save = BytesIO()
@@ -929,6 +930,7 @@ class NewAClient:
         packname: str = "",
         crop: bool = False,
         enforce_not_broken: bool = False,
+        animated_gif: bool = False,
         add_msg_secret: bool = False,
     ) -> SendResponse:
         """
@@ -956,7 +958,7 @@ class NewAClient:
         return await self.send_message(
             to,
             await self.build_sticker_message(
-                file, quoted, name, packname, crop, enforce_not_broken
+                file, quoted, name, packname, crop, enforce_not_broken, animated_gif
             ),
             add_msg_secret=add_msg_secret,
         )

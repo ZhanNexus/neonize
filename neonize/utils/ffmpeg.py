@@ -230,28 +230,40 @@ class AFFmpeg:
         """
         MAX_STICKER_FILESIZE = 512000
         temp = tempfile.gettempdir() + "/" + time.time().__str__() + ".webp"
+        duration = int((await self.extract_info()).format.duration)
+        if not duration:
+            duration = 1
+        if duration > 6 and animated:
+            duration = 6
+        elif duration < 6:
+            animated = False
         ffmpeg_command = [
             "ffmpeg",
             "-i",
             self.filepath,
-            "-vcodec",
-            "libwebp",
-            # "libwebp_anim",
-            "-vf",
-            (
-                "scale='if(gt(iw,ih),512,-1)':'if(gt(iw,ih),-1,512)',fps=15, "
-                "pad=512:512:-1:-1:color=white@0.0, split [a][b]; [a] "
-                "palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse"
-            ),
         ]
+        if animated:
+            ffmpeg_command.extend(
+                [
+                    "-ss",
+                    "00:00:00.0",
+                    "-t",
+                    "00:00:06.0",
+                ]
+            )
+        ffmpeg_command.extend(
+            [
+                "-vcodec",
+                "libwebp_anim",
+                "-vf",
+                (
+                    "scale='if(gt(iw,ih),512,-1)':'if(gt(iw,ih),-1,512)',fps=15, "
+                    "pad=512:512:-1:-1:color=white@0.0, split [a][b]; [a] "
+                    "palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse"
+                ),
+            ]
+        )
         if enforce_not_broken:
-            duration = int((await self.extract_info()).format.duration)
-            if not duration:
-                duration = 1
-            if duration > 6 and animated:
-                duration = 6
-            elif duration < 6:
-                animated = False
             bitrate = f"{MAX_STICKER_FILESIZE // duration}k"
             ffmpeg_command.extend(
                 [
@@ -263,15 +275,6 @@ class AFFmpeg:
                     f"{MAX_STICKER_FILESIZE}",
                     "-q:v",
                     bitrate,
-                ]
-            )
-        if animated:
-            ffmpeg_command.extend(
-                [
-                    "-ss",
-                    "00:00:00.0",
-                    "-t",
-                    "00:00:06.0",
                 ]
             )
         ffmpeg_command.append(temp)
