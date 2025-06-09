@@ -25,7 +25,6 @@ import (
 	"go.mau.fi/whatsmeow/proto/waMsgApplication"
 	"go.mau.fi/whatsmeow/store"
 	"go.mau.fi/whatsmeow/store/sqlstore"
-	"go.mau.fi/whatsmeow/store/sqlstore/lidmap"
 	"go.mau.fi/whatsmeow/types"
 	"go.mau.fi/whatsmeow/types/events"
 
@@ -79,7 +78,7 @@ func GetPNFromLID(JIDByte *C.uchar, JIDSize C.int) C.struct_BytesReturn {
 		panic(err)
 	}
 	lid := utils.DecodeJidProto(&neoJIDProto)
-	pn, err := lidmap.GetPNForLID(context.Background(), lid)
+	pn, err := sqlstore.GetPNForLID(context.Background(), lid)
 
 	neojid := utils.EncodeJidProto(pn)
 
@@ -106,7 +105,7 @@ func GetLIDFromPN(JIDByte *C.uchar, JIDSize C.int) C.struct_BytesReturn {
 		panic(err)
 	}
 	pn := utils.DecodeJidProto(&neoJIDProto)
-	lid, err := lidmap.GetLIDForPN(context.Background(), pn)
+	lid, err := sqlstore.GetLIDForPN(context.Background(), pn)
 
 	neojid := utils.EncodeJidProto(pn)
 
