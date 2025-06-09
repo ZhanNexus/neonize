@@ -25,6 +25,7 @@ import (
 	"go.mau.fi/whatsmeow/proto/waMsgApplication"
 	"go.mau.fi/whatsmeow/store"
 	"go.mau.fi/whatsmeow/store/sqlstore"
+	"go.mau.fi/whatsmeow/store/sqlstore/lidmap"
 	"go.mau.fi/whatsmeow/types"
 	"go.mau.fi/whatsmeow/types/events"
 
@@ -67,6 +68,61 @@ func getBytesAndSize(data []byte) (*C.char, C.size_t) {
 	messageSourceCDATA := (*C.char)(unsafe.Pointer(&data[0]))
 	messageSourceCSize := C.size_t(len(data))
 	return messageSourceCDATA, messageSourceCSize
+}
+
+//export GetPNFromLID
+func GetPNFromLID(JIDByte *C.uchar, JIDSize C.int) C.struct_BytesReturn {
+	var neoJIDProto defproto.JID
+	jidbyte := getByteByAddr(JIDByte, JIDSize)
+	err := proto.Unmarshal(jidbyte, &neoJIDProto)
+	if err != nil {
+		panic(err)
+	}
+	lid := utils.DecodeJidProto(&neoJIDProto)
+	pn, err := lidmap.GetPNForLID(context.Background(), lid)
+
+	neojid := utils.EncodeJidProto(pn)
+
+	return_ := defproto.GetJIDFromStoreReturnFunction{
+		Jid: neojid,
+	}
+	if err != nil {
+		return_.Error = proto.String(err.Error())
+	}
+
+	jidBuf, err_ := proto.Marshal(&return_)
+
+	if err_ != nil {
+		panic(err_)
+	}
+	return ReturnBytes(jidBuf)
+}
+//export GetLIDFromPN
+func GetLIDFromPN(JIDByte *C.uchar, JIDSize C.int) C.struct_BytesReturn {
+	var neoJIDProto defproto.JID
+	jidbyte := getByteByAddr(JIDByte, JIDSize)
+	err := proto.Unmarshal(jidbyte, &neoJIDProto)
+	if err != nil {
+		panic(err)
+	}
+	pn := utils.DecodeJidProto(&neoJIDProto)
+	lid, err := lidmap.GetLIDForPN(context.Background(), pn)
+
+	neojid := utils.EncodeJidProto(pn)
+
+	return_ := defproto.GetJIDFromStoreReturnFunction{
+		Jid: neojid,
+	}
+	if err != nil {
+		return_.Error = proto.String(err.Error())
+	}
+
+	jidBuf, err_ := proto.Marshal(&return_)
+
+	if err_ != nil {
+		panic(err_)
+	}
+	return ReturnBytes(jidBuf)
 }
 
 //export Upload

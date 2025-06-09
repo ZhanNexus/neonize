@@ -144,6 +144,7 @@ from ..proto.Neonize_pb2 import (
     DownloadReturnFunction,
     GetGroupInfoReturnFunction,
     GetGroupInviteLinkReturnFunction,
+    GetJIDFromStoreReturnFunction,
     GetUserInfoReturnFunction,
     GetUserInfoSingleReturnFunction,
     GroupInfo,
@@ -1698,6 +1699,22 @@ class NewAClient:
         if model.Error:
             raise SetGroupPhotoError(model.Error)
         return model.PictureID
+
+    async def get_lid_from_pn(self, jid: JID) -> JID:
+        jid_buf = jid.SerializeToString()
+        resp = (await self.__client.GetLIDFromPN(jid_buf, len(jid_buf))).get_bytes()
+        model = GetJIDFromStoreReturnFunction.FromString(resp)
+        if model.Error:
+            raise InviteLinkError(model.Error)
+        return model.Jid
+
+    async def get_pn_from_lid(self, jid: JID) -> JID:
+        jid_buf = jid.SerializeToString()
+        resp = (await self.__client.GetPNFromLID(jid_buf, len(jid_buf))).get_bytes()
+        model = GetJIDFromStoreReturnFunction.FromString(resp)
+        if model.Error:
+            raise InviteLinkError(model.Error)
+        return model.Jid
 
     async def leave_group(self, jid: JID) -> str:
         """Leaves a group.

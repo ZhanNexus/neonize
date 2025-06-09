@@ -210,6 +210,10 @@ message JoinGroupWithLinkReturnFunction{
     optional string Error = 1;
     optional JID Jid = 2;
 }
+message GetJIDFromStoreReturnFunction{
+    optional string Error = 1;
+    optional JID Jid = 2;
+}
 message GetGroupInviteLinkReturnFunction{
     optional string InviteLink = 1;
     optional string Error = 2;
