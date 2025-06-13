@@ -1339,7 +1339,7 @@ class NewAClient:
         return await self.send_message(
             to,
             await self.build_document_message(
-                file, caption, title, filename, mimetype, quoted, mentions_are_lids
+                file, caption, title, filename, mimetype, quoted, ghost_mentions, mentions_are_lids
             ),
             add_msg_secret=add_msg_secret,
         )
