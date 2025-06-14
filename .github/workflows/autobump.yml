@@ -30,7 +30,8 @@ jobs:
       run: |
         uv sync --group dev
         uv run task proto
-        git diff --exit-code || uv run task build proto
+        # git diff --exit-code || uv run task build proto
+        uv run task build proto
     - uses: astral-sh/ruff-action@v3
       with:
         args: "check --fix"
