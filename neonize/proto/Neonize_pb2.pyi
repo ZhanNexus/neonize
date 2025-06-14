@@ -846,6 +846,26 @@ class JoinGroupWithLinkReturnFunction(google.protobuf.message.Message):
 global___JoinGroupWithLinkReturnFunction = JoinGroupWithLinkReturnFunction
 
 @typing.final
+class GetJIDFromStoreReturnFunction(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    ERROR_FIELD_NUMBER: builtins.int
+    JID_FIELD_NUMBER: builtins.int
+    Error: builtins.str
+    @property
+    def Jid(self) -> global___JID: ...
+    def __init__(
+        self,
+        *,
+        Error: builtins.str | None = ...,
+        Jid: global___JID | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["Error", b"Error", "Jid", b"Jid"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["Error", b"Error", "Jid", b"Jid"]) -> None: ...
+
+global___GetJIDFromStoreReturnFunction = GetJIDFromStoreReturnFunction
+
+@typing.final
 class GetGroupInviteLinkReturnFunction(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 

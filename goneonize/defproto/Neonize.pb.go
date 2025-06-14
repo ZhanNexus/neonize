@@ -389,7 +389,7 @@ func (x *WrappedNewsletterState_NewsletterState) UnmarshalJSON(b []byte) error {
 
 // Deprecated: Use WrappedNewsletterState_NewsletterState.Descriptor instead.
 func (WrappedNewsletterState_NewsletterState) EnumDescriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{47, 0}
+	return file_Neonize_proto_rawDescGZIP(), []int{48, 0}
 }
 
 type NewsletterReactionSettings_NewsletterReactionsMode int32
@@ -451,7 +451,7 @@ func (x *NewsletterReactionSettings_NewsletterReactionsMode) UnmarshalJSON(b []b
 
 // Deprecated: Use NewsletterReactionSettings_NewsletterReactionsMode.Descriptor instead.
 func (NewsletterReactionSettings_NewsletterReactionsMode) EnumDescriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{50, 0}
+	return file_Neonize_proto_rawDescGZIP(), []int{51, 0}
 }
 
 type NewsletterThreadMetadata_NewsletterVerificationState int32
@@ -507,7 +507,7 @@ func (x *NewsletterThreadMetadata_NewsletterVerificationState) UnmarshalJSON(b [
 
 // Deprecated: Use NewsletterThreadMetadata_NewsletterVerificationState.Descriptor instead.
 func (NewsletterThreadMetadata_NewsletterVerificationState) EnumDescriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{52, 0}
+	return file_Neonize_proto_rawDescGZIP(), []int{53, 0}
 }
 
 type PrivacySettings_PrivacySetting int32
@@ -578,7 +578,7 @@ func (x *PrivacySettings_PrivacySetting) UnmarshalJSON(b []byte) error {
 
 // Deprecated: Use PrivacySettings_PrivacySetting.Descriptor instead.
 func (PrivacySettings_PrivacySetting) EnumDescriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{59, 0}
+	return file_Neonize_proto_rawDescGZIP(), []int{60, 0}
 }
 
 type StatusPrivacy_StatusPrivacyType int32
@@ -637,7 +637,7 @@ func (x *StatusPrivacy_StatusPrivacyType) UnmarshalJSON(b []byte) error {
 
 // Deprecated: Use StatusPrivacy_StatusPrivacyType.Descriptor instead.
 func (StatusPrivacy_StatusPrivacyType) EnumDescriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{65, 0}
+	return file_Neonize_proto_rawDescGZIP(), []int{66, 0}
 }
 
 type GroupLinkChange_ChangeType int32
@@ -696,7 +696,7 @@ func (x *GroupLinkChange_ChangeType) UnmarshalJSON(b []byte) error {
 
 // Deprecated: Use GroupLinkChange_ChangeType.Descriptor instead.
 func (GroupLinkChange_ChangeType) EnumDescriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{68, 0}
+	return file_Neonize_proto_rawDescGZIP(), []int{69, 0}
 }
 
 type PatchInfo_WAPatchName int32
@@ -761,7 +761,7 @@ func (x *PatchInfo_WAPatchName) UnmarshalJSON(b []byte) error {
 
 // Deprecated: Use PatchInfo_WAPatchName.Descriptor instead.
 func (PatchInfo_WAPatchName) EnumDescriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{79, 0}
+	return file_Neonize_proto_rawDescGZIP(), []int{80, 0}
 }
 
 type PairStatus_PStatus int32
@@ -817,7 +817,7 @@ func (x *PairStatus_PStatus) UnmarshalJSON(b []byte) error {
 
 // Deprecated: Use PairStatus_PStatus.Descriptor instead.
 func (PairStatus_PStatus) EnumDescriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{89, 0}
+	return file_Neonize_proto_rawDescGZIP(), []int{90, 0}
 }
 
 type TemporaryBan_TempBanReason int32
@@ -882,7 +882,7 @@ func (x *TemporaryBan_TempBanReason) UnmarshalJSON(b []byte) error {
 
 // Deprecated: Use TemporaryBan_TempBanReason.Descriptor instead.
 func (TemporaryBan_TempBanReason) EnumDescriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{95, 0}
+	return file_Neonize_proto_rawDescGZIP(), []int{96, 0}
 }
 
 type Receipt_ReceiptType int32
@@ -965,7 +965,7 @@ func (x *Receipt_ReceiptType) UnmarshalJSON(b []byte) error {
 
 // Deprecated: Use Receipt_ReceiptType.Descriptor instead.
 func (Receipt_ReceiptType) EnumDescriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{101, 0}
+	return file_Neonize_proto_rawDescGZIP(), []int{102, 0}
 }
 
 type ChatPresence_ChatPresence int32
@@ -1021,7 +1021,7 @@ func (x *ChatPresence_ChatPresence) UnmarshalJSON(b []byte) error {
 
 // Deprecated: Use ChatPresence_ChatPresence.Descriptor instead.
 func (ChatPresence_ChatPresence) EnumDescriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{102, 0}
+	return file_Neonize_proto_rawDescGZIP(), []int{103, 0}
 }
 
 type ChatPresence_ChatPresenceMedia int32
@@ -1077,7 +1077,7 @@ func (x *ChatPresence_ChatPresenceMedia) UnmarshalJSON(b []byte) error {
 
 // Deprecated: Use ChatPresence_ChatPresenceMedia.Descriptor instead.
 func (ChatPresence_ChatPresenceMedia) EnumDescriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{102, 1}
+	return file_Neonize_proto_rawDescGZIP(), []int{103, 1}
 }
 
 type BlocklistEvent_Actions int32
@@ -1133,7 +1133,7 @@ func (x *BlocklistEvent_Actions) UnmarshalJSON(b []byte) error {
 
 // Deprecated: Use BlocklistEvent_Actions.Descriptor instead.
 func (BlocklistEvent_Actions) EnumDescriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{111, 0}
+	return file_Neonize_proto_rawDescGZIP(), []int{112, 0}
 }
 
 type BlocklistChange_Action int32
@@ -1189,7 +1189,7 @@ func (x *BlocklistChange_Action) UnmarshalJSON(b []byte) error {
 
 // Deprecated: Use BlocklistChange_Action.Descriptor instead.
 func (BlocklistChange_Action) EnumDescriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{112, 0}
+	return file_Neonize_proto_rawDescGZIP(), []int{113, 0}
 }
 
 type UndecryptableMessage_DecryptFailModeT int32
@@ -1245,7 +1245,7 @@ func (x *UndecryptableMessage_DecryptFailModeT) UnmarshalJSON(b []byte) error {
 
 // Deprecated: Use UndecryptableMessage_DecryptFailModeT.Descriptor instead.
 func (UndecryptableMessage_DecryptFailModeT) EnumDescriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{127, 0}
+	return file_Neonize_proto_rawDescGZIP(), []int{128, 0}
 }
 
 // types
@@ -3105,6 +3105,58 @@ func (x *JoinGroupWithLinkReturnFunction) GetJid() *JID {
 	return nil
 }
 
+type GetJIDFromStoreReturnFunction struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Error         *string                `protobuf:"bytes,1,opt,name=Error" json:"Error,omitempty"`
+	Jid           *JID                   `protobuf:"bytes,2,opt,name=Jid" json:"Jid,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetJIDFromStoreReturnFunction) Reset() {
+	*x = GetJIDFromStoreReturnFunction{}
+	mi := &file_Neonize_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetJIDFromStoreReturnFunction) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetJIDFromStoreReturnFunction) ProtoMessage() {}
+
+func (x *GetJIDFromStoreReturnFunction) ProtoReflect() protoreflect.Message {
+	mi := &file_Neonize_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetJIDFromStoreReturnFunction.ProtoReflect.Descriptor instead.
+func (*GetJIDFromStoreReturnFunction) Descriptor() ([]byte, []int) {
+	return file_Neonize_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *GetJIDFromStoreReturnFunction) GetError() string {
+	if x != nil && x.Error != nil {
+		return *x.Error
+	}
+	return ""
+}
+
+func (x *GetJIDFromStoreReturnFunction) GetJid() *JID {
+	if x != nil {
+		return x.Jid
+	}
+	return nil
+}
+
 type GetGroupInviteLinkReturnFunction struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	InviteLink    *string                `protobuf:"bytes,1,opt,name=InviteLink" json:"InviteLink,omitempty"`
@@ -3115,7 +3167,7 @@ type GetGroupInviteLinkReturnFunction struct {
 
 func (x *GetGroupInviteLinkReturnFunction) Reset() {
 	*x = GetGroupInviteLinkReturnFunction{}
-	mi := &file_Neonize_proto_msgTypes[26]
+	mi := &file_Neonize_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3127,7 +3179,7 @@ func (x *GetGroupInviteLinkReturnFunction) String() string {
 func (*GetGroupInviteLinkReturnFunction) ProtoMessage() {}
 
 func (x *GetGroupInviteLinkReturnFunction) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[26]
+	mi := &file_Neonize_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3140,7 +3192,7 @@ func (x *GetGroupInviteLinkReturnFunction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetGroupInviteLinkReturnFunction.ProtoReflect.Descriptor instead.
 func (*GetGroupInviteLinkReturnFunction) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{26}
+	return file_Neonize_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *GetGroupInviteLinkReturnFunction) GetInviteLink() string {
@@ -3167,7 +3219,7 @@ type DownloadReturnFunction struct {
 
 func (x *DownloadReturnFunction) Reset() {
 	*x = DownloadReturnFunction{}
-	mi := &file_Neonize_proto_msgTypes[27]
+	mi := &file_Neonize_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3179,7 +3231,7 @@ func (x *DownloadReturnFunction) String() string {
 func (*DownloadReturnFunction) ProtoMessage() {}
 
 func (x *DownloadReturnFunction) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[27]
+	mi := &file_Neonize_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3192,7 +3244,7 @@ func (x *DownloadReturnFunction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DownloadReturnFunction.ProtoReflect.Descriptor instead.
 func (*DownloadReturnFunction) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{27}
+	return file_Neonize_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *DownloadReturnFunction) GetBinary() []byte {
@@ -3219,7 +3271,7 @@ type UploadReturnFunction struct {
 
 func (x *UploadReturnFunction) Reset() {
 	*x = UploadReturnFunction{}
-	mi := &file_Neonize_proto_msgTypes[28]
+	mi := &file_Neonize_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3231,7 +3283,7 @@ func (x *UploadReturnFunction) String() string {
 func (*UploadReturnFunction) ProtoMessage() {}
 
 func (x *UploadReturnFunction) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[28]
+	mi := &file_Neonize_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3244,7 +3296,7 @@ func (x *UploadReturnFunction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UploadReturnFunction.ProtoReflect.Descriptor instead.
 func (*UploadReturnFunction) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{28}
+	return file_Neonize_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *UploadReturnFunction) GetUploadResponse() *UploadResponse {
@@ -3271,7 +3323,7 @@ type SetGroupPhotoReturnFunction struct {
 
 func (x *SetGroupPhotoReturnFunction) Reset() {
 	*x = SetGroupPhotoReturnFunction{}
-	mi := &file_Neonize_proto_msgTypes[29]
+	mi := &file_Neonize_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3283,7 +3335,7 @@ func (x *SetGroupPhotoReturnFunction) String() string {
 func (*SetGroupPhotoReturnFunction) ProtoMessage() {}
 
 func (x *SetGroupPhotoReturnFunction) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[29]
+	mi := &file_Neonize_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3296,7 +3348,7 @@ func (x *SetGroupPhotoReturnFunction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetGroupPhotoReturnFunction.ProtoReflect.Descriptor instead.
 func (*SetGroupPhotoReturnFunction) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{29}
+	return file_Neonize_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *SetGroupPhotoReturnFunction) GetPictureID() string {
@@ -3323,7 +3375,7 @@ type IsOnWhatsAppReturnFunction struct {
 
 func (x *IsOnWhatsAppReturnFunction) Reset() {
 	*x = IsOnWhatsAppReturnFunction{}
-	mi := &file_Neonize_proto_msgTypes[30]
+	mi := &file_Neonize_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3335,7 +3387,7 @@ func (x *IsOnWhatsAppReturnFunction) String() string {
 func (*IsOnWhatsAppReturnFunction) ProtoMessage() {}
 
 func (x *IsOnWhatsAppReturnFunction) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[30]
+	mi := &file_Neonize_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3348,7 +3400,7 @@ func (x *IsOnWhatsAppReturnFunction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsOnWhatsAppReturnFunction.ProtoReflect.Descriptor instead.
 func (*IsOnWhatsAppReturnFunction) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{30}
+	return file_Neonize_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *IsOnWhatsAppReturnFunction) GetIsOnWhatsAppResponse() []*IsOnWhatsAppResponse {
@@ -3375,7 +3427,7 @@ type GetUserInfoSingleReturnFunction struct {
 
 func (x *GetUserInfoSingleReturnFunction) Reset() {
 	*x = GetUserInfoSingleReturnFunction{}
-	mi := &file_Neonize_proto_msgTypes[31]
+	mi := &file_Neonize_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3387,7 +3439,7 @@ func (x *GetUserInfoSingleReturnFunction) String() string {
 func (*GetUserInfoSingleReturnFunction) ProtoMessage() {}
 
 func (x *GetUserInfoSingleReturnFunction) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[31]
+	mi := &file_Neonize_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3400,7 +3452,7 @@ func (x *GetUserInfoSingleReturnFunction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserInfoSingleReturnFunction.ProtoReflect.Descriptor instead.
 func (*GetUserInfoSingleReturnFunction) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{31}
+	return file_Neonize_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *GetUserInfoSingleReturnFunction) GetJID() *JID {
@@ -3427,7 +3479,7 @@ type GetUserInfoReturnFunction struct {
 
 func (x *GetUserInfoReturnFunction) Reset() {
 	*x = GetUserInfoReturnFunction{}
-	mi := &file_Neonize_proto_msgTypes[32]
+	mi := &file_Neonize_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3439,7 +3491,7 @@ func (x *GetUserInfoReturnFunction) String() string {
 func (*GetUserInfoReturnFunction) ProtoMessage() {}
 
 func (x *GetUserInfoReturnFunction) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[32]
+	mi := &file_Neonize_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3452,7 +3504,7 @@ func (x *GetUserInfoReturnFunction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserInfoReturnFunction.ProtoReflect.Descriptor instead.
 func (*GetUserInfoReturnFunction) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{32}
+	return file_Neonize_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *GetUserInfoReturnFunction) GetUsersInfo() []*GetUserInfoSingleReturnFunction {
@@ -3479,7 +3531,7 @@ type BuildPollVoteReturnFunction struct {
 
 func (x *BuildPollVoteReturnFunction) Reset() {
 	*x = BuildPollVoteReturnFunction{}
-	mi := &file_Neonize_proto_msgTypes[33]
+	mi := &file_Neonize_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3491,7 +3543,7 @@ func (x *BuildPollVoteReturnFunction) String() string {
 func (*BuildPollVoteReturnFunction) ProtoMessage() {}
 
 func (x *BuildPollVoteReturnFunction) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[33]
+	mi := &file_Neonize_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3504,7 +3556,7 @@ func (x *BuildPollVoteReturnFunction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BuildPollVoteReturnFunction.ProtoReflect.Descriptor instead.
 func (*BuildPollVoteReturnFunction) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{33}
+	return file_Neonize_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *BuildPollVoteReturnFunction) GetPollVote() *waE2E.Message {
@@ -3531,7 +3583,7 @@ type CreateNewsLetterReturnFunction struct {
 
 func (x *CreateNewsLetterReturnFunction) Reset() {
 	*x = CreateNewsLetterReturnFunction{}
-	mi := &file_Neonize_proto_msgTypes[34]
+	mi := &file_Neonize_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3543,7 +3595,7 @@ func (x *CreateNewsLetterReturnFunction) String() string {
 func (*CreateNewsLetterReturnFunction) ProtoMessage() {}
 
 func (x *CreateNewsLetterReturnFunction) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[34]
+	mi := &file_Neonize_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3556,7 +3608,7 @@ func (x *CreateNewsLetterReturnFunction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateNewsLetterReturnFunction.ProtoReflect.Descriptor instead.
 func (*CreateNewsLetterReturnFunction) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{34}
+	return file_Neonize_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *CreateNewsLetterReturnFunction) GetNewsletterMetadata() *NewsletterMetadata {
@@ -3583,7 +3635,7 @@ type GetBlocklistReturnFunction struct {
 
 func (x *GetBlocklistReturnFunction) Reset() {
 	*x = GetBlocklistReturnFunction{}
-	mi := &file_Neonize_proto_msgTypes[35]
+	mi := &file_Neonize_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3595,7 +3647,7 @@ func (x *GetBlocklistReturnFunction) String() string {
 func (*GetBlocklistReturnFunction) ProtoMessage() {}
 
 func (x *GetBlocklistReturnFunction) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[35]
+	mi := &file_Neonize_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3608,7 +3660,7 @@ func (x *GetBlocklistReturnFunction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetBlocklistReturnFunction.ProtoReflect.Descriptor instead.
 func (*GetBlocklistReturnFunction) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{35}
+	return file_Neonize_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *GetBlocklistReturnFunction) GetBlocklist() *Blocklist {
@@ -3635,7 +3687,7 @@ type GetContactQRLinkReturnFunction struct {
 
 func (x *GetContactQRLinkReturnFunction) Reset() {
 	*x = GetContactQRLinkReturnFunction{}
-	mi := &file_Neonize_proto_msgTypes[36]
+	mi := &file_Neonize_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3647,7 +3699,7 @@ func (x *GetContactQRLinkReturnFunction) String() string {
 func (*GetContactQRLinkReturnFunction) ProtoMessage() {}
 
 func (x *GetContactQRLinkReturnFunction) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[36]
+	mi := &file_Neonize_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3660,7 +3712,7 @@ func (x *GetContactQRLinkReturnFunction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetContactQRLinkReturnFunction.ProtoReflect.Descriptor instead.
 func (*GetContactQRLinkReturnFunction) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{36}
+	return file_Neonize_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *GetContactQRLinkReturnFunction) GetLink() string {
@@ -3687,7 +3739,7 @@ type GroupParticipantRequest struct {
 
 func (x *GroupParticipantRequest) Reset() {
 	*x = GroupParticipantRequest{}
-	mi := &file_Neonize_proto_msgTypes[37]
+	mi := &file_Neonize_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3699,7 +3751,7 @@ func (x *GroupParticipantRequest) String() string {
 func (*GroupParticipantRequest) ProtoMessage() {}
 
 func (x *GroupParticipantRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[37]
+	mi := &file_Neonize_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3712,7 +3764,7 @@ func (x *GroupParticipantRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GroupParticipantRequest.ProtoReflect.Descriptor instead.
 func (*GroupParticipantRequest) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{37}
+	return file_Neonize_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *GroupParticipantRequest) GetParticipant() *JID {
@@ -3739,7 +3791,7 @@ type GetGroupRequestParticipantsReturnFunction struct {
 
 func (x *GetGroupRequestParticipantsReturnFunction) Reset() {
 	*x = GetGroupRequestParticipantsReturnFunction{}
-	mi := &file_Neonize_proto_msgTypes[38]
+	mi := &file_Neonize_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3751,7 +3803,7 @@ func (x *GetGroupRequestParticipantsReturnFunction) String() string {
 func (*GetGroupRequestParticipantsReturnFunction) ProtoMessage() {}
 
 func (x *GetGroupRequestParticipantsReturnFunction) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[38]
+	mi := &file_Neonize_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3764,7 +3816,7 @@ func (x *GetGroupRequestParticipantsReturnFunction) ProtoReflect() protoreflect.
 
 // Deprecated: Use GetGroupRequestParticipantsReturnFunction.ProtoReflect.Descriptor instead.
 func (*GetGroupRequestParticipantsReturnFunction) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{38}
+	return file_Neonize_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *GetGroupRequestParticipantsReturnFunction) GetParticipants() []*GroupParticipantRequest {
@@ -3791,7 +3843,7 @@ type GetJoinedGroupsReturnFunction struct {
 
 func (x *GetJoinedGroupsReturnFunction) Reset() {
 	*x = GetJoinedGroupsReturnFunction{}
-	mi := &file_Neonize_proto_msgTypes[39]
+	mi := &file_Neonize_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3803,7 +3855,7 @@ func (x *GetJoinedGroupsReturnFunction) String() string {
 func (*GetJoinedGroupsReturnFunction) ProtoMessage() {}
 
 func (x *GetJoinedGroupsReturnFunction) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[39]
+	mi := &file_Neonize_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3816,7 +3868,7 @@ func (x *GetJoinedGroupsReturnFunction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetJoinedGroupsReturnFunction.ProtoReflect.Descriptor instead.
 func (*GetJoinedGroupsReturnFunction) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{39}
+	return file_Neonize_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *GetJoinedGroupsReturnFunction) GetGroup() []*GroupInfo {
@@ -3846,7 +3898,7 @@ type ReqCreateGroup struct {
 
 func (x *ReqCreateGroup) Reset() {
 	*x = ReqCreateGroup{}
-	mi := &file_Neonize_proto_msgTypes[40]
+	mi := &file_Neonize_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3858,7 +3910,7 @@ func (x *ReqCreateGroup) String() string {
 func (*ReqCreateGroup) ProtoMessage() {}
 
 func (x *ReqCreateGroup) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[40]
+	mi := &file_Neonize_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3871,7 +3923,7 @@ func (x *ReqCreateGroup) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReqCreateGroup.ProtoReflect.Descriptor instead.
 func (*ReqCreateGroup) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{40}
+	return file_Neonize_proto_rawDescGZIP(), []int{41}
 }
 
 func (x *ReqCreateGroup) GetName() string {
@@ -3918,7 +3970,7 @@ type JIDArray struct {
 
 func (x *JIDArray) Reset() {
 	*x = JIDArray{}
-	mi := &file_Neonize_proto_msgTypes[41]
+	mi := &file_Neonize_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3930,7 +3982,7 @@ func (x *JIDArray) String() string {
 func (*JIDArray) ProtoMessage() {}
 
 func (x *JIDArray) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[41]
+	mi := &file_Neonize_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3943,7 +3995,7 @@ func (x *JIDArray) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use JIDArray.ProtoReflect.Descriptor instead.
 func (*JIDArray) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{41}
+	return file_Neonize_proto_rawDescGZIP(), []int{42}
 }
 
 func (x *JIDArray) GetJIDS() []*JID {
@@ -3962,7 +4014,7 @@ type ArrayString struct {
 
 func (x *ArrayString) Reset() {
 	*x = ArrayString{}
-	mi := &file_Neonize_proto_msgTypes[42]
+	mi := &file_Neonize_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3974,7 +4026,7 @@ func (x *ArrayString) String() string {
 func (*ArrayString) ProtoMessage() {}
 
 func (x *ArrayString) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[42]
+	mi := &file_Neonize_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3987,7 +4039,7 @@ func (x *ArrayString) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ArrayString.ProtoReflect.Descriptor instead.
 func (*ArrayString) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{42}
+	return file_Neonize_proto_rawDescGZIP(), []int{43}
 }
 
 func (x *ArrayString) GetData() []string {
@@ -4007,7 +4059,7 @@ type NewsLetterMessageMeta struct {
 
 func (x *NewsLetterMessageMeta) Reset() {
 	*x = NewsLetterMessageMeta{}
-	mi := &file_Neonize_proto_msgTypes[43]
+	mi := &file_Neonize_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4019,7 +4071,7 @@ func (x *NewsLetterMessageMeta) String() string {
 func (*NewsLetterMessageMeta) ProtoMessage() {}
 
 func (x *NewsLetterMessageMeta) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[43]
+	mi := &file_Neonize_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4032,7 +4084,7 @@ func (x *NewsLetterMessageMeta) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NewsLetterMessageMeta.ProtoReflect.Descriptor instead.
 func (*NewsLetterMessageMeta) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{43}
+	return file_Neonize_proto_rawDescGZIP(), []int{44}
 }
 
 func (x *NewsLetterMessageMeta) GetEditTS() int64 {
@@ -4059,7 +4111,7 @@ type GroupDelete struct {
 
 func (x *GroupDelete) Reset() {
 	*x = GroupDelete{}
-	mi := &file_Neonize_proto_msgTypes[44]
+	mi := &file_Neonize_proto_msgTypes[45]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4071,7 +4123,7 @@ func (x *GroupDelete) String() string {
 func (*GroupDelete) ProtoMessage() {}
 
 func (x *GroupDelete) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[44]
+	mi := &file_Neonize_proto_msgTypes[45]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4084,7 +4136,7 @@ func (x *GroupDelete) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GroupDelete.ProtoReflect.Descriptor instead.
 func (*GroupDelete) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{44}
+	return file_Neonize_proto_rawDescGZIP(), []int{45}
 }
 
 func (x *GroupDelete) GetDeleted() bool {
@@ -4123,7 +4175,7 @@ type Message struct {
 
 func (x *Message) Reset() {
 	*x = Message{}
-	mi := &file_Neonize_proto_msgTypes[45]
+	mi := &file_Neonize_proto_msgTypes[46]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4135,7 +4187,7 @@ func (x *Message) String() string {
 func (*Message) ProtoMessage() {}
 
 func (x *Message) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[45]
+	mi := &file_Neonize_proto_msgTypes[46]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4148,7 +4200,7 @@ func (x *Message) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Message.ProtoReflect.Descriptor instead.
 func (*Message) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{45}
+	return file_Neonize_proto_rawDescGZIP(), []int{46}
 }
 
 func (x *Message) GetInfo() *MessageInfo {
@@ -4260,7 +4312,7 @@ type CreateNewsletterParams struct {
 
 func (x *CreateNewsletterParams) Reset() {
 	*x = CreateNewsletterParams{}
-	mi := &file_Neonize_proto_msgTypes[46]
+	mi := &file_Neonize_proto_msgTypes[47]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4272,7 +4324,7 @@ func (x *CreateNewsletterParams) String() string {
 func (*CreateNewsletterParams) ProtoMessage() {}
 
 func (x *CreateNewsletterParams) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[46]
+	mi := &file_Neonize_proto_msgTypes[47]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4285,7 +4337,7 @@ func (x *CreateNewsletterParams) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateNewsletterParams.ProtoReflect.Descriptor instead.
 func (*CreateNewsletterParams) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{46}
+	return file_Neonize_proto_rawDescGZIP(), []int{47}
 }
 
 func (x *CreateNewsletterParams) GetName() string {
@@ -4318,7 +4370,7 @@ type WrappedNewsletterState struct {
 
 func (x *WrappedNewsletterState) Reset() {
 	*x = WrappedNewsletterState{}
-	mi := &file_Neonize_proto_msgTypes[47]
+	mi := &file_Neonize_proto_msgTypes[48]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4330,7 +4382,7 @@ func (x *WrappedNewsletterState) String() string {
 func (*WrappedNewsletterState) ProtoMessage() {}
 
 func (x *WrappedNewsletterState) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[47]
+	mi := &file_Neonize_proto_msgTypes[48]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4343,7 +4395,7 @@ func (x *WrappedNewsletterState) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WrappedNewsletterState.ProtoReflect.Descriptor instead.
 func (*WrappedNewsletterState) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{47}
+	return file_Neonize_proto_rawDescGZIP(), []int{48}
 }
 
 func (x *WrappedNewsletterState) GetType() WrappedNewsletterState_NewsletterState {
@@ -4364,7 +4416,7 @@ type NewsletterText struct {
 
 func (x *NewsletterText) Reset() {
 	*x = NewsletterText{}
-	mi := &file_Neonize_proto_msgTypes[48]
+	mi := &file_Neonize_proto_msgTypes[49]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4376,7 +4428,7 @@ func (x *NewsletterText) String() string {
 func (*NewsletterText) ProtoMessage() {}
 
 func (x *NewsletterText) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[48]
+	mi := &file_Neonize_proto_msgTypes[49]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4389,7 +4441,7 @@ func (x *NewsletterText) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NewsletterText.ProtoReflect.Descriptor instead.
 func (*NewsletterText) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{48}
+	return file_Neonize_proto_rawDescGZIP(), []int{49}
 }
 
 func (x *NewsletterText) GetText() string {
@@ -4425,7 +4477,7 @@ type ProfilePictureInfo struct {
 
 func (x *ProfilePictureInfo) Reset() {
 	*x = ProfilePictureInfo{}
-	mi := &file_Neonize_proto_msgTypes[49]
+	mi := &file_Neonize_proto_msgTypes[50]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4437,7 +4489,7 @@ func (x *ProfilePictureInfo) String() string {
 func (*ProfilePictureInfo) ProtoMessage() {}
 
 func (x *ProfilePictureInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[49]
+	mi := &file_Neonize_proto_msgTypes[50]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4450,7 +4502,7 @@ func (x *ProfilePictureInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProfilePictureInfo.ProtoReflect.Descriptor instead.
 func (*ProfilePictureInfo) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{49}
+	return file_Neonize_proto_rawDescGZIP(), []int{50}
 }
 
 func (x *ProfilePictureInfo) GetURL() string {
@@ -4490,7 +4542,7 @@ type NewsletterReactionSettings struct {
 
 func (x *NewsletterReactionSettings) Reset() {
 	*x = NewsletterReactionSettings{}
-	mi := &file_Neonize_proto_msgTypes[50]
+	mi := &file_Neonize_proto_msgTypes[51]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4502,7 +4554,7 @@ func (x *NewsletterReactionSettings) String() string {
 func (*NewsletterReactionSettings) ProtoMessage() {}
 
 func (x *NewsletterReactionSettings) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[50]
+	mi := &file_Neonize_proto_msgTypes[51]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4515,7 +4567,7 @@ func (x *NewsletterReactionSettings) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NewsletterReactionSettings.ProtoReflect.Descriptor instead.
 func (*NewsletterReactionSettings) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{50}
+	return file_Neonize_proto_rawDescGZIP(), []int{51}
 }
 
 func (x *NewsletterReactionSettings) GetValue() NewsletterReactionSettings_NewsletterReactionsMode {
@@ -4534,7 +4586,7 @@ type NewsletterSetting struct {
 
 func (x *NewsletterSetting) Reset() {
 	*x = NewsletterSetting{}
-	mi := &file_Neonize_proto_msgTypes[51]
+	mi := &file_Neonize_proto_msgTypes[52]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4546,7 +4598,7 @@ func (x *NewsletterSetting) String() string {
 func (*NewsletterSetting) ProtoMessage() {}
 
 func (x *NewsletterSetting) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[51]
+	mi := &file_Neonize_proto_msgTypes[52]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4559,7 +4611,7 @@ func (x *NewsletterSetting) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NewsletterSetting.ProtoReflect.Descriptor instead.
 func (*NewsletterSetting) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{51}
+	return file_Neonize_proto_rawDescGZIP(), []int{52}
 }
 
 func (x *NewsletterSetting) GetReactionCodes() *NewsletterReactionSettings {
@@ -4586,7 +4638,7 @@ type NewsletterThreadMetadata struct {
 
 func (x *NewsletterThreadMetadata) Reset() {
 	*x = NewsletterThreadMetadata{}
-	mi := &file_Neonize_proto_msgTypes[52]
+	mi := &file_Neonize_proto_msgTypes[53]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4598,7 +4650,7 @@ func (x *NewsletterThreadMetadata) String() string {
 func (*NewsletterThreadMetadata) ProtoMessage() {}
 
 func (x *NewsletterThreadMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[52]
+	mi := &file_Neonize_proto_msgTypes[53]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4611,7 +4663,7 @@ func (x *NewsletterThreadMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NewsletterThreadMetadata.ProtoReflect.Descriptor instead.
 func (*NewsletterThreadMetadata) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{52}
+	return file_Neonize_proto_rawDescGZIP(), []int{53}
 }
 
 func (x *NewsletterThreadMetadata) GetCreationTime() int64 {
@@ -4687,7 +4739,7 @@ type NewsletterViewerMetadata struct {
 
 func (x *NewsletterViewerMetadata) Reset() {
 	*x = NewsletterViewerMetadata{}
-	mi := &file_Neonize_proto_msgTypes[53]
+	mi := &file_Neonize_proto_msgTypes[54]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4699,7 +4751,7 @@ func (x *NewsletterViewerMetadata) String() string {
 func (*NewsletterViewerMetadata) ProtoMessage() {}
 
 func (x *NewsletterViewerMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[53]
+	mi := &file_Neonize_proto_msgTypes[54]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4712,7 +4764,7 @@ func (x *NewsletterViewerMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NewsletterViewerMetadata.ProtoReflect.Descriptor instead.
 func (*NewsletterViewerMetadata) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{53}
+	return file_Neonize_proto_rawDescGZIP(), []int{54}
 }
 
 func (x *NewsletterViewerMetadata) GetMute() NewsletterMuteState {
@@ -4741,7 +4793,7 @@ type NewsletterMetadata struct {
 
 func (x *NewsletterMetadata) Reset() {
 	*x = NewsletterMetadata{}
-	mi := &file_Neonize_proto_msgTypes[54]
+	mi := &file_Neonize_proto_msgTypes[55]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4753,7 +4805,7 @@ func (x *NewsletterMetadata) String() string {
 func (*NewsletterMetadata) ProtoMessage() {}
 
 func (x *NewsletterMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[54]
+	mi := &file_Neonize_proto_msgTypes[55]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4766,7 +4818,7 @@ func (x *NewsletterMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NewsletterMetadata.ProtoReflect.Descriptor instead.
 func (*NewsletterMetadata) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{54}
+	return file_Neonize_proto_rawDescGZIP(), []int{55}
 }
 
 func (x *NewsletterMetadata) GetID() *JID {
@@ -4807,7 +4859,7 @@ type Blocklist struct {
 
 func (x *Blocklist) Reset() {
 	*x = Blocklist{}
-	mi := &file_Neonize_proto_msgTypes[55]
+	mi := &file_Neonize_proto_msgTypes[56]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4819,7 +4871,7 @@ func (x *Blocklist) String() string {
 func (*Blocklist) ProtoMessage() {}
 
 func (x *Blocklist) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[55]
+	mi := &file_Neonize_proto_msgTypes[56]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4832,7 +4884,7 @@ func (x *Blocklist) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Blocklist.ProtoReflect.Descriptor instead.
 func (*Blocklist) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{55}
+	return file_Neonize_proto_rawDescGZIP(), []int{56}
 }
 
 func (x *Blocklist) GetDHash() string {
@@ -4859,7 +4911,7 @@ type Reaction struct {
 
 func (x *Reaction) Reset() {
 	*x = Reaction{}
-	mi := &file_Neonize_proto_msgTypes[56]
+	mi := &file_Neonize_proto_msgTypes[57]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4871,7 +4923,7 @@ func (x *Reaction) String() string {
 func (*Reaction) ProtoMessage() {}
 
 func (x *Reaction) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[56]
+	mi := &file_Neonize_proto_msgTypes[57]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4884,7 +4936,7 @@ func (x *Reaction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Reaction.ProtoReflect.Descriptor instead.
 func (*Reaction) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{56}
+	return file_Neonize_proto_rawDescGZIP(), []int{57}
 }
 
 func (x *Reaction) GetType() string {
@@ -4913,7 +4965,7 @@ type NewsletterMessage struct {
 
 func (x *NewsletterMessage) Reset() {
 	*x = NewsletterMessage{}
-	mi := &file_Neonize_proto_msgTypes[57]
+	mi := &file_Neonize_proto_msgTypes[58]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4925,7 +4977,7 @@ func (x *NewsletterMessage) String() string {
 func (*NewsletterMessage) ProtoMessage() {}
 
 func (x *NewsletterMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[57]
+	mi := &file_Neonize_proto_msgTypes[58]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4938,7 +4990,7 @@ func (x *NewsletterMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NewsletterMessage.ProtoReflect.Descriptor instead.
 func (*NewsletterMessage) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{57}
+	return file_Neonize_proto_rawDescGZIP(), []int{58}
 }
 
 func (x *NewsletterMessage) GetMessageServerID() int64 {
@@ -4979,7 +5031,7 @@ type GetNewsletterMessageUpdateReturnFunction struct {
 
 func (x *GetNewsletterMessageUpdateReturnFunction) Reset() {
 	*x = GetNewsletterMessageUpdateReturnFunction{}
-	mi := &file_Neonize_proto_msgTypes[58]
+	mi := &file_Neonize_proto_msgTypes[59]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4991,7 +5043,7 @@ func (x *GetNewsletterMessageUpdateReturnFunction) String() string {
 func (*GetNewsletterMessageUpdateReturnFunction) ProtoMessage() {}
 
 func (x *GetNewsletterMessageUpdateReturnFunction) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[58]
+	mi := &file_Neonize_proto_msgTypes[59]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5004,7 +5056,7 @@ func (x *GetNewsletterMessageUpdateReturnFunction) ProtoReflect() protoreflect.M
 
 // Deprecated: Use GetNewsletterMessageUpdateReturnFunction.ProtoReflect.Descriptor instead.
 func (*GetNewsletterMessageUpdateReturnFunction) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{58}
+	return file_Neonize_proto_rawDescGZIP(), []int{59}
 }
 
 func (x *GetNewsletterMessageUpdateReturnFunction) GetNewsletterMessage() []*NewsletterMessage {
@@ -5036,7 +5088,7 @@ type PrivacySettings struct {
 
 func (x *PrivacySettings) Reset() {
 	*x = PrivacySettings{}
-	mi := &file_Neonize_proto_msgTypes[59]
+	mi := &file_Neonize_proto_msgTypes[60]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5048,7 +5100,7 @@ func (x *PrivacySettings) String() string {
 func (*PrivacySettings) ProtoMessage() {}
 
 func (x *PrivacySettings) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[59]
+	mi := &file_Neonize_proto_msgTypes[60]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5061,7 +5113,7 @@ func (x *PrivacySettings) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PrivacySettings.ProtoReflect.Descriptor instead.
 func (*PrivacySettings) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{59}
+	return file_Neonize_proto_rawDescGZIP(), []int{60}
 }
 
 func (x *PrivacySettings) GetGroupAdd() PrivacySettings_PrivacySetting {
@@ -5129,7 +5181,7 @@ type NodeAttrs struct {
 
 func (x *NodeAttrs) Reset() {
 	*x = NodeAttrs{}
-	mi := &file_Neonize_proto_msgTypes[60]
+	mi := &file_Neonize_proto_msgTypes[61]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5141,7 +5193,7 @@ func (x *NodeAttrs) String() string {
 func (*NodeAttrs) ProtoMessage() {}
 
 func (x *NodeAttrs) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[60]
+	mi := &file_Neonize_proto_msgTypes[61]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5154,7 +5206,7 @@ func (x *NodeAttrs) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NodeAttrs.ProtoReflect.Descriptor instead.
 func (*NodeAttrs) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{60}
+	return file_Neonize_proto_rawDescGZIP(), []int{61}
 }
 
 func (x *NodeAttrs) GetName() string {
@@ -5253,7 +5305,7 @@ const (
 
 func (x *Node) Reset() {
 	*x = Node{}
-	mi := &file_Neonize_proto_msgTypes[61]
+	mi := &file_Neonize_proto_msgTypes[62]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5265,7 +5317,7 @@ func (x *Node) String() string {
 func (*Node) ProtoMessage() {}
 
 func (x *Node) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[61]
+	mi := &file_Neonize_proto_msgTypes[62]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5278,7 +5330,7 @@ func (x *Node) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Node.ProtoReflect.Descriptor instead.
 func (*Node) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{61}
+	return file_Neonize_proto_rawDescGZIP(), []int{62}
 }
 
 func (x *Node) GetTag() string {
@@ -5328,7 +5380,7 @@ type InfoQuery struct {
 
 func (x *InfoQuery) Reset() {
 	*x = InfoQuery{}
-	mi := &file_Neonize_proto_msgTypes[62]
+	mi := &file_Neonize_proto_msgTypes[63]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5340,7 +5392,7 @@ func (x *InfoQuery) String() string {
 func (*InfoQuery) ProtoMessage() {}
 
 func (x *InfoQuery) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[62]
+	mi := &file_Neonize_proto_msgTypes[63]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5353,7 +5405,7 @@ func (x *InfoQuery) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InfoQuery.ProtoReflect.Descriptor instead.
 func (*InfoQuery) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{62}
+	return file_Neonize_proto_rawDescGZIP(), []int{63}
 }
 
 func (x *InfoQuery) GetNamespace() string {
@@ -5395,7 +5447,7 @@ type GetProfilePictureParams struct {
 
 func (x *GetProfilePictureParams) Reset() {
 	*x = GetProfilePictureParams{}
-	mi := &file_Neonize_proto_msgTypes[63]
+	mi := &file_Neonize_proto_msgTypes[64]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5407,7 +5459,7 @@ func (x *GetProfilePictureParams) String() string {
 func (*GetProfilePictureParams) ProtoMessage() {}
 
 func (x *GetProfilePictureParams) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[63]
+	mi := &file_Neonize_proto_msgTypes[64]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5420,7 +5472,7 @@ func (x *GetProfilePictureParams) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetProfilePictureParams.ProtoReflect.Descriptor instead.
 func (*GetProfilePictureParams) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{63}
+	return file_Neonize_proto_rawDescGZIP(), []int{64}
 }
 
 func (x *GetProfilePictureParams) GetPreview() bool {
@@ -5454,7 +5506,7 @@ type GetProfilePictureReturnFunction struct {
 
 func (x *GetProfilePictureReturnFunction) Reset() {
 	*x = GetProfilePictureReturnFunction{}
-	mi := &file_Neonize_proto_msgTypes[64]
+	mi := &file_Neonize_proto_msgTypes[65]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5466,7 +5518,7 @@ func (x *GetProfilePictureReturnFunction) String() string {
 func (*GetProfilePictureReturnFunction) ProtoMessage() {}
 
 func (x *GetProfilePictureReturnFunction) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[64]
+	mi := &file_Neonize_proto_msgTypes[65]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5479,7 +5531,7 @@ func (x *GetProfilePictureReturnFunction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetProfilePictureReturnFunction.ProtoReflect.Descriptor instead.
 func (*GetProfilePictureReturnFunction) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{64}
+	return file_Neonize_proto_rawDescGZIP(), []int{65}
 }
 
 func (x *GetProfilePictureReturnFunction) GetPicture() *ProfilePictureInfo {
@@ -5507,7 +5559,7 @@ type StatusPrivacy struct {
 
 func (x *StatusPrivacy) Reset() {
 	*x = StatusPrivacy{}
-	mi := &file_Neonize_proto_msgTypes[65]
+	mi := &file_Neonize_proto_msgTypes[66]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5519,7 +5571,7 @@ func (x *StatusPrivacy) String() string {
 func (*StatusPrivacy) ProtoMessage() {}
 
 func (x *StatusPrivacy) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[65]
+	mi := &file_Neonize_proto_msgTypes[66]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5532,7 +5584,7 @@ func (x *StatusPrivacy) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StatusPrivacy.ProtoReflect.Descriptor instead.
 func (*StatusPrivacy) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{65}
+	return file_Neonize_proto_rawDescGZIP(), []int{66}
 }
 
 func (x *StatusPrivacy) GetType() StatusPrivacy_StatusPrivacyType {
@@ -5566,7 +5618,7 @@ type GetStatusPrivacyReturnFunction struct {
 
 func (x *GetStatusPrivacyReturnFunction) Reset() {
 	*x = GetStatusPrivacyReturnFunction{}
-	mi := &file_Neonize_proto_msgTypes[66]
+	mi := &file_Neonize_proto_msgTypes[67]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5578,7 +5630,7 @@ func (x *GetStatusPrivacyReturnFunction) String() string {
 func (*GetStatusPrivacyReturnFunction) ProtoMessage() {}
 
 func (x *GetStatusPrivacyReturnFunction) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[66]
+	mi := &file_Neonize_proto_msgTypes[67]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5591,7 +5643,7 @@ func (x *GetStatusPrivacyReturnFunction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetStatusPrivacyReturnFunction.ProtoReflect.Descriptor instead.
 func (*GetStatusPrivacyReturnFunction) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{66}
+	return file_Neonize_proto_rawDescGZIP(), []int{67}
 }
 
 func (x *GetStatusPrivacyReturnFunction) GetStatusPrivacy() []*StatusPrivacy {
@@ -5619,7 +5671,7 @@ type GroupLinkTarget struct {
 
 func (x *GroupLinkTarget) Reset() {
 	*x = GroupLinkTarget{}
-	mi := &file_Neonize_proto_msgTypes[67]
+	mi := &file_Neonize_proto_msgTypes[68]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5631,7 +5683,7 @@ func (x *GroupLinkTarget) String() string {
 func (*GroupLinkTarget) ProtoMessage() {}
 
 func (x *GroupLinkTarget) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[67]
+	mi := &file_Neonize_proto_msgTypes[68]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5644,7 +5696,7 @@ func (x *GroupLinkTarget) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GroupLinkTarget.ProtoReflect.Descriptor instead.
 func (*GroupLinkTarget) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{67}
+	return file_Neonize_proto_rawDescGZIP(), []int{68}
 }
 
 func (x *GroupLinkTarget) GetJID() *JID {
@@ -5679,7 +5731,7 @@ type GroupLinkChange struct {
 
 func (x *GroupLinkChange) Reset() {
 	*x = GroupLinkChange{}
-	mi := &file_Neonize_proto_msgTypes[68]
+	mi := &file_Neonize_proto_msgTypes[69]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5691,7 +5743,7 @@ func (x *GroupLinkChange) String() string {
 func (*GroupLinkChange) ProtoMessage() {}
 
 func (x *GroupLinkChange) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[68]
+	mi := &file_Neonize_proto_msgTypes[69]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5704,7 +5756,7 @@ func (x *GroupLinkChange) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GroupLinkChange.ProtoReflect.Descriptor instead.
 func (*GroupLinkChange) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{68}
+	return file_Neonize_proto_rawDescGZIP(), []int{69}
 }
 
 func (x *GroupLinkChange) GetType() GroupLinkChange_ChangeType {
@@ -5738,7 +5790,7 @@ type GetSubGroupsReturnFunction struct {
 
 func (x *GetSubGroupsReturnFunction) Reset() {
 	*x = GetSubGroupsReturnFunction{}
-	mi := &file_Neonize_proto_msgTypes[69]
+	mi := &file_Neonize_proto_msgTypes[70]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5750,7 +5802,7 @@ func (x *GetSubGroupsReturnFunction) String() string {
 func (*GetSubGroupsReturnFunction) ProtoMessage() {}
 
 func (x *GetSubGroupsReturnFunction) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[69]
+	mi := &file_Neonize_proto_msgTypes[70]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5763,7 +5815,7 @@ func (x *GetSubGroupsReturnFunction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetSubGroupsReturnFunction.ProtoReflect.Descriptor instead.
 func (*GetSubGroupsReturnFunction) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{69}
+	return file_Neonize_proto_rawDescGZIP(), []int{70}
 }
 
 func (x *GetSubGroupsReturnFunction) GetGroupLinkTarget() []*GroupLinkTarget {
@@ -5790,7 +5842,7 @@ type GetSubscribedNewslettersReturnFunction struct {
 
 func (x *GetSubscribedNewslettersReturnFunction) Reset() {
 	*x = GetSubscribedNewslettersReturnFunction{}
-	mi := &file_Neonize_proto_msgTypes[70]
+	mi := &file_Neonize_proto_msgTypes[71]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5802,7 +5854,7 @@ func (x *GetSubscribedNewslettersReturnFunction) String() string {
 func (*GetSubscribedNewslettersReturnFunction) ProtoMessage() {}
 
 func (x *GetSubscribedNewslettersReturnFunction) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[70]
+	mi := &file_Neonize_proto_msgTypes[71]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5815,7 +5867,7 @@ func (x *GetSubscribedNewslettersReturnFunction) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use GetSubscribedNewslettersReturnFunction.ProtoReflect.Descriptor instead.
 func (*GetSubscribedNewslettersReturnFunction) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{70}
+	return file_Neonize_proto_rawDescGZIP(), []int{71}
 }
 
 func (x *GetSubscribedNewslettersReturnFunction) GetNewsletter() []*NewsletterMetadata {
@@ -5842,7 +5894,7 @@ type GetUserDevicesreturnFunction struct {
 
 func (x *GetUserDevicesreturnFunction) Reset() {
 	*x = GetUserDevicesreturnFunction{}
-	mi := &file_Neonize_proto_msgTypes[71]
+	mi := &file_Neonize_proto_msgTypes[72]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5854,7 +5906,7 @@ func (x *GetUserDevicesreturnFunction) String() string {
 func (*GetUserDevicesreturnFunction) ProtoMessage() {}
 
 func (x *GetUserDevicesreturnFunction) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[71]
+	mi := &file_Neonize_proto_msgTypes[72]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5867,7 +5919,7 @@ func (x *GetUserDevicesreturnFunction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserDevicesreturnFunction.ProtoReflect.Descriptor instead.
 func (*GetUserDevicesreturnFunction) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{71}
+	return file_Neonize_proto_rawDescGZIP(), []int{72}
 }
 
 func (x *GetUserDevicesreturnFunction) GetJID() []*JID {
@@ -5894,7 +5946,7 @@ type NewsletterSubscribeLiveUpdatesReturnFunction struct {
 
 func (x *NewsletterSubscribeLiveUpdatesReturnFunction) Reset() {
 	*x = NewsletterSubscribeLiveUpdatesReturnFunction{}
-	mi := &file_Neonize_proto_msgTypes[72]
+	mi := &file_Neonize_proto_msgTypes[73]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5906,7 +5958,7 @@ func (x *NewsletterSubscribeLiveUpdatesReturnFunction) String() string {
 func (*NewsletterSubscribeLiveUpdatesReturnFunction) ProtoMessage() {}
 
 func (x *NewsletterSubscribeLiveUpdatesReturnFunction) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[72]
+	mi := &file_Neonize_proto_msgTypes[73]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5919,7 +5971,7 @@ func (x *NewsletterSubscribeLiveUpdatesReturnFunction) ProtoReflect() protorefle
 
 // Deprecated: Use NewsletterSubscribeLiveUpdatesReturnFunction.ProtoReflect.Descriptor instead.
 func (*NewsletterSubscribeLiveUpdatesReturnFunction) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{72}
+	return file_Neonize_proto_rawDescGZIP(), []int{73}
 }
 
 func (x *NewsletterSubscribeLiveUpdatesReturnFunction) GetDuration() int64 {
@@ -5948,7 +6000,7 @@ type PairPhoneParams struct {
 
 func (x *PairPhoneParams) Reset() {
 	*x = PairPhoneParams{}
-	mi := &file_Neonize_proto_msgTypes[73]
+	mi := &file_Neonize_proto_msgTypes[74]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5960,7 +6012,7 @@ func (x *PairPhoneParams) String() string {
 func (*PairPhoneParams) ProtoMessage() {}
 
 func (x *PairPhoneParams) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[73]
+	mi := &file_Neonize_proto_msgTypes[74]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5973,7 +6025,7 @@ func (x *PairPhoneParams) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PairPhoneParams.ProtoReflect.Descriptor instead.
 func (*PairPhoneParams) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{73}
+	return file_Neonize_proto_rawDescGZIP(), []int{74}
 }
 
 func (x *PairPhoneParams) GetPhone() string {
@@ -6015,7 +6067,7 @@ type ContactQRLinkTarget struct {
 
 func (x *ContactQRLinkTarget) Reset() {
 	*x = ContactQRLinkTarget{}
-	mi := &file_Neonize_proto_msgTypes[74]
+	mi := &file_Neonize_proto_msgTypes[75]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6027,7 +6079,7 @@ func (x *ContactQRLinkTarget) String() string {
 func (*ContactQRLinkTarget) ProtoMessage() {}
 
 func (x *ContactQRLinkTarget) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[74]
+	mi := &file_Neonize_proto_msgTypes[75]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6040,7 +6092,7 @@ func (x *ContactQRLinkTarget) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ContactQRLinkTarget.ProtoReflect.Descriptor instead.
 func (*ContactQRLinkTarget) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{74}
+	return file_Neonize_proto_rawDescGZIP(), []int{75}
 }
 
 func (x *ContactQRLinkTarget) GetJID() *JID {
@@ -6074,7 +6126,7 @@ type ResolveContactQRLinkReturnFunction struct {
 
 func (x *ResolveContactQRLinkReturnFunction) Reset() {
 	*x = ResolveContactQRLinkReturnFunction{}
-	mi := &file_Neonize_proto_msgTypes[75]
+	mi := &file_Neonize_proto_msgTypes[76]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6086,7 +6138,7 @@ func (x *ResolveContactQRLinkReturnFunction) String() string {
 func (*ResolveContactQRLinkReturnFunction) ProtoMessage() {}
 
 func (x *ResolveContactQRLinkReturnFunction) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[75]
+	mi := &file_Neonize_proto_msgTypes[76]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6099,7 +6151,7 @@ func (x *ResolveContactQRLinkReturnFunction) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use ResolveContactQRLinkReturnFunction.ProtoReflect.Descriptor instead.
 func (*ResolveContactQRLinkReturnFunction) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{75}
+	return file_Neonize_proto_rawDescGZIP(), []int{76}
 }
 
 func (x *ResolveContactQRLinkReturnFunction) GetContactQrLink() *ContactQRLinkTarget {
@@ -6130,7 +6182,7 @@ type BusinessMessageLinkTarget struct {
 
 func (x *BusinessMessageLinkTarget) Reset() {
 	*x = BusinessMessageLinkTarget{}
-	mi := &file_Neonize_proto_msgTypes[76]
+	mi := &file_Neonize_proto_msgTypes[77]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6142,7 +6194,7 @@ func (x *BusinessMessageLinkTarget) String() string {
 func (*BusinessMessageLinkTarget) ProtoMessage() {}
 
 func (x *BusinessMessageLinkTarget) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[76]
+	mi := &file_Neonize_proto_msgTypes[77]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6155,7 +6207,7 @@ func (x *BusinessMessageLinkTarget) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BusinessMessageLinkTarget.ProtoReflect.Descriptor instead.
 func (*BusinessMessageLinkTarget) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{76}
+	return file_Neonize_proto_rawDescGZIP(), []int{77}
 }
 
 func (x *BusinessMessageLinkTarget) GetJID() *JID {
@@ -6210,7 +6262,7 @@ type ResolveBusinessMessageLinkReturnFunction struct {
 
 func (x *ResolveBusinessMessageLinkReturnFunction) Reset() {
 	*x = ResolveBusinessMessageLinkReturnFunction{}
-	mi := &file_Neonize_proto_msgTypes[77]
+	mi := &file_Neonize_proto_msgTypes[78]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6222,7 +6274,7 @@ func (x *ResolveBusinessMessageLinkReturnFunction) String() string {
 func (*ResolveBusinessMessageLinkReturnFunction) ProtoMessage() {}
 
 func (x *ResolveBusinessMessageLinkReturnFunction) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[77]
+	mi := &file_Neonize_proto_msgTypes[78]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6235,7 +6287,7 @@ func (x *ResolveBusinessMessageLinkReturnFunction) ProtoReflect() protoreflect.M
 
 // Deprecated: Use ResolveBusinessMessageLinkReturnFunction.ProtoReflect.Descriptor instead.
 func (*ResolveBusinessMessageLinkReturnFunction) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{77}
+	return file_Neonize_proto_rawDescGZIP(), []int{78}
 }
 
 func (x *ResolveBusinessMessageLinkReturnFunction) GetMessageLinkTarget() *BusinessMessageLinkTarget {
@@ -6263,7 +6315,7 @@ type MutationInfo struct {
 
 func (x *MutationInfo) Reset() {
 	*x = MutationInfo{}
-	mi := &file_Neonize_proto_msgTypes[78]
+	mi := &file_Neonize_proto_msgTypes[79]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6275,7 +6327,7 @@ func (x *MutationInfo) String() string {
 func (*MutationInfo) ProtoMessage() {}
 
 func (x *MutationInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[78]
+	mi := &file_Neonize_proto_msgTypes[79]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6288,7 +6340,7 @@ func (x *MutationInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MutationInfo.ProtoReflect.Descriptor instead.
 func (*MutationInfo) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{78}
+	return file_Neonize_proto_rawDescGZIP(), []int{79}
 }
 
 func (x *MutationInfo) GetIndex() []string {
@@ -6323,7 +6375,7 @@ type PatchInfo struct {
 
 func (x *PatchInfo) Reset() {
 	*x = PatchInfo{}
-	mi := &file_Neonize_proto_msgTypes[79]
+	mi := &file_Neonize_proto_msgTypes[80]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6335,7 +6387,7 @@ func (x *PatchInfo) String() string {
 func (*PatchInfo) ProtoMessage() {}
 
 func (x *PatchInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[79]
+	mi := &file_Neonize_proto_msgTypes[80]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6348,7 +6400,7 @@ func (x *PatchInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PatchInfo.ProtoReflect.Descriptor instead.
 func (*PatchInfo) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{79}
+	return file_Neonize_proto_rawDescGZIP(), []int{80}
 }
 
 func (x *PatchInfo) GetTimestamp() int64 {
@@ -6383,7 +6435,7 @@ type ContactsPutPushNameReturnFunction struct {
 
 func (x *ContactsPutPushNameReturnFunction) Reset() {
 	*x = ContactsPutPushNameReturnFunction{}
-	mi := &file_Neonize_proto_msgTypes[80]
+	mi := &file_Neonize_proto_msgTypes[81]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6395,7 +6447,7 @@ func (x *ContactsPutPushNameReturnFunction) String() string {
 func (*ContactsPutPushNameReturnFunction) ProtoMessage() {}
 
 func (x *ContactsPutPushNameReturnFunction) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[80]
+	mi := &file_Neonize_proto_msgTypes[81]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6408,7 +6460,7 @@ func (x *ContactsPutPushNameReturnFunction) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use ContactsPutPushNameReturnFunction.ProtoReflect.Descriptor instead.
 func (*ContactsPutPushNameReturnFunction) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{80}
+	return file_Neonize_proto_rawDescGZIP(), []int{81}
 }
 
 func (x *ContactsPutPushNameReturnFunction) GetStatus() bool {
@@ -6443,7 +6495,7 @@ type ContactEntry struct {
 
 func (x *ContactEntry) Reset() {
 	*x = ContactEntry{}
-	mi := &file_Neonize_proto_msgTypes[81]
+	mi := &file_Neonize_proto_msgTypes[82]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6455,7 +6507,7 @@ func (x *ContactEntry) String() string {
 func (*ContactEntry) ProtoMessage() {}
 
 func (x *ContactEntry) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[81]
+	mi := &file_Neonize_proto_msgTypes[82]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6468,7 +6520,7 @@ func (x *ContactEntry) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ContactEntry.ProtoReflect.Descriptor instead.
 func (*ContactEntry) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{81}
+	return file_Neonize_proto_rawDescGZIP(), []int{82}
 }
 
 func (x *ContactEntry) GetJID() *JID {
@@ -6501,7 +6553,7 @@ type ContactEntryArray struct {
 
 func (x *ContactEntryArray) Reset() {
 	*x = ContactEntryArray{}
-	mi := &file_Neonize_proto_msgTypes[82]
+	mi := &file_Neonize_proto_msgTypes[83]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6513,7 +6565,7 @@ func (x *ContactEntryArray) String() string {
 func (*ContactEntryArray) ProtoMessage() {}
 
 func (x *ContactEntryArray) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[82]
+	mi := &file_Neonize_proto_msgTypes[83]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6526,7 +6578,7 @@ func (x *ContactEntryArray) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ContactEntryArray.ProtoReflect.Descriptor instead.
 func (*ContactEntryArray) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{82}
+	return file_Neonize_proto_rawDescGZIP(), []int{83}
 }
 
 func (x *ContactEntryArray) GetContactEntry() []*ContactEntry {
@@ -6546,7 +6598,7 @@ type SetPrivacySettingReturnFunction struct {
 
 func (x *SetPrivacySettingReturnFunction) Reset() {
 	*x = SetPrivacySettingReturnFunction{}
-	mi := &file_Neonize_proto_msgTypes[83]
+	mi := &file_Neonize_proto_msgTypes[84]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6558,7 +6610,7 @@ func (x *SetPrivacySettingReturnFunction) String() string {
 func (*SetPrivacySettingReturnFunction) ProtoMessage() {}
 
 func (x *SetPrivacySettingReturnFunction) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[83]
+	mi := &file_Neonize_proto_msgTypes[84]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6571,7 +6623,7 @@ func (x *SetPrivacySettingReturnFunction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetPrivacySettingReturnFunction.ProtoReflect.Descriptor instead.
 func (*SetPrivacySettingReturnFunction) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{83}
+	return file_Neonize_proto_rawDescGZIP(), []int{84}
 }
 
 func (x *SetPrivacySettingReturnFunction) GetSettings() *PrivacySettings {
@@ -6598,7 +6650,7 @@ type ContactsGetContactReturnFunction struct {
 
 func (x *ContactsGetContactReturnFunction) Reset() {
 	*x = ContactsGetContactReturnFunction{}
-	mi := &file_Neonize_proto_msgTypes[84]
+	mi := &file_Neonize_proto_msgTypes[85]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6610,7 +6662,7 @@ func (x *ContactsGetContactReturnFunction) String() string {
 func (*ContactsGetContactReturnFunction) ProtoMessage() {}
 
 func (x *ContactsGetContactReturnFunction) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[84]
+	mi := &file_Neonize_proto_msgTypes[85]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6623,7 +6675,7 @@ func (x *ContactsGetContactReturnFunction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ContactsGetContactReturnFunction.ProtoReflect.Descriptor instead.
 func (*ContactsGetContactReturnFunction) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{84}
+	return file_Neonize_proto_rawDescGZIP(), []int{85}
 }
 
 func (x *ContactsGetContactReturnFunction) GetContactInfo() *ContactInfo {
@@ -6653,7 +6705,7 @@ type ContactInfo struct {
 
 func (x *ContactInfo) Reset() {
 	*x = ContactInfo{}
-	mi := &file_Neonize_proto_msgTypes[85]
+	mi := &file_Neonize_proto_msgTypes[86]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6665,7 +6717,7 @@ func (x *ContactInfo) String() string {
 func (*ContactInfo) ProtoMessage() {}
 
 func (x *ContactInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[85]
+	mi := &file_Neonize_proto_msgTypes[86]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6678,7 +6730,7 @@ func (x *ContactInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ContactInfo.ProtoReflect.Descriptor instead.
 func (*ContactInfo) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{85}
+	return file_Neonize_proto_rawDescGZIP(), []int{86}
 }
 
 func (x *ContactInfo) GetFound() bool {
@@ -6726,7 +6778,7 @@ type Contact struct {
 
 func (x *Contact) Reset() {
 	*x = Contact{}
-	mi := &file_Neonize_proto_msgTypes[86]
+	mi := &file_Neonize_proto_msgTypes[87]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6738,7 +6790,7 @@ func (x *Contact) String() string {
 func (*Contact) ProtoMessage() {}
 
 func (x *Contact) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[86]
+	mi := &file_Neonize_proto_msgTypes[87]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6751,7 +6803,7 @@ func (x *Contact) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Contact.ProtoReflect.Descriptor instead.
 func (*Contact) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{86}
+	return file_Neonize_proto_rawDescGZIP(), []int{87}
 }
 
 func (x *Contact) GetJID() *JID {
@@ -6778,7 +6830,7 @@ type ContactsGetAllContactsReturnFunction struct {
 
 func (x *ContactsGetAllContactsReturnFunction) Reset() {
 	*x = ContactsGetAllContactsReturnFunction{}
-	mi := &file_Neonize_proto_msgTypes[87]
+	mi := &file_Neonize_proto_msgTypes[88]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6790,7 +6842,7 @@ func (x *ContactsGetAllContactsReturnFunction) String() string {
 func (*ContactsGetAllContactsReturnFunction) ProtoMessage() {}
 
 func (x *ContactsGetAllContactsReturnFunction) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[87]
+	mi := &file_Neonize_proto_msgTypes[88]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6803,7 +6855,7 @@ func (x *ContactsGetAllContactsReturnFunction) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use ContactsGetAllContactsReturnFunction.ProtoReflect.Descriptor instead.
 func (*ContactsGetAllContactsReturnFunction) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{87}
+	return file_Neonize_proto_rawDescGZIP(), []int{88}
 }
 
 func (x *ContactsGetAllContactsReturnFunction) GetContact() []*Contact {
@@ -6830,7 +6882,7 @@ type QR struct {
 
 func (x *QR) Reset() {
 	*x = QR{}
-	mi := &file_Neonize_proto_msgTypes[88]
+	mi := &file_Neonize_proto_msgTypes[89]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6842,7 +6894,7 @@ func (x *QR) String() string {
 func (*QR) ProtoMessage() {}
 
 func (x *QR) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[88]
+	mi := &file_Neonize_proto_msgTypes[89]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6855,7 +6907,7 @@ func (x *QR) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QR.ProtoReflect.Descriptor instead.
 func (*QR) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{88}
+	return file_Neonize_proto_rawDescGZIP(), []int{89}
 }
 
 func (x *QR) GetCodes() []string {
@@ -6878,7 +6930,7 @@ type PairStatus struct {
 
 func (x *PairStatus) Reset() {
 	*x = PairStatus{}
-	mi := &file_Neonize_proto_msgTypes[89]
+	mi := &file_Neonize_proto_msgTypes[90]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6890,7 +6942,7 @@ func (x *PairStatus) String() string {
 func (*PairStatus) ProtoMessage() {}
 
 func (x *PairStatus) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[89]
+	mi := &file_Neonize_proto_msgTypes[90]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6903,7 +6955,7 @@ func (x *PairStatus) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PairStatus.ProtoReflect.Descriptor instead.
 func (*PairStatus) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{89}
+	return file_Neonize_proto_rawDescGZIP(), []int{90}
 }
 
 func (x *PairStatus) GetID() *JID {
@@ -6950,7 +7002,7 @@ type Connected struct {
 
 func (x *Connected) Reset() {
 	*x = Connected{}
-	mi := &file_Neonize_proto_msgTypes[90]
+	mi := &file_Neonize_proto_msgTypes[91]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6962,7 +7014,7 @@ func (x *Connected) String() string {
 func (*Connected) ProtoMessage() {}
 
 func (x *Connected) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[90]
+	mi := &file_Neonize_proto_msgTypes[91]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6975,7 +7027,7 @@ func (x *Connected) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Connected.ProtoReflect.Descriptor instead.
 func (*Connected) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{90}
+	return file_Neonize_proto_rawDescGZIP(), []int{91}
 }
 
 func (x *Connected) GetStatus() bool {
@@ -6995,7 +7047,7 @@ type KeepAliveTimeout struct {
 
 func (x *KeepAliveTimeout) Reset() {
 	*x = KeepAliveTimeout{}
-	mi := &file_Neonize_proto_msgTypes[91]
+	mi := &file_Neonize_proto_msgTypes[92]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7007,7 +7059,7 @@ func (x *KeepAliveTimeout) String() string {
 func (*KeepAliveTimeout) ProtoMessage() {}
 
 func (x *KeepAliveTimeout) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[91]
+	mi := &file_Neonize_proto_msgTypes[92]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7020,7 +7072,7 @@ func (x *KeepAliveTimeout) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use KeepAliveTimeout.ProtoReflect.Descriptor instead.
 func (*KeepAliveTimeout) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{91}
+	return file_Neonize_proto_rawDescGZIP(), []int{92}
 }
 
 func (x *KeepAliveTimeout) GetErrorCount() int64 {
@@ -7045,7 +7097,7 @@ type KeepAliveRestored struct {
 
 func (x *KeepAliveRestored) Reset() {
 	*x = KeepAliveRestored{}
-	mi := &file_Neonize_proto_msgTypes[92]
+	mi := &file_Neonize_proto_msgTypes[93]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7057,7 +7109,7 @@ func (x *KeepAliveRestored) String() string {
 func (*KeepAliveRestored) ProtoMessage() {}
 
 func (x *KeepAliveRestored) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[92]
+	mi := &file_Neonize_proto_msgTypes[93]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7070,7 +7122,7 @@ func (x *KeepAliveRestored) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use KeepAliveRestored.ProtoReflect.Descriptor instead.
 func (*KeepAliveRestored) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{92}
+	return file_Neonize_proto_rawDescGZIP(), []int{93}
 }
 
 type LoggedOut struct {
@@ -7083,7 +7135,7 @@ type LoggedOut struct {
 
 func (x *LoggedOut) Reset() {
 	*x = LoggedOut{}
-	mi := &file_Neonize_proto_msgTypes[93]
+	mi := &file_Neonize_proto_msgTypes[94]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7095,7 +7147,7 @@ func (x *LoggedOut) String() string {
 func (*LoggedOut) ProtoMessage() {}
 
 func (x *LoggedOut) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[93]
+	mi := &file_Neonize_proto_msgTypes[94]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7108,7 +7160,7 @@ func (x *LoggedOut) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LoggedOut.ProtoReflect.Descriptor instead.
 func (*LoggedOut) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{93}
+	return file_Neonize_proto_rawDescGZIP(), []int{94}
 }
 
 func (x *LoggedOut) GetOnConnect() bool {
@@ -7133,7 +7185,7 @@ type StreamReplaced struct {
 
 func (x *StreamReplaced) Reset() {
 	*x = StreamReplaced{}
-	mi := &file_Neonize_proto_msgTypes[94]
+	mi := &file_Neonize_proto_msgTypes[95]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7145,7 +7197,7 @@ func (x *StreamReplaced) String() string {
 func (*StreamReplaced) ProtoMessage() {}
 
 func (x *StreamReplaced) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[94]
+	mi := &file_Neonize_proto_msgTypes[95]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7158,7 +7210,7 @@ func (x *StreamReplaced) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StreamReplaced.ProtoReflect.Descriptor instead.
 func (*StreamReplaced) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{94}
+	return file_Neonize_proto_rawDescGZIP(), []int{95}
 }
 
 type TemporaryBan struct {
@@ -7171,7 +7223,7 @@ type TemporaryBan struct {
 
 func (x *TemporaryBan) Reset() {
 	*x = TemporaryBan{}
-	mi := &file_Neonize_proto_msgTypes[95]
+	mi := &file_Neonize_proto_msgTypes[96]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7183,7 +7235,7 @@ func (x *TemporaryBan) String() string {
 func (*TemporaryBan) ProtoMessage() {}
 
 func (x *TemporaryBan) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[95]
+	mi := &file_Neonize_proto_msgTypes[96]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7196,7 +7248,7 @@ func (x *TemporaryBan) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TemporaryBan.ProtoReflect.Descriptor instead.
 func (*TemporaryBan) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{95}
+	return file_Neonize_proto_rawDescGZIP(), []int{96}
 }
 
 func (x *TemporaryBan) GetCode() TemporaryBan_TempBanReason {
@@ -7224,7 +7276,7 @@ type ConnectFailure struct {
 
 func (x *ConnectFailure) Reset() {
 	*x = ConnectFailure{}
-	mi := &file_Neonize_proto_msgTypes[96]
+	mi := &file_Neonize_proto_msgTypes[97]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7236,7 +7288,7 @@ func (x *ConnectFailure) String() string {
 func (*ConnectFailure) ProtoMessage() {}
 
 func (x *ConnectFailure) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[96]
+	mi := &file_Neonize_proto_msgTypes[97]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7249,7 +7301,7 @@ func (x *ConnectFailure) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConnectFailure.ProtoReflect.Descriptor instead.
 func (*ConnectFailure) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{96}
+	return file_Neonize_proto_rawDescGZIP(), []int{97}
 }
 
 func (x *ConnectFailure) GetReason() ConnectFailureReason {
@@ -7281,7 +7333,7 @@ type ClientOutdated struct {
 
 func (x *ClientOutdated) Reset() {
 	*x = ClientOutdated{}
-	mi := &file_Neonize_proto_msgTypes[97]
+	mi := &file_Neonize_proto_msgTypes[98]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7293,7 +7345,7 @@ func (x *ClientOutdated) String() string {
 func (*ClientOutdated) ProtoMessage() {}
 
 func (x *ClientOutdated) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[97]
+	mi := &file_Neonize_proto_msgTypes[98]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7306,7 +7358,7 @@ func (x *ClientOutdated) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClientOutdated.ProtoReflect.Descriptor instead.
 func (*ClientOutdated) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{97}
+	return file_Neonize_proto_rawDescGZIP(), []int{98}
 }
 
 type StreamError struct {
@@ -7319,7 +7371,7 @@ type StreamError struct {
 
 func (x *StreamError) Reset() {
 	*x = StreamError{}
-	mi := &file_Neonize_proto_msgTypes[98]
+	mi := &file_Neonize_proto_msgTypes[99]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7331,7 +7383,7 @@ func (x *StreamError) String() string {
 func (*StreamError) ProtoMessage() {}
 
 func (x *StreamError) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[98]
+	mi := &file_Neonize_proto_msgTypes[99]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7344,7 +7396,7 @@ func (x *StreamError) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StreamError.ProtoReflect.Descriptor instead.
 func (*StreamError) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{98}
+	return file_Neonize_proto_rawDescGZIP(), []int{99}
 }
 
 func (x *StreamError) GetCode() string {
@@ -7370,7 +7422,7 @@ type Disconnected struct {
 
 func (x *Disconnected) Reset() {
 	*x = Disconnected{}
-	mi := &file_Neonize_proto_msgTypes[99]
+	mi := &file_Neonize_proto_msgTypes[100]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7382,7 +7434,7 @@ func (x *Disconnected) String() string {
 func (*Disconnected) ProtoMessage() {}
 
 func (x *Disconnected) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[99]
+	mi := &file_Neonize_proto_msgTypes[100]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7395,7 +7447,7 @@ func (x *Disconnected) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Disconnected.ProtoReflect.Descriptor instead.
 func (*Disconnected) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{99}
+	return file_Neonize_proto_rawDescGZIP(), []int{100}
 }
 
 func (x *Disconnected) GetStatus() bool {
@@ -7414,7 +7466,7 @@ type HistorySync struct {
 
 func (x *HistorySync) Reset() {
 	*x = HistorySync{}
-	mi := &file_Neonize_proto_msgTypes[100]
+	mi := &file_Neonize_proto_msgTypes[101]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7426,7 +7478,7 @@ func (x *HistorySync) String() string {
 func (*HistorySync) ProtoMessage() {}
 
 func (x *HistorySync) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[100]
+	mi := &file_Neonize_proto_msgTypes[101]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7439,7 +7491,7 @@ func (x *HistorySync) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HistorySync.ProtoReflect.Descriptor instead.
 func (*HistorySync) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{100}
+	return file_Neonize_proto_rawDescGZIP(), []int{101}
 }
 
 func (x *HistorySync) GetData() *waHistorySync.HistorySync {
@@ -7465,7 +7517,7 @@ type Receipt struct {
 
 func (x *Receipt) Reset() {
 	*x = Receipt{}
-	mi := &file_Neonize_proto_msgTypes[101]
+	mi := &file_Neonize_proto_msgTypes[102]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7477,7 +7529,7 @@ func (x *Receipt) String() string {
 func (*Receipt) ProtoMessage() {}
 
 func (x *Receipt) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[101]
+	mi := &file_Neonize_proto_msgTypes[102]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7490,7 +7542,7 @@ func (x *Receipt) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Receipt.ProtoReflect.Descriptor instead.
 func (*Receipt) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{101}
+	return file_Neonize_proto_rawDescGZIP(), []int{102}
 }
 
 func (x *Receipt) GetMessageSource() *MessageSource {
@@ -7532,7 +7584,7 @@ type ChatPresence struct {
 
 func (x *ChatPresence) Reset() {
 	*x = ChatPresence{}
-	mi := &file_Neonize_proto_msgTypes[102]
+	mi := &file_Neonize_proto_msgTypes[103]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7544,7 +7596,7 @@ func (x *ChatPresence) String() string {
 func (*ChatPresence) ProtoMessage() {}
 
 func (x *ChatPresence) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[102]
+	mi := &file_Neonize_proto_msgTypes[103]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7557,7 +7609,7 @@ func (x *ChatPresence) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChatPresence.ProtoReflect.Descriptor instead.
 func (*ChatPresence) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{102}
+	return file_Neonize_proto_rawDescGZIP(), []int{103}
 }
 
 func (x *ChatPresence) GetMessageSource() *MessageSource {
@@ -7592,7 +7644,7 @@ type Presence struct {
 
 func (x *Presence) Reset() {
 	*x = Presence{}
-	mi := &file_Neonize_proto_msgTypes[103]
+	mi := &file_Neonize_proto_msgTypes[104]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7604,7 +7656,7 @@ func (x *Presence) String() string {
 func (*Presence) ProtoMessage() {}
 
 func (x *Presence) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[103]
+	mi := &file_Neonize_proto_msgTypes[104]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7617,7 +7669,7 @@ func (x *Presence) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Presence.ProtoReflect.Descriptor instead.
 func (*Presence) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{103}
+	return file_Neonize_proto_rawDescGZIP(), []int{104}
 }
 
 func (x *Presence) GetFrom() *JID {
@@ -7653,7 +7705,7 @@ type JoinedGroup struct {
 
 func (x *JoinedGroup) Reset() {
 	*x = JoinedGroup{}
-	mi := &file_Neonize_proto_msgTypes[104]
+	mi := &file_Neonize_proto_msgTypes[105]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7665,7 +7717,7 @@ func (x *JoinedGroup) String() string {
 func (*JoinedGroup) ProtoMessage() {}
 
 func (x *JoinedGroup) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[104]
+	mi := &file_Neonize_proto_msgTypes[105]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7678,7 +7730,7 @@ func (x *JoinedGroup) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use JoinedGroup.ProtoReflect.Descriptor instead.
 func (*JoinedGroup) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{104}
+	return file_Neonize_proto_rawDescGZIP(), []int{105}
 }
 
 func (x *JoinedGroup) GetReason() string {
@@ -7738,7 +7790,7 @@ type GroupInfoEvent struct {
 
 func (x *GroupInfoEvent) Reset() {
 	*x = GroupInfoEvent{}
-	mi := &file_Neonize_proto_msgTypes[105]
+	mi := &file_Neonize_proto_msgTypes[106]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7750,7 +7802,7 @@ func (x *GroupInfoEvent) String() string {
 func (*GroupInfoEvent) ProtoMessage() {}
 
 func (x *GroupInfoEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[105]
+	mi := &file_Neonize_proto_msgTypes[106]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7763,7 +7815,7 @@ func (x *GroupInfoEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GroupInfoEvent.ProtoReflect.Descriptor instead.
 func (*GroupInfoEvent) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{105}
+	return file_Neonize_proto_rawDescGZIP(), []int{106}
 }
 
 func (x *GroupInfoEvent) GetJID() *JID {
@@ -7925,7 +7977,7 @@ type Picture struct {
 
 func (x *Picture) Reset() {
 	*x = Picture{}
-	mi := &file_Neonize_proto_msgTypes[106]
+	mi := &file_Neonize_proto_msgTypes[107]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7937,7 +7989,7 @@ func (x *Picture) String() string {
 func (*Picture) ProtoMessage() {}
 
 func (x *Picture) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[106]
+	mi := &file_Neonize_proto_msgTypes[107]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7950,7 +8002,7 @@ func (x *Picture) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Picture.ProtoReflect.Descriptor instead.
 func (*Picture) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{106}
+	return file_Neonize_proto_rawDescGZIP(), []int{107}
 }
 
 func (x *Picture) GetJID() *JID {
@@ -7992,7 +8044,7 @@ type IdentityChange struct {
 
 func (x *IdentityChange) Reset() {
 	*x = IdentityChange{}
-	mi := &file_Neonize_proto_msgTypes[107]
+	mi := &file_Neonize_proto_msgTypes[108]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8004,7 +8056,7 @@ func (x *IdentityChange) String() string {
 func (*IdentityChange) ProtoMessage() {}
 
 func (x *IdentityChange) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[107]
+	mi := &file_Neonize_proto_msgTypes[108]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8017,7 +8069,7 @@ func (x *IdentityChange) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IdentityChange.ProtoReflect.Descriptor instead.
 func (*IdentityChange) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{107}
+	return file_Neonize_proto_rawDescGZIP(), []int{108}
 }
 
 func (x *IdentityChange) GetJID() *JID {
@@ -8057,7 +8109,7 @@ type PrivacySettingsEvent struct {
 
 func (x *PrivacySettingsEvent) Reset() {
 	*x = PrivacySettingsEvent{}
-	mi := &file_Neonize_proto_msgTypes[108]
+	mi := &file_Neonize_proto_msgTypes[109]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8069,7 +8121,7 @@ func (x *PrivacySettingsEvent) String() string {
 func (*PrivacySettingsEvent) ProtoMessage() {}
 
 func (x *PrivacySettingsEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[108]
+	mi := &file_Neonize_proto_msgTypes[109]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8082,7 +8134,7 @@ func (x *PrivacySettingsEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PrivacySettingsEvent.ProtoReflect.Descriptor instead.
 func (*PrivacySettingsEvent) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{108}
+	return file_Neonize_proto_rawDescGZIP(), []int{109}
 }
 
 func (x *PrivacySettingsEvent) GetNewSettings() *PrivacySettings {
@@ -8154,7 +8206,7 @@ type OfflineSyncPreview struct {
 
 func (x *OfflineSyncPreview) Reset() {
 	*x = OfflineSyncPreview{}
-	mi := &file_Neonize_proto_msgTypes[109]
+	mi := &file_Neonize_proto_msgTypes[110]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8166,7 +8218,7 @@ func (x *OfflineSyncPreview) String() string {
 func (*OfflineSyncPreview) ProtoMessage() {}
 
 func (x *OfflineSyncPreview) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[109]
+	mi := &file_Neonize_proto_msgTypes[110]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8179,7 +8231,7 @@ func (x *OfflineSyncPreview) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OfflineSyncPreview.ProtoReflect.Descriptor instead.
 func (*OfflineSyncPreview) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{109}
+	return file_Neonize_proto_rawDescGZIP(), []int{110}
 }
 
 func (x *OfflineSyncPreview) GetTotal() int32 {
@@ -8226,7 +8278,7 @@ type OfflineSyncCompleted struct {
 
 func (x *OfflineSyncCompleted) Reset() {
 	*x = OfflineSyncCompleted{}
-	mi := &file_Neonize_proto_msgTypes[110]
+	mi := &file_Neonize_proto_msgTypes[111]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8238,7 +8290,7 @@ func (x *OfflineSyncCompleted) String() string {
 func (*OfflineSyncCompleted) ProtoMessage() {}
 
 func (x *OfflineSyncCompleted) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[110]
+	mi := &file_Neonize_proto_msgTypes[111]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8251,7 +8303,7 @@ func (x *OfflineSyncCompleted) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OfflineSyncCompleted.ProtoReflect.Descriptor instead.
 func (*OfflineSyncCompleted) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{110}
+	return file_Neonize_proto_rawDescGZIP(), []int{111}
 }
 
 func (x *OfflineSyncCompleted) GetCount() int32 {
@@ -8273,7 +8325,7 @@ type BlocklistEvent struct {
 
 func (x *BlocklistEvent) Reset() {
 	*x = BlocklistEvent{}
-	mi := &file_Neonize_proto_msgTypes[111]
+	mi := &file_Neonize_proto_msgTypes[112]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8285,7 +8337,7 @@ func (x *BlocklistEvent) String() string {
 func (*BlocklistEvent) ProtoMessage() {}
 
 func (x *BlocklistEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[111]
+	mi := &file_Neonize_proto_msgTypes[112]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8298,7 +8350,7 @@ func (x *BlocklistEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BlocklistEvent.ProtoReflect.Descriptor instead.
 func (*BlocklistEvent) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{111}
+	return file_Neonize_proto_rawDescGZIP(), []int{112}
 }
 
 func (x *BlocklistEvent) GetAction() BlocklistEvent_Actions {
@@ -8339,7 +8391,7 @@ type BlocklistChange struct {
 
 func (x *BlocklistChange) Reset() {
 	*x = BlocklistChange{}
-	mi := &file_Neonize_proto_msgTypes[112]
+	mi := &file_Neonize_proto_msgTypes[113]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8351,7 +8403,7 @@ func (x *BlocklistChange) String() string {
 func (*BlocklistChange) ProtoMessage() {}
 
 func (x *BlocklistChange) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[112]
+	mi := &file_Neonize_proto_msgTypes[113]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8364,7 +8416,7 @@ func (x *BlocklistChange) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BlocklistChange.ProtoReflect.Descriptor instead.
 func (*BlocklistChange) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{112}
+	return file_Neonize_proto_rawDescGZIP(), []int{113}
 }
 
 func (x *BlocklistChange) GetJID() *JID {
@@ -8390,7 +8442,7 @@ type NewsletterJoin struct {
 
 func (x *NewsletterJoin) Reset() {
 	*x = NewsletterJoin{}
-	mi := &file_Neonize_proto_msgTypes[113]
+	mi := &file_Neonize_proto_msgTypes[114]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8402,7 +8454,7 @@ func (x *NewsletterJoin) String() string {
 func (*NewsletterJoin) ProtoMessage() {}
 
 func (x *NewsletterJoin) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[113]
+	mi := &file_Neonize_proto_msgTypes[114]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8415,7 +8467,7 @@ func (x *NewsletterJoin) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NewsletterJoin.ProtoReflect.Descriptor instead.
 func (*NewsletterJoin) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{113}
+	return file_Neonize_proto_rawDescGZIP(), []int{114}
 }
 
 func (x *NewsletterJoin) GetNewsletterMetadata() *NewsletterMetadata {
@@ -8435,7 +8487,7 @@ type NewsletterLeave struct {
 
 func (x *NewsletterLeave) Reset() {
 	*x = NewsletterLeave{}
-	mi := &file_Neonize_proto_msgTypes[114]
+	mi := &file_Neonize_proto_msgTypes[115]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8447,7 +8499,7 @@ func (x *NewsletterLeave) String() string {
 func (*NewsletterLeave) ProtoMessage() {}
 
 func (x *NewsletterLeave) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[114]
+	mi := &file_Neonize_proto_msgTypes[115]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8460,7 +8512,7 @@ func (x *NewsletterLeave) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NewsletterLeave.ProtoReflect.Descriptor instead.
 func (*NewsletterLeave) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{114}
+	return file_Neonize_proto_rawDescGZIP(), []int{115}
 }
 
 func (x *NewsletterLeave) GetID() *JID {
@@ -8487,7 +8539,7 @@ type NewsletterMuteChange struct {
 
 func (x *NewsletterMuteChange) Reset() {
 	*x = NewsletterMuteChange{}
-	mi := &file_Neonize_proto_msgTypes[115]
+	mi := &file_Neonize_proto_msgTypes[116]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8499,7 +8551,7 @@ func (x *NewsletterMuteChange) String() string {
 func (*NewsletterMuteChange) ProtoMessage() {}
 
 func (x *NewsletterMuteChange) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[115]
+	mi := &file_Neonize_proto_msgTypes[116]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8512,7 +8564,7 @@ func (x *NewsletterMuteChange) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NewsletterMuteChange.ProtoReflect.Descriptor instead.
 func (*NewsletterMuteChange) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{115}
+	return file_Neonize_proto_rawDescGZIP(), []int{116}
 }
 
 func (x *NewsletterMuteChange) GetID() *JID {
@@ -8540,7 +8592,7 @@ type NewsletterLiveUpdate struct {
 
 func (x *NewsletterLiveUpdate) Reset() {
 	*x = NewsletterLiveUpdate{}
-	mi := &file_Neonize_proto_msgTypes[116]
+	mi := &file_Neonize_proto_msgTypes[117]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8552,7 +8604,7 @@ func (x *NewsletterLiveUpdate) String() string {
 func (*NewsletterLiveUpdate) ProtoMessage() {}
 
 func (x *NewsletterLiveUpdate) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[116]
+	mi := &file_Neonize_proto_msgTypes[117]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8565,7 +8617,7 @@ func (x *NewsletterLiveUpdate) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NewsletterLiveUpdate.ProtoReflect.Descriptor instead.
 func (*NewsletterLiveUpdate) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{116}
+	return file_Neonize_proto_rawDescGZIP(), []int{117}
 }
 
 func (x *NewsletterLiveUpdate) GetJID() *JID {
@@ -8602,7 +8654,7 @@ type BasicCallMeta struct {
 
 func (x *BasicCallMeta) Reset() {
 	*x = BasicCallMeta{}
-	mi := &file_Neonize_proto_msgTypes[117]
+	mi := &file_Neonize_proto_msgTypes[118]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8614,7 +8666,7 @@ func (x *BasicCallMeta) String() string {
 func (*BasicCallMeta) ProtoMessage() {}
 
 func (x *BasicCallMeta) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[117]
+	mi := &file_Neonize_proto_msgTypes[118]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8627,7 +8679,7 @@ func (x *BasicCallMeta) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BasicCallMeta.ProtoReflect.Descriptor instead.
 func (*BasicCallMeta) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{117}
+	return file_Neonize_proto_rawDescGZIP(), []int{118}
 }
 
 func (x *BasicCallMeta) GetFrom() *JID {
@@ -8668,7 +8720,7 @@ type CallRemoteMeta struct {
 
 func (x *CallRemoteMeta) Reset() {
 	*x = CallRemoteMeta{}
-	mi := &file_Neonize_proto_msgTypes[118]
+	mi := &file_Neonize_proto_msgTypes[119]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8680,7 +8732,7 @@ func (x *CallRemoteMeta) String() string {
 func (*CallRemoteMeta) ProtoMessage() {}
 
 func (x *CallRemoteMeta) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[118]
+	mi := &file_Neonize_proto_msgTypes[119]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8693,7 +8745,7 @@ func (x *CallRemoteMeta) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CallRemoteMeta.ProtoReflect.Descriptor instead.
 func (*CallRemoteMeta) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{118}
+	return file_Neonize_proto_rawDescGZIP(), []int{119}
 }
 
 func (x *CallRemoteMeta) GetRemotePlatform() string {
@@ -8722,7 +8774,7 @@ type CallOffer struct {
 
 func (x *CallOffer) Reset() {
 	*x = CallOffer{}
-	mi := &file_Neonize_proto_msgTypes[119]
+	mi := &file_Neonize_proto_msgTypes[120]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8734,7 +8786,7 @@ func (x *CallOffer) String() string {
 func (*CallOffer) ProtoMessage() {}
 
 func (x *CallOffer) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[119]
+	mi := &file_Neonize_proto_msgTypes[120]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8747,7 +8799,7 @@ func (x *CallOffer) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CallOffer.ProtoReflect.Descriptor instead.
 func (*CallOffer) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{119}
+	return file_Neonize_proto_rawDescGZIP(), []int{120}
 }
 
 func (x *CallOffer) GetBasicCallMeta() *BasicCallMeta {
@@ -8782,7 +8834,7 @@ type CallAccept struct {
 
 func (x *CallAccept) Reset() {
 	*x = CallAccept{}
-	mi := &file_Neonize_proto_msgTypes[120]
+	mi := &file_Neonize_proto_msgTypes[121]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8794,7 +8846,7 @@ func (x *CallAccept) String() string {
 func (*CallAccept) ProtoMessage() {}
 
 func (x *CallAccept) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[120]
+	mi := &file_Neonize_proto_msgTypes[121]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8807,7 +8859,7 @@ func (x *CallAccept) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CallAccept.ProtoReflect.Descriptor instead.
 func (*CallAccept) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{120}
+	return file_Neonize_proto_rawDescGZIP(), []int{121}
 }
 
 func (x *CallAccept) GetBasicCallMeta() *BasicCallMeta {
@@ -8842,7 +8894,7 @@ type CallPreAccept struct {
 
 func (x *CallPreAccept) Reset() {
 	*x = CallPreAccept{}
-	mi := &file_Neonize_proto_msgTypes[121]
+	mi := &file_Neonize_proto_msgTypes[122]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8854,7 +8906,7 @@ func (x *CallPreAccept) String() string {
 func (*CallPreAccept) ProtoMessage() {}
 
 func (x *CallPreAccept) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[121]
+	mi := &file_Neonize_proto_msgTypes[122]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8867,7 +8919,7 @@ func (x *CallPreAccept) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CallPreAccept.ProtoReflect.Descriptor instead.
 func (*CallPreAccept) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{121}
+	return file_Neonize_proto_rawDescGZIP(), []int{122}
 }
 
 func (x *CallPreAccept) GetBasicCallMeta() *BasicCallMeta {
@@ -8902,7 +8954,7 @@ type CallTransport struct {
 
 func (x *CallTransport) Reset() {
 	*x = CallTransport{}
-	mi := &file_Neonize_proto_msgTypes[122]
+	mi := &file_Neonize_proto_msgTypes[123]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8914,7 +8966,7 @@ func (x *CallTransport) String() string {
 func (*CallTransport) ProtoMessage() {}
 
 func (x *CallTransport) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[122]
+	mi := &file_Neonize_proto_msgTypes[123]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8927,7 +8979,7 @@ func (x *CallTransport) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CallTransport.ProtoReflect.Descriptor instead.
 func (*CallTransport) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{122}
+	return file_Neonize_proto_rawDescGZIP(), []int{123}
 }
 
 func (x *CallTransport) GetBasicCallMeta() *BasicCallMeta {
@@ -8963,7 +9015,7 @@ type CallOfferNotice struct {
 
 func (x *CallOfferNotice) Reset() {
 	*x = CallOfferNotice{}
-	mi := &file_Neonize_proto_msgTypes[123]
+	mi := &file_Neonize_proto_msgTypes[124]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8975,7 +9027,7 @@ func (x *CallOfferNotice) String() string {
 func (*CallOfferNotice) ProtoMessage() {}
 
 func (x *CallOfferNotice) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[123]
+	mi := &file_Neonize_proto_msgTypes[124]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8988,7 +9040,7 @@ func (x *CallOfferNotice) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CallOfferNotice.ProtoReflect.Descriptor instead.
 func (*CallOfferNotice) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{123}
+	return file_Neonize_proto_rawDescGZIP(), []int{124}
 }
 
 func (x *CallOfferNotice) GetBasicCallMeta() *BasicCallMeta {
@@ -9029,7 +9081,7 @@ type CallRelayLatency struct {
 
 func (x *CallRelayLatency) Reset() {
 	*x = CallRelayLatency{}
-	mi := &file_Neonize_proto_msgTypes[124]
+	mi := &file_Neonize_proto_msgTypes[125]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9041,7 +9093,7 @@ func (x *CallRelayLatency) String() string {
 func (*CallRelayLatency) ProtoMessage() {}
 
 func (x *CallRelayLatency) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[124]
+	mi := &file_Neonize_proto_msgTypes[125]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9054,7 +9106,7 @@ func (x *CallRelayLatency) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CallRelayLatency.ProtoReflect.Descriptor instead.
 func (*CallRelayLatency) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{124}
+	return file_Neonize_proto_rawDescGZIP(), []int{125}
 }
 
 func (x *CallRelayLatency) GetBasicCallMeta() *BasicCallMeta {
@@ -9082,7 +9134,7 @@ type CallTerminate struct {
 
 func (x *CallTerminate) Reset() {
 	*x = CallTerminate{}
-	mi := &file_Neonize_proto_msgTypes[125]
+	mi := &file_Neonize_proto_msgTypes[126]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9094,7 +9146,7 @@ func (x *CallTerminate) String() string {
 func (*CallTerminate) ProtoMessage() {}
 
 func (x *CallTerminate) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[125]
+	mi := &file_Neonize_proto_msgTypes[126]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9107,7 +9159,7 @@ func (x *CallTerminate) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CallTerminate.ProtoReflect.Descriptor instead.
 func (*CallTerminate) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{125}
+	return file_Neonize_proto_rawDescGZIP(), []int{126}
 }
 
 func (x *CallTerminate) GetBasicCallMeta() *BasicCallMeta {
@@ -9140,7 +9192,7 @@ type UnknownCallEvent struct {
 
 func (x *UnknownCallEvent) Reset() {
 	*x = UnknownCallEvent{}
-	mi := &file_Neonize_proto_msgTypes[126]
+	mi := &file_Neonize_proto_msgTypes[127]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9152,7 +9204,7 @@ func (x *UnknownCallEvent) String() string {
 func (*UnknownCallEvent) ProtoMessage() {}
 
 func (x *UnknownCallEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[126]
+	mi := &file_Neonize_proto_msgTypes[127]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9165,7 +9217,7 @@ func (x *UnknownCallEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UnknownCallEvent.ProtoReflect.Descriptor instead.
 func (*UnknownCallEvent) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{126}
+	return file_Neonize_proto_rawDescGZIP(), []int{127}
 }
 
 func (x *UnknownCallEvent) GetNode() *Node {
@@ -9186,7 +9238,7 @@ type UndecryptableMessage struct {
 
 func (x *UndecryptableMessage) Reset() {
 	*x = UndecryptableMessage{}
-	mi := &file_Neonize_proto_msgTypes[127]
+	mi := &file_Neonize_proto_msgTypes[128]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9198,7 +9250,7 @@ func (x *UndecryptableMessage) String() string {
 func (*UndecryptableMessage) ProtoMessage() {}
 
 func (x *UndecryptableMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[127]
+	mi := &file_Neonize_proto_msgTypes[128]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9211,7 +9263,7 @@ func (x *UndecryptableMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UndecryptableMessage.ProtoReflect.Descriptor instead.
 func (*UndecryptableMessage) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{127}
+	return file_Neonize_proto_rawDescGZIP(), []int{128}
 }
 
 func (x *UndecryptableMessage) GetInfo() *MessageInfo {
@@ -9245,7 +9297,7 @@ type UpdateGroupParticipantsReturnFunction struct {
 
 func (x *UpdateGroupParticipantsReturnFunction) Reset() {
 	*x = UpdateGroupParticipantsReturnFunction{}
-	mi := &file_Neonize_proto_msgTypes[128]
+	mi := &file_Neonize_proto_msgTypes[129]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9257,7 +9309,7 @@ func (x *UpdateGroupParticipantsReturnFunction) String() string {
 func (*UpdateGroupParticipantsReturnFunction) ProtoMessage() {}
 
 func (x *UpdateGroupParticipantsReturnFunction) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[128]
+	mi := &file_Neonize_proto_msgTypes[129]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9270,7 +9322,7 @@ func (x *UpdateGroupParticipantsReturnFunction) ProtoReflect() protoreflect.Mess
 
 // Deprecated: Use UpdateGroupParticipantsReturnFunction.ProtoReflect.Descriptor instead.
 func (*UpdateGroupParticipantsReturnFunction) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{128}
+	return file_Neonize_proto_rawDescGZIP(), []int{129}
 }
 
 func (x *UpdateGroupParticipantsReturnFunction) GetError() string {
@@ -9302,7 +9354,7 @@ const (
 
 func (x *GetMessageForRetryReturnFunction) Reset() {
 	*x = GetMessageForRetryReturnFunction{}
-	mi := &file_Neonize_proto_msgTypes[129]
+	mi := &file_Neonize_proto_msgTypes[130]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9314,7 +9366,7 @@ func (x *GetMessageForRetryReturnFunction) String() string {
 func (*GetMessageForRetryReturnFunction) ProtoMessage() {}
 
 func (x *GetMessageForRetryReturnFunction) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[129]
+	mi := &file_Neonize_proto_msgTypes[130]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9327,7 +9379,7 @@ func (x *GetMessageForRetryReturnFunction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMessageForRetryReturnFunction.ProtoReflect.Descriptor instead.
 func (*GetMessageForRetryReturnFunction) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{129}
+	return file_Neonize_proto_rawDescGZIP(), []int{130}
 }
 
 func (x *GetMessageForRetryReturnFunction) GetIsEmpty() bool {
@@ -9357,7 +9409,7 @@ type LocalChatSettings struct {
 
 func (x *LocalChatSettings) Reset() {
 	*x = LocalChatSettings{}
-	mi := &file_Neonize_proto_msgTypes[130]
+	mi := &file_Neonize_proto_msgTypes[131]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9369,7 +9421,7 @@ func (x *LocalChatSettings) String() string {
 func (*LocalChatSettings) ProtoMessage() {}
 
 func (x *LocalChatSettings) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[130]
+	mi := &file_Neonize_proto_msgTypes[131]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9382,7 +9434,7 @@ func (x *LocalChatSettings) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LocalChatSettings.ProtoReflect.Descriptor instead.
 func (*LocalChatSettings) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{130}
+	return file_Neonize_proto_rawDescGZIP(), []int{131}
 }
 
 func (x *LocalChatSettings) GetFound() bool {
@@ -9429,7 +9481,7 @@ type ReturnFunctionWithError struct {
 
 func (x *ReturnFunctionWithError) Reset() {
 	*x = ReturnFunctionWithError{}
-	mi := &file_Neonize_proto_msgTypes[131]
+	mi := &file_Neonize_proto_msgTypes[132]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9441,7 +9493,7 @@ func (x *ReturnFunctionWithError) String() string {
 func (*ReturnFunctionWithError) ProtoMessage() {}
 
 func (x *ReturnFunctionWithError) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[131]
+	mi := &file_Neonize_proto_msgTypes[132]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9454,7 +9506,7 @@ func (x *ReturnFunctionWithError) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReturnFunctionWithError.ProtoReflect.Descriptor instead.
 func (*ReturnFunctionWithError) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{131}
+	return file_Neonize_proto_rawDescGZIP(), []int{132}
 }
 
 func (x *ReturnFunctionWithError) GetError() string {
@@ -9533,7 +9585,7 @@ type SendRequestExtra struct {
 
 func (x *SendRequestExtra) Reset() {
 	*x = SendRequestExtra{}
-	mi := &file_Neonize_proto_msgTypes[132]
+	mi := &file_Neonize_proto_msgTypes[133]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9545,7 +9597,7 @@ func (x *SendRequestExtra) String() string {
 func (*SendRequestExtra) ProtoMessage() {}
 
 func (x *SendRequestExtra) ProtoReflect() protoreflect.Message {
-	mi := &file_Neonize_proto_msgTypes[132]
+	mi := &file_Neonize_proto_msgTypes[133]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9558,7 +9610,7 @@ func (x *SendRequestExtra) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SendRequestExtra.ProtoReflect.Descriptor instead.
 func (*SendRequestExtra) Descriptor() ([]byte, []int) {
-	return file_Neonize_proto_rawDescGZIP(), []int{132}
+	return file_Neonize_proto_rawDescGZIP(), []int{133}
 }
 
 func (x *SendRequestExtra) GetID() string {
@@ -9766,6 +9818,9 @@ const file_Neonize_proto_rawDesc = "" +
 	"\tGroupInfo\x18\x01 \x01(\v2\x12.neonize.GroupInfoR\tGroupInfo\x12\x14\n" +
 	"\x05Error\x18\x02 \x01(\tR\x05Error\"W\n" +
 	"\x1fJoinGroupWithLinkReturnFunction\x12\x14\n" +
+	"\x05Error\x18\x01 \x01(\tR\x05Error\x12\x1e\n" +
+	"\x03Jid\x18\x02 \x01(\v2\f.neonize.JIDR\x03Jid\"U\n" +
+	"\x1dGetJIDFromStoreReturnFunction\x12\x14\n" +
 	"\x05Error\x18\x01 \x01(\tR\x05Error\x12\x1e\n" +
 	"\x03Jid\x18\x02 \x01(\v2\f.neonize.JIDR\x03Jid\"X\n" +
 	" GetGroupInviteLinkReturnFunction\x12\x1e\n" +
@@ -10351,7 +10406,7 @@ func file_Neonize_proto_rawDescGZIP() []byte {
 }
 
 var file_Neonize_proto_enumTypes = make([]protoimpl.EnumInfo, 20)
-var file_Neonize_proto_msgTypes = make([]protoimpl.MessageInfo, 133)
+var file_Neonize_proto_msgTypes = make([]protoimpl.MessageInfo, 134)
 var file_Neonize_proto_goTypes = []any{
 	(AddressingMode)(0),                                       // 0: neonize.AddressingMode
 	(NewsletterRole)(0),                                       // 1: neonize.NewsletterRole
@@ -10399,120 +10454,121 @@ var file_Neonize_proto_goTypes = []any{
 	(*SendMessageReturnFunction)(nil),                    // 43: neonize.SendMessageReturnFunction
 	(*GetGroupInfoReturnFunction)(nil),                   // 44: neonize.GetGroupInfoReturnFunction
 	(*JoinGroupWithLinkReturnFunction)(nil),              // 45: neonize.JoinGroupWithLinkReturnFunction
-	(*GetGroupInviteLinkReturnFunction)(nil),             // 46: neonize.GetGroupInviteLinkReturnFunction
-	(*DownloadReturnFunction)(nil),                       // 47: neonize.DownloadReturnFunction
-	(*UploadReturnFunction)(nil),                         // 48: neonize.UploadReturnFunction
-	(*SetGroupPhotoReturnFunction)(nil),                  // 49: neonize.SetGroupPhotoReturnFunction
-	(*IsOnWhatsAppReturnFunction)(nil),                   // 50: neonize.IsOnWhatsAppReturnFunction
-	(*GetUserInfoSingleReturnFunction)(nil),              // 51: neonize.GetUserInfoSingleReturnFunction
-	(*GetUserInfoReturnFunction)(nil),                    // 52: neonize.GetUserInfoReturnFunction
-	(*BuildPollVoteReturnFunction)(nil),                  // 53: neonize.BuildPollVoteReturnFunction
-	(*CreateNewsLetterReturnFunction)(nil),               // 54: neonize.CreateNewsLetterReturnFunction
-	(*GetBlocklistReturnFunction)(nil),                   // 55: neonize.GetBlocklistReturnFunction
-	(*GetContactQRLinkReturnFunction)(nil),               // 56: neonize.GetContactQRLinkReturnFunction
-	(*GroupParticipantRequest)(nil),                      // 57: neonize.GroupParticipantRequest
-	(*GetGroupRequestParticipantsReturnFunction)(nil),    // 58: neonize.GetGroupRequestParticipantsReturnFunction
-	(*GetJoinedGroupsReturnFunction)(nil),                // 59: neonize.GetJoinedGroupsReturnFunction
-	(*ReqCreateGroup)(nil),                               // 60: neonize.ReqCreateGroup
-	(*JIDArray)(nil),                                     // 61: neonize.JIDArray
-	(*ArrayString)(nil),                                  // 62: neonize.ArrayString
-	(*NewsLetterMessageMeta)(nil),                        // 63: neonize.NewsLetterMessageMeta
-	(*GroupDelete)(nil),                                  // 64: neonize.GroupDelete
-	(*Message)(nil),                                      // 65: neonize.Message
-	(*CreateNewsletterParams)(nil),                       // 66: neonize.CreateNewsletterParams
-	(*WrappedNewsletterState)(nil),                       // 67: neonize.WrappedNewsletterState
-	(*NewsletterText)(nil),                               // 68: neonize.NewsletterText
-	(*ProfilePictureInfo)(nil),                           // 69: neonize.ProfilePictureInfo
-	(*NewsletterReactionSettings)(nil),                   // 70: neonize.NewsletterReactionSettings
-	(*NewsletterSetting)(nil),                            // 71: neonize.NewsletterSetting
-	(*NewsletterThreadMetadata)(nil),                     // 72: neonize.NewsletterThreadMetadata
-	(*NewsletterViewerMetadata)(nil),                     // 73: neonize.NewsletterViewerMetadata
-	(*NewsletterMetadata)(nil),                           // 74: neonize.NewsletterMetadata
-	(*Blocklist)(nil),                                    // 75: neonize.Blocklist
-	(*Reaction)(nil),                                     // 76: neonize.Reaction
-	(*NewsletterMessage)(nil),                            // 77: neonize.NewsletterMessage
-	(*GetNewsletterMessageUpdateReturnFunction)(nil),     // 78: neonize.GetNewsletterMessageUpdateReturnFunction
-	(*PrivacySettings)(nil),                              // 79: neonize.PrivacySettings
-	(*NodeAttrs)(nil),                                    // 80: neonize.NodeAttrs
-	(*Node)(nil),                                         // 81: neonize.Node
-	(*InfoQuery)(nil),                                    // 82: neonize.InfoQuery
-	(*GetProfilePictureParams)(nil),                      // 83: neonize.GetProfilePictureParams
-	(*GetProfilePictureReturnFunction)(nil),              // 84: neonize.GetProfilePictureReturnFunction
-	(*StatusPrivacy)(nil),                                // 85: neonize.StatusPrivacy
-	(*GetStatusPrivacyReturnFunction)(nil),               // 86: neonize.GetStatusPrivacyReturnFunction
-	(*GroupLinkTarget)(nil),                              // 87: neonize.GroupLinkTarget
-	(*GroupLinkChange)(nil),                              // 88: neonize.GroupLinkChange
-	(*GetSubGroupsReturnFunction)(nil),                   // 89: neonize.GetSubGroupsReturnFunction
-	(*GetSubscribedNewslettersReturnFunction)(nil),       // 90: neonize.GetSubscribedNewslettersReturnFunction
-	(*GetUserDevicesreturnFunction)(nil),                 // 91: neonize.GetUserDevicesreturnFunction
-	(*NewsletterSubscribeLiveUpdatesReturnFunction)(nil), // 92: neonize.NewsletterSubscribeLiveUpdatesReturnFunction
-	(*PairPhoneParams)(nil),                              // 93: neonize.PairPhoneParams
-	(*ContactQRLinkTarget)(nil),                          // 94: neonize.ContactQRLinkTarget
-	(*ResolveContactQRLinkReturnFunction)(nil),           // 95: neonize.ResolveContactQRLinkReturnFunction
-	(*BusinessMessageLinkTarget)(nil),                    // 96: neonize.BusinessMessageLinkTarget
-	(*ResolveBusinessMessageLinkReturnFunction)(nil),     // 97: neonize.ResolveBusinessMessageLinkReturnFunction
-	(*MutationInfo)(nil),                                 // 98: neonize.MutationInfo
-	(*PatchInfo)(nil),                                    // 99: neonize.PatchInfo
-	(*ContactsPutPushNameReturnFunction)(nil),            // 100: neonize.ContactsPutPushNameReturnFunction
-	(*ContactEntry)(nil),                                 // 101: neonize.ContactEntry
-	(*ContactEntryArray)(nil),                            // 102: neonize.ContactEntryArray
-	(*SetPrivacySettingReturnFunction)(nil),              // 103: neonize.SetPrivacySettingReturnFunction
-	(*ContactsGetContactReturnFunction)(nil),             // 104: neonize.ContactsGetContactReturnFunction
-	(*ContactInfo)(nil),                                  // 105: neonize.ContactInfo
-	(*Contact)(nil),                                      // 106: neonize.Contact
-	(*ContactsGetAllContactsReturnFunction)(nil),         // 107: neonize.ContactsGetAllContactsReturnFunction
-	(*QR)(nil),                                          // 108: neonize.QR
-	(*PairStatus)(nil),                                  // 109: neonize.PairStatus
-	(*Connected)(nil),                                   // 110: neonize.Connected
-	(*KeepAliveTimeout)(nil),                            // 111: neonize.KeepAliveTimeout
-	(*KeepAliveRestored)(nil),                           // 112: neonize.KeepAliveRestored
-	(*LoggedOut)(nil),                                   // 113: neonize.LoggedOut
-	(*StreamReplaced)(nil),                              // 114: neonize.StreamReplaced
-	(*TemporaryBan)(nil),                                // 115: neonize.TemporaryBan
-	(*ConnectFailure)(nil),                              // 116: neonize.ConnectFailure
-	(*ClientOutdated)(nil),                              // 117: neonize.ClientOutdated
-	(*StreamError)(nil),                                 // 118: neonize.StreamError
-	(*Disconnected)(nil),                                // 119: neonize.Disconnected
-	(*HistorySync)(nil),                                 // 120: neonize.HistorySync
-	(*Receipt)(nil),                                     // 121: neonize.Receipt
-	(*ChatPresence)(nil),                                // 122: neonize.ChatPresence
-	(*Presence)(nil),                                    // 123: neonize.Presence
-	(*JoinedGroup)(nil),                                 // 124: neonize.JoinedGroup
-	(*GroupInfoEvent)(nil),                              // 125: neonize.GroupInfoEvent
-	(*Picture)(nil),                                     // 126: neonize.Picture
-	(*IdentityChange)(nil),                              // 127: neonize.IdentityChange
-	(*PrivacySettingsEvent)(nil),                        // 128: neonize.privacySettingsEvent
-	(*OfflineSyncPreview)(nil),                          // 129: neonize.OfflineSyncPreview
-	(*OfflineSyncCompleted)(nil),                        // 130: neonize.OfflineSyncCompleted
-	(*BlocklistEvent)(nil),                              // 131: neonize.BlocklistEvent
-	(*BlocklistChange)(nil),                             // 132: neonize.BlocklistChange
-	(*NewsletterJoin)(nil),                              // 133: neonize.NewsletterJoin
-	(*NewsletterLeave)(nil),                             // 134: neonize.NewsletterLeave
-	(*NewsletterMuteChange)(nil),                        // 135: neonize.NewsletterMuteChange
-	(*NewsletterLiveUpdate)(nil),                        // 136: neonize.NewsletterLiveUpdate
-	(*BasicCallMeta)(nil),                               // 137: neonize.BasicCallMeta
-	(*CallRemoteMeta)(nil),                              // 138: neonize.CallRemoteMeta
-	(*CallOffer)(nil),                                   // 139: neonize.CallOffer
-	(*CallAccept)(nil),                                  // 140: neonize.CallAccept
-	(*CallPreAccept)(nil),                               // 141: neonize.CallPreAccept
-	(*CallTransport)(nil),                               // 142: neonize.CallTransport
-	(*CallOfferNotice)(nil),                             // 143: neonize.CallOfferNotice
-	(*CallRelayLatency)(nil),                            // 144: neonize.CallRelayLatency
-	(*CallTerminate)(nil),                               // 145: neonize.CallTerminate
-	(*UnknownCallEvent)(nil),                            // 146: neonize.UnknownCallEvent
-	(*UndecryptableMessage)(nil),                        // 147: neonize.UndecryptableMessage
-	(*UpdateGroupParticipantsReturnFunction)(nil),       // 148: neonize.UpdateGroupParticipantsReturnFunction
-	(*GetMessageForRetryReturnFunction)(nil),            // 149: neonize.GetMessageForRetryReturnFunction
-	(*LocalChatSettings)(nil),                           // 150: neonize.LocalChatSettings
-	(*ReturnFunctionWithError)(nil),                     // 151: neonize.ReturnFunctionWithError
-	(*SendRequestExtra)(nil),                            // 152: neonize.SendRequestExtra
-	(*waVnameCert.VerifiedNameCertificate)(nil),         // 153: WAWebProtobufsVnameCert.VerifiedNameCertificate
-	(*waVnameCert.VerifiedNameCertificate_Details)(nil), // 154: WAWebProtobufsVnameCert.VerifiedNameCertificate.Details
-	(*waE2E.Message)(nil),                               // 155: WAWebProtobufsE2E.Message
-	(*waWeb.WebMessageInfo)(nil),                        // 156: WAWebProtobufsWeb.WebMessageInfo
-	(*waSyncAction.SyncActionValue)(nil),                // 157: WASyncAction.SyncActionValue
-	(*waHistorySync.HistorySync)(nil),                   // 158: WAWebProtobufsHistorySync.HistorySync
-	(*waE2E.PollVoteMessage)(nil),                       // 159: WAWebProtobufsE2E.PollVoteMessage
+	(*GetJIDFromStoreReturnFunction)(nil),                // 46: neonize.GetJIDFromStoreReturnFunction
+	(*GetGroupInviteLinkReturnFunction)(nil),             // 47: neonize.GetGroupInviteLinkReturnFunction
+	(*DownloadReturnFunction)(nil),                       // 48: neonize.DownloadReturnFunction
+	(*UploadReturnFunction)(nil),                         // 49: neonize.UploadReturnFunction
+	(*SetGroupPhotoReturnFunction)(nil),                  // 50: neonize.SetGroupPhotoReturnFunction
+	(*IsOnWhatsAppReturnFunction)(nil),                   // 51: neonize.IsOnWhatsAppReturnFunction
+	(*GetUserInfoSingleReturnFunction)(nil),              // 52: neonize.GetUserInfoSingleReturnFunction
+	(*GetUserInfoReturnFunction)(nil),                    // 53: neonize.GetUserInfoReturnFunction
+	(*BuildPollVoteReturnFunction)(nil),                  // 54: neonize.BuildPollVoteReturnFunction
+	(*CreateNewsLetterReturnFunction)(nil),               // 55: neonize.CreateNewsLetterReturnFunction
+	(*GetBlocklistReturnFunction)(nil),                   // 56: neonize.GetBlocklistReturnFunction
+	(*GetContactQRLinkReturnFunction)(nil),               // 57: neonize.GetContactQRLinkReturnFunction
+	(*GroupParticipantRequest)(nil),                      // 58: neonize.GroupParticipantRequest
+	(*GetGroupRequestParticipantsReturnFunction)(nil),    // 59: neonize.GetGroupRequestParticipantsReturnFunction
+	(*GetJoinedGroupsReturnFunction)(nil),                // 60: neonize.GetJoinedGroupsReturnFunction
+	(*ReqCreateGroup)(nil),                               // 61: neonize.ReqCreateGroup
+	(*JIDArray)(nil),                                     // 62: neonize.JIDArray
+	(*ArrayString)(nil),                                  // 63: neonize.ArrayString
+	(*NewsLetterMessageMeta)(nil),                        // 64: neonize.NewsLetterMessageMeta
+	(*GroupDelete)(nil),                                  // 65: neonize.GroupDelete
+	(*Message)(nil),                                      // 66: neonize.Message
+	(*CreateNewsletterParams)(nil),                       // 67: neonize.CreateNewsletterParams
+	(*WrappedNewsletterState)(nil),                       // 68: neonize.WrappedNewsletterState
+	(*NewsletterText)(nil),                               // 69: neonize.NewsletterText
+	(*ProfilePictureInfo)(nil),                           // 70: neonize.ProfilePictureInfo
+	(*NewsletterReactionSettings)(nil),                   // 71: neonize.NewsletterReactionSettings
+	(*NewsletterSetting)(nil),                            // 72: neonize.NewsletterSetting
+	(*NewsletterThreadMetadata)(nil),                     // 73: neonize.NewsletterThreadMetadata
+	(*NewsletterViewerMetadata)(nil),                     // 74: neonize.NewsletterViewerMetadata
+	(*NewsletterMetadata)(nil),                           // 75: neonize.NewsletterMetadata
+	(*Blocklist)(nil),                                    // 76: neonize.Blocklist
+	(*Reaction)(nil),                                     // 77: neonize.Reaction
+	(*NewsletterMessage)(nil),                            // 78: neonize.NewsletterMessage
+	(*GetNewsletterMessageUpdateReturnFunction)(nil),     // 79: neonize.GetNewsletterMessageUpdateReturnFunction
+	(*PrivacySettings)(nil),                              // 80: neonize.PrivacySettings
+	(*NodeAttrs)(nil),                                    // 81: neonize.NodeAttrs
+	(*Node)(nil),                                         // 82: neonize.Node
+	(*InfoQuery)(nil),                                    // 83: neonize.InfoQuery
+	(*GetProfilePictureParams)(nil),                      // 84: neonize.GetProfilePictureParams
+	(*GetProfilePictureReturnFunction)(nil),              // 85: neonize.GetProfilePictureReturnFunction
+	(*StatusPrivacy)(nil),                                // 86: neonize.StatusPrivacy
+	(*GetStatusPrivacyReturnFunction)(nil),               // 87: neonize.GetStatusPrivacyReturnFunction
+	(*GroupLinkTarget)(nil),                              // 88: neonize.GroupLinkTarget
+	(*GroupLinkChange)(nil),                              // 89: neonize.GroupLinkChange
+	(*GetSubGroupsReturnFunction)(nil),                   // 90: neonize.GetSubGroupsReturnFunction
+	(*GetSubscribedNewslettersReturnFunction)(nil),       // 91: neonize.GetSubscribedNewslettersReturnFunction
+	(*GetUserDevicesreturnFunction)(nil),                 // 92: neonize.GetUserDevicesreturnFunction
+	(*NewsletterSubscribeLiveUpdatesReturnFunction)(nil), // 93: neonize.NewsletterSubscribeLiveUpdatesReturnFunction
+	(*PairPhoneParams)(nil),                              // 94: neonize.PairPhoneParams
+	(*ContactQRLinkTarget)(nil),                          // 95: neonize.ContactQRLinkTarget
+	(*ResolveContactQRLinkReturnFunction)(nil),           // 96: neonize.ResolveContactQRLinkReturnFunction
+	(*BusinessMessageLinkTarget)(nil),                    // 97: neonize.BusinessMessageLinkTarget
+	(*ResolveBusinessMessageLinkReturnFunction)(nil),     // 98: neonize.ResolveBusinessMessageLinkReturnFunction
+	(*MutationInfo)(nil),                                 // 99: neonize.MutationInfo
+	(*PatchInfo)(nil),                                    // 100: neonize.PatchInfo
+	(*ContactsPutPushNameReturnFunction)(nil),            // 101: neonize.ContactsPutPushNameReturnFunction
+	(*ContactEntry)(nil),                                 // 102: neonize.ContactEntry
+	(*ContactEntryArray)(nil),                            // 103: neonize.ContactEntryArray
+	(*SetPrivacySettingReturnFunction)(nil),              // 104: neonize.SetPrivacySettingReturnFunction
+	(*ContactsGetContactReturnFunction)(nil),             // 105: neonize.ContactsGetContactReturnFunction
+	(*ContactInfo)(nil),                                  // 106: neonize.ContactInfo
+	(*Contact)(nil),                                      // 107: neonize.Contact
+	(*ContactsGetAllContactsReturnFunction)(nil),         // 108: neonize.ContactsGetAllContactsReturnFunction
+	(*QR)(nil),                                          // 109: neonize.QR
+	(*PairStatus)(nil),                                  // 110: neonize.PairStatus
+	(*Connected)(nil),                                   // 111: neonize.Connected
+	(*KeepAliveTimeout)(nil),                            // 112: neonize.KeepAliveTimeout
+	(*KeepAliveRestored)(nil),                           // 113: neonize.KeepAliveRestored
+	(*LoggedOut)(nil),                                   // 114: neonize.LoggedOut
+	(*StreamReplaced)(nil),                              // 115: neonize.StreamReplaced
+	(*TemporaryBan)(nil),                                // 116: neonize.TemporaryBan
+	(*ConnectFailure)(nil),                              // 117: neonize.ConnectFailure
+	(*ClientOutdated)(nil),                              // 118: neonize.ClientOutdated
+	(*StreamError)(nil),                                 // 119: neonize.StreamError
+	(*Disconnected)(nil),                                // 120: neonize.Disconnected
+	(*HistorySync)(nil),                                 // 121: neonize.HistorySync
+	(*Receipt)(nil),                                     // 122: neonize.Receipt
+	(*ChatPresence)(nil),                                // 123: neonize.ChatPresence
+	(*Presence)(nil),                                    // 124: neonize.Presence
+	(*JoinedGroup)(nil),                                 // 125: neonize.JoinedGroup
+	(*GroupInfoEvent)(nil),                              // 126: neonize.GroupInfoEvent
+	(*Picture)(nil),                                     // 127: neonize.Picture
+	(*IdentityChange)(nil),                              // 128: neonize.IdentityChange
+	(*PrivacySettingsEvent)(nil),                        // 129: neonize.privacySettingsEvent
+	(*OfflineSyncPreview)(nil),                          // 130: neonize.OfflineSyncPreview
+	(*OfflineSyncCompleted)(nil),                        // 131: neonize.OfflineSyncCompleted
+	(*BlocklistEvent)(nil),                              // 132: neonize.BlocklistEvent
+	(*BlocklistChange)(nil),                             // 133: neonize.BlocklistChange
+	(*NewsletterJoin)(nil),                              // 134: neonize.NewsletterJoin
+	(*NewsletterLeave)(nil),                             // 135: neonize.NewsletterLeave
+	(*NewsletterMuteChange)(nil),                        // 136: neonize.NewsletterMuteChange
+	(*NewsletterLiveUpdate)(nil),                        // 137: neonize.NewsletterLiveUpdate
+	(*BasicCallMeta)(nil),                               // 138: neonize.BasicCallMeta
+	(*CallRemoteMeta)(nil),                              // 139: neonize.CallRemoteMeta
+	(*CallOffer)(nil),                                   // 140: neonize.CallOffer
+	(*CallAccept)(nil),                                  // 141: neonize.CallAccept
+	(*CallPreAccept)(nil),                               // 142: neonize.CallPreAccept
+	(*CallTransport)(nil),                               // 143: neonize.CallTransport
+	(*CallOfferNotice)(nil),                             // 144: neonize.CallOfferNotice
+	(*CallRelayLatency)(nil),                            // 145: neonize.CallRelayLatency
+	(*CallTerminate)(nil),                               // 146: neonize.CallTerminate
+	(*UnknownCallEvent)(nil),                            // 147: neonize.UnknownCallEvent
+	(*UndecryptableMessage)(nil),                        // 148: neonize.UndecryptableMessage
+	(*UpdateGroupParticipantsReturnFunction)(nil),       // 149: neonize.UpdateGroupParticipantsReturnFunction
+	(*GetMessageForRetryReturnFunction)(nil),            // 150: neonize.GetMessageForRetryReturnFunction
+	(*LocalChatSettings)(nil),                           // 151: neonize.LocalChatSettings
+	(*ReturnFunctionWithError)(nil),                     // 152: neonize.ReturnFunctionWithError
+	(*SendRequestExtra)(nil),                            // 153: neonize.SendRequestExtra
+	(*waVnameCert.VerifiedNameCertificate)(nil),         // 154: WAWebProtobufsVnameCert.VerifiedNameCertificate
+	(*waVnameCert.VerifiedNameCertificate_Details)(nil), // 155: WAWebProtobufsVnameCert.VerifiedNameCertificate.Details
+	(*waE2E.Message)(nil),                               // 156: WAWebProtobufsE2E.Message
+	(*waWeb.WebMessageInfo)(nil),                        // 157: WAWebProtobufsWeb.WebMessageInfo
+	(*waSyncAction.SyncActionValue)(nil),                // 158: WASyncAction.SyncActionValue
+	(*waHistorySync.HistorySync)(nil),                   // 159: WAWebProtobufsHistorySync.HistorySync
+	(*waE2E.PollVoteMessage)(nil),                       // 160: WAWebProtobufsE2E.PollVoteMessage
 }
 var file_Neonize_proto_depIdxs = []int32{
 	23,  // 0: neonize.MessageInfo.MessageSource:type_name -> neonize.MessageSource
@@ -10524,8 +10580,8 @@ var file_Neonize_proto_depIdxs = []int32{
 	20,  // 6: neonize.MessageSource.SenderAlt:type_name -> neonize.JID
 	20,  // 7: neonize.MessageSource.RecipientAlt:type_name -> neonize.JID
 	20,  // 8: neonize.MessageSource.BroadcastListOwner:type_name -> neonize.JID
-	153, // 9: neonize.VerifiedName.Certificate:type_name -> WAWebProtobufsVnameCert.VerifiedNameCertificate
-	154, // 10: neonize.VerifiedName.Details:type_name -> WAWebProtobufsVnameCert.VerifiedNameCertificate.Details
+	154, // 9: neonize.VerifiedName.Certificate:type_name -> WAWebProtobufsVnameCert.VerifiedNameCertificate
+	155, // 10: neonize.VerifiedName.Details:type_name -> WAWebProtobufsVnameCert.VerifiedNameCertificate.Details
 	20,  // 11: neonize.IsOnWhatsAppResponse.JID:type_name -> neonize.JID
 	25,  // 12: neonize.IsOnWhatsAppResponse.VerifiedName:type_name -> neonize.VerifiedName
 	25,  // 13: neonize.UserInfo.VerifiedName:type_name -> neonize.VerifiedName
@@ -10553,165 +10609,166 @@ var file_Neonize_proto_depIdxs = []int32{
 	37,  // 35: neonize.GroupInfo.GroupIsDefaultSub:type_name -> neonize.GroupIsDefaultSub
 	39,  // 36: neonize.GroupInfo.Participants:type_name -> neonize.GroupParticipant
 	41,  // 37: neonize.SendResponse.DebugTimings:type_name -> neonize.MessageDebugTimings
-	155, // 38: neonize.SendResponse.Message:type_name -> WAWebProtobufsE2E.Message
+	156, // 38: neonize.SendResponse.Message:type_name -> WAWebProtobufsE2E.Message
 	42,  // 39: neonize.SendMessageReturnFunction.SendResponse:type_name -> neonize.SendResponse
 	40,  // 40: neonize.GetGroupInfoReturnFunction.GroupInfo:type_name -> neonize.GroupInfo
 	20,  // 41: neonize.JoinGroupWithLinkReturnFunction.Jid:type_name -> neonize.JID
-	22,  // 42: neonize.UploadReturnFunction.UploadResponse:type_name -> neonize.UploadResponse
-	26,  // 43: neonize.IsOnWhatsAppReturnFunction.IsOnWhatsAppResponse:type_name -> neonize.IsOnWhatsAppResponse
-	20,  // 44: neonize.GetUserInfoSingleReturnFunction.JID:type_name -> neonize.JID
-	27,  // 45: neonize.GetUserInfoSingleReturnFunction.UserInfo:type_name -> neonize.UserInfo
-	51,  // 46: neonize.GetUserInfoReturnFunction.UsersInfo:type_name -> neonize.GetUserInfoSingleReturnFunction
-	155, // 47: neonize.BuildPollVoteReturnFunction.PollVote:type_name -> WAWebProtobufsE2E.Message
-	74,  // 48: neonize.CreateNewsLetterReturnFunction.NewsletterMetadata:type_name -> neonize.NewsletterMetadata
-	75,  // 49: neonize.GetBlocklistReturnFunction.Blocklist:type_name -> neonize.Blocklist
-	20,  // 50: neonize.GroupParticipantRequest.Participant:type_name -> neonize.JID
-	57,  // 51: neonize.GetGroupRequestParticipantsReturnFunction.Participants:type_name -> neonize.GroupParticipantRequest
-	40,  // 52: neonize.GetJoinedGroupsReturnFunction.Group:type_name -> neonize.GroupInfo
-	20,  // 53: neonize.ReqCreateGroup.Participants:type_name -> neonize.JID
-	35,  // 54: neonize.ReqCreateGroup.GroupParent:type_name -> neonize.GroupParent
-	36,  // 55: neonize.ReqCreateGroup.GroupLinkedParent:type_name -> neonize.GroupLinkedParent
-	20,  // 56: neonize.JIDArray.JIDS:type_name -> neonize.JID
-	21,  // 57: neonize.Message.Info:type_name -> neonize.MessageInfo
-	155, // 58: neonize.Message.Message:type_name -> WAWebProtobufsE2E.Message
-	156, // 59: neonize.Message.SourceWebMsg:type_name -> WAWebProtobufsWeb.WebMessageInfo
-	63,  // 60: neonize.Message.NewsLetterMeta:type_name -> neonize.NewsLetterMessageMeta
-	155, // 61: neonize.Message.Raw:type_name -> WAWebProtobufsE2E.Message
-	5,   // 62: neonize.WrappedNewsletterState.Type:type_name -> neonize.WrappedNewsletterState.NewsletterState
-	6,   // 63: neonize.NewsletterReactionSettings.Value:type_name -> neonize.NewsletterReactionSettings.NewsletterReactionsMode
-	70,  // 64: neonize.NewsletterSetting.ReactionCodes:type_name -> neonize.NewsletterReactionSettings
-	68,  // 65: neonize.NewsletterThreadMetadata.Name:type_name -> neonize.NewsletterText
-	68,  // 66: neonize.NewsletterThreadMetadata.Description:type_name -> neonize.NewsletterText
-	7,   // 67: neonize.NewsletterThreadMetadata.VerificationState:type_name -> neonize.NewsletterThreadMetadata.NewsletterVerificationState
-	69,  // 68: neonize.NewsletterThreadMetadata.Picture:type_name -> neonize.ProfilePictureInfo
-	69,  // 69: neonize.NewsletterThreadMetadata.Preview:type_name -> neonize.ProfilePictureInfo
-	71,  // 70: neonize.NewsletterThreadMetadata.Settings:type_name -> neonize.NewsletterSetting
-	2,   // 71: neonize.NewsletterViewerMetadata.Mute:type_name -> neonize.NewsletterMuteState
-	1,   // 72: neonize.NewsletterViewerMetadata.Role:type_name -> neonize.NewsletterRole
-	20,  // 73: neonize.NewsletterMetadata.ID:type_name -> neonize.JID
-	67,  // 74: neonize.NewsletterMetadata.State:type_name -> neonize.WrappedNewsletterState
-	72,  // 75: neonize.NewsletterMetadata.ThreadMeta:type_name -> neonize.NewsletterThreadMetadata
-	73,  // 76: neonize.NewsletterMetadata.ViewerMeta:type_name -> neonize.NewsletterViewerMetadata
-	20,  // 77: neonize.Blocklist.JIDs:type_name -> neonize.JID
-	76,  // 78: neonize.NewsletterMessage.ReactionCounts:type_name -> neonize.Reaction
-	155, // 79: neonize.NewsletterMessage.Message:type_name -> WAWebProtobufsE2E.Message
-	77,  // 80: neonize.GetNewsletterMessageUpdateReturnFunction.NewsletterMessage:type_name -> neonize.NewsletterMessage
-	8,   // 81: neonize.PrivacySettings.GroupAdd:type_name -> neonize.PrivacySettings.PrivacySetting
-	8,   // 82: neonize.PrivacySettings.LastSeen:type_name -> neonize.PrivacySettings.PrivacySetting
-	8,   // 83: neonize.PrivacySettings.Status:type_name -> neonize.PrivacySettings.PrivacySetting
-	8,   // 84: neonize.PrivacySettings.Profile:type_name -> neonize.PrivacySettings.PrivacySetting
-	8,   // 85: neonize.PrivacySettings.ReadReceipts:type_name -> neonize.PrivacySettings.PrivacySetting
-	8,   // 86: neonize.PrivacySettings.CallAdd:type_name -> neonize.PrivacySettings.PrivacySetting
-	8,   // 87: neonize.PrivacySettings.Online:type_name -> neonize.PrivacySettings.PrivacySetting
-	20,  // 88: neonize.NodeAttrs.jid:type_name -> neonize.JID
-	80,  // 89: neonize.Node.Attrs:type_name -> neonize.NodeAttrs
-	81,  // 90: neonize.Node.Nodes:type_name -> neonize.Node
-	81,  // 91: neonize.InfoQuery.Content:type_name -> neonize.Node
-	69,  // 92: neonize.GetProfilePictureReturnFunction.Picture:type_name -> neonize.ProfilePictureInfo
-	9,   // 93: neonize.StatusPrivacy.Type:type_name -> neonize.StatusPrivacy.StatusPrivacyType
-	20,  // 94: neonize.StatusPrivacy.List:type_name -> neonize.JID
-	85,  // 95: neonize.GetStatusPrivacyReturnFunction.StatusPrivacy:type_name -> neonize.StatusPrivacy
-	20,  // 96: neonize.GroupLinkTarget.JID:type_name -> neonize.JID
-	29,  // 97: neonize.GroupLinkTarget.GroupName:type_name -> neonize.GroupName
-	37,  // 98: neonize.GroupLinkTarget.GroupIsDefaultSub:type_name -> neonize.GroupIsDefaultSub
-	10,  // 99: neonize.GroupLinkChange.Type:type_name -> neonize.GroupLinkChange.ChangeType
-	87,  // 100: neonize.GroupLinkChange.Group:type_name -> neonize.GroupLinkTarget
-	87,  // 101: neonize.GetSubGroupsReturnFunction.GroupLinkTarget:type_name -> neonize.GroupLinkTarget
-	74,  // 102: neonize.GetSubscribedNewslettersReturnFunction.Newsletter:type_name -> neonize.NewsletterMetadata
-	20,  // 103: neonize.GetUserDevicesreturnFunction.JID:type_name -> neonize.JID
-	20,  // 104: neonize.ContactQRLinkTarget.JID:type_name -> neonize.JID
-	94,  // 105: neonize.ResolveContactQRLinkReturnFunction.ContactQrLink:type_name -> neonize.ContactQRLinkTarget
-	20,  // 106: neonize.BusinessMessageLinkTarget.JID:type_name -> neonize.JID
-	96,  // 107: neonize.ResolveBusinessMessageLinkReturnFunction.MessageLinkTarget:type_name -> neonize.BusinessMessageLinkTarget
-	157, // 108: neonize.MutationInfo.Value:type_name -> WASyncAction.SyncActionValue
-	11,  // 109: neonize.PatchInfo.Type:type_name -> neonize.PatchInfo.WAPatchName
-	98,  // 110: neonize.PatchInfo.Mutations:type_name -> neonize.MutationInfo
-	20,  // 111: neonize.ContactEntry.JID:type_name -> neonize.JID
-	101, // 112: neonize.ContactEntryArray.ContactEntry:type_name -> neonize.ContactEntry
-	79,  // 113: neonize.SetPrivacySettingReturnFunction.settings:type_name -> neonize.PrivacySettings
-	105, // 114: neonize.ContactsGetContactReturnFunction.ContactInfo:type_name -> neonize.ContactInfo
-	20,  // 115: neonize.Contact.JID:type_name -> neonize.JID
-	105, // 116: neonize.Contact.Info:type_name -> neonize.ContactInfo
-	106, // 117: neonize.ContactsGetAllContactsReturnFunction.Contact:type_name -> neonize.Contact
-	20,  // 118: neonize.PairStatus.ID:type_name -> neonize.JID
-	12,  // 119: neonize.PairStatus.Status:type_name -> neonize.PairStatus.PStatus
-	3,   // 120: neonize.LoggedOut.Reason:type_name -> neonize.ConnectFailureReason
-	13,  // 121: neonize.TemporaryBan.Code:type_name -> neonize.TemporaryBan.TempBanReason
-	3,   // 122: neonize.ConnectFailure.Reason:type_name -> neonize.ConnectFailureReason
-	81,  // 123: neonize.ConnectFailure.Raw:type_name -> neonize.Node
-	81,  // 124: neonize.StreamError.Raw:type_name -> neonize.Node
-	158, // 125: neonize.HistorySync.Data:type_name -> WAWebProtobufsHistorySync.HistorySync
-	23,  // 126: neonize.Receipt.MessageSource:type_name -> neonize.MessageSource
-	14,  // 127: neonize.Receipt.Type:type_name -> neonize.Receipt.ReceiptType
-	23,  // 128: neonize.ChatPresence.MessageSource:type_name -> neonize.MessageSource
-	15,  // 129: neonize.ChatPresence.State:type_name -> neonize.ChatPresence.ChatPresence
-	16,  // 130: neonize.ChatPresence.Media:type_name -> neonize.ChatPresence.ChatPresenceMedia
-	20,  // 131: neonize.Presence.From:type_name -> neonize.JID
-	40,  // 132: neonize.JoinedGroup.GroupInfo:type_name -> neonize.GroupInfo
-	20,  // 133: neonize.GroupInfoEvent.JID:type_name -> neonize.JID
-	20,  // 134: neonize.GroupInfoEvent.Sender:type_name -> neonize.JID
-	29,  // 135: neonize.GroupInfoEvent.Name:type_name -> neonize.GroupName
-	30,  // 136: neonize.GroupInfoEvent.Topic:type_name -> neonize.GroupTopic
-	31,  // 137: neonize.GroupInfoEvent.Locked:type_name -> neonize.GroupLocked
-	32,  // 138: neonize.GroupInfoEvent.Announce:type_name -> neonize.GroupAnnounce
-	33,  // 139: neonize.GroupInfoEvent.Ephemeral:type_name -> neonize.GroupEphemeral
-	64,  // 140: neonize.GroupInfoEvent.Delete:type_name -> neonize.GroupDelete
-	88,  // 141: neonize.GroupInfoEvent.Link:type_name -> neonize.GroupLinkChange
-	88,  // 142: neonize.GroupInfoEvent.Unlink:type_name -> neonize.GroupLinkChange
-	20,  // 143: neonize.GroupInfoEvent.Join:type_name -> neonize.JID
-	20,  // 144: neonize.GroupInfoEvent.Leave:type_name -> neonize.JID
-	20,  // 145: neonize.GroupInfoEvent.Promote:type_name -> neonize.JID
-	20,  // 146: neonize.GroupInfoEvent.Demote:type_name -> neonize.JID
-	81,  // 147: neonize.GroupInfoEvent.UnknownChanges:type_name -> neonize.Node
-	20,  // 148: neonize.Picture.JID:type_name -> neonize.JID
-	20,  // 149: neonize.Picture.Author:type_name -> neonize.JID
-	20,  // 150: neonize.IdentityChange.JID:type_name -> neonize.JID
-	79,  // 151: neonize.privacySettingsEvent.NewSettings:type_name -> neonize.PrivacySettings
-	17,  // 152: neonize.BlocklistEvent.Action:type_name -> neonize.BlocklistEvent.Actions
-	132, // 153: neonize.BlocklistEvent.Changes:type_name -> neonize.BlocklistChange
-	20,  // 154: neonize.BlocklistChange.JID:type_name -> neonize.JID
-	18,  // 155: neonize.BlocklistChange.BlockAction:type_name -> neonize.BlocklistChange.Action
-	74,  // 156: neonize.NewsletterJoin.NewsletterMetadata:type_name -> neonize.NewsletterMetadata
-	20,  // 157: neonize.NewsletterLeave.ID:type_name -> neonize.JID
-	1,   // 158: neonize.NewsletterLeave.Role:type_name -> neonize.NewsletterRole
-	20,  // 159: neonize.NewsletterMuteChange.ID:type_name -> neonize.JID
-	2,   // 160: neonize.NewsletterMuteChange.Mute:type_name -> neonize.NewsletterMuteState
-	20,  // 161: neonize.NewsletterLiveUpdate.JID:type_name -> neonize.JID
-	77,  // 162: neonize.NewsletterLiveUpdate.Messages:type_name -> neonize.NewsletterMessage
-	20,  // 163: neonize.BasicCallMeta.from:type_name -> neonize.JID
-	20,  // 164: neonize.BasicCallMeta.callCreator:type_name -> neonize.JID
-	137, // 165: neonize.CallOffer.basicCallMeta:type_name -> neonize.BasicCallMeta
-	138, // 166: neonize.CallOffer.callRemoteMeta:type_name -> neonize.CallRemoteMeta
-	81,  // 167: neonize.CallOffer.data:type_name -> neonize.Node
-	137, // 168: neonize.CallAccept.basicCallMeta:type_name -> neonize.BasicCallMeta
-	138, // 169: neonize.CallAccept.callRemoteMeta:type_name -> neonize.CallRemoteMeta
-	81,  // 170: neonize.CallAccept.data:type_name -> neonize.Node
-	137, // 171: neonize.CallPreAccept.basicCallMeta:type_name -> neonize.BasicCallMeta
-	138, // 172: neonize.CallPreAccept.callRemoteMeta:type_name -> neonize.CallRemoteMeta
-	81,  // 173: neonize.CallPreAccept.data:type_name -> neonize.Node
-	137, // 174: neonize.CallTransport.basicCallMeta:type_name -> neonize.BasicCallMeta
-	138, // 175: neonize.CallTransport.callRemoteMeta:type_name -> neonize.CallRemoteMeta
-	81,  // 176: neonize.CallTransport.data:type_name -> neonize.Node
-	137, // 177: neonize.CallOfferNotice.basicCallMeta:type_name -> neonize.BasicCallMeta
-	81,  // 178: neonize.CallOfferNotice.data:type_name -> neonize.Node
-	137, // 179: neonize.CallRelayLatency.basicCallMeta:type_name -> neonize.BasicCallMeta
-	81,  // 180: neonize.CallRelayLatency.data:type_name -> neonize.Node
-	137, // 181: neonize.CallTerminate.basicCallMeta:type_name -> neonize.BasicCallMeta
-	81,  // 182: neonize.CallTerminate.data:type_name -> neonize.Node
-	81,  // 183: neonize.UnknownCallEvent.node:type_name -> neonize.Node
-	21,  // 184: neonize.UndecryptableMessage.Info:type_name -> neonize.MessageInfo
-	19,  // 185: neonize.UndecryptableMessage.DecryptFailMode:type_name -> neonize.UndecryptableMessage.DecryptFailModeT
-	39,  // 186: neonize.UpdateGroupParticipantsReturnFunction.participants:type_name -> neonize.GroupParticipant
-	155, // 187: neonize.GetMessageForRetryReturnFunction.Message:type_name -> WAWebProtobufsE2E.Message
-	150, // 188: neonize.ReturnFunctionWithError.LocalChatSettings:type_name -> neonize.LocalChatSettings
-	159, // 189: neonize.ReturnFunctionWithError.PollVoteMessage:type_name -> WAWebProtobufsE2E.PollVoteMessage
-	61,  // 190: neonize.ReturnFunctionWithError.GetLinkedGroupsParticipants:type_name -> neonize.JIDArray
-	20,  // 191: neonize.SendRequestExtra.InlineBotJID:type_name -> neonize.JID
-	192, // [192:192] is the sub-list for method output_type
-	192, // [192:192] is the sub-list for method input_type
-	192, // [192:192] is the sub-list for extension type_name
-	192, // [192:192] is the sub-list for extension extendee
-	0,   // [0:192] is the sub-list for field type_name
+	20,  // 42: neonize.GetJIDFromStoreReturnFunction.Jid:type_name -> neonize.JID
+	22,  // 43: neonize.UploadReturnFunction.UploadResponse:type_name -> neonize.UploadResponse
+	26,  // 44: neonize.IsOnWhatsAppReturnFunction.IsOnWhatsAppResponse:type_name -> neonize.IsOnWhatsAppResponse
+	20,  // 45: neonize.GetUserInfoSingleReturnFunction.JID:type_name -> neonize.JID
+	27,  // 46: neonize.GetUserInfoSingleReturnFunction.UserInfo:type_name -> neonize.UserInfo
+	52,  // 47: neonize.GetUserInfoReturnFunction.UsersInfo:type_name -> neonize.GetUserInfoSingleReturnFunction
+	156, // 48: neonize.BuildPollVoteReturnFunction.PollVote:type_name -> WAWebProtobufsE2E.Message
+	75,  // 49: neonize.CreateNewsLetterReturnFunction.NewsletterMetadata:type_name -> neonize.NewsletterMetadata
+	76,  // 50: neonize.GetBlocklistReturnFunction.Blocklist:type_name -> neonize.Blocklist
+	20,  // 51: neonize.GroupParticipantRequest.Participant:type_name -> neonize.JID
+	58,  // 52: neonize.GetGroupRequestParticipantsReturnFunction.Participants:type_name -> neonize.GroupParticipantRequest
+	40,  // 53: neonize.GetJoinedGroupsReturnFunction.Group:type_name -> neonize.GroupInfo
+	20,  // 54: neonize.ReqCreateGroup.Participants:type_name -> neonize.JID
+	35,  // 55: neonize.ReqCreateGroup.GroupParent:type_name -> neonize.GroupParent
+	36,  // 56: neonize.ReqCreateGroup.GroupLinkedParent:type_name -> neonize.GroupLinkedParent
+	20,  // 57: neonize.JIDArray.JIDS:type_name -> neonize.JID
+	21,  // 58: neonize.Message.Info:type_name -> neonize.MessageInfo
+	156, // 59: neonize.Message.Message:type_name -> WAWebProtobufsE2E.Message
+	157, // 60: neonize.Message.SourceWebMsg:type_name -> WAWebProtobufsWeb.WebMessageInfo
+	64,  // 61: neonize.Message.NewsLetterMeta:type_name -> neonize.NewsLetterMessageMeta
+	156, // 62: neonize.Message.Raw:type_name -> WAWebProtobufsE2E.Message
+	5,   // 63: neonize.WrappedNewsletterState.Type:type_name -> neonize.WrappedNewsletterState.NewsletterState
+	6,   // 64: neonize.NewsletterReactionSettings.Value:type_name -> neonize.NewsletterReactionSettings.NewsletterReactionsMode
+	71,  // 65: neonize.NewsletterSetting.ReactionCodes:type_name -> neonize.NewsletterReactionSettings
+	69,  // 66: neonize.NewsletterThreadMetadata.Name:type_name -> neonize.NewsletterText
+	69,  // 67: neonize.NewsletterThreadMetadata.Description:type_name -> neonize.NewsletterText
+	7,   // 68: neonize.NewsletterThreadMetadata.VerificationState:type_name -> neonize.NewsletterThreadMetadata.NewsletterVerificationState
+	70,  // 69: neonize.NewsletterThreadMetadata.Picture:type_name -> neonize.ProfilePictureInfo
+	70,  // 70: neonize.NewsletterThreadMetadata.Preview:type_name -> neonize.ProfilePictureInfo
+	72,  // 71: neonize.NewsletterThreadMetadata.Settings:type_name -> neonize.NewsletterSetting
+	2,   // 72: neonize.NewsletterViewerMetadata.Mute:type_name -> neonize.NewsletterMuteState
+	1,   // 73: neonize.NewsletterViewerMetadata.Role:type_name -> neonize.NewsletterRole
+	20,  // 74: neonize.NewsletterMetadata.ID:type_name -> neonize.JID
+	68,  // 75: neonize.NewsletterMetadata.State:type_name -> neonize.WrappedNewsletterState
+	73,  // 76: neonize.NewsletterMetadata.ThreadMeta:type_name -> neonize.NewsletterThreadMetadata
+	74,  // 77: neonize.NewsletterMetadata.ViewerMeta:type_name -> neonize.NewsletterViewerMetadata
+	20,  // 78: neonize.Blocklist.JIDs:type_name -> neonize.JID
+	77,  // 79: neonize.NewsletterMessage.ReactionCounts:type_name -> neonize.Reaction
+	156, // 80: neonize.NewsletterMessage.Message:type_name -> WAWebProtobufsE2E.Message
+	78,  // 81: neonize.GetNewsletterMessageUpdateReturnFunction.NewsletterMessage:type_name -> neonize.NewsletterMessage
+	8,   // 82: neonize.PrivacySettings.GroupAdd:type_name -> neonize.PrivacySettings.PrivacySetting
+	8,   // 83: neonize.PrivacySettings.LastSeen:type_name -> neonize.PrivacySettings.PrivacySetting
+	8,   // 84: neonize.PrivacySettings.Status:type_name -> neonize.PrivacySettings.PrivacySetting
+	8,   // 85: neonize.PrivacySettings.Profile:type_name -> neonize.PrivacySettings.PrivacySetting
+	8,   // 86: neonize.PrivacySettings.ReadReceipts:type_name -> neonize.PrivacySettings.PrivacySetting
+	8,   // 87: neonize.PrivacySettings.CallAdd:type_name -> neonize.PrivacySettings.PrivacySetting
+	8,   // 88: neonize.PrivacySettings.Online:type_name -> neonize.PrivacySettings.PrivacySetting
+	20,  // 89: neonize.NodeAttrs.jid:type_name -> neonize.JID
+	81,  // 90: neonize.Node.Attrs:type_name -> neonize.NodeAttrs
+	82,  // 91: neonize.Node.Nodes:type_name -> neonize.Node
+	82,  // 92: neonize.InfoQuery.Content:type_name -> neonize.Node
+	70,  // 93: neonize.GetProfilePictureReturnFunction.Picture:type_name -> neonize.ProfilePictureInfo
+	9,   // 94: neonize.StatusPrivacy.Type:type_name -> neonize.StatusPrivacy.StatusPrivacyType
+	20,  // 95: neonize.StatusPrivacy.List:type_name -> neonize.JID
+	86,  // 96: neonize.GetStatusPrivacyReturnFunction.StatusPrivacy:type_name -> neonize.StatusPrivacy
+	20,  // 97: neonize.GroupLinkTarget.JID:type_name -> neonize.JID
+	29,  // 98: neonize.GroupLinkTarget.GroupName:type_name -> neonize.GroupName
+	37,  // 99: neonize.GroupLinkTarget.GroupIsDefaultSub:type_name -> neonize.GroupIsDefaultSub
+	10,  // 100: neonize.GroupLinkChange.Type:type_name -> neonize.GroupLinkChange.ChangeType
+	88,  // 101: neonize.GroupLinkChange.Group:type_name -> neonize.GroupLinkTarget
+	88,  // 102: neonize.GetSubGroupsReturnFunction.GroupLinkTarget:type_name -> neonize.GroupLinkTarget
+	75,  // 103: neonize.GetSubscribedNewslettersReturnFunction.Newsletter:type_name -> neonize.NewsletterMetadata
+	20,  // 104: neonize.GetUserDevicesreturnFunction.JID:type_name -> neonize.JID
+	20,  // 105: neonize.ContactQRLinkTarget.JID:type_name -> neonize.JID
+	95,  // 106: neonize.ResolveContactQRLinkReturnFunction.ContactQrLink:type_name -> neonize.ContactQRLinkTarget
+	20,  // 107: neonize.BusinessMessageLinkTarget.JID:type_name -> neonize.JID
+	97,  // 108: neonize.ResolveBusinessMessageLinkReturnFunction.MessageLinkTarget:type_name -> neonize.BusinessMessageLinkTarget
+	158, // 109: neonize.MutationInfo.Value:type_name -> WASyncAction.SyncActionValue
+	11,  // 110: neonize.PatchInfo.Type:type_name -> neonize.PatchInfo.WAPatchName
+	99,  // 111: neonize.PatchInfo.Mutations:type_name -> neonize.MutationInfo
+	20,  // 112: neonize.ContactEntry.JID:type_name -> neonize.JID
+	102, // 113: neonize.ContactEntryArray.ContactEntry:type_name -> neonize.ContactEntry
+	80,  // 114: neonize.SetPrivacySettingReturnFunction.settings:type_name -> neonize.PrivacySettings
+	106, // 115: neonize.ContactsGetContactReturnFunction.ContactInfo:type_name -> neonize.ContactInfo
+	20,  // 116: neonize.Contact.JID:type_name -> neonize.JID
+	106, // 117: neonize.Contact.Info:type_name -> neonize.ContactInfo
+	107, // 118: neonize.ContactsGetAllContactsReturnFunction.Contact:type_name -> neonize.Contact
+	20,  // 119: neonize.PairStatus.ID:type_name -> neonize.JID
+	12,  // 120: neonize.PairStatus.Status:type_name -> neonize.PairStatus.PStatus
+	3,   // 121: neonize.LoggedOut.Reason:type_name -> neonize.ConnectFailureReason
+	13,  // 122: neonize.TemporaryBan.Code:type_name -> neonize.TemporaryBan.TempBanReason
+	3,   // 123: neonize.ConnectFailure.Reason:type_name -> neonize.ConnectFailureReason
+	82,  // 124: neonize.ConnectFailure.Raw:type_name -> neonize.Node
+	82,  // 125: neonize.StreamError.Raw:type_name -> neonize.Node
+	159, // 126: neonize.HistorySync.Data:type_name -> WAWebProtobufsHistorySync.HistorySync
+	23,  // 127: neonize.Receipt.MessageSource:type_name -> neonize.MessageSource
+	14,  // 128: neonize.Receipt.Type:type_name -> neonize.Receipt.ReceiptType
+	23,  // 129: neonize.ChatPresence.MessageSource:type_name -> neonize.MessageSource
+	15,  // 130: neonize.ChatPresence.State:type_name -> neonize.ChatPresence.ChatPresence
+	16,  // 131: neonize.ChatPresence.Media:type_name -> neonize.ChatPresence.ChatPresenceMedia
+	20,  // 132: neonize.Presence.From:type_name -> neonize.JID
+	40,  // 133: neonize.JoinedGroup.GroupInfo:type_name -> neonize.GroupInfo
+	20,  // 134: neonize.GroupInfoEvent.JID:type_name -> neonize.JID
+	20,  // 135: neonize.GroupInfoEvent.Sender:type_name -> neonize.JID
+	29,  // 136: neonize.GroupInfoEvent.Name:type_name -> neonize.GroupName
+	30,  // 137: neonize.GroupInfoEvent.Topic:type_name -> neonize.GroupTopic
+	31,  // 138: neonize.GroupInfoEvent.Locked:type_name -> neonize.GroupLocked
+	32,  // 139: neonize.GroupInfoEvent.Announce:type_name -> neonize.GroupAnnounce
+	33,  // 140: neonize.GroupInfoEvent.Ephemeral:type_name -> neonize.GroupEphemeral
+	65,  // 141: neonize.GroupInfoEvent.Delete:type_name -> neonize.GroupDelete
+	89,  // 142: neonize.GroupInfoEvent.Link:type_name -> neonize.GroupLinkChange
+	89,  // 143: neonize.GroupInfoEvent.Unlink:type_name -> neonize.GroupLinkChange
+	20,  // 144: neonize.GroupInfoEvent.Join:type_name -> neonize.JID
+	20,  // 145: neonize.GroupInfoEvent.Leave:type_name -> neonize.JID
+	20,  // 146: neonize.GroupInfoEvent.Promote:type_name -> neonize.JID
+	20,  // 147: neonize.GroupInfoEvent.Demote:type_name -> neonize.JID
+	82,  // 148: neonize.GroupInfoEvent.UnknownChanges:type_name -> neonize.Node
+	20,  // 149: neonize.Picture.JID:type_name -> neonize.JID
+	20,  // 150: neonize.Picture.Author:type_name -> neonize.JID
+	20,  // 151: neonize.IdentityChange.JID:type_name -> neonize.JID
+	80,  // 152: neonize.privacySettingsEvent.NewSettings:type_name -> neonize.PrivacySettings
+	17,  // 153: neonize.BlocklistEvent.Action:type_name -> neonize.BlocklistEvent.Actions
+	133, // 154: neonize.BlocklistEvent.Changes:type_name -> neonize.BlocklistChange
+	20,  // 155: neonize.BlocklistChange.JID:type_name -> neonize.JID
+	18,  // 156: neonize.BlocklistChange.BlockAction:type_name -> neonize.BlocklistChange.Action
+	75,  // 157: neonize.NewsletterJoin.NewsletterMetadata:type_name -> neonize.NewsletterMetadata
+	20,  // 158: neonize.NewsletterLeave.ID:type_name -> neonize.JID
+	1,   // 159: neonize.NewsletterLeave.Role:type_name -> neonize.NewsletterRole
+	20,  // 160: neonize.NewsletterMuteChange.ID:type_name -> neonize.JID
+	2,   // 161: neonize.NewsletterMuteChange.Mute:type_name -> neonize.NewsletterMuteState
+	20,  // 162: neonize.NewsletterLiveUpdate.JID:type_name -> neonize.JID
+	78,  // 163: neonize.NewsletterLiveUpdate.Messages:type_name -> neonize.NewsletterMessage
+	20,  // 164: neonize.BasicCallMeta.from:type_name -> neonize.JID
+	20,  // 165: neonize.BasicCallMeta.callCreator:type_name -> neonize.JID
+	138, // 166: neonize.CallOffer.basicCallMeta:type_name -> neonize.BasicCallMeta
+	139, // 167: neonize.CallOffer.callRemoteMeta:type_name -> neonize.CallRemoteMeta
+	82,  // 168: neonize.CallOffer.data:type_name -> neonize.Node
+	138, // 169: neonize.CallAccept.basicCallMeta:type_name -> neonize.BasicCallMeta
+	139, // 170: neonize.CallAccept.callRemoteMeta:type_name -> neonize.CallRemoteMeta
+	82,  // 171: neonize.CallAccept.data:type_name -> neonize.Node
+	138, // 172: neonize.CallPreAccept.basicCallMeta:type_name -> neonize.BasicCallMeta
+	139, // 173: neonize.CallPreAccept.callRemoteMeta:type_name -> neonize.CallRemoteMeta
+	82,  // 174: neonize.CallPreAccept.data:type_name -> neonize.Node
+	138, // 175: neonize.CallTransport.basicCallMeta:type_name -> neonize.BasicCallMeta
+	139, // 176: neonize.CallTransport.callRemoteMeta:type_name -> neonize.CallRemoteMeta
+	82,  // 177: neonize.CallTransport.data:type_name -> neonize.Node
+	138, // 178: neonize.CallOfferNotice.basicCallMeta:type_name -> neonize.BasicCallMeta
+	82,  // 179: neonize.CallOfferNotice.data:type_name -> neonize.Node
+	138, // 180: neonize.CallRelayLatency.basicCallMeta:type_name -> neonize.BasicCallMeta
+	82,  // 181: neonize.CallRelayLatency.data:type_name -> neonize.Node
+	138, // 182: neonize.CallTerminate.basicCallMeta:type_name -> neonize.BasicCallMeta
+	82,  // 183: neonize.CallTerminate.data:type_name -> neonize.Node
+	82,  // 184: neonize.UnknownCallEvent.node:type_name -> neonize.Node
+	21,  // 185: neonize.UndecryptableMessage.Info:type_name -> neonize.MessageInfo
+	19,  // 186: neonize.UndecryptableMessage.DecryptFailMode:type_name -> neonize.UndecryptableMessage.DecryptFailModeT
+	39,  // 187: neonize.UpdateGroupParticipantsReturnFunction.participants:type_name -> neonize.GroupParticipant
+	156, // 188: neonize.GetMessageForRetryReturnFunction.Message:type_name -> WAWebProtobufsE2E.Message
+	151, // 189: neonize.ReturnFunctionWithError.LocalChatSettings:type_name -> neonize.LocalChatSettings
+	160, // 190: neonize.ReturnFunctionWithError.PollVoteMessage:type_name -> WAWebProtobufsE2E.PollVoteMessage
+	62,  // 191: neonize.ReturnFunctionWithError.GetLinkedGroupsParticipants:type_name -> neonize.JIDArray
+	20,  // 192: neonize.SendRequestExtra.InlineBotJID:type_name -> neonize.JID
+	193, // [193:193] is the sub-list for method output_type
+	193, // [193:193] is the sub-list for method input_type
+	193, // [193:193] is the sub-list for extension type_name
+	193, // [193:193] is the sub-list for extension extendee
+	0,   // [0:193] is the sub-list for field type_name
 }
 
 func init() { file_Neonize_proto_init() }
@@ -10719,13 +10776,13 @@ func file_Neonize_proto_init() {
 	if File_Neonize_proto != nil {
 		return
 	}
-	file_Neonize_proto_msgTypes[60].OneofWrappers = []any{
+	file_Neonize_proto_msgTypes[61].OneofWrappers = []any{
 		(*NodeAttrs_Boolean)(nil),
 		(*NodeAttrs_Integer)(nil),
 		(*NodeAttrs_Text)(nil),
 		(*NodeAttrs_Jid)(nil),
 	}
-	file_Neonize_proto_msgTypes[131].OneofWrappers = []any{
+	file_Neonize_proto_msgTypes[132].OneofWrappers = []any{
 		(*ReturnFunctionWithError_LocalChatSettings)(nil),
 		(*ReturnFunctionWithError_PollVoteMessage)(nil),
 		(*ReturnFunctionWithError_GetLinkedGroupsParticipants)(nil),
@@ -10736,7 +10793,7 @@ func file_Neonize_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_Neonize_proto_rawDesc), len(file_Neonize_proto_rawDesc)),
 			NumEnums:      20,
-			NumMessages:   133,
+			NumMessages:   134,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
