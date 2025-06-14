@@ -67,10 +67,11 @@ def get_poll_update_message(message: neonize_proto.Message) -> PollUpdateMessage
         pollUpdateMessage: PollUpdateMessage = msg.pollUpdateMessage
         return pollUpdateMessage
 
+
 def message_has_contextinfo(message: Message) -> bool:
     for field_name, msg in message.ListFields():
         if field_name.name.endswith("Message"):
             break
     else:
         return False
-    return (type(msg) in MessageWithContextInfo.__constraints__)
+    return type(msg) in MessageWithContextInfo.__constraints__
