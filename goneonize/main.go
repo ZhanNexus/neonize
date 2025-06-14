@@ -103,7 +103,7 @@ func GetLIDFromPN(id *C.char, JIDByte *C.uchar, JIDSize C.int) *C.struct_BytesRe
 	cli := clients[C.GoString(id)].Store
 	lid, err := cli.LIDs.GetLIDForPN(context.Background(), pn)
 
-	neojid := utils.EncodeJidProto(pn)
+	neojid := utils.EncodeJidProto(lid)
 
 	return_ := defproto.GetJIDFromStoreReturnFunction{
 		Jid: neojid,
