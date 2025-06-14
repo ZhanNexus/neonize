@@ -545,7 +545,7 @@ class NewAClient:
                 log.info(msg)
         sender = message.Info.MessageSource.Sender
         if jid_is_lid(sender):
-            sender = message.Info.MessageSource.SenderAlt
+            sender = message.Info.MessageSource.SenderAlt or sender
         return ContextInfo(
             stanzaID=message.Info.ID,
             participant=Jid2String(JIDToNonAD(sender)),
