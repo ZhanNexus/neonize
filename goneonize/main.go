@@ -39,9 +39,9 @@ var clients = make(map[string]*whatsmeow.Client)
 
 // Defaults to sqlite otherwise use postgres database url
 func getDB(db *C.char, dbLog waLog.Logger) (*sqlstore.Container, error) {
-	container, err := sqlstore.New("sqlite3", fmt.Sprintf("file:%s?_foreign_keys=on", C.GoString(db)), dbLog)
+	container, err := sqlstore.New(context.Background(), "sqlite3", fmt.Sprintf("file:%s?_foreign_keys=on", C.GoString(db)), dbLog)
 	if strings.HasPrefix(C.GoString(db), "postgres") {
-		container, err = sqlstore.New("postgres", C.GoString(db), dbLog)
+		container, err = sqlstore.New(context.Background(), "postgres", C.GoString(db), dbLog)
 	}
 	return container, err
 }
