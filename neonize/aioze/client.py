@@ -538,7 +538,11 @@ class NewAClient:
         self, message: neonize_proto.Message, reply_privately: bool = False
     ) -> ContextInfo:
         if not isinstance((msg := get_message_type(message.Message)), str):
-            msg.contextInfo.Clear()
+            try:
+                msg.contextInfo.Clear()
+            except Exception:
+                log.info("Debug:")
+                log.info(msg)
         sender = message.Info.MessageSource.Sender
         if jid_is_lid(sender):
             sender = message.Info.MessageSource.SenderAlt
