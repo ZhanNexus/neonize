@@ -427,7 +427,7 @@ class NewAClient:
         self.qr = self.event.qr
         self.contact = ContactStore(self.uuid)
         self.chat_settings = ChatSettingsStore(self.uuid)
-        self.loop = event_global_loop
+        self.loop = get_event_loop()
         log.debug("🔨 Creating a NewClient instance")
 
     def __onLoginStatus(self, uuid: int, status: int):
