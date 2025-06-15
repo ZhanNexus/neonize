@@ -779,10 +779,14 @@ class NewAClient:
         )
         protobytes = bytes_ptr.contents.get_bytes()
         free_bytes(bytes_ptr)
-        result = Message.FromString(protobytes)
+        model = BuildMessageReturnFunction.FromString(protobytes)
+        if model.Error:
+            raise Exception(model.Error) #To be replaced with custom exception
+        message = model.Message
+        # result = Message.FromString(protobytes)
         if quoted:
-            result.pollCreationMessage.contextInfo.MergeFrom(self._make_quoted_message(quoted))
-        return result
+            message.pollCreationMessage.contextInfo.MergeFrom(self._make_quoted_message(quoted))
+        return message
 
     async def build_poll_vote(self, poll_info: MessageInfo, option_names: List[str]) -> Message:
         """Builds a poll vote.
