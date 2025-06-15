@@ -915,7 +915,7 @@ message SendRequestExtra {
 }
 
 message BuildMessageReturnFunction{
-    required string Error = 1;
+    optional string Error = 1;
     required WAWebProtobufsE2E.Message Message = 2;
 }
 
