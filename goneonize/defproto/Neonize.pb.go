@@ -9658,7 +9658,7 @@ func (x *SendRequestExtra) GetMediaHandle() string {
 
 type BuildMessageReturnFunction struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Error         *string                `protobuf:"bytes,1,req,name=Error" json:"Error,omitempty"`
+	Error         *string                `protobuf:"bytes,1,opt,name=Error" json:"Error,omitempty"`
 	Message       *waE2E.Message         `protobuf:"bytes,2,req,name=Message" json:"Message,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -10464,7 +10464,7 @@ const file_Neonize_proto_rawDesc = "" +
 	"\aTimeout\x18\x04 \x02(\x03R\aTimeout\x12 \n" +
 	"\vMediaHandle\x18\x05 \x02(\tR\vMediaHandle\"h\n" +
 	"\x1aBuildMessageReturnFunction\x12\x14\n" +
-	"\x05Error\x18\x01 \x02(\tR\x05Error\x124\n" +
+	"\x05Error\x18\x01 \x01(\tR\x05Error\x124\n" +
 	"\aMessage\x18\x02 \x02(\v2\x1a.WAWebProtobufsE2E.MessageR\aMessage\"\x06\n" +
 	"\x04Stop*!\n" +
 	"\x0eAddressingMode\x12\x06\n" +
