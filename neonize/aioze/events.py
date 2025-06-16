@@ -170,9 +170,9 @@ class Event:
 
             def wrap_paircode(_, code, connected: bool):
                 paircode = ctypes.string_at(code)
-                asyncio.run_coroutine_threadsafe(
+                self.future = asyncio.run_coroutine_threadsafe(
                     f(self.client, paircode.decode(), connected), event_global_loop
-                ).result()
+                )
 
             self.blocking_func = wrap_paircode
             return self.blocking_func

@@ -427,7 +427,7 @@ class NewAClient:
         self.qr = self.event.qr
         self.contact = ContactStore(self.uuid)
         self.chat_settings = ChatSettingsStore(self.uuid)
-        self.idle = start_event_thread
+
         self.loop = event_global_loop #get_event_loop()
         log.debug("🔨 Creating a NewClient instance")
 
@@ -2783,6 +2783,10 @@ class NewAClient:
             payload,
             len(payload),
         )
+
+    def idle(self):
+        start_event_thread()
+        self.event.future.result()
 
     async def stop(self):
         """
