@@ -493,5 +493,5 @@ else:
 
 
 def free_bytes(bytes_ptr: ctypes._Pointer):
-    print("Freeing bytes", bytes_ptr)
+    # print("Freeing bytes", bytes_ptr)
     gocode.FreeBytesStruct(bytes_ptr)
