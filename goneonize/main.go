@@ -255,12 +255,12 @@ func SendMessage(id *C.char, JIDByte *C.uchar, JIDSize C.int, messageByte *C.uch
 	}
 	// fmt.Println("SendMessage: Encoding send response")
 	return_.SendResponse = utils.EncodeSendResponse(sendresponse)
-	buff, err := proto.Marshal(&return_)
-	if err != nil {
-		panic(err)
-	}
-	hashx := sha256.Sum256(buff)
-	hashl := hex.EncodeToString(hashx[:]) // This is just to ensure the data is not empty
+	// buff, err := proto.Marshal(&return_)
+	// if err != nil {
+	// 	panic(err)
+	// }
+	// hashx := sha256.Sum256(buff)
+	// hashl := hex.EncodeToString(hashx[:]) // This is just to ensure the data is not empty
 	// fmt.Printf("Marshaled data (%d bytes): %x\thash: %s\n", len(buff), buff, hashl)
 	// fmt.Println("SendMessage: Returning proto response")
 	// result := ProtoReturnV3(&return_)
