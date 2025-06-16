@@ -12,8 +12,8 @@ package main
 import "C"
 import (
 	"context"
-	"crypto/sha256"
-	"encoding/hex"
+	// "crypto/sha256"
+	// "encoding/hex"
 	"fmt"
 	"strings"
 	"time"
