@@ -235,7 +235,8 @@ class EventsManager:
         return callback
 
 
-threading.Thread(
-    target=event_global_loop.run_forever,
-    daemon=True,
-).start()
+def start_event_thread():
+    threading.Thread(
+        target=event_global_loop.run_forever,
+        daemon=True,
+    ).start()

@@ -176,7 +176,7 @@ from ..proto.Neonize_pb2 import (
 )
 from ..proto.waCompanionReg.WAWebProtobufsCompanionReg_pb2 import DeviceProps
 from .._binder import gocode, free_bytes
-from .events import Event, event_global_loop
+from .events import Event, event_global_loop, start_event_thread
 from ..utils.log import log
 
 from linkpreview import link_preview as fallback_link_preview
@@ -427,7 +427,8 @@ class NewAClient:
         self.qr = self.event.qr
         self.contact = ContactStore(self.uuid)
         self.chat_settings = ChatSettingsStore(self.uuid)
-        self.loop = get_event_loop()
+        self.idle = start_event_thread
+        self.loop = event_global_loop #get_event_loop()
         log.debug("🔨 Creating a NewClient instance")
 
     def __onLoginStatus(self, uuid: int, status: int):
