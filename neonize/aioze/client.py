@@ -783,7 +783,7 @@ class NewAClient:
         free_bytes(bytes_ptr)
         model = BuildMessageReturnFunction.FromString(protobytes)
         if model.Error:
-            raise Exception(model.Error) # To be replaced with a custom exception
+            raise Exception(model.Error)  # To be replaced with a custom exception
         message = model.Message
         # result = Message.FromString(protobytes)
         if quoted:
@@ -1736,7 +1736,7 @@ class NewAClient:
         free_bytes(bytes_ptr)
         model = GetJIDFromStoreReturnFunction.FromString(protobytes)
         if model.Error:
-            raise Exception(model.Error) # To be replaced with a custom exception
+            raise Exception(model.Error)  # To be replaced with a custom exception
         return model.Jid
 
     async def get_pn_from_lid(self, jid: JID) -> JID:
@@ -1746,7 +1746,7 @@ class NewAClient:
         free_bytes(bytes_ptr)
         model = GetJIDFromStoreReturnFunction.FromString(protobytes)
         if model.Error:
-            raise Exception(model.Error) # To be replaced with a custom exception
+            raise Exception(model.Error)  # To be replaced with a custom exception
         return model.Jid
 
     async def leave_group(self, jid: JID) -> str:
