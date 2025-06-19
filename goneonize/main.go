@@ -367,7 +367,7 @@ func Neonize(db *C.char, id *C.char, JIDByte *C.uchar, JIDSize C.int, logLevel *
 				eventChan <- &messageEvent
 			}
 		case *events.Connected:
-			if int(pairphoneSize) > 0 && client.Store.ID == nil {
+			if int(pairphoneSize) > 0 {
 				loginStateChan <- true
 			}
 			if _, ok := subscribers[3]; ok {
@@ -804,12 +804,11 @@ func Neonize(db *C.char, id *C.char, JIDByte *C.uchar, JIDSize C.int, logLevel *
 				panic(code_err)
 			}
 			fmt.Println("Pair Code: ", code_)
-			for stat := range loginStateChan {
-				if stat {
-					close(loginStateChan)
-					break
-				}
-			}
+			// for stat := range loginStateChan {
+			//	if stat {
+			//		break
+			//	}
+			// }
 
 		} else {
 			qrChan, _ := client.GetQRChannel(context.Background())
@@ -836,6 +835,14 @@ func Neonize(db *C.char, id *C.char, JIDByte *C.uchar, JIDSize C.int, logLevel *
 		err = client.Connect()
 		if err != nil {
 			panic(err)
+		}
+	}
+
+	if int(pairphoneSize) > 0 {
+		for stat := range loginStateChan {
+			if stat {
+				break
+			}
 		}
 	}
 
