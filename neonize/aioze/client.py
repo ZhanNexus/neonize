@@ -2785,7 +2785,7 @@ class NewAClient:
             payload,
             len(payload),
         )
-        self.connect_task = connect_task = self.event_loop.create_task(task)
+        self.connect_task = connect_task = self.loop.create_task(task)
         return connect_task
 
     async def idle(self):
@@ -2916,7 +2916,7 @@ class NewAClient:
             b"",
             0,
         )
-        self.connect_task = connect_task = self.event_loop.create_task(task)
+        self.connect_task = connect_task = self.loop.create_task(task)
         return connect_task
 
     async def disconnect(self) -> None:
