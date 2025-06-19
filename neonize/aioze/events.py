@@ -132,6 +132,8 @@ class Event:
         if code == 0:
             self.client.me = message
             return
+        elif code == 3:
+            self.client.connected = True
         # loop = asyncio.new_event_loop()
         # loop.run_until_complete(
         #     self.list_func[code](self.client, message)

@@ -428,8 +428,9 @@ class NewAClient:
         self.contact = ContactStore(self.uuid)
         self.chat_settings = ChatSettingsStore(self.uuid)
         self.connect_task = None
-        self.event_loop = event_global_loop
-        self.loop = get_event_loop()
+        self.connected = False
+        self.loop = event_global_loop()
+        self.me = None
         log.debug("🔨 Creating a NewClient instance")
 
     def __onLoginStatus(self, uuid: int, status: int):
@@ -2784,7 +2785,14 @@ class NewAClient:
             payload,
             len(payload),
         )
-        self.connect_task = self.event_loop.create_task(task)
+        self.connect_task = connect_task = self.event_loop.create_task(task)
+        return connect_task
+
+    async def idle(self):
+        """
+        Idles the client
+        """
+        await self.connect_task
 
     async def stop(self):
         """
@@ -2892,7 +2900,7 @@ class NewAClient:
             jidbuf_size = len(jidbuf)
 
         # Initiate connection to the server
-        await self.__client.Neonize(
+        task = self.__client.Neonize(
             self.name.encode(),
             self.uuid,
             jidbuf,
@@ -2908,6 +2916,8 @@ class NewAClient:
             b"",
             0,
         )
+        self.connect_task = connect_task = self.event_loop.create_task(task)
+        return connect_task
 
     async def disconnect(self) -> None:
         """

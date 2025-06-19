@@ -153,6 +153,11 @@ class Event:
         if code not in INT_TO_EVENT:
             raise UnsupportedEvent()
         message = INT_TO_EVENT[code].FromString(ctypes.string_at(binary, size))
+        if code == 0:
+            self.client.me = message
+            return
+        elif code == 3:
+            self.client.connected = True
         self.list_func[code](self.client, message)
 
     def __onqr(self, _: NewClient, data_qr: bytes):
