@@ -806,6 +806,7 @@ func Neonize(db *C.char, id *C.char, JIDByte *C.uchar, JIDSize C.int, logLevel *
 			fmt.Println("Pair Code: ", code_)
 			for stat := range loginStateChan {
 				if stat {
+					close(loginStateChan)
 					break
 				}
 			}
@@ -2109,10 +2110,38 @@ func main() {
 
 }
 
+func FetchMe(id string) defproto.Device {
+    cli := clients[id].Store
+    
+    // Block until cli.ID is set
+    for cli.ID == nil {
+        time.Sleep(100 * time.Millisecond) // Check 10 times per second
+    }
+
+    device := defproto.Device{
+        PushName:      &cli.PushName,
+        Platform:      &cli.Platform,
+        BussinessName: &cli.BusinessName,
+        Initialized:   &cli.Initialized,
+    }
+    
+    // Now guaranteed to have value
+    device.JID = utils.EncodeJidProto(*cli.ID)
+    device.LID = utils.EncodeJidProto(cli.LID)
+    
+    return device
+}
+
 // comment
 func CallbackFunction(ctx context.Context, callback C.ptr_to_python_function_bytes, id string) {
 	uuid := C.CString(id)
 	channel := eventChannel[id]
+	buff, err := proto.Marshal(FetchMe(id))
+	if err != nil {
+		panic(err)
+	}
+	uchars, size := getBytesAndSize(buff)
+	C.call_c_func_callback_bytes(callback, uuid, uchars, size, C.int(0))
 	for {
 		select {
 		case <-ctx.Done():
