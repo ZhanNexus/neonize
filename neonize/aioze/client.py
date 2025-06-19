@@ -427,7 +427,8 @@ class NewAClient:
         self.qr = self.event.qr
         self.contact = ContactStore(self.uuid)
         self.chat_settings = ChatSettingsStore(self.uuid)
-
+        self.connect_task = None
+        self.event_loop = event_global_loop
         self.loop = get_event_loop()
         log.debug("🔨 Creating a NewClient instance")
 
@@ -2767,7 +2768,7 @@ class NewAClient:
             jidbuf = self.jid.SerializeToString()
             jidbuf_size = len(jidbuf)
 
-        await self.__client.Neonize(
+        task = self.__client.Neonize(
             self.name.encode(),
             self.uuid,
             jidbuf,
@@ -2783,6 +2784,7 @@ class NewAClient:
             payload,
             len(payload),
         )
+        self.connect_task = self.event_loop.create_task(task)
 
     async def stop(self):
         """
