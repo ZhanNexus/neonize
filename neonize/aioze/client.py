@@ -429,7 +429,7 @@ class NewAClient:
         self.chat_settings = ChatSettingsStore(self.uuid)
         self.connect_task = None
         self.connected = False
-        self.loop = event_global_loop()
+        self.loop = event_global_loop
         self.me = None
         log.debug("🔨 Creating a NewClient instance")
 
