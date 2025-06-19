@@ -2110,7 +2110,7 @@ func main() {
 
 }
 
-func FetchMe(id string) defproto.Device {
+func FetchMe(id string) *defproto.Device {
     cli := clients[id].Store
     
     // Block until cli.ID is set
@@ -2129,7 +2129,7 @@ func FetchMe(id string) defproto.Device {
     device.JID = utils.EncodeJidProto(*cli.ID)
     device.LID = utils.EncodeJidProto(cli.LID)
     
-    return device
+    return &device
 }
 
 // comment
