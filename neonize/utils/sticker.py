@@ -62,11 +62,11 @@ async def convert_to_sticker(file: bytes, name="", packname="", enforce_not_brok
             "-set",
             "exif",
             exif_filename.path.__str__(),
-            self.filepath,
+            ffmpeg.filepath,
             "-o",
             temp,
         ]
-        await self.call(cmd)
+        await ffmpeg.call(cmd)
     exif_filename.__exit__(None, None, None)
     with open(temp, "rb") as file:
         buf = file.read()
