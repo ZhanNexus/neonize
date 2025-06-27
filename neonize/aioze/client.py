@@ -28,6 +28,7 @@ from .preview.compose import link_preview
 from .events import EventsManager
 from ..utils.ffmpeg import AFFmpeg
 from ..utils.calc import AspectRatioMethod, auto_sticker, original_sticker
+from ..utils.sticker import convert_to_sticker
 from ..utils import add_exif, gen_vcard
 from PIL import Image, ImageSequence
 from google.protobuf.internal.containers import RepeatedCompositeFieldContainer
@@ -904,7 +905,7 @@ class NewAClient:
         :rtype: Message
         """
         sticker = await get_bytes_from_name_or_url_async(file)
-        animated = is_webp = is_image = False
+        animated = is_webp = is_image = saved_exif = False
         mime = magic.from_buffer(sticker, mime=True)
         if mime == "image/webp":
             is_webp = True
@@ -921,17 +922,17 @@ class NewAClient:
             io_save = BytesIO()
             # io_save.seek(0)
         elif not passthrough:
-            async with AFFmpeg(sticker) as ffmpeg:
-                animated = True
-                sticker = await ffmpeg.cv_to_webp(
-                    enforce_not_broken=enforce_not_broken, animated_gif=animated_gif
-                )
+            animated = True
+            sticker, saved_exif = await convert_to_sticker(sticker, name, packname, enforce_not_broken, animated_gif)
+            if saved_exif:
+                io_save = BytesIO(sticker)
+            else:
                 stk = Image.open(BytesIO(sticker))
                 io_save = BytesIO()
         else:
             if not is_webp:
                 raise Exception ("File is not a webp, which is required for passthrough.")
-        if not passthrough:
+        if not (passthrough or saved_exif):
             stk.save(
                 io_save,
                 format="webp",

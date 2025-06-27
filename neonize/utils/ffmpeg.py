@@ -3,10 +3,10 @@ from enum import Enum
 import json
 import os
 import shlex
-import time
 import subprocess
 import tempfile
 import logging
+import uuid
 from typing import List, Optional, Tuple
 from dataclasses import dataclass
 from .iofile import (
@@ -231,7 +231,7 @@ class AFFmpeg:
         :rtype: bytes
         """
         MAX_STICKER_FILESIZE = max_sticker_size or 512000
-        temp = tempfile.gettempdir() + "/" + time.time().__str__() + ".webp"
+        temp = tempfile.gettempdir() + "/" + uuid.uuid4().__str__() + ".webp"
         duration = int((await self.extract_info()).format.duration or 0)
         if not duration:
             duration = 1
@@ -306,7 +306,7 @@ class AFFmpeg:
         """
         This function convertes a gif to mp4 format.
         """
-        temp = tempfile.gettempdir() + "/" + time.time().__str__() + ".mp4"
+        temp = tempfile.gettempdir() + "/" + uuid.uuid4().__str__() + ".mp4"
         await self.call(
             [
                 "ffmpeg",
@@ -329,7 +329,7 @@ class AFFmpeg:
         return buf
 
     async def to_mp3(self) -> bytes:
-        temp = tempfile.gettempdir() + "/" + time.time().__str__() + ".mp3"
+        temp = tempfile.gettempdir() + "/" + uuid.uuid4().__str__() + ".mp3"
         await self.call(
             [
                 "ffmpeg",
@@ -486,7 +486,7 @@ class FFmpeg:
         :rtype: bytes
         """
         MAX_STICKER_FILESIZE = 512000
-        temp = tempfile.gettempdir() + "/" + time.time().__str__() + ".webp"
+        temp = tempfile.gettempdir() + "/" + uuid.uuid4().__str__() + ".webp"
         ffmpeg_command = [
             "ffmpeg",
             "-i",
@@ -554,7 +554,7 @@ class FFmpeg:
         """
         This function convertes a gif to mp4 format.
         """
-        temp = tempfile.gettempdir() + "/" + time.time().__str__() + ".mp4"
+        temp = tempfile.gettempdir() + "/" + uuid.uuid4().__str__() + ".mp4"
         self.call(
             [
                 "ffmpeg",
@@ -577,7 +577,7 @@ class FFmpeg:
         return buf
 
     def to_mp3(self) -> bytes:
-        temp = tempfile.gettempdir() + "/" + time.time().__str__() + ".mp3"
+        temp = tempfile.gettempdir() + "/" + uuid.uuid4().__str__() + ".mp3"
         self.call(
             [
                 "ffmpeg",
