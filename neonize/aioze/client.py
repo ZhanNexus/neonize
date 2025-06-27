@@ -915,7 +915,7 @@ class NewAClient:
         elif (mime := mime.split("/"))[0] == "image":
             is_image = True
         animated = not(is_image)
-        if not passthrough and is_image:
+        if not passthrough and not animated_gif and is_image:
             io_save = BytesIO(sticker)
             stk = auto_sticker(io_save) if crop else original_sticker(io_save)
             io_save = BytesIO()
