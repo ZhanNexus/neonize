@@ -29,7 +29,7 @@ from .events import EventsManager
 from ..utils.ffmpeg import AFFmpeg
 from ..utils.calc import AspectRatioMethod, auto_sticker, original_sticker
 from ..utils import add_exif, gen_vcard
-from PIL import Image
+from PIL import Image, ImageSequence
 from google.protobuf.internal.containers import RepeatedCompositeFieldContainer
 from ..proto.waConsumerApplication.WAConsumerApplication_pb2 import ConsumerApplication
 from ..proto.waMsgApplication.WAMsgApplication_pb2 import MessageApplication
@@ -881,6 +881,7 @@ class NewAClient:
         crop: bool = False,
         enforce_not_broken: bool = False,
         animated_gif: bool = False,
+        passthrough: bool = False,
     ) -> Message:
         """
         This function builds a sticker message from a given image or video file.
@@ -903,12 +904,34 @@ class NewAClient:
         :rtype: Message
         """
         sticker = await get_bytes_from_name_or_url_async(file)
-        animated = False
-        mime = magic.from_buffer(sticker, mime=True).split("/")
-        if mime[0] == "image" and not animated_gif:
+        animated = is_webp = is_image = False
+        mime = magic.from_buffer(sticker, mime=True)
+        if mime == "image/webp":
+            is_webp = True
+            io_save = BytesIO(sticker)
+            img = Image.open(io_save)
+            if len(ImageSequence.all_frames(img)) < 2:
+                is_image = True
+        elif (mime := mime.split("/"))[0] == "image":
+            is_image = True
+        animated = not(is_image)
+        if not passthrough and is_image:
             io_save = BytesIO(sticker)
             stk = auto_sticker(io_save) if crop else original_sticker(io_save)
             io_save = BytesIO()
+            # io_save.seek(0)
+        elif not passthrough:
+            async with AFFmpeg(sticker) as ffmpeg:
+                animated = True
+                sticker = await ffmpeg.cv_to_webp(
+                    enforce_not_broken=enforce_not_broken, animated_gif=animated_gif
+                )
+                stk = Image.open(BytesIO(sticker))
+                io_save = BytesIO()
+        else:
+            if not is_webp:
+                raise Exception ("File is not a webp, which is required for passthrough.")
+        if not passthrough:
             stk.save(
                 io_save,
                 format="webp",
@@ -916,17 +939,6 @@ class NewAClient:
                 save_all=True,
                 loop=0,
             )
-            io_save.seek(0)
-        else:
-            async with AFFmpeg(sticker) as ffmpeg:
-                animated = True
-                sticker = await ffmpeg.cv_to_webp(
-                    enforce_not_broken=enforce_not_broken, animated_gif=animated_gif
-                )
-                io_save = BytesIO(sticker)
-                img = Image.open(io_save)
-                io_save = BytesIO()
-                img.save(io_save, format="webp", exif=add_exif(name, packname), save_all=True)
         upload = await self.upload(io_save.getvalue())
         message = Message(
             stickerMessage=StickerMessage(
@@ -954,6 +966,7 @@ class NewAClient:
         crop: bool = False,
         enforce_not_broken: bool = False,
         animated_gif: bool = False,
+        passthrough: bool = False,
         add_msg_secret: bool = False,
     ) -> SendResponse:
         """
@@ -981,7 +994,7 @@ class NewAClient:
         return await self.send_message(
             to,
             await self.build_sticker_message(
-                file, quoted, name, packname, crop, enforce_not_broken, animated_gif
+                file, quoted, name, packname, crop, enforce_not_broken, animated_gif, passthrough
             ),
             add_msg_secret=add_msg_secret,
         )
