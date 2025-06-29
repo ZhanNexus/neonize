@@ -37,7 +37,7 @@ def webpmux_is_installed():
     return is_executable_installed("webpmux")
 
 
-async def convert_to_sticker(file: bytes, name="", packname="", enforce_not_broken=False, animated_gif=False):
+async def convert_to_sticker(file: bytes, name="", packname="", enforce_not_broken=False, animated_gif=False, is_webm=False):
     max_sticker_size = 512000
     webpmux_is_available = False
     if webpmux_is_installed():
@@ -47,7 +47,8 @@ async def convert_to_sticker(file: bytes, name="", packname="", enforce_not_brok
         sticker = await ffmpeg.cv_to_webp(
             enforce_not_broken=enforce_not_broken,
             animated_gif=animated_gif,
-            max_sticker_size=max_sticker_size
+            max_sticker_size=max_sticker_size,
+            is_webm=is_webm,
         )
     if not webpmux_is_available:
         return sticker, False

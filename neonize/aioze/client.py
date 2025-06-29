@@ -905,7 +905,7 @@ class NewAClient:
         :rtype: Message
         """
         sticker = await get_bytes_from_name_or_url_async(file)
-        animated = is_webp = is_image = saved_exif = False
+        animated = is_webm = is_webp = is_image = saved_exif = False
         mime = magic.from_buffer(sticker, mime=True)
         if mime == "image/webp":
             is_webp = True
@@ -913,6 +913,8 @@ class NewAClient:
             img = Image.open(io_save)
             if len(ImageSequence.all_frames(img)) < 2:
                 is_image = True
+        elif mime == "video/webm":
+            is_webm = True
         elif (mime := mime.split("/"))[0] == "image":
             is_image = True
         animated = not(is_image)
@@ -923,7 +925,7 @@ class NewAClient:
             # io_save.seek(0)
         elif not passthrough:
             animated = True
-            sticker, saved_exif = await convert_to_sticker(sticker, name, packname, enforce_not_broken, animated_gif)
+            sticker, saved_exif = await convert_to_sticker(sticker, name, packname, enforce_not_broken, animated_gif, is_webm)
             if saved_exif:
                 io_save = BytesIO(sticker)
             else:
