@@ -245,7 +245,7 @@ class AFFmpeg:
             codec = (await self.extract_info()).streams[0].codec_name
             if codec == "vp9":
                 decoder += "-vp9"
-            ffmpeg_command.append(decoder)
+            ffmpeg_command.extend(decoder.split())
         ffmpeg_command.extend(
             [
                 "-i",
