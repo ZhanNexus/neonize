@@ -36,13 +36,13 @@ def add_exif(name: str = "", packname: str = "") -> bytes:
 def webpmux_is_installed():
     return is_executable_installed("webpmux")
 
+max_sticker_size = 512000
+webpmux_is_available = False
+if webpmux_is_installed():
+    max_sticker_size = 712000
+    webpmux_is_available = True
 
 async def convert_to_sticker(file: bytes, name="", packname="", enforce_not_broken=False, animated_gif=False, is_webm=False):
-    max_sticker_size = 512000
-    webpmux_is_available = False
-    if webpmux_is_installed():
-        max_sticker_size = 712000
-        webpmux_is_available = True
     async with AFFmpeg(file) as ffmpeg:
         sticker = await ffmpeg.cv_to_webp(
             enforce_not_broken=enforce_not_broken,
