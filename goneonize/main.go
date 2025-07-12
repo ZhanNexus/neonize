@@ -302,7 +302,7 @@ func PinMessage(id *C.char, ChatJIDByte *C.uchar, ChatJIDSize C.int, SenderJIDBy
 	message := waE2E.Message{
 		MessageContextInfo: &waE2E.MessageContextInfo{
 			MessageAddOnExpiryType:     waE2E.MessageContextInfo_STATIC.Enum(),
-			MessageAddOnDurationInSecs: proto.Uint32(int(seconds),
+			MessageAddOnDurationInSecs: proto.Uint32(int(seconds)),
 		},
 		PinInChatMessage: pinInChatMessage,
 	}
