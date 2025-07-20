@@ -1,8 +1,7 @@
 package utils
 
 import (
-	// "go.mau.fi/whatsmeow"
-	"github.com/Nubuki-all/whatsmeow"
+	"go.mau.fi/whatsmeow"
 	"go.mau.fi/whatsmeow/types"
 )
 
