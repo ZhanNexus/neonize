@@ -19,16 +19,19 @@ from typing import (
     TypeVar,
     overload,
 )
+import base64
 import typing
 import magic
 import traceback
+
 from io import BytesIO
+from uuid import uuid4
 
 from .preview.compose import link_preview
 from .events import EventsManager
 from ..utils.ffmpeg import AFFmpeg
 from ..utils.calc import AspectRatioMethod, auto_sticker, original_sticker
-from ..utils.sticker import convert_to_sticker
+from ..utils.sticker import aio_convert_to_sticker, aio_convert_to_webp
 from ..utils import add_exif, gen_vcard
 from PIL import Image, ImageSequence
 from google.protobuf.internal.containers import RepeatedCompositeFieldContainer
@@ -39,6 +42,7 @@ from ..types import MessageServerID, MessageWithContextInfo
 from ..utils.iofile import (
     get_bytes_from_name_or_url,
     get_bytes_from_name_or_url_async,
+    prepare_zip_file_content,
 )
 from ..utils.jid import JIDToNonAD, Jid2String, build_jid, jid_is_lid
 from .._binder import func_string, func_callback_bytes
@@ -54,6 +58,7 @@ from ..proto.waE2E.WAWebProtobufsE2E_pb2 import (
     DocumentMessage,
     ContactMessage,
     GroupMention,
+    StickerPackMessage,
 )
 from ..utils.enum import (
     BlocklistAction,
@@ -925,7 +930,7 @@ class NewAClient:
             # io_save.seek(0)
         elif not passthrough:
             animated = True
-            sticker, saved_exif = await convert_to_sticker(
+            sticker, saved_exif = await aio_convert_to_sticker(
                 sticker, name, packname, enforce_not_broken, animated_gif, is_webm
             )
             if saved_exif:
@@ -1003,6 +1008,169 @@ class NewAClient:
             ),
             add_msg_secret=add_msg_secret,
         )
+    async def _process_single_pack(
+        self, stickers: List[bytes], pack_name: str, publisher: str = "", quoted: Optional[neonize_proto.Message] = None,
+    ) -> Message:
+        """Helper function to process a single sticker pack chunk"""
+        zip_dict = {}
+        # Upload all stickers concurrently
+        funcs = [
+            self._upload_sticker(sticker, animated, zip_dict)
+            for sticker, animated in stickers
+        ]
+        sticker_metadata = await asyncio.gather(*funcs)
+    
+        # Generate unique pack ID
+        sticker_id = f"{uuid4()}"
+
+        tray_icon = f"{sticker_id}.png"
+        io_save = BytesIO()
+        img = Image.open(BytesIO(stickers[0][0]))
+        img = img.resize((252, 252))
+        img.save(
+            io_save,
+            format="png",
+            save_all=False,
+            loop=0,
+        )
+        cover = io_save.getvalue()
+        zip_dict.update({tray_icon: cover})
+        file_size = 0
+        for f in zip_dict.values():
+            file_size += len(f)
+    
+        # Create zip archive
+        sticker_pack = prepare_zip_file_content(zip_dict)
+        thumbnail = await event.client.upload(cover)
+        img_hash = base64.b64encode(thumbnail.FileSHA256).decode("utf-8").replace("/", "-")
+        upload = await event.client.upload(sticker_pack, MediaType.MediaStickerPack)
+    
+        message = Message(
+            stickerPackMessage=StickerPackMessage(
+                stickerPackID=sticker_id,
+                name=pack_name,
+                publisher=publisher,
+                stickers=sticker_metadata,
+                # fileLength=upload.FileLength,
+                fileLength=file_size,
+                fileSHA256=upload.FileSHA256,
+                fileEncSHA256=upload.FileEncSHA256,
+                mediaKey=upload.MediaKey,
+                directPath=upload.DirectPath,
+                mediaKeyTimestamp=int(time.time()),
+                trayIconFileName=tray_icon,
+                thumbnailDirectPath=thumbnail.DirectPath,
+                thumbnailSHA256=thumbnail.FileSHA256,
+                thumbnailEncSHA256=thumbnail.FileEncSHA256,
+                thumbnailHeight=252,
+                thumbnailWidth=252,
+                imageDataHash=img_hash,
+                stickerPackSize=upload.FileLength,
+                # stickerPackOrigin=StickerPackMessage.StickerPackOrigin.USER_CREATED,
+                stickerPackOrigin=StickerPackMessage.StickerPackOrigin.THIRD_PARTY,
+            )
+        )
+        if quoted:
+            message.stickerPackMessage.contextInfo.MergeFrom(self._make_quoted_message(quoted))
+        return message
+    
+    async def _upload_sticker(self, sticker: bytes, animated: bool, zip_dict: dict) -> StickerPackMessage.Sticker:
+        upload = await self.upload(sticker)
+        b64 = base64.b64encode(upload.FileSHA256)
+        file_name = b64.decode("ascii").replace("/", "-") + ".webp"
+        # b64 = base64.urlsafe_b64encode(upload.FileSHA256)
+        # file_name = b64.decode("ascii") + ".webp"
+        zip_dict.update({file_name: sticker})
+        mimetype = magic.from_buffer(sticker, mime=True)
+        return StickerPackMessage.Sticker(
+            fileName=file_name,
+            isAnimated=animated,
+            accessibilityLabel="",
+            isLottie=False,
+            mimetype=mimetype,
+        )
+
+    async def build_stickerpack_message(
+        self,
+        files: list,
+        quoted: Optional[neonize_proto.Message] = None,
+        packname: str = "Sticker pack",
+        publisher: str = "",
+        crop: bool = False,
+        animated_gif: bool = False,
+        passthrough: bool = False,
+    ) -> List[Message]:
+        funcs = [
+            aio_convert_to_webp(
+                file, packname, publisher, crop, passthrough, animated_gif
+            )
+            for file in files
+        ]
+        def ensure_non_broken_packs(stickers):
+            return [sticker for sticker in stickers if len(sticker) < 1000000]
+        stickers = await asyncio.gather(*funcs)
+        stickers = ensure_non_broken_packs(stickers) # prevents broken packs by removing invalid stickers 
+        CHUNK_SIZE = 60
+        chunks = [stickers[i : i + CHUNK_SIZE] for i in range(0, len(stickers), CHUNK_SIZE)]
+        tasks = []
+        
+        for idx, chunk in enumerate(chunks):
+            # Generate unique pack suffix for multi-pack scenarios
+            pack_suffix = f" ({idx + 1})" if len(chunks) > 1 else ""
+            task = self._process_single_pack(
+                stickers=chunk,
+                pack_name=pack_name + pack_suffix,
+                publisher=publisher,
+                quoted=quoted,
+            )
+            tasks.append(task)
+
+        return await asyncio.gather(*tasks)
+
+    async def send_stickerpack(
+        self,
+        to: JID,
+        files: list,
+        quoted: Optional[neonize_proto.Message] = None,
+        packname: str = "Sticker pack",
+        publisher: str = "",
+        crop: bool = False,
+        animated_gif: bool = False,
+        passthrough: bool = False,
+        add_msg_secret: bool = False,
+    ) -> List[SendResponse]:
+        """
+        Send a sticker pack to a specific JID.
+
+        :param to: The JID to send the sticker to.
+        :type to: JID
+        :param files:  A list of file paths of the stickers or a list of stickers data in bytes.
+        :type file: List[typing.Union[str, bytes]]
+        :param quoted: The quoted message, if any, defaults to None.
+        :type quoted: Optional[neonize_proto.Message], optional
+        :param packname: The name of the sticker pack, defaults to "Sticker pack".
+        :type packname: str, optional
+        :param publisher: The name of the publisher, defaults to "".
+        :type publisher: str, optional
+        :param crop: Whether to crop-center the image, defaults to False
+        :type crop: bool, optional
+        :param add_msg_secret: Whether to generate 32 random bytes for messageSecret inside MessageContextInfo before sending, defaults to False
+        :type add_msg_secret: bool, optional
+        :return: A list of response(s) from the send message function.
+        :rtype: List[SendResponse]
+        """
+        responses = []
+        msgs = await self.build_stickerpack_message(
+                files, quoted, packname, publisher, crop, animated_gif, passthrough
+            )
+        for msg in msgs:
+            response = await self.send_message(
+                to,
+                msg,
+                add_msg_secret=add_msg_secret,
+            )
+            responses.append(response)
+        return responses
 
     async def build_video_message(
         self,
