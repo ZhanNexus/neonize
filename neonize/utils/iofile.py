@@ -1,13 +1,17 @@
+import io
 import os
-from pathlib import Path
 import re
+import requests
 import tempfile
 import typing
-import io
-import requests
-import httpx
-from .log import log
+import zipfile
+from pathlib import Path
 from typing import Optional
+
+import httpx
+
+from .log import log
+
 
 URL_MATCH = re.compile(r"^https?://")
 
@@ -110,3 +114,16 @@ class TemporaryFile:
     def __exit__(self, exc_type, exc_value, traceback):
         os.remove(self.path)
         log.debug("exc_type: %r, exc_value: %r, traceback: %r" % (exc_type, exc_value, traceback))
+
+
+def prepare_zip_file_content(file_name_content: dict) -> bytes:
+    """
+    returns Zip bytes
+    """
+    zip_buffer = io.BytesIO()
+    with zipfile.ZipFile(zip_buffer, "a", zipfile.ZIP_DEFLATED, False) as zip_file:
+        for file_name, file_data in file_name_content.items():
+            zip_file.writestr(file_name, file_data)
+
+    zip_buffer.seek(0)
+    return zip_buffer.getvalue()
