@@ -1175,7 +1175,7 @@ class NewAClient:
         ]
 
         def ensure_non_broken_packs(stickers):
-            return [sticker for sticker in stickers if len(sticker) < 1000000]
+            return [sticker for sticker in stickers if len(sticker[0]) < 1000000]
 
         stickers = await asyncio.gather(*funcs)
         stickers = ensure_non_broken_packs(
@@ -1188,7 +1188,6 @@ class NewAClient:
         tasks = []
 
         for idx, chunk in enumerate(chunks):
-            # Generate unique pack suffix for multi-pack scenarios
             pack_suffix = f" ({idx + 1})" if len(chunks) > 1 else ""
             task = self._process_single_pack(
                 stickers=chunk,
