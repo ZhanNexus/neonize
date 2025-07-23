@@ -3,14 +3,15 @@ import json
 import os
 import tempfile
 import uuid
+from io import BytesIO
 
 import magic
 from PIL import Image, ImageSequence
-from io import BytesIO
 
+from ..exc import ConvertStickerError
 from .calc import auto_sticker, original_sticker
 from .ffmpeg import AFFmpeg
-from .iofile import TemporaryFile, get_bytes_from_name_or_url, get_bytes_from_name_or_url_async
+from .iofile import TemporaryFile, get_bytes_from_name_or_url_async
 from .platform import is_executable_installed
 
 
@@ -33,7 +34,9 @@ def add_exif(name: str = "", packname: str = "") -> bytes:
         "ios-app-store-link": "https://itunes.apple.com/app/sticker-maker-studio/id1443326857",
     }
 
-    exif_attr = bytes.fromhex("49 49 2A 00 08 00 00 00 01 00 41 57 07 00 00 00 00 00 16 00 00 00")
+    exif_attr = bytes.fromhex(
+        "49 49 2A 00 08 00 00 00 01 00 41 57 07 00 00 00 00 00 16 00 00 00"
+    )
     json_buffer = json.dumps(json_data).encode("utf-8")
     exif = exif_attr + json_buffer
     exif_length = len(json_buffer)
@@ -45,36 +48,41 @@ def webpmux_is_installed():
     return is_executable_installed("webpmux")
 
 
-max_sticker_size = 512000
-webpmux_is_available = False
+MAX_STICKER_SIZE = 512000
+WEBPMUX_IS_AVAILABLE = False
 if webpmux_is_installed():
-    max_sticker_size = 712000
-    webpmux_is_available = True
+    MAX_STICKER_SIZE = 712000
+    WEBPMUX_IS_AVAILABLE = True
 
 
 async def aio_convert_to_sticker(
-    file: bytes, name="", packname="", enforce_not_broken=False, animated_gif=False, is_webm=False
+    file: bytes,
+    name="",
+    packname="",
+    enforce_not_broken=False,
+    animated_gif=False,
+    is_webm=False,
 ):
     async with AFFmpeg(file) as ffmpeg:
         sticker = await ffmpeg.cv_to_webp(
             enforce_not_broken=enforce_not_broken,
             animated_gif=animated_gif,
-            max_sticker_size=max_sticker_size,
+            max_sticker_size=MAX_STICKER_SIZE,
             is_webm=is_webm,
         )
-    if not webpmux_is_available:
+    if not WEBPMUX_IS_AVAILABLE:
         return sticker, False
 
     exif_filename = TemporaryFile(prefix=None, touch=False).__enter__()
     with open(exif_filename.path, "wb") as file:
         file.write(add_exif(name=name, packname=packname))
-    temp = tempfile.gettempdir() + "/" + uuid.uuid4().__str__() + ".webp"
+    temp = tempfile.gettempdir() + "/" + f"{uuid.uuid4()}" + ".webp"
     async with AFFmpeg(sticker) as ffmpeg:
         cmd = [
             "webpmux",
             "-set",
             "exif",
-            exif_filename.path.__str__(),
+            f"{exif_filename.path}",
             ffmpeg.filepath,
             "-o",
             temp,
@@ -86,25 +94,29 @@ async def aio_convert_to_sticker(
     os.remove(temp)
     return buf, True
 
+
 stick_sem = asyncio.Semaphore(20)
 
-async def aio_convert_to_webp(sticker, name, packname, crop=False, passthrough=True, transparent=False):
+
+async def aio_convert_to_webp(
+    sticker, name, packname, crop=False, passthrough=True, transparent=False
+):
     sticker = await get_bytes_from_name_or_url_async(sticker)
-    animated = is_webm = is_webp = is_image = saved_exif = False
+    animated = is_webm = is_image = saved_exif = stk = False
     mime = magic.from_buffer(sticker, mime=True)
     if mime == "image/webp":
-        is_webp = True
         io_save = BytesIO(sticker)
         img = Image.open(io_save)
         if len(ImageSequence.all_frames(img)) < 2:
             is_image = True
     elif passthrough:
-        raise Exception("File is not a webp, which is required for passthrough.")
+        raise ConvertStickerError(
+            "File is not a webp, which is required for passthrough.")
     elif mime == "video/webm":
         is_webm = True
     elif (mime := mime.split("/"))[0] == "image":
         is_image = True
-    animated = not (is_image)
+    animated = not is_image
     if passthrough:
         return sticker, animated
     if is_image:
@@ -116,7 +128,12 @@ async def aio_convert_to_webp(sticker, name, packname, crop=False, passthrough=T
         animated = True
         async with stick_sem:
             sticker, saved_exif = await aio_convert_to_sticker(
-                sticker, name, packname, enforce_not_broken=True, animated_gif=transparent, is_webm=is_webm,
+                sticker,
+                name,
+                packname,
+                enforce_not_broken=True,
+                animated_gif=transparent,
+                is_webm=is_webm,
             )
         if saved_exif:
             io_save = BytesIO(sticker)
