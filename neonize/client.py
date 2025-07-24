@@ -381,10 +381,10 @@ class NewClient:
         self.me = None
         log.debug("🔨 Creating a NewClient instance")
 
-    def __onLoginStatus(self, s: str):
-        print(s)
+    def __onLoginStatus(self, uuid: int, status: int):
+        print(status)
 
-    def __onQr(self, qr_protoaddr: int):
+    def __onQr(self, uuid: int, qr_protoaddr: int):
         """
         This method triggers an event when a QR code is detected.
 
