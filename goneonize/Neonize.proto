@@ -922,8 +922,7 @@ message BuildMessageReturnFunction{
 message LogEntry {
   required string Message = 1;
   required string Level = 2;
-  required string name = 3;
+  required string Name = 3;
 }
 
 message Stop{}
-Name
