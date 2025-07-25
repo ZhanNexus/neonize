@@ -110,6 +110,6 @@ func (s *stdoutLogger) Sub(mod string) Logger {
 // minLevel specifies the minimum log level to output. An empty string will output all logs.
 //
 // If color is true, then info, warn and error logs will be colored cyan, yellow and red respectively using ANSI color escape codes.
-func NewLogger(module string, minLevel string, callback C.ptr_to_python_function_bytes2) Logger {
+func NewLogger(module string, minLevel string, callback C.ptr_to_python_function_callback_bytes2) Logger {
 	return &stdoutLogger{mod: module, min: levelToInt[strings.ToUpper(minLevel)], callback: callback}
 }
