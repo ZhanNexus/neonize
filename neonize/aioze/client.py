@@ -183,7 +183,7 @@ from ..utils.iofile import (
     prepare_zip_file_content,
 )
 from ..utils.jid import Jid2String, JIDToNonAD, build_jid, jid_is_lid
-from ..utils.log import log
+from ..utils.log import log, log_whatsmeow
 from ..utils.sticker import aio_convert_to_sticker, aio_convert_to_webp
 from .events import Event, EventsManager, event_global_loop
 from .preview.compose import link_preview
@@ -3004,6 +3004,7 @@ class NewAClient:
             func_string(self.__onQr),
             func_string(self.__onLoginStatus),
             func_callback_bytes(self.event.execute),
+            func_callback_bytes(log_whatsmeow),
             (ctypes.c_char * self.event.list_func.__len__()).from_buffer(d),
             len(d),
             deviceprops,
@@ -3135,6 +3136,7 @@ class NewAClient:
             func_string(self.__onQr),
             func_string(self.__onLoginStatus),
             func_callback_bytes(self.event.execute),
+            func_callback_bytes(log_whatsmeow),
             (ctypes.c_char * len(self.event.list_func)).from_buffer(d),
             len(d),
             deviceprops,

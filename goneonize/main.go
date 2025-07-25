@@ -34,7 +34,7 @@ import (
 
 	_ "github.com/lib/pq"
 
-	waLog "go.mau.fi/whatsmeow/util/log"
+	// waLog "go.mau.fi/whatsmeow/util/log"
 	"google.golang.org/protobuf/proto"
 )
 
@@ -49,7 +49,7 @@ var eventChannel map[string]chan *MessageEvent = make(map[string]chan *MessageEv
 var StopSignal map[string]context.CancelFunc = make(map[string]context.CancelFunc)
 
 // Defaults to sqlite otherwise use postgres database url
-func getDB(db *C.char, dbLog waLog.Logger) (*sqlstore.Container, error) {
+func getDB(db *C.char, dbLog utils.Logger) (*sqlstore.Container, error) {
 	container, err := sqlstore.New(context.TODO(), "sqlite3", fmt.Sprintf("file:%s?_foreign_keys=on", C.GoString(db)), dbLog)
 	if strings.HasPrefix(C.GoString(db), "postgres") {
 		container, err = sqlstore.New(context.TODO(), "postgres", C.GoString(db), dbLog)
@@ -326,7 +326,7 @@ func StopAll() {
 
 //export Stop
 func Stop(id *C.char) {
-	waLog.Noop.Infof("Stopping client with ID:", C.GoString(id))
+	utils.Noop.Infof("Stopping client with ID:", C.GoString(id)) // utils.Logger
 	if client, exists := clients[C.GoString(id)]; exists {
 		client.Disconnect()
 		delete(clients, C.GoString(id))
@@ -342,7 +342,7 @@ func Stop(id *C.char) {
 }
 
 //export Neonize
-func Neonize(db *C.char, id *C.char, JIDByte *C.uchar, JIDSize C.int, logLevel *C.char, qrCb C.ptr_to_python_function_string, logStatus C.ptr_to_python_function_string, event C.ptr_to_python_function_bytes, subscribes *C.uchar, lenSubscriber C.int, devicePropsBuf *C.uchar, devicePropsSize C.int, pairphone *C.uchar, pairphoneSize C.int) { // ,
+func Neonize(db *C.char, id *C.char, JIDByte *C.uchar, JIDSize C.int, logLevel *C.char, qrCb C.ptr_to_python_function_string, logStatus C.ptr_to_python_function_string, event C.ptr_to_python_function_bytes, logCb C.ptr_to_python_function_bytes, subscribes *C.uchar, lenSubscriber C.int, devicePropsBuf *C.uchar, devicePropsSize C.int, pairphone *C.uchar, pairphoneSize C.int) { // ,
 	subscribers := map[int]bool{}
 	var deviceProps waCompanionReg.DeviceProps
 	var loginStateChan = make(chan bool)
@@ -355,7 +355,7 @@ func Neonize(db *C.char, id *C.char, JIDByte *C.uchar, JIDSize C.int, logLevel *
 	for _, s := range getByteByAddr(subscribes, lenSubscriber) {
 		subscribers[int(s)] = true
 	}
-	dbLog := waLog.Stdout("Database", C.GoString(logLevel), true)
+	dbLog := utils.NewLogger("Database", C.GoString(logLevel), logCb)
 	// Make sure you add appropriate DB connector imports, e.g. github.com/mattn/go-sqlite3 for SQLite
 	container, err := getDB(db, dbLog)
 	uuid := C.GoString(id)
@@ -381,7 +381,7 @@ func Neonize(db *C.char, id *C.char, JIDByte *C.uchar, JIDSize C.int, logLevel *
 		panic(err_device)
 	}
 	proto.Merge(store.DeviceProps, &deviceProps)
-	clientLog := waLog.Stdout("Client", C.GoString(logLevel), true)
+	clientLog := utils.NewLogger("Client", C.GoString(logLevel), logCb)
 	client := whatsmeow.NewClient(deviceStore, clientLog)
 	clients[uuid] = client
 	eventHandler := func(evt interface{}) {
