@@ -42,7 +42,6 @@ type Logger interface {
 	Errorf(msg string, args ...interface{})
 	Infof(msg string, args ...interface{})
 	Debugf(msg string, args ...interface{})
-	Sub(module string) Logger
 }
 
 type noopLogger struct{}
