@@ -4,15 +4,15 @@
 // Package waLog contains a simple logger interface used by the other whatsmeow packages.
 package utils
 
-
+ // #cgo CFLAGS: -I${SRCDIR}/../header -I${SRCDIR}/../python
 /*
 
    #include <stdlib.h>
    #include <stdbool.h>
    #include <stdint.h>
    #include <string.h>
-   #include "../header/cstruct.h"
-   #include "../python/pythonptr.h"
+   #include "cstruct.h"
+   #include "pythonptr.h"
 */
 import (
 	"C"
