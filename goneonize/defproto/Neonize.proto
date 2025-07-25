@@ -919,4 +919,10 @@ message BuildMessageReturnFunction{
     required WAWebProtobufsE2E.Message Message = 2;
 }
 
+message LogEntry {
+  string message = 1;
+  string level = 2;
+  string module = 3;
+}
+
 message Stop{}
