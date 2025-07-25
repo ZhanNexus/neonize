@@ -11,8 +11,8 @@ package utils
    #include <stdbool.h>
    #include <stdint.h>
    #include <string.h>
-   #include "header/cstruct.h"
-   #include "python/pythonptr.h"
+   #include "../header/cstruct.h"
+   #include "../python/pythonptr.h"
 */
 import (
 	"C"
