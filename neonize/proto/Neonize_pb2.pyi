@@ -3652,6 +3652,28 @@ class BuildMessageReturnFunction(google.protobuf.message.Message):
 global___BuildMessageReturnFunction = BuildMessageReturnFunction
 
 @typing.final
+class LogEntry(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    MESSAGE_FIELD_NUMBER: builtins.int
+    LEVEL_FIELD_NUMBER: builtins.int
+    NAME_FIELD_NUMBER: builtins.int
+    message: builtins.str
+    level: builtins.str
+    name: builtins.str
+    def __init__(
+        self,
+        *,
+        message: builtins.str | None = ...,
+        level: builtins.str | None = ...,
+        name: builtins.str | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["level", b"level", "message", b"message", "name", b"name"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["level", b"level", "message", b"message", "name", b"name"]) -> None: ...
+
+global___LogEntry = LogEntry
+
+@typing.final
 class Stop(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 

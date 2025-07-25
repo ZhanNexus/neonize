@@ -37,7 +37,6 @@ clientlogger = logging.getLogger("whatsmeow.Client")
 dblogger = logging.getLogger("Whatsmeow.Database")
 
 
-
 def log_whatsmeow(binary: int, size: int):
     log_msg = LogEntry.FromString(ctypes.string_at(binary, size))
     if log_msg.name == "Client":
