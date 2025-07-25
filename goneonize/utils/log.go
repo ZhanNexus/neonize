@@ -25,7 +25,6 @@ import (
 import (
 	"fmt"
 	"strings"
-	// "time"
 )
 
 
@@ -80,8 +79,9 @@ func (s *stdoutLogger) outputf(level, msg string, args ...interface{}) {
 	if levelToInt[level] < s.min {
 		return
 	}
+	formatted := fmt.Sprintf(msg, args...)
 	log_msg := defproto.LogEntry{
-		Message: proto.String(msg),
+		Message: proto.String(formatted),
 		Level:   proto.String(level),
 		Name:    proto.String(s.mod),
 	}
@@ -91,12 +91,6 @@ func (s *stdoutLogger) outputf(level, msg string, args ...interface{}) {
 	}
 	uchars, size := getBytesAndSize(buff)
 	C.call_c_func_callback_bytes2(s.callback, uchars, size)
-	// var colorStart, colorReset string
-	// if s.color {
-		//  colorStart = colors[level]
-		// colorReset = "\033[0m"
-	// }
-	// fmt.Printf("%s%s [%s %s] %s%s\n", time.Now().Format("15:04:05.000"), colorStart, s.mod, level, fmt.Sprintf(msg, args...), colorReset)
 }
 
 func (s *stdoutLogger) Errorf(msg string, args ...interface{}) { s.outputf("ERROR", msg, args...) }
