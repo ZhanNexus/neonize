@@ -1,14 +1,15 @@
 import asyncio
-from enum import Enum
 import json
+import logging
 import os
 import shlex
 import subprocess
 import tempfile
-import logging
 import uuid
-from typing import List, Optional, Tuple
 from dataclasses import dataclass
+from enum import Enum
+from typing import List, Optional, Tuple
+
 from .iofile import (
     URL_MATCH,
     TemporaryFile,
@@ -195,7 +196,9 @@ class AFFmpeg:
     async def __aenter__(self):
         if isinstance(self.__file_data, str):
             if URL_MATCH.match(self.__file_data):
-                self.filename = TemporaryFile(prefix=self.prefix, touch=False).__enter__()
+                self.filename = TemporaryFile(
+                    prefix=self.prefix, touch=False
+                ).__enter__()
                 with open(self.filename.path, "wb") as file:
                     file.write(await get_bytes_from_name_or_url_async(self.__file_data))
             else:
@@ -311,7 +314,8 @@ class AFFmpeg:
         stdout, stderr = await popen.communicate()  # type: ignore
         if popen.returncode != 0:
             raise RuntimeError(
-                f"stderr: {stderr} Return code: {popen.returncode}"  # type: ignore
+                # type: ignore
+                f"stderr: {stderr} Return code: {popen.returncode}"
             )
         return stdout
 
@@ -387,7 +391,8 @@ class AFFmpeg:
                     extra.extend(
                         [
                             "-vf",
-                            "scale='if(gt(iw,ih),%i,-1)':'if(gt(iw,ih),-1,%i)'" % (size, size),
+                            "scale='if(gt(iw,ih),%i,-1)':'if(gt(iw,ih),-1,%i)'"
+                            % (size, size),
                         ]
                     )
         elif isinstance(size, Tuple):
@@ -435,7 +440,10 @@ class AFFmpeg:
         format: dict = data["format"]
         return FFProbeInfo(
             format=Format(
-                **{i: format.get(i, None) for i, _ in Format.__dataclass_fields__.items()}
+                **{
+                    i: format.get(i, None)
+                    for i, _ in Format.__dataclass_fields__.items()
+                }
             ),
             streams=[
                 Stream(
@@ -493,7 +501,6 @@ class FFmpeg:
         animated_gif: bool = False,
         max_sticker_size: int = 0,
         is_webm=False,
-        
     ) -> bytes:
         """
         This function converts a given file to webp format using ffmpeg.
@@ -581,7 +588,8 @@ class FFmpeg:
         popen.wait(10)
         if popen.returncode != 0:
             raise RuntimeError(
-                f"stderr: {popen.stderr.read().decode()} Return code: {popen.returncode}"  # type: ignore
+                # type: ignore
+                f"stderr: {popen.stderr.read().decode()} Return code: {popen.returncode}"
             )
         return out
 
@@ -657,7 +665,8 @@ class FFmpeg:
                     extra.extend(
                         [
                             "-vf",
-                            "scale='if(gt(iw,ih),%i,-1)':'if(gt(iw,ih),-1,%i)'" % (size, size),
+                            "scale='if(gt(iw,ih),%i,-1)':'if(gt(iw,ih),-1,%i)'"
+                            % (size, size),
                         ]
                     )
         elif isinstance(size, Tuple):
@@ -705,7 +714,10 @@ class FFmpeg:
         format: dict = data["format"]
         return FFProbeInfo(
             format=Format(
-                **{i: format.get(i, None) for i, _ in Format.__dataclass_fields__.items()}
+                **{
+                    i: format.get(i, None)
+                    for i, _ in Format.__dataclass_fields__.items()
+                }
             ),
             streams=[
                 Stream(

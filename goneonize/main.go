@@ -1,6 +1,5 @@
 package main
 
-
 /*
 
    #include <stdlib.h>
@@ -11,6 +10,7 @@ package main
    #include "python/pythonptr.h"
 */
 import "C"
+
 import (
 	"context"
 	// "crypto/sha256"
@@ -46,8 +46,10 @@ type MessageEvent struct {
 	message   proto.Message
 }
 
-var eventChannel map[string]chan *MessageEvent = make(map[string]chan *MessageEvent)
-var StopSignal map[string]context.CancelFunc = make(map[string]context.CancelFunc)
+var (
+	eventChannel map[string]chan *MessageEvent = make(map[string]chan *MessageEvent)
+	StopSignal   map[string]context.CancelFunc = make(map[string]context.CancelFunc)
+)
 
 // Defaults to sqlite otherwise use postgres database url
 func getDB(db *C.char, dbLog utils.Logger) (*sqlstore.Container, error) {
@@ -92,6 +94,7 @@ func GetPNFromLID(id *C.char, JIDByte *C.uchar, JIDSize C.int) *C.struct_BytesRe
 
 	return ProtoReturnV3(&return_)
 }
+
 //export GetLIDFromPN
 func GetLIDFromPN(id *C.char, JIDByte *C.uchar, JIDSize C.int) *C.struct_BytesReturn {
 	var neoJIDProto defproto.JID
@@ -116,7 +119,6 @@ func GetLIDFromPN(id *C.char, JIDByte *C.uchar, JIDSize C.int) *C.struct_BytesRe
 	return ProtoReturnV3(&return_)
 }
 
-
 func ReturnBytes(data []byte) C.struct_BytesReturn {
 	size := C.size_t(len(data))
 	ptr := (*C.char)(C.CBytes(data))
@@ -138,6 +140,7 @@ func ProtoReturn(data proto.Message) C.struct_BytesReturn {
 	}
 	return ReturnBytes(data_buf)
 }
+
 func ProtoReturnV2(data proto.Message) *C.struct_BytesReturn {
 	data_buf, err := proto.Marshal(data)
 	if err != nil {
@@ -145,6 +148,7 @@ func ProtoReturnV2(data proto.Message) *C.struct_BytesReturn {
 	}
 	return ReturnBytesV2(data_buf)
 }
+
 func ProtoReturnV3(data proto.Message) *C.struct_BytesReturn {
 	data_buf, err := proto.Marshal(data)
 	if err != nil {
@@ -156,6 +160,7 @@ func ProtoReturnV3(data proto.Message) *C.struct_BytesReturn {
 	C.memcpy(unsafe.Pointer(result.data), unsafe.Pointer(&data_buf[0]), result.size)
 	return result
 }
+
 func getBytesAndSize(data []byte) (*C.char, C.size_t) {
 	messageSourceCDATA := (*C.char)(unsafe.Pointer(&data[0]))
 	messageSourceCSize := C.size_t(len(data))
@@ -271,7 +276,6 @@ func SendMessage(id *C.char, JIDByte *C.uchar, JIDSize C.int, messageByte *C.uch
 
 //export PinMessage
 func PinMessage(id *C.char, ChatJIDByte *C.uchar, ChatJIDSize C.int, SenderJIDByte *C.uchar, SenderJIDSize C.int, messageID *C.char, seconds C.int) *C.struct_BytesReturn {
-	
 	client := clients[C.GoString(id)]
 	_chat_jid := getByteByAddr(ChatJIDByte, ChatJIDSize)
 	_sender_jid := getByteByAddr(SenderJIDByte, SenderJIDSize)
@@ -317,7 +321,6 @@ func PinMessage(id *C.char, ChatJIDByte *C.uchar, ChatJIDSize C.int, SenderJIDBy
 	return ProtoReturnV3(&return_)
 }
 
-
 //export StopAll
 func StopAll() {
 	for key := range clients {
@@ -346,7 +349,7 @@ func Stop(id *C.char) {
 func Neonize(db *C.char, id *C.char, JIDByte *C.uchar, JIDSize C.int, logLevel *C.char, qrCb C.ptr_to_python_function_string, logStatus C.ptr_to_python_function_string, event C.ptr_to_python_function_bytes, logCb C.ptr_to_python_function_callback_bytes2, subscribes *C.uchar, lenSubscriber C.int, devicePropsBuf *C.uchar, devicePropsSize C.int, pairphone *C.uchar, pairphoneSize C.int) { // ,
 	subscribers := map[int]bool{}
 	var deviceProps waCompanionReg.DeviceProps
-	var loginStateChan = make(chan bool)
+	loginStateChan := make(chan bool)
 	err_proto := proto.Unmarshal(getByteByAddr(devicePropsBuf, devicePropsSize), &deviceProps)
 	ctx, cancel := context.WithCancel(context.Background())
 	StopSignal[C.GoString(id)] = cancel
@@ -879,7 +882,6 @@ func Neonize(db *C.char, id *C.char, JIDByte *C.uchar, JIDSize C.int, logLevel *
 				}
 			}
 		}
-
 	} else {
 		// Already logged in, just connect
 		err = client.Connect()
@@ -1133,10 +1135,8 @@ func SetGroupName(id *C.char, JIDByte *C.uchar, JIDSize C.int, name *C.char) *C.
 	status_err := clients[C.GoString(id)].SetGroupName(utils.DecodeJidProto(&neoJIDProto), C.GoString(name))
 	if status_err != nil {
 		return C.CString(status_err.Error())
-
 	}
 	return C.CString("")
-
 }
 
 //export SetGroupPhoto
@@ -1255,7 +1255,6 @@ func LinkGroup(id *C.char, parent *C.uchar, parentSize C.int, child *C.uchar, ch
 		return C.CString(err.Error())
 	}
 	return C.CString("")
-
 }
 
 //export SendChatPresence
@@ -1465,7 +1464,7 @@ func MarkRead(id *C.char, ids *C.char, timestamp C.int, chatByte *C.uchar, chatS
 //export NewsletterMarkViewed
 func NewsletterMarkViewed(id *C.char, JIDByte *C.uchar, JIDSize C.int, MessageServerID *C.uchar, MessageServerIDSize C.int) *C.char {
 	var JID defproto.JID
-	var serverIDs = make([]int, int(MessageServerIDSize))
+	serverIDs := make([]int, int(MessageServerIDSize))
 	for _, msid := range getByteByAddr(MessageServerID, MessageServerIDSize) {
 		serverIDs = append(serverIDs, int(msid))
 	}
@@ -1966,7 +1965,6 @@ func GetJoinedGroups(id *C.char) *C.struct_BytesReturn {
 
 	return_.Group = neonize_groups_info
 	return ProtoReturnV3(&return_)
-
 }
 
 //export GetMe
@@ -2103,7 +2101,7 @@ func DecryptPollVote(id *C.char, message *C.uchar, messageSize C.int) *C.struct_
 
 //export SendFBMessage
 func SendFBMessage(id *C.char, to *C.uchar, toSize C.int, message *C.uchar, messageSize C.int, metadata *C.uchar, metadataSize C.int, extra *C.uchar, extraSize C.int) *C.struct_BytesReturn {
-	var _return = defproto.SendMessageReturnFunction{}
+	_return := defproto.SendMessageReturnFunction{}
 	var toJID defproto.JID
 	var waConsumerApp waConsumerApplication.ConsumerApplication
 	var waConsumerAppMetadata waMsgApplication.MessageApplication_Metadata
@@ -2167,30 +2165,30 @@ func SendFBMessage(id *C.char, to *C.uchar, toSize C.int, message *C.uchar, mess
 	_return.SendResponse = &response
 	return ProtoReturnV3(&_return)
 }
-func main() {
 
+func main() {
 }
 
 func FetchMe(id string) *defproto.Device {
-    cli := clients[id].Store
-    
-    // Block until cli.ID is set
-    for cli.ID == nil {
-        time.Sleep(100 * time.Millisecond) // Check 10 times per second
-    }
+	cli := clients[id].Store
 
-    device := defproto.Device{
-        PushName:      &cli.PushName,
-        Platform:      &cli.Platform,
-        BussinessName: &cli.BusinessName,
-        Initialized:   &cli.Initialized,
-    }
-    
-    // Now guaranteed to have value
-    device.JID = utils.EncodeJidProto(*cli.ID)
-    device.LID = utils.EncodeJidProto(cli.LID)
-    
-    return &device
+	// Block until cli.ID is set
+	for cli.ID == nil {
+		time.Sleep(100 * time.Millisecond) // Check 10 times per second
+	}
+
+	device := defproto.Device{
+		PushName:      &cli.PushName,
+		Platform:      &cli.Platform,
+		BussinessName: &cli.BusinessName,
+		Initialized:   &cli.Initialized,
+	}
+
+	// Now guaranteed to have value
+	device.JID = utils.EncodeJidProto(*cli.ID)
+	device.LID = utils.EncodeJidProto(cli.LID)
+
+	return &device
 }
 
 // comment
@@ -2216,7 +2214,6 @@ func CallbackFunction(ctx context.Context, callback C.ptr_to_python_function_byt
 			C.call_c_func_callback_bytes(callback, uuid, uchars, size, C.int(message.eventType))
 
 		}
-
 	}
 }
 

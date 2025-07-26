@@ -250,8 +250,10 @@ async def handler(client: NewAClient, message: MessageEv):
                                 deviceListMetadataVersion=2,
                             ),
                             interactiveMessage=InteractiveMessage(
-                                body=InteractiveMessage.Body(text="Body Message"),
-                                footer=InteractiveMessage.Footer(text="@krypton-byte"),
+                                body=InteractiveMessage.Body(
+                                    text="Body Message"),
+                                footer=InteractiveMessage.Footer(
+                                    text="@krypton-byte"),
                                 header=InteractiveMessage.Header(
                                     title="Title Message",
                                     subtitle="Subtitle Message",
@@ -305,6 +307,7 @@ async def PairStatusMessage(_: NewAClient, message: PairStatusEv):
 
 
 if __name__ == "__main__":
-    # all created clients will be automatically logged in and receive all events
+    # all created clients will be automatically logged in and receive all
+    # events
     loop = asyncio.get_event_loop()
     loop.run_until_complete(client_factory.run())
