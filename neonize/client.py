@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import base64
 import ctypes
 import re
 import struct
@@ -7,9 +8,13 @@ import time
 from types import NoneType
 import typing
 import traceback
+from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
 from datetime import timedelta
+from functools import partial
 from io import BytesIO
+from os import urandom
 from typing import Optional, List, Sequence, overload
+from uuid import uuid4
 
 import magic
 from PIL import Image
@@ -20,7 +25,7 @@ from threading import Thread
 from .utils.calc import AspectRatioMethod, auto_sticker, original_sticker
 
 
-from ._binder import gocode, func_string, func_callback_bytes, free_bytes
+from ._binder import gocode, func_string, func_callback_bytes, func_callback_bytes2, free_bytes
 from .builder import build_edit, build_revoke
 from .events import Event, EventsManager
 from .exc import (
@@ -83,6 +88,8 @@ from .exc import (
     LinkGroupError,
     NewsletterSubscribeLiveUpdatesError,
     NewsletterToggleMuteError,
+    GetJIDFromStoreError,
+    ConvertStickerError,
 )
 from .proto import Neonize_pb2 as neonize_proto
 from .proto.Neonize_pb2 import (
@@ -140,11 +147,12 @@ from .proto.waE2E.WAWebProtobufsE2E_pb2 import (
     DocumentMessage,
     ContactMessage,
     GroupMention,
+    StickerPackMessage,
 )
 from .proto.waConsumerApplication.WAConsumerApplication_pb2 import ConsumerApplication
 from .proto.waMsgApplication.WAMsgApplication_pb2 import MessageApplication
 from .types import MessageServerID, MessageWithContextInfo
-from .utils import add_exif, gen_vcard, log, validate_link
+from .utils import add_exif, gen_vcard, log, log_whatsmeow, validate_link
 from .utils.enum import (
     BlocklistAction,
     MediaType,
@@ -161,9 +169,11 @@ from .utils.enum import (
     MediaTypeToMMS,
 )
 from .utils.ffmpeg import FFmpeg
-from .utils.iofile import get_bytes_from_name_or_url
+from .utils.iofile import get_bytes_from_name_or_url, prepare_zip_file_content
 from .utils.jid import Jid2String, JIDToNonAD, build_jid
+from .utils.sticker import convert_to_sticker, convert_to_webp
 
+_log_ = logging.getLogger(__name__)
 
 class ContactStore:
     def __init__(self, uuid: bytes) -> None:
@@ -379,7 +389,7 @@ class NewClient:
         self.chat_settings = ChatSettingsStore(self.uuid)
         self.connected = False
         self.me = None
-        log.debug("🔨 Creating a NewClient instance")
+        _log_.debug("🔨 Creating a NewClient instance")
 
     def __onLoginStatus(self, uuid: int, status: int):
         print(status)
@@ -400,12 +410,17 @@ class NewClient:
 
         :param text: The text to be parsed for mentions, defaults to None
         :type text: Optional[str], optional
+        :param are_lids: whether the mentions are lids defaults to False
+        :type are_lids: bool, optional
         :return: A list of mentions in the format of 'mention@s.whatsapp.net'
         :rtype: list[str]
         """
         if text is None:
             return []
-        return [jid.group(1) + "@s.whatsapp.net" for jid in re.finditer(r"@([0-9]{5,16}|0)", text)]
+        # Definitely need a better method
+        # WIP
+        server = "@s.whatsapp.net" if not are_lids else "@lid"
+        return [jid.group(1) + server for jid in re.finditer(r"@([0-9]{5,16}|0)", text)]
 
     def _parse_group_mention(self, text: Optional[str] = None) -> list[GroupMention]:
         """
@@ -427,7 +442,7 @@ class NewClient:
             except GetGroupInfoError:
                 continue
             except Exception:
-                log.info(traceback.format_exc())
+                _log_.error(traceback.format_exc())
                 continue
             gc_mentions.append(
                 GroupMention(groupJID=Jid2String(group.JID), groupSubject=group.GroupName.Name)
@@ -480,13 +495,23 @@ class NewClient:
     def _make_quoted_message(
         self, message: neonize_proto.Message, reply_privately: bool = False
     ) -> ContextInfo:
+        if not isinstance((msg := get_message_type(message.Message)), str):
+            try:
+                msg.contextInfo.Clear()
+            except Exception:
+                _log_.warning("@_make_quoted_message; Couldn't clear the contextInfo of:")
+                _log_.warning(msg)
+        sender = message.Info.MessageSource.Sender
+        if jid_is_lid(sender):
+            senderalt = message.Info.MessageSource.SenderAlt
+            sender = senderalt if senderalt.ListFields() else sender
         return ContextInfo(
             stanzaID=message.Info.ID,
-            participant=Jid2String(JIDToNonAD(message.Info.MessageSource.Sender)),
+            participant=Jid2String(JIDToNonAD(sender)),
             quotedMessage=message.Message,
-            remoteJID=Jid2String(JIDToNonAD(message.Info.MessageSource.Chat))
-            if reply_privately
-            else None,
+            remoteJID=(
+                Jid2String(JIDToNonAD(message.Info.MessageSource.Chat)) if reply_privately else None
+            ),
         )
 
     def send_message(
@@ -495,6 +520,8 @@ class NewClient:
         message: typing.Union[Message, str],
         link_preview: bool = False,
         ghost_mentions: Optional[str] = None,
+        mentions_are_lids: bool = False,
+        add_msg_secret: bool = False,
     ) -> SendResponse:
         """Send a message to the specified JID.
 
@@ -506,6 +533,10 @@ class NewClient:
         :type link_preview: bool, optional
         :param ghost_mentions: List of users to tag silently (Takes precedence over auto detected mentions)
         :type ghost_mentions: str, optional
+        :param mentions_are_lids: whether mentions contained in meesage or ghost_mentions are lids, defaults to False.
+        :type mentions_are_lids: bool, optional
+        :param add_msg_secret: Whether to generate 32 random bytes for messageSecret inside MessageContextInfo before sending, defaults to False
+        :type add_msg_secret: bool, optional
         :raises SendMessageError: If there was an error sending the message.
         :return: The response from the server.
         :rtype: SendResponse
@@ -513,7 +544,7 @@ class NewClient:
         to_bytes = to.SerializeToString()
         if isinstance(message, str):
             mentioned_groups = self._parse_group_mention(message)
-            mentioned_jid = self._parse_mention(ghost_mentions or message)
+            mentioned_jid = self._parse_mention((ghost_mentions or message), mentions_are_lids)
             partial_msg = ExtendedTextMessage(
                 text=message,
                 contextInfo=ContextInfo(mentionedJID=mentioned_jid, groupMentions=mentioned_groups),
@@ -522,12 +553,14 @@ class NewClient:
                 preview = self._generate_link_preview(message)
                 if preview:
                     partial_msg.MergeFrom(preview)
-            if partial_msg.previewType is None and not mentioned_jid:
+            if partial_msg.previewType is None and not (mentioned_groups or mentioned_jid):
                 msg = Message(conversation=message)
             else:
                 msg = Message(extendedTextMessage=partial_msg)
         else:
             msg = message
+        if add_msg_secret:
+            msg.messageContextInfo.messageSecret = urandom(32)
         message_bytes = msg.SerializeToString()
         bytes_ptr = self.__client.SendMessage(
             self.uuid, to_bytes, len(to_bytes), message_bytes, len(message_bytes)
@@ -537,6 +570,7 @@ class NewClient:
         model = SendMessageReturnFunction.FromString(protobytes)
         if model.Error:
             raise SendMessageError(model.Error)
+        model.SendResponse.MergeFrom(model.SendResponse.__class__(Message=msg))
         return model.SendResponse
 
     def build_reply_message(
@@ -546,6 +580,7 @@ class NewClient:
         link_preview: bool = False,
         reply_privately: bool = False,
         ghost_mentions: Optional[str] = None,
+        mentions_are_lids: bool = False,
     ) -> Message:
         """Send a reply message to a specified JID.
 
@@ -557,8 +592,10 @@ class NewClient:
         :type link_preview: bool, optional
         :param reply_privately: If set to True, the message is sent as a private reply. Defaults to False.
         :type reply_privately: bool, optional
-        :param mentioned_jid: List of JIDs to be mentioned in the message. Defaults to an empty list.
-        :type mentioned_jid: List[str], optional
+        :param ghost_mentions: List of users to tag silently (Takes precedence over auto detected mentions)
+        :type ghost_mentions: str, optional
+        :param mentions_are_lids: whether mentions contained in meesage or ghost_mentions are lids, defaults to False.
+        :type mentions_are_lids: bool, optional
         :return: Response of the send operation.
         :rtype: SendResponse
         """
@@ -567,8 +604,10 @@ class NewClient:
             partial_message = ExtendedTextMessage(
                 text=message,
                 contextInfo=ContextInfo(
-                    mentionedJID=self._parse_mention(ghost_mentions or message),
-                    groupMentions=self._parse_group_mention(message),
+                    mentionedJID=self._parse_mention(
+                        (ghost_mentions or message), mentions_are_lids
+                    ),
+                    groupMentions=(self._parse_group_mention(message)),
                 ),
             )
             if link_preview:
@@ -592,6 +631,8 @@ class NewClient:
         link_preview: bool = False,
         reply_privately: bool = False,
         ghost_mentions: Optional[str] = None,
+        mentions_are_lids: bool = False,
+        add_msg_secret: bool = False,
     ) -> SendResponse:
         """Send a reply message to a specified JID.
 
@@ -607,12 +648,19 @@ class NewClient:
         :type reply_privately: bool, optional
         :param ghost_mentions: List of users to tag silently (Takes precedence over auto detected mentions)
         :type ghost_mentions: str, optional
+        :param mentions_are_lids: whether mentions contained in meesage or ghost_mentions are lids, defaults to False.
+        :type mentions_are_lids: bool, optional
+        :param add_msg_secret: If set to True generate 32 random bytes for messageSecret inside MessageContextInfo before sending, defaults to False
+        :type add_msg_secret: bool, optional
         :return: Response of the send operation.
         :rtype: SendResponse
         """
         if to is None:
             if reply_privately:
-                to = JIDToNonAD(quoted.Info.MessageSource.Sender)
+                sender = quoted.Info.MessageSource.Sender
+                if jid_is_lid(sender):
+                    sender = quoted.Info.MessageSource.SenderAlt or sender
+                to = JIDToNonAD(sender)
             else:
                 to = quoted.Info.MessageSource.Chat
         return self.send_message(
@@ -623,8 +671,10 @@ class NewClient:
                 link_preview=link_preview,
                 reply_privately=reply_privately,
                 ghost_mentions=ghost_mentions,
+                mentions_are_lids=mentions_are_lids,
             ),
             link_preview,
+            add_msg_secret=add_msg_secret,
         )
 
     def edit_message(self, chat: JID, message_id: str, new_message: Message) -> SendResponse:
@@ -656,7 +706,11 @@ class NewClient:
         return self.send_message(chat, self.build_revoke(chat, sender, message_id))
 
     def build_poll_vote_creation(
-        self, name: str, options: List[str], selectable_count: int
+        self,
+        name: str,
+        options: List[str],
+        selectable_count: int,
+        quoted: Optional[neonize_proto.Message] = None,
     ) -> Message:
         """Build a poll vote creation message.
 
@@ -666,6 +720,8 @@ class NewClient:
         :type options: List[str]
         :param selectable_count: The number of selectable options.
         :type selectable_count: int
+        :param quoted: A message that the poll message is a reply to, defaults to None
+        :type quoted: Optional[neonize_proto.Message], optional
         :return: The poll vote creation message.
         :rtype: Message
         """
@@ -679,10 +735,14 @@ class NewClient:
         )
         protobytes = bytes_ptr.contents.get_bytes()
         free_bytes(bytes_ptr)
-        response = BuildMessageReturnFunction.FromString(protobytes)
-        if response.Error:
-            raise BuildPollVoteError(response.Error)
-        return response.Message
+        model = BuildMessageReturnFunction.FromString(protobytes)
+        if model.Error:
+            raise BuildPollVoteCreationError(model.Error)
+        message = model.Message
+
+        if quoted:
+            message.pollCreationMessage.contextInfo.MergeFrom(self._make_quoted_message(quoted))
+        return message
 
     def build_poll_vote(self, poll_info: MessageInfo, option_names: List[str]) -> Message:
         """Builds a poll vote.
@@ -788,6 +848,8 @@ class NewClient:
         packname: str = "",
         crop: bool = False,
         enforce_not_broken: bool = False,
+        animated_gif: bool = False,
+        passthrough: bool = False,
     ) -> Message:
         """
         This function builds a sticker message from a given image or video file.
@@ -806,16 +868,46 @@ class NewClient:
         :type crop: bool, optional
         :param enforce_not_broken: Enforce non-broken stickers by constraining sticker size to WA limits, defaults to False
         :type enforce_not_broken: bool, optional
+        :param animated_gif: Ensure transparent media are properly processed, defaults to False
+        :type animated_gif: bool, optional
+        :param passthrough: Don't process sticker, send as is, defaults to False.
+        :type passthrough: bool, optional
         :return: The constructed sticker message
         :rtype: Message
         """
-        sticker = get_bytes_from_name_or_url(file)
-        animated = False
-        mime = magic.from_buffer(sticker, mime=True).split("/")
-        if mime[0] == "image":
+        sticker = await get_bytes_from_name_or_url(file)
+        animated = is_webm = is_webp = is_image = saved_exif = False
+        mime = magic.from_buffer(sticker, mime=True)
+        if mime == "image/webp":
+            is_webp = True
+            io_save = BytesIO(sticker)
+            img = Image.open(io_save)
+            if len(ImageSequence.all_frames(img)) < 2:
+                is_image = True
+        elif mime == "video/webm":
+            is_webm = True
+        elif (mime := mime.split("/"))[0] == "image":
+            is_image = True
+        animated = not (is_image)
+        if not passthrough and not animated_gif and is_image:
             io_save = BytesIO(sticker)
             stk = auto_sticker(io_save) if crop else original_sticker(io_save)
             io_save = BytesIO()
+            # io_save.seek(0)
+        elif not passthrough:
+            animated = True
+            sticker, saved_exif = convert_to_sticker(
+                sticker, name, packname, enforce_not_broken, animated_gif, is_webm
+            )
+            if saved_exif:
+                io_save = BytesIO(sticker)
+            else:
+                stk = Image.open(BytesIO(sticker))
+                io_save = BytesIO()
+        else:
+            if not is_webp:
+                raise ConvertStickerError("File is not a webp, which is required for passthrough.")
+        if not (passthrough or saved_exif):
             stk.save(
                 io_save,
                 format="webp",
@@ -823,15 +915,6 @@ class NewClient:
                 save_all=True,
                 loop=0,
             )
-            io_save.seek(0)
-        else:
-            with FFmpeg(sticker) as ffmpeg:
-                animated = True
-                sticker = ffmpeg.cv_to_webp(enforce_not_broken=enforce_not_broken)
-                io_save = BytesIO(sticker)
-                img = Image.open(io_save)
-                io_save.seek(0)
-                img.save(io_save, format="webp", exif=add_exif(name, packname), save_all=True)
         upload = self.upload(io_save.getvalue())
         message = Message(
             stickerMessage=StickerMessage(
@@ -858,6 +941,9 @@ class NewClient:
         packname: str = "",
         crop: bool = False,
         enforce_not_broken: bool = False,
+        animated_gif: bool = False,
+        passthrough: bool = False,
+        add_msg_secret: bool = False,
     ) -> SendResponse:
         """
         Send a sticker to a specific JID.
@@ -872,17 +958,213 @@ class NewClient:
         :type name: str, optional
         :param packname: The name of the sticker pack, defaults to "".
         :type packname: str, optional
-        :param crop: Crop-center the image, defaults to False
+        :param crop: Whether to crop-center the image, defaults to False
         :type crop: bool, optional
-        :param enforce_not_broken: Enforce non-broken stickers by constraining sticker size to WA limits, defaults to False
+        :param enforce_not_broken: Whether to enforce non-broken stickers by constraining sticker size to WA limits, defaults to False
         :type enforce_not_broken: bool, optional
+        :param animated_gif: Ensure transparent media are properly processed, defaults to False
+        :type animated_gif: bool, optional
+        :param passthrough: Don't process sticker, send as is, defaults to False.
+        :type passthrough: bool, optional
+        :param add_msg_secret: Whether to generate 32 random bytes for messageSecret inside MessageContextInfo before sending, defaults to False
+        :type add_msg_secret: bool, optional
         :return: The response from the send message function.
         :rtype: SendResponse
         """
         return self.send_message(
             to,
-            self.build_sticker_message(file, quoted, name, packname, crop, enforce_not_broken),
+            await self.build_sticker_message(
+                file,
+                quoted,
+                name,
+                packname,
+                crop,
+                enforce_not_broken,
+                animated_gif,
+                passthrough,
+            ),
+            add_msg_secret=add_msg_secret,
         )
+
+    def _process_single_pack(
+        self,
+        stickers: List[List[bytes, bool]],
+        pack_name: str,
+        publisher: str = "",
+        quoted: Optional[neonize_proto.Message] = None,
+    ) -> Message:
+        """
+        Helper function to process a single sticker pack chunk
+        
+        """
+        zip_dict = {}
+        # Upload all stickers concurrently
+        with ThreadPoolExecutor(max_workers=50) as executor:
+            sticker_metadata = list(executor.map(
+                lambda args: self._upload_sticker(*args, zip_dict),
+                stickers
+            ))
+            
+        # Generate unique pack ID
+        sticker_id = f"{uuid4()}"
+
+        tray_icon = f"{sticker_id}.png"
+        io_save = BytesIO()
+        img = Image.open(BytesIO(stickers[0][0]))
+        img = img.resize((252, 252))
+        img.save(
+            io_save,
+            format="png",
+            save_all=False,
+            loop=0,
+        )
+        cover = io_save.getvalue()
+        zip_dict.update({tray_icon: cover})
+        file_size = 0
+        for f in zip_dict.values():
+            file_size += len(f)
+
+        # Create zip archive
+        sticker_pack = prepare_zip_file_content(zip_dict)
+        thumbnail = self.upload(cover)
+        img_hash = base64.b64encode(thumbnail.FileSHA256).decode("utf-8").replace("/", "-")
+        upload = await self.upload(sticker_pack, MediaType.MediaStickerPack)
+
+        message = Message(
+            stickerPackMessage=StickerPackMessage(
+                stickerPackID=sticker_id,
+                name=pack_name,
+                publisher=publisher,
+                stickers=sticker_metadata,
+                # fileLength=upload.FileLength,
+                fileLength=upload.FileLength,
+                fileSHA256=upload.FileSHA256,
+                fileEncSHA256=upload.FileEncSHA256,
+                mediaKey=upload.MediaKey,
+                directPath=upload.DirectPath,
+                mediaKeyTimestamp=int(time.time()),
+                trayIconFileName=tray_icon,
+                thumbnailDirectPath=thumbnail.DirectPath,
+                thumbnailSHA256=thumbnail.FileSHA256,
+                thumbnailEncSHA256=thumbnail.FileEncSHA256,
+                thumbnailHeight=252,
+                thumbnailWidth=252,
+                imageDataHash=img_hash,
+                stickerPackSize=file_size,
+                # stickerPackOrigin=StickerPackMessage.StickerPackOrigin.USER_CREATED,
+                stickerPackOrigin=StickerPackMessage.StickerPackOrigin.THIRD_PARTY,
+            )
+        )
+        if quoted:
+            message.stickerPackMessage.contextInfo.MergeFrom(self._make_quoted_message(quoted))
+        return message
+
+    def _upload_sticker(
+        self, sticker: bytes, animated: bool, zip_dict: dict
+    ) -> StickerPackMessage.Sticker:
+        upload = self.upload(sticker)
+        b64 = base64.b64encode(upload.FileSHA256)
+        file_name = b64.decode("ascii").replace("/", "-") + ".webp"
+        # b64 = base64.urlsafe_b64encode(upload.FileSHA256)
+        # file_name = b64.decode("ascii") + ".webp"
+        zip_dict.update({file_name: sticker})
+        mimetype = magic.from_buffer(sticker, mime=True)
+        return StickerPackMessage.Sticker(
+            fileName=file_name,
+            isAnimated=animated,
+            accessibilityLabel="",
+            isLottie=False,
+            mimetype=mimetype,
+        )
+
+    def build_stickerpack_message(
+        self,
+        files: list,
+        quoted: Optional[neonize_proto.Message] = None,
+        packname: str = "Sticker pack",
+        publisher: str = "",
+        crop: bool = False,
+        animated_gif: bool = False,
+        passthrough: bool = False,
+    ) -> List[Message]:
+        p_func = partial(
+            convert_to_webp,
+            packname=name,
+            publisher=packname,
+            crop=crop,
+            passthrough=passthrough,
+            animated_gif=transparent,
+        )
+        def ensure_non_broken_packs(stickers):
+            return [sticker for sticker in stickers if len(sticker[0]) < 1000000]
+        with ProcessPoolExecutor(max_workers=20) as executor:
+            stickers = list(executor.map(p_func, files))
+        stickers = await asyncio.gather(*funcs)
+        stickers = ensure_non_broken_packs(
+            stickers
+        )  # prevents broken packs by removing invalid stickers
+        CHUNK_SIZE = 60
+        chunks = [stickers[i : i + CHUNK_SIZE] for i in range(0, len(stickers), CHUNK_SIZE)]
+        arg_list = []
+
+        for idx, chunk in enumerate(chunks):
+            pack_suffix = f" ({idx + 1})" if len(chunks) > 1 else ""
+            args_list.append((chunk, (packname + pack_suffix), publisher, quoted))
+        with ThreadPoolExecutor(max_workers=4) as executor:
+            return list(executor.map(
+                lambda args: self._process_single_pack(
+                    stickers=args[0],
+                    pack_name=args[1],
+                    publisher=args[2],
+                    quoted=args[3],
+                ),
+                args_list
+            ))
+
+    def send_stickerpack(
+        self,
+        to: JID,
+        files: list,
+        quoted: Optional[neonize_proto.Message] = None,
+        packname: str = "Sticker pack",
+        publisher: str = "",
+        crop: bool = False,
+        animated_gif: bool = False,
+        passthrough: bool = False,
+        add_msg_secret: bool = False,
+    ) -> List[SendResponse]:
+        """
+        Send a sticker pack to a specific JID.
+
+        :param to: The JID to send the sticker to.
+        :type to: JID
+        :param files:  A list of file paths of the stickers or a list of stickers data in bytes.
+        :type file: List[typing.Union[str, bytes]]
+        :param quoted: The quoted message, if any, defaults to None.
+        :type quoted: Optional[neonize_proto.Message], optional
+        :param packname: The name of the sticker pack, defaults to "Sticker pack".
+        :type packname: str, optional
+        :param publisher: The name of the publisher, defaults to "".
+        :type publisher: str, optional
+        :param crop: Whether to crop-center the image, defaults to False
+        :type crop: bool, optional
+        :param add_msg_secret: Whether to generate 32 random bytes for messageSecret inside MessageContextInfo before sending, defaults to False
+        :type add_msg_secret: bool, optional
+        :return: A list of response(s) from the send message function.
+        :rtype: List[SendResponse]
+        """
+        responses = []
+        msgs = self.build_stickerpack_message(
+            files, quoted, packname, publisher, crop, animated_gif, passthrough
+        )
+        for msg in msgs:
+            response = self.send_message(
+                to,
+                msg,
+                add_msg_secret=add_msg_secret,
+            )
+            responses.append(response)
+        return responses
 
     def build_video_message(
         self,
@@ -893,6 +1175,7 @@ class NewClient:
         gifplayback: bool = False,
         is_gif: bool = False,
         ghost_mentions: Optional[str] = None,
+        mentions_are_lids: bool = False,
     ) -> Message:
         """
         This function is used to build a video message. It uploads a video file, extracts necessary information,
@@ -910,9 +1193,11 @@ class NewClient:
         :type gifplayback: bool, optional
         :param is_gif: Optional. Whether the video to be sent is a gif. Defaults to False.
         :type is_gif: bool, optional
+        :return: A video message with the given parameters.
         :param ghost_mentions: List of users to tag silently (Takes precedence over auto detected mentions)
         :type ghost_mentions: str, optional
-        :return: A video message with the given parameters.
+        :param mentions_are_lids: whether mentions contained in meesage or ghost_mentions are lids, defaults to False.
+        :type mentions_are_lids: bool, optional
         :rtype: Message
         """
         io = BytesIO(get_bytes_from_name_or_url(file))
@@ -943,8 +1228,10 @@ class NewClient:
                 thumbnailSHA256=upload.FileSHA256,
                 viewOnce=viewonce,
                 contextInfo=ContextInfo(
-                    mentionedJID=self._parse_mention(ghost_mentions or caption),
-                    groupMentions=self._parse_group_mention(caption),
+                    mentionedJID=self._parse_mention(
+                        (ghost_mentions or caption), mentions_are_lids
+                    ),
+                    groupMentions=(self._parse_group_mention(caption)),
                 ),
             )
         )
@@ -962,6 +1249,8 @@ class NewClient:
         gifplayback: bool = False,
         is_gif: bool = False,
         ghost_mentions: Optional[str] = None,
+        mentions_are_lids: bool = False,
+        add_msg_secret: bool = False,
     ) -> SendResponse:
         """Sends a video to the specified recipient.
 
@@ -979,14 +1268,28 @@ class NewClient:
         :type gifplayback: bool, optional
         :param is_gif: Optional. Whether the video to be sent is a gif. Defaults to False.
         :type is_gif: bool, optional
+        :param ghost_mentions: List of users to tag silently (Takes precedence over auto detected mentions)
+        :type ghost_mentions: str, optional
+        :param mentions_are_lids: whether mentions contained in meesage or ghost_mentions are lids, defaults to False.
+        :type mentions_are_lids: bool, optional
+        :param add_msg_secret: Optional. Whether to generate 32 random bytes for messageSecret inside MessageContextInfo before sending, defaults to False
+        :type add_msg_secret: bool, optional
         :return: A function for handling the result of the video sending process.
         :rtype: SendResponse
         """
         return self.send_message(
             to,
             self.build_video_message(
-                file, caption, quoted, viewonce, gifplayback, is_gif, ghost_mentions
+                file,
+                caption,
+                quoted,
+                viewonce,
+                gifplayback,
+                is_gif,
+                ghost_mentions,
+                mentions_are_lids,
             ),
+            add_msg_secret=add_msg_secret,
         )
 
     def build_image_message(
@@ -996,6 +1299,7 @@ class NewClient:
         quoted: Optional[neonize_proto.Message] = None,
         viewonce: bool = False,
         ghost_mentions: Optional[str] = None,
+        mentions_are_lids: bool = False,
     ) -> Message:
         """
         This function builds an image message. It takes a file (either a string or bytes),
@@ -1014,6 +1318,8 @@ class NewClient:
         :type viewonce: bool, optional
         :param ghost_mentions: List of users to tag silently (Takes precedence over auto detected mentions)
         :type ghost_mentions: str, optional
+        :param mentions_are_lids: whether mentions contained in meesage or ghost_mentions are lids, defaults to False.
+        :type mentions_are_lids: bool, optional
         :return: The constructed image message.
         :rtype: Message
         """
@@ -1040,8 +1346,10 @@ class NewClient:
                 thumbnailSHA256=upload.FileSHA256,
                 viewOnce=viewonce,
                 contextInfo=ContextInfo(
-                    mentionedJID=self._parse_mention(ghost_mentions or caption),
-                    groupMentions=self._parse_group_mention(caption),
+                    mentionedJID=self._parse_mention(
+                        (ghost_mentions or caption), mentions_are_lids
+                    ),
+                    groupMentions=(self._parse_group_mention(caption)),
                 ),
             )
         )
@@ -1057,6 +1365,8 @@ class NewClient:
         quoted: Optional[neonize_proto.Message] = None,
         viewonce: bool = False,
         ghost_mentions: Optional[str] = None,
+        mentions_are_lids: bool = False,
+        add_msg_secret: bool = False,
     ) -> SendResponse:
         """Sends an image to the specified recipient.
 
@@ -1072,14 +1382,24 @@ class NewClient:
         :type viewonce: bool, optional
         :param ghost_mentions: List of users to tag silently (Takes precedence over auto detected mentions)
         :type ghost_mentions: str, optional
+        :param mentions_are_lids: whether mentions contained in meesage or ghost_mentions are lids, defaults to False.
+        :type mentions_are_lids: bool, optional
+        :param add_msg_secret: Optional. Whether to generate 32 random bytes for messageSecret inside MessageContextInfo before sending, defaults to False
+        :type add_msg_secret: bool, optional
         :return: A function for handling the result of the image sending process.
         :rtype: SendResponse
         """
         return self.send_message(
             to,
             self.build_image_message(
-                file, caption, quoted, viewonce=viewonce, ghost_mentions=ghost_mentions
+                file,
+                caption,
+                quoted,
+                viewonce=viewonce,
+                ghost_mentions=ghost_mentions,
+                mentions_are_lids=mentions_are_lids,
             ),
+            add_msg_secret=add_msg_secret,
         )
 
     def build_audio_message(
@@ -1129,6 +1449,7 @@ class NewClient:
         file: str | bytes,
         ptt: bool = False,
         quoted: Optional[neonize_proto.Message] = None,
+        add_msg_secret: bool = False,
     ) -> SendResponse:
         """Sends an audio to the specified recipient.
 
@@ -1140,11 +1461,17 @@ class NewClient:
         :type ptt: bool, optional
         :param quoted: Optional. The message to which the audio is a reply. Defaults to None.
         :type quoted: Optional[Message], optional
+        :param add_msg_secret: Optional. Whether to  generate 32 random bytes for messageSecret inside MessageContextInfo before sending, defaults to False
+        :type add_msg_secret: bool, optional
         :return: A function for handling the result of the audio sending process.
         :rtype: SendResponse
         """
 
-        return self.send_message(to, self.build_audio_message(file, ptt, quoted))
+        return self.send_message(
+            to,
+            self.build_audio_message(file, ptt, quoted),
+            add_msg_secret=add_msg_secret,
+        )
 
     def build_document_message(
         self,
@@ -1155,11 +1482,12 @@ class NewClient:
         mimetype: Optional[str] = None,
         quoted: Optional[neonize_proto.Message] = None,
         ghost_mentions: Optional[str] = None,
+        mentions_are_lids: bool = False,
     ):
         io = BytesIO(get_bytes_from_name_or_url(file))
         io.seek(0)
         buff = io.read()
-        upload = self.upload(buff)
+        upload = self.upload(buff, MediaType.MediaDocument)
         message = Message(
             documentMessage=DocumentMessage(
                 URL=upload.url,
@@ -1173,8 +1501,10 @@ class NewClient:
                 title=title,
                 fileName=filename,
                 contextInfo=ContextInfo(
-                    mentionedJID=self._parse_mention(ghost_mentions or caption),
-                    groupMentions=self._parse_group_mention(caption),
+                    mentionedJID=self._parse_mention(
+                        (ghost_mentions or caption), mentions_are_lids
+                    ),
+                    groupMentions=(self._parse_group_mention(caption)),
                 ),
             )
         )
@@ -1192,6 +1522,8 @@ class NewClient:
         mimetype: Optional[str] = None,
         quoted: Optional[neonize_proto.Message] = None,
         ghost_mentions: Optional[str] = None,
+        mentions_are_lids: bool = False,
+        add_msg_secret: bool = False,
     ) -> SendResponse:
         """Sends a document to the specified recipient.
 
@@ -1209,14 +1541,26 @@ class NewClient:
         :type quoted: Optional[Message], optional
         :param ghost_mentions: List of users to tag silently (Takes precedence over auto detected mentions)
         :type ghost_mentions: str, optional
+        :param mentions_are_lids: whether mentions contained in meesage or ghost_mentions are lids, defaults to False.
+        :type mentions_are_lids: bool, optional
+        :param add_msg_secret: Optional. Whether to generate 32 random bytes for messageSecret inside MessageContextInfo before sending, defaults to False
+        :type add_msg_secret: bool, optional
         :return: A function for handling the result of the document sending process.
         :rtype: SendResponse
         """
         return self.send_message(
             to,
             self.build_document_message(
-                file, caption, title, filename, mimetype, quoted, ghost_mentions
+                file,
+                caption,
+                title,
+                filename,
+                mimetype,
+                quoted,
+                ghost_mentions,
+                mentions_are_lids,
             ),
+            add_msg_secret=add_msg_secret,
         )
 
     def send_contact(
@@ -1573,6 +1917,64 @@ class NewClient:
             raise SetGroupPhotoError(model.Error)
         return model.PictureID
 
+    def get_lid_from_pn(self, jid: JID) -> JID:
+        """Retrieves the matching lid from the supplied jid.
+
+        :param jid: The JID (Jabber Identifier) (pn) of the target user.
+        :type jid: JID
+        :raises GetJIDFromStoreError: Raised if there is an issue getting the lid from the given jid.
+        :return: The lid (hidden user) matching the supplied jid.
+        :rtype: JID
+        """
+        jid_buf = jid.SerializeToString()
+        bytes_ptr = self.__client.GetLIDFromPN(self.uuid, jid_buf, len(jid_buf))
+        protobytes = bytes_ptr.contents.get_bytes()
+        free_bytes(bytes_ptr)
+        model = GetJIDFromStoreReturnFunction.FromString(protobytes)
+        if model.Error:
+            raise GetJIDFromStoreError(model.Error)
+        return model.Jid
+
+    def get_pn_from_lid(self, jid: JID) -> JID:
+        """Retrieves the matching jid from the supplied lid.
+
+        :param jid: The JID (Jabber Identifier) (lid) of the target user.
+        :type jid: JID
+        :raises GetJIDFromStoreError: Raised if there is an issue getting the jid from the given lid.
+        :return: The jid (phone number) matching the supplied lid.
+        :rtype: JID
+        """
+        jid_buf = jid.SerializeToString()
+        bytes_ptr = self.__client.GetPNFromLID(self.uuid, jid_buf, len(jid_buf))
+        protobytes = bytes_ptr.contents.get_bytes()
+        free_bytes(bytes_ptr)
+        model = GetJIDFromStoreReturnFunction.FromString(protobytes)
+        if model.Error:
+            raise GetJIDFromStoreError(model.Error)
+        return model.Jid
+
+    def pin_message(self, chat_jid: JID, sender_jid: JID, message_id: str, seconds: int):
+        """
+        Currently Non-functional
+        """
+        chat_buf = chat_jid.SerializeToString()
+        sender_buf = sender_jid.SerializeToString()
+        bytes_ptr = self.__client.PinMessage(
+            self.uuid,
+            chat_buf,
+            len(chat_buf),
+            sender_buf,
+            len(sender_buf),
+            message_id.encode(),
+            seconds,
+        )
+        protobytes = bytes_ptr.contents.get_bytes()
+        free_bytes(bytes_ptr)
+        model = SendMessageReturnFunction.FromString(protobytes)
+        if model.Error:
+            raise SendMessageError(model.Error)
+        return model.SendResponse
+    
     def leave_group(self, jid: JID) -> str:
         """Leaves a group.
 
@@ -2542,7 +2944,7 @@ class NewClient:
         payload = pl.SerializeToString()
         d = bytearray(list(self.event.list_func))
 
-        log.debug("trying connect to whatsapp servers")
+        _log_.debug("trying connect to whatsapp servers")
 
         deviceprops = (
             DeviceProps(os="Neonize", platformType=DeviceProps.SAFARI)
@@ -2565,6 +2967,7 @@ class NewClient:
             func_string(self.__onQr),
             func_string(self.__onLoginStatus),
             func_callback_bytes(self.event.execute),
+            func_callback_bytes2(log_whatsmeow),
             (ctypes.c_char * self.event.list_func.__len__()).from_buffer(d),
             len(d),
             deviceprops,
@@ -2577,7 +2980,7 @@ class NewClient:
         """
         Stops the client by disconnecting it from the WhatsApp servers.
         """
-        log.debug("Stopping client and disconnecting from WhatsApp servers.")
+        _log_.debug("Stopping client and disconnecting from WhatsApp servers.")
         self.__client.stop()
 
     def get_message_for_retry(
@@ -2662,7 +3065,7 @@ class NewClient:
         """Establishes a connection to the WhatsApp servers."""
         # Convert the list of functions to a bytearray
         d = bytearray(list(self.event.list_func))
-        log.debug("🔒 Attempting to connect to the WhatsApp servers.")
+        _log_.debug("🔒 Attempting to connect to the WhatsApp servers.")
         # Set device properties
         deviceprops = (
             DeviceProps(os="Neonize", platformType=DeviceProps.SAFARI)
@@ -2686,6 +3089,7 @@ class NewClient:
             func_string(self.__onQr),
             func_string(self.__onLoginStatus),
             func_callback_bytes(self.event.execute),
+            func_callback_bytes2(log_whatsmeow),
             (ctypes.c_char * len(self.event.list_func)).from_buffer(d),
             len(d),
             deviceprops,
@@ -2718,7 +3122,7 @@ class ClientFactory:
         :return: A list of Device-like objects representing all associated devices.
         :rtype: List[neonize_proto.Device]
         """
-        c_string = gocode.GetAllDevices(db.encode()).decode()
+        c_string = gocode.GetAllDevices(db.encode(), func_callback_bytes2(log_whatsmeow)).decode()
         if not c_string:
             return []
 

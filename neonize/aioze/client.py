@@ -188,6 +188,7 @@ from ..utils.sticker import aio_convert_to_sticker, aio_convert_to_webp
 from .events import Event, EventsManager, event_global_loop
 from .preview.compose import link_preview
 
+_log_ = logging.getLogger(__name__)
 loop = get_event_loop()
 
 SyncFunctionParams = ParamSpec("SyncFunctionParams")
@@ -437,7 +438,7 @@ class NewAClient:
         self.connected = False
         self.loop = event_global_loop
         self.me = None
-        log.debug("🔨 Creating a NewClient instance")
+        _log_.debug("🔨 Creating a NewClient instance")
 
     def __onLoginStatus(self, uuid: int, status: int):
         pass
@@ -460,7 +461,7 @@ class NewAClient:
 
         :param text: The text to be parsed for mentions, defaults to None
         :type text: Optional[str], optional
-        :param are_lids: whether the mentions are lids defaults to False
+        :param are_lids: whether the mentions are lids, defaults to False
         :type are_lids: bool, optional
         :return: A list of mentions in the format of 'mention@s.whatsapp.net'
         :rtype: list[str]
@@ -475,7 +476,7 @@ class NewAClient:
     async def _parse_group_mention(self, text: Optional[str] = None) -> list[GroupMention]:
         """
         This function parses a given text and returns a list of 'mentions' in the format of 'GroupMention(…'
-        A 'mention' is defined as a sequence of numbers (11 to 26 digits long) (might also include an hypen) that is prefixed by '@' and suffixed by @g.us in the text.
+        A 'mention' is defined as a sequence of numbers (11 to 26 digits long) (might also include an hypen) that is prefixed by '@' and suffixed byg.us in the text.
 
         :param text: The text to be parsed for mentions, defaults to None
         :type text: Optional[str], optional
@@ -492,7 +493,7 @@ class NewAClient:
             except GetGroupInfoError:
                 continue
             except Exception:
-                log.info(traceback.format_exc())
+                _log_.error(traceback.format_exc())
                 continue
             gc_mentions.append(
                 GroupMention(groupJID=Jid2String(group.JID), groupSubject=group.GroupName.Name)
@@ -516,7 +517,7 @@ class NewAClient:
                 try:
                     preview = fallback_link_preview(valid_links[0])
                 except (HTTPError, MaximumContentSizeError):
-                    log.debug(f"Getting link preview failed for link: {valid_links[0]}")
+                    _log_.debug(f"Getting link preview failed for link: {valid_links[0]}")
                     return None
             preview_type = (
                 ExtendedTextMessage.PreviewType.VIDEO
@@ -557,8 +558,8 @@ class NewAClient:
             try:
                 msg.contextInfo.Clear()
             except Exception:
-                log.info("Debug:")
-                log.info(msg)
+                _log_.warning("@_make_quoted_message; Couldn't clear the contextInfo of:")
+                _log_.warning(msg)
         sender = message.Info.MessageSource.Sender
         if jid_is_lid(sender):
             senderalt = message.Info.MessageSource.SenderAlt
@@ -591,6 +592,8 @@ class NewAClient:
         :type link_preview: bool, optional
         :param ghost_mentions: List of users to tag silently (Takes precedence over auto detected mentions)
         :type ghost_mentions: str, optional
+        :param mentions_are_lids: whether mentions contained in meesage or ghost_mentions are lids, defaults to False.
+        :type mentions_are_lids: bool, optional
         :param add_msg_secret: Whether to generate 32 random bytes for messageSecret inside MessageContextInfo before sending, defaults to False
         :type add_msg_secret: bool, optional
         :raises SendMessageError: If there was an error sending the message.
@@ -652,6 +655,8 @@ class NewAClient:
         :type reply_privately: bool, optional
         :param ghost_mentions: List of users to tag silently (Takes precedence over auto detected mentions)
         :type ghost_mentions: str, optional
+        :param mentions_are_lids: whether mentions contained in meesage or ghost_mentions are lids, defaults to False.
+        :type mentions_are_lids: bool, optional
         :return: Response of the send operation.
         :rtype: SendResponse
         """
@@ -704,6 +709,8 @@ class NewAClient:
         :type reply_privately: bool, optional
         :param ghost_mentions: List of users to tag silently (Takes precedence over auto detected mentions)
         :type ghost_mentions: str, optional
+        :param mentions_are_lids: whether mentions contained in meesage or ghost_mentions are lids, defaults to False.
+        :type mentions_are_lids: bool, optional
         :param add_msg_secret: If set to True generate 32 random bytes for messageSecret inside MessageContextInfo before sending, defaults to False
         :type add_msg_secret: bool, optional
         :return: Response of the send operation.
@@ -906,6 +913,10 @@ class NewAClient:
         :type crop: bool, optional
         :param enforce_not_broken: Enforce non-broken stickers by constraining sticker size to WA limits, defaults to False
         :type enforce_not_broken: bool, optional
+        :param animated_gif: Ensure transparent media are properly processed, defaults to False
+        :type animated_gif: bool, optional
+        :param passthrough: Don't process sticker, send as is, defaults to False.
+        :type passthrough: bool, optional
         :return: The constructed sticker message
         :rtype: Message
         """
@@ -996,6 +1007,10 @@ class NewAClient:
         :type crop: bool, optional
         :param enforce_not_broken: Whether to enforce non-broken stickers by constraining sticker size to WA limits, defaults to False
         :type enforce_not_broken: bool, optional
+        :param animated_gif: Ensure transparent media are properly processed, defaults to False
+        :type animated_gif: bool, optional
+        :param passthrough: Don't process sticker, send as is, defaults to False.
+        :type passthrough: bool, optional
         :param add_msg_secret: Whether to generate 32 random bytes for messageSecret inside MessageContextInfo before sending, defaults to False
         :type add_msg_secret: bool, optional
         :return: The response from the send message function.
@@ -1023,7 +1038,10 @@ class NewAClient:
         publisher: str = "",
         quoted: Optional[neonize_proto.Message] = None,
     ) -> Message:
-        """Helper function to process a single sticker pack chunk"""
+        """
+        Helper function to process a single sticker pack chunk
+        
+        """
         zip_dict = {}
         # Upload all stickers concurrently
         funcs = [
@@ -1063,7 +1081,7 @@ class NewAClient:
                 publisher=publisher,
                 stickers=sticker_metadata,
                 # fileLength=upload.FileLength,
-                fileLength=file_size,
+                fileLength=upload.FileLength,
                 fileSHA256=upload.FileSHA256,
                 fileEncSHA256=upload.FileEncSHA256,
                 mediaKey=upload.MediaKey,
@@ -1076,7 +1094,7 @@ class NewAClient:
                 thumbnailHeight=252,
                 thumbnailWidth=252,
                 imageDataHash=img_hash,
-                stickerPackSize=upload.FileLength,
+                stickerPackSize=file_size,
                 # stickerPackOrigin=StickerPackMessage.StickerPackOrigin.USER_CREATED,
                 stickerPackOrigin=StickerPackMessage.StickerPackOrigin.THIRD_PARTY,
             )
@@ -1939,26 +1957,45 @@ class NewAClient:
         return model.PictureID
 
     async def get_lid_from_pn(self, jid: JID) -> JID:
+        """Retrieves the matching lid from the supplied jid.
+
+        :param jid: The JID (Jabber Identifier) (pn) of the target user.
+        :type jid: JID
+        :raises GetJIDFromStoreError: Raised if there is an issue getting the lid from the given jid.
+        :return: The lid (hidden user) matching the supplied jid.
+        :rtype: JID
+        """
         jid_buf = jid.SerializeToString()
         bytes_ptr = await self.__client.GetLIDFromPN(self.uuid, jid_buf, len(jid_buf))
         protobytes = bytes_ptr.contents.get_bytes()
         free_bytes(bytes_ptr)
         model = GetJIDFromStoreReturnFunction.FromString(protobytes)
         if model.Error:
-            raise GetJIDFromStoreError(model.Error)  # To be replaced with a custom exception
+            raise GetJIDFromStoreError(model.Error)
         return model.Jid
 
     async def get_pn_from_lid(self, jid: JID) -> JID:
+        """Retrieves the matching jid from the supplied lid.
+
+        :param jid: The JID (Jabber Identifier) (lid) of the target user.
+        :type jid: JID
+        :raises GetJIDFromStoreError: Raised if there is an issue getting the jid from the given lid.
+        :return: The jid (phone number) matching the supplied lid.
+        :rtype: JID
+        """
         jid_buf = jid.SerializeToString()
         bytes_ptr = await self.__client.GetPNFromLID(self.uuid, jid_buf, len(jid_buf))
         protobytes = bytes_ptr.contents.get_bytes()
         free_bytes(bytes_ptr)
         model = GetJIDFromStoreReturnFunction.FromString(protobytes)
         if model.Error:
-            raise GetJIDFromStoreError(model.Error)  # To be replaced with a custom exception
+            raise GetJIDFromStoreError(model.Error)
         return model.Jid
 
     async def pin_message(self, chat_jid: JID, sender_jid: JID, message_id: str, seconds: int):
+        """
+        Currently Non-functional
+        """
         chat_buf = chat_jid.SerializeToString()
         sender_buf = sender_jid.SerializeToString()
         bytes_ptr = await self.__client.PinMessage(
@@ -2981,7 +3018,7 @@ class NewAClient:
         payload = pl.SerializeToString()
         d = bytearray(list(self.event.list_func))
 
-        log.debug("trying connect to whatsapp servers")
+        _log_.debug("trying connect to whatsapp servers")
 
         deviceprops = (
             DeviceProps(os="Neonize", platformType=DeviceProps.SAFARI)
@@ -3112,7 +3149,7 @@ class NewAClient:
         """Establishes a connection to the WhatsApp servers."""
         # Convert the list of functions to a bytearray
         d = bytearray(list(self.event.list_func))
-        log.debug("🔒 Attempting to connect to the WhatsApp servers.")
+        _log_.debug("🔒 Attempting to connect to the WhatsApp servers.")
         # Set device properties
         deviceprops = (
             DeviceProps(os="Neonize", platformType=DeviceProps.SAFARI)

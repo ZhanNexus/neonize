@@ -37,6 +37,17 @@ jobs:
         args: "check --fix"
     - name: format python style PEP8 standard
       run: ruff check --fix && ruff format .
+    - name: Install Python lint libraries
+      run: |
+        pip3 install autopep8 autoflake isort black
+    - name: Check for showstoppers
+      run: autopep8 --verbose --in-place --recursive --aggressive --aggressive .
+    - name: Remove unused imports and variables
+      run: autoflake --in-place --recursive --remove-all-unused-imports --remove-unused-variables --ignore-init-module-imports .
+    - name: lint with isort and black
+      run: |
+        isort bridge_bot
+        black --fast bridge_bot
     - name: update golang dependencies
       run: cd goneonize && go get -u && go mod tidy
     - name: Run golangci-lint

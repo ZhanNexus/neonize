@@ -1,6 +1,6 @@
 import re
 from phonenumbers import parse, PhoneNumberFormat, format_number
-from .log import log
+from .log import log, log_whatsmeow
 from .message import extract_text, get_message_type
 from .ffmpeg import FFmpeg
 from .sticker import add_exif
@@ -69,6 +69,7 @@ def validate_link(link) -> bool:
 
 __all__ = (
     "log",
+    "log_whatsmeow",
     "get_message_type",
     "extract_text",
     "FFmpeg",
