@@ -1,27 +1,29 @@
 import re
-from phonenumbers import parse, PhoneNumberFormat, format_number
-from .log import log, log_whatsmeow
-from .message import extract_text, get_message_type
-from .ffmpeg import FFmpeg
-from .sticker import add_exif
-from .thumbnail import save_file_to_temp_directory
-from .iofile import get_bytes_from_name_or_url
+
+from phonenumbers import PhoneNumberFormat, format_number, parse
+
 from .calc import AspectRatioMethod
-from .jid import build_jid, Jid2String, JIDToNonAD
 from .enum import (
-    MediaType,
-    MediaTypeToMMS,
     BlocklistAction,
     ChatPresence,
     ChatPresenceMedia,
     ClientName,
     ClientType,
+    MediaType,
+    MediaTypeToMMS,
     ParticipantChange,
     ParticipantRequestChange,
     PrivacySetting,
     PrivacySettingType,
     ReceiptType,
 )
+from .ffmpeg import FFmpeg
+from .iofile import get_bytes_from_name_or_url
+from .jid import Jid2String, JIDToNonAD, build_jid
+from .log import log, log_whatsmeow
+from .message import extract_text, get_message_type
+from .sticker import add_exif
+from .thumbnail import save_file_to_temp_directory
 
 
 def gen_vcard(name: str, phone_number: str) -> str:

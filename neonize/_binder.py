@@ -1,15 +1,18 @@
 import ctypes
 import ctypes.util
 import os
+from pathlib import Path
 from platform import system
 from typing import Any
-from pathlib import Path
+
+from .download import __GONEONIZE_VERSION__, download
 from .utils.platform import generated_name
-from .download import download, __GONEONIZE_VERSION__
 
 func_string = ctypes.CFUNCTYPE(None, ctypes.c_void_p, ctypes.c_void_p)  # qr
 func = ctypes.CFUNCTYPE(None, ctypes.c_void_p, ctypes.c_bool)  # blocking
-func_bytes = ctypes.CFUNCTYPE(None, ctypes.c_void_p, ctypes.c_void_p, ctypes.c_int)  # status
+func_bytes = ctypes.CFUNCTYPE(
+    None, ctypes.c_void_p, ctypes.c_void_p, ctypes.c_int
+)  # status
 func_callback_bytes = ctypes.CFUNCTYPE(
     None, ctypes.c_char_p, ctypes.c_void_p, ctypes.c_int, ctypes.c_int
 )  # callback_bytes

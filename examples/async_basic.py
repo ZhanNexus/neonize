@@ -236,11 +236,13 @@ async def handler(client: NewAClient, message: MessageEv):
             for i in range(1, len(text) + 1):
                 if id_msg is None:
                     msg = await client.send_message(
-                        message.Info.MessageSource.Chat, Message(conversation=text[:i])
+                        message.Info.MessageSource.Chat, Message(
+                            conversation=text[:i])
                     )
                     id_msg = msg.ID
                 await client.edit_message(
-                    message.Info.MessageSource.Chat, id_msg, Message(conversation=text[:i])
+                    message.Info.MessageSource.Chat, id_msg, Message(
+                        conversation=text[:i])
                 )
         case "button":
             await client.send_message(
@@ -253,8 +255,10 @@ async def handler(client: NewAClient, message: MessageEv):
                                 deviceListMetadataVersion=2,
                             ),
                             interactiveMessage=InteractiveMessage(
-                                body=InteractiveMessage.Body(text="Body Message"),
-                                footer=InteractiveMessage.Footer(text="@krypton-byte"),
+                                body=InteractiveMessage.Body(
+                                    text="Body Message"),
+                                footer=InteractiveMessage.Footer(
+                                    text="@krypton-byte"),
                                 header=InteractiveMessage.Header(
                                     title="Title Message",
                                     subtitle="Subtitle Message",

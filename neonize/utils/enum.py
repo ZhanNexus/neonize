@@ -1,15 +1,18 @@
 from __future__ import annotations
-from enum import Enum
-import magic
+
 import typing
+from enum import Enum
+
+import magic
+
 from ..proto.waE2E.WAWebProtobufsE2E_pb2 import (
-    Message,
-    ImageMessage,
     AudioMessage,
-    StickerMessage,
-    VideoMessage,
     DocumentMessage,
+    ImageMessage,
+    Message,
+    StickerMessage,
     StickerPackMessage,
+    VideoMessage,
 )
 from .message import get_message_type
 
@@ -81,7 +84,9 @@ class MediaType(Enum):
         :return: The determined MediaType.
         :rtype: MediaType
         """
-        magic_func = magic.from_file if isinstance(fn_or_bytes, str) else magic.from_buffer
+        magic_func = (
+            magic.from_file if isinstance(fn_or_bytes, str) else magic.from_buffer
+        )
         mime = magic_func(fn_or_bytes, mime=True).split("/")[0]
         match mime:
             case "image":

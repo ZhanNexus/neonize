@@ -1,8 +1,8 @@
 import os
+import platform
 import shutil
 import sys
 from typing import Dict
-import platform
 
 
 def arch_normalizer(arch_: str) -> str:
