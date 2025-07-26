@@ -59,12 +59,8 @@ def build_goneonize_decision() -> bool:
         bool: True if Goneonize should be rebuilt, False otherwise.
     """
     try:
-        return True
         github = Github()
-        zipfile = ZipFile(
-            BytesIO(
-                github.download_neonize(
-                    github.get_last_goneonize_version())))
+        zipfile = ZipFile(BytesIO(github.download_neonize(github.get_last_goneonize_version())))
         return check(zipfile)
     except Exception:
         return True
