@@ -40,11 +40,15 @@ jobs:
     - name: update golang dependencies
       run: cd goneonize && go get -u && go mod tidy
     - name: Run golangci-lint
-      uses: golangci/golangci-lint-action@v3
+      uses: golangci/golangci-lint-action@v8
       with:
-        version: v1.58.1 # Specify a golangci-lint version
+        version: v2.1 # Specify a golangci-lint version
+        working-directory: goneonize
         args: --issues-exit-code=0 # Exit with 0 even if issues are found, useful for reformatting
-              
+    - name: Install gofumpt
+      run: go install mvdan.cc/gofumpt@latest
+    - name: reformat go
+      run: cd goneonize && gofumpt -l -w .
     - name: Create Pull Request
       id: cpr
       uses: peter-evans/create-pull-request@v7
