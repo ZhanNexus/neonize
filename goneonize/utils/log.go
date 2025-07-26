@@ -34,7 +34,7 @@ func getBytesAndSize(data []byte) (*C.char, C.size_t) {
 	return messageSourceCDATA, messageSourceCSize
 }
 
-// Logger is a simple logger interface that can have subloggers for specific areas.
+// Logger is a logger interface that emulates waLog.Logger but instead passes the logs to a python function 
 type Logger interface {
 	waLog.Logger
 	Warnf(msg string, args ...interface{})
@@ -54,17 +54,13 @@ func (n *noopLogger) Sub(_ string) waLog.Logger               { return n }
 // Noop is a no-op Logger implementation that silently drops everything.
 var Noop Logger = &noopLogger{}
 
+type Callback = C.ptr_to_python_function_callback_bytes2
+
 type stdoutLogger struct {
 	mod   string
 	min   int
 	
-	callback  C.ptr_to_python_function_callback_bytes2
-}
-
-var colors = map[string]string{
-	"INFO":  "\033[36m",
-	"WARN":  "\033[33m",
-	"ERROR": "\033[31m",
+	callback  Callback
 }
 
 var levelToInt = map[string]int{
@@ -100,8 +96,6 @@ func (s *stdoutLogger) Debugf(msg string, args ...interface{}) { s.outputf("DEBU
 func (s *stdoutLogger) Sub(mod string) waLog.Logger {
 	return &stdoutLogger{mod: fmt.Sprintf("%s/%s", s.mod, mod), callback: s.callback, min: s.min}
 }
-
-type Callback = C.ptr_to_python_function_callback_bytes2
 
 
 func NewLogger(module string, minLevel string, callback Callback) Logger {

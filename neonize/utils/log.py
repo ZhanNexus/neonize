@@ -44,5 +44,5 @@ def log_whatsmeow(binary: int, size: int):
     elif log_msg.Name == "Database":
         log = dblogger
     else:
-        log = logging.getLogger(f"whatsmeow.{log_msg.Name}")
+        log = logging.getLogger(f"whatsmeow.{log_msg.Name.replace('/', '.')}")
     getattr(log, log_msg.Level.lower())(log_msg.Message)

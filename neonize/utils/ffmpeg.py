@@ -486,7 +486,15 @@ class FFmpeg:
             return self.filename
         return self.filename.path.__str__()
 
-    def cv_to_webp(self, animated: bool = True, enforce_not_broken: bool = False) -> bytes:
+    def cv_to_webp(
+        self,
+        animated: bool = True,
+        enforce_not_broken: bool = False,
+        animated_gif: bool = False,
+        max_sticker_size: int = 0,
+        is_webm=False,
+        
+    ) -> bytes:
         """
         This function converts a given file to webp format using ffmpeg.
         If the animated flag is set to True, it will only convert the first 6 seconds of the file.
@@ -498,27 +506,50 @@ class FFmpeg:
         :return: The converted file in bytes
         :rtype: bytes
         """
-        MAX_STICKER_FILESIZE = 512000
+        MAX_STICKER_FILESIZE = max_sticker_size or 512000
         temp = tempfile.gettempdir() + "/" + uuid.uuid4().__str__() + ".webp"
-        ffmpeg_command = [
-            "ffmpeg",
-            "-i",
-            self.filepath,
-            "-vcodec",
-            "libwebp",
-            "-vf",
-            (
-                "scale='if(gt(iw,ih),512,-1)':'if(gt(iw,ih),-1,512)',fps=15, "
-                "pad=512:512:-1:-1:color=white@0.0, split [a][b]; [a] "
-                "palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse"
-            ),
-        ]
+        duration = int((self.extract_info()).format.duration or 0)
+        if not duration:
+            duration = 1
+        if duration > 6 and animated:
+            duration = 6
+        elif duration < 6:
+            animated = False
+        ffmpeg_command = ["ffmpeg"]
+        if is_webm:
+            decoder = "-c:v libvpx"
+            codec = (self.extract_info()).streams[0].codec_name
+            if codec == "vp9":
+                decoder += "-vp9"
+            ffmpeg_command.extend(decoder.split())
+        ffmpeg_command.extend(
+            [
+                "-i",
+                self.filepath,
+            ]
+        )
+        if animated:
+            ffmpeg_command.extend(
+                [
+                    "-ss",
+                    "00:00:00.0",
+                    "-t",
+                    "00:00:06.0",
+                ]
+            )
+        ffmpeg_command.extend(
+            [
+                "-vcodec",
+                "libwebp_anim" if animated_gif else "libwebp",
+                "-vf",
+                (
+                    "scale='if(gt(iw,ih),512,-1)':'if(gt(iw,ih),-1,512)',fps=15, "
+                    "pad=512:512:-1:-1:color=white@0.0, split [a][b]; [a] "
+                    "palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse"
+                ),
+            ]
+        )
         if enforce_not_broken:
-            duration = int(self.extract_info().format.duration)
-            if not duration:
-                duration = 1
-            if duration > 6 and animated:
-                duration = 6
             bitrate = f"{MAX_STICKER_FILESIZE // duration}k"
             ffmpeg_command.extend(
                 [
@@ -530,15 +561,6 @@ class FFmpeg:
                     f"{MAX_STICKER_FILESIZE}",
                     "-q:v",
                     bitrate,
-                ]
-            )
-        if animated:
-            ffmpeg_command.extend(
-                [
-                    "-ss",
-                    "00:00:00.0",
-                    "-t",
-                    "00:00:06.0",
                 ]
             )
         ffmpeg_command.append(temp)
