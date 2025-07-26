@@ -322,4 +322,4 @@ async def run_factory():
 
 if __name__ == "__main__":
     # all created clients will be automatically logged in and receive all events
-    client.loop.run_until_complete(run_factory())
+    client_factory.loop.run_until_complete(run_factory())

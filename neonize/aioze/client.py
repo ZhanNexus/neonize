@@ -3352,6 +3352,7 @@ class ClientFactory:
         self.database_name = database_name
         self.clients: list[NewAClient] = []
         self.event = EventsManager(self)
+        self.loop = event_global_loop
 
     @staticmethod
     def get_all_devices_from_db(db: str) -> List[Device]:
