@@ -4,11 +4,12 @@ import os
 import sys
 from datetime import timedelta
 from neonize.aioze.client import ClientFactory, NewAClient
-from neonize.events import (
+from neonize.aioze.events import (
     ConnectedEv,
     MessageEv,
     PairStatusEv,
     ReceiptEv,
+    event,
     CallOfferEv,
 )
 
@@ -22,16 +23,19 @@ from neonize.proto.waE2E.WAWebProtobufsE2E_pb2 import (
 from neonize.types import MessageServerID
 from neonize.utils import log
 from neonize.utils.enum import ReceiptType
+import signal
+
 
 sys.path.insert(0, os.getcwd())
 
 
-# def interrupted(*_):
-#     event.set()
+def interrupted(*_):
+    loop = asyncio.get_event_loop()
+    asyncio.run_coroutine_threadsafe(ClientFactory.stop(), loop)
 
 
 log.setLevel(logging.DEBUG)
-# signal.signal(signal.SIGINT, interrupted)
+signal.signal(signal.SIGINT, interrupted)
 
 
 client_factory = ClientFactory("db.sqlite3")
@@ -77,6 +81,8 @@ async def handler(client: NewAClient, message: MessageEv):
             await client.send_message(
                 chat, "Test https://github.com/krypton-byte/neonize", link_preview=True
             )
+        case "stop_all":
+            await client_factory.stop()
         case "_sticker":
             await client.send_sticker(
                 chat,
@@ -103,6 +109,12 @@ async def handler(client: NewAClient, message: MessageEv):
                 caption="Test",
                 quoted=message,
             )
+        case "wait":
+            await client.send_message(chat, "Waiting for 5 seconds...")
+            await asyncio.sleep(5)
+            await client.send_message(chat, "Done waiting!")
+        case "shutdown":
+            event.set()
         case "_audio":
             await client.send_audio(
                 chat,
@@ -250,10 +262,8 @@ async def handler(client: NewAClient, message: MessageEv):
                                 deviceListMetadataVersion=2,
                             ),
                             interactiveMessage=InteractiveMessage(
-                                body=InteractiveMessage.Body(
-                                    text="Body Message"),
-                                footer=InteractiveMessage.Footer(
-                                    text="@krypton-byte"),
+                                body=InteractiveMessage.Body(text="Body Message"),
+                                footer=InteractiveMessage.Footer(text="@krypton-byte"),
                                 header=InteractiveMessage.Header(
                                     title="Title Message",
                                     subtitle="Subtitle Message",
@@ -305,9 +315,11 @@ async def handler(client: NewAClient, message: MessageEv):
 async def PairStatusMessage(_: NewAClient, message: PairStatusEv):
     log.info(f"logged as {message.ID.User}")
 
+async def run_factory():
+    await client_factory.run()
+    # Do something else
+    await client_factory.idle_all()
 
 if __name__ == "__main__":
-    # all created clients will be automatically logged in and receive all
-    # events
-    loop = asyncio.get_event_loop()
-    loop.run_until_complete(client_factory.run())
+    # all created clients will be automatically logged in and receive all events
+    client.loop.run_until_complete(run_factory())

@@ -3,15 +3,8 @@ import logging
 import os
 import sys
 from datetime import timedelta
-from neonize.aioze.client import NewAClient
-from neonize.events import (
-    ConnectedEv,
-    MessageEv,
-    PairStatusEv,
-    event,
-    ReceiptEv,
-    CallOfferEv,
-)
+from neonize.aioze.client import NewAClient, ClientFactory
+from neonize.aioze.events import ConnectedEv, MessageEv, PairStatusEv, ReceiptEv, CallOfferEv, event
 from neonize.proto.waE2E.WAWebProtobufsE2E_pb2 import (
     Message,
     FutureProofMessage,
@@ -20,18 +13,21 @@ from neonize.proto.waE2E.WAWebProtobufsE2E_pb2 import (
     DeviceListMetadata,
 )
 from neonize.types import MessageServerID
-from neonize.utils import log
-from neonize.utils.enum import ReceiptType
+from neonize.utils import log, build_jid
+from neonize.utils.enum import ReceiptType, VoteType
+import signal
+
 
 sys.path.insert(0, os.getcwd())
 
 
 def interrupted(*_):
-    event.set()
+    loop = asyncio.get_event_loop()
+    asyncio.run_coroutine_threadsafe(ClientFactory.stop(), loop)
 
 
 log.setLevel(logging.DEBUG)
-# signal.signal(signal.SIGINT, interrupted)
+signal.signal(signal.SIGINT, interrupted)
 
 
 client = NewAClient("db.sqlite3")
@@ -57,13 +53,18 @@ async def on_message(client: NewAClient, message: MessageEv):
     await handler(client, message)
 
 
+import pickle
+
+
 async def handler(client: NewAClient, message: MessageEv):
     text = message.Message.conversation or message.Message.extendedTextMessage.text
     chat = message.Info.MessageSource.Chat
-    print(message.Message)
     match text:
         case "ping":
-            await client.reply_message("pong", message)
+            result = await client.reply_message("pong", message)
+        case "stop":
+            print("Stopping client...")
+            await client.stop()
         case "_test_link_preview":
             await client.send_message(
                 chat, "Test https://github.com/krypton-byte/neonize", link_preview=True
@@ -116,7 +117,8 @@ async def handler(client: NewAClient, message: MessageEv):
                 quoted=message,
             )
         case "debug":
-            await client.send_message(chat, message.__str__())
+            result = await client.send_message(chat, message.__str__())
+            await client.send_message(chat, result.__str__())
         case "viewonce":
             await client.send_image(
                 chat,
@@ -230,19 +232,39 @@ async def handler(client: NewAClient, message: MessageEv):
             await client.send_message(
                 chat, (await client.chat_settings.get_chat_settings(chat)).__str__()
             )
+        case "poll_vote":
+            await client.send_message(
+                chat,
+                await client.build_poll_vote_creation(
+                    "Food",
+                    ["Pizza", "Burger", "Sushi"],
+                    VoteType.SINGLE,
+                ),
+            )
+        case "wait":
+            await client.send_message(chat, "Waiting for 5 seconds...")
+            await asyncio.sleep(5)
+            await client.send_message(chat, "Done waiting!")
+        case "shutdown":
+            event.set()
+        case "send_react":
+            await client.send_message(
+                chat,
+                await client.build_reaction(
+                    chat, message.Info.MessageSource.Sender, message.Info.ID, reaction="🗿"
+                ),
+            )
         case "edit_message":
             text = "Hello World"
             id_msg = None
             for i in range(1, len(text) + 1):
                 if id_msg is None:
                     msg = await client.send_message(
-                        message.Info.MessageSource.Chat, Message(
-                            conversation=text[:i])
+                        message.Info.MessageSource.Chat, Message(conversation=text[:i])
                     )
                     id_msg = msg.ID
                 await client.edit_message(
-                    message.Info.MessageSource.Chat, id_msg, Message(
-                        conversation=text[:i])
+                    message.Info.MessageSource.Chat, id_msg, Message(conversation=text[:i])
                 )
         case "button":
             await client.send_message(
@@ -255,10 +277,8 @@ async def handler(client: NewAClient, message: MessageEv):
                                 deviceListMetadataVersion=2,
                             ),
                             interactiveMessage=InteractiveMessage(
-                                body=InteractiveMessage.Body(
-                                    text="Body Message"),
-                                footer=InteractiveMessage.Footer(
-                                    text="@krypton-byte"),
+                                body=InteractiveMessage.Body(text="Body Message"),
+                                footer=InteractiveMessage.Footer(text="@krypton-byte"),
                                 header=InteractiveMessage.Header(
                                     title="Title Message",
                                     subtitle="Subtitle Message",
@@ -311,6 +331,10 @@ async def PairStatusMessage(_: NewAClient, message: PairStatusEv):
     log.info(f"logged as {message.ID.User}")
 
 
+async def connect():
+    await client.connect()
+    # Do something else
+    await client.idle() # Necessary to keep receiving events 
+
 if __name__ == "__main__":
-    loop = asyncio.get_event_loop()
-    loop.run_until_complete(client.connect())
+    client.loop.run_until_complete(connect())
