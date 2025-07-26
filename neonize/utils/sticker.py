@@ -203,7 +203,7 @@ stick_sem = threading.Semaphore(20)
 def convert_to_webp(
     sticker, name, packname, crop=False, passthrough=True, transparent=False
 ):
-    sticker = await get_bytes_from_name_or_url(sticker)
+    sticker = get_bytes_from_name_or_url(sticker)
     animated = is_webm = is_image = saved_exif = stk = False
     mime = magic.from_buffer(sticker, mime=True)
     if mime == "image/webp":
