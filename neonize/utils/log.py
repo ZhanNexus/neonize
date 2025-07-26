@@ -1,6 +1,7 @@
 import ctypes
 import logging
 import queue
+import threading
 
 from ..proto.Neonize_pb2 import LogEntry
 
