@@ -6,8 +6,12 @@ import os
 import platform
 
 WORKDIR = Path(__file__).parent.parent
-fname = "-".join(["neonize",
-                  os.popen("uv run task version neonize --pypi-format").read().strip()])
+fname = "-".join(
+    [
+        "neonize",
+        os.popen("uv run task version neonize --pypi-format").read().strip(),
+    ]
+)
 wheel_name = fname + "-py3-none-any.whl"
 os_name = os.environ.get("GOOS") or platform.system().lower()
 arch_name = os.environ.get("GOARCH") or platform.machine().lower()
@@ -17,9 +21,40 @@ arch_name = {
 }.get(arch_name, arch_name)
 
 
+def check_libc():
+    # Coba cek dengan ldd --version
+    try:
+        result = subprocess.run(["ldd", "--version"], capture_output=True, text=True)
+        output = result.stdout.lower() + result.stderr.lower()
+        if "musl" in output:
+            return "musl libc"
+        elif "glibc" in output or "gnu libc" in output:
+            return "glibc"
+    except Exception:
+        pass
+
+    # Coba cek file libc.so.6 di /lib atau /lib64
+    libc_paths = ["/lib/libc.so.6", "/lib64/libc.so.6"]
+    for path in libc_paths:
+        if os.path.isfile(path):
+            try:
+                result = subprocess.run([path], capture_output=True, text=True)
+                output = result.stdout.lower() + result.stderr.lower()
+                if "musl" in output:
+                    return "musl libc"
+                elif "glibc" in output or "gnu libc" in output:
+                    return "glibc"
+            except Exception:
+                pass
+
+    # Jika belum ketahuan
+    return "Unknown libc type"
+
+
 class OS(Enum):
     MAC = "macosx"
     LINUX = "manylinux2014"
+    MUSL_LINUX = "musllinux_1_2"
     WINDOWS = "win"
 
     # ANDROID = "android"
@@ -28,7 +63,12 @@ class OS(Enum):
         if os_name == "windows":
             return cls.WINDOWS
         elif os_name == "linux":
-            return cls.LINUX
+            libc = check_libc()
+            if libc == "musl libc":
+                return cls.MUSL_LINUX
+            elif libc == "glibc":
+                return cls.LINUX
+            raise OSError("Unsupported libc type: " + libc)
         elif os_name == "darwin":
             return cls.MAC
         raise OSError(
@@ -46,6 +86,7 @@ class ARCH(Enum):
     ARM = "armv7l"
     ARM64 = "arm64"
     RISCV64 = "riscv64"
+    PPC64LE = "ppc64le"
 
     @classmethod
     def auto(cls, os: OS):
@@ -65,15 +106,15 @@ class ARCH(Enum):
             return cls.ARM
         elif arch_name == "s390x":
             return cls.S390X
+        elif arch_name == "ppc64le":
+            return cls.PPC64LE
         raise OSError("Unsupported architecture")
 
 
 def repack(_os: OS, arch: ARCH):
     try:
-        subprocess.call(["wheel", "unpack", WORKDIR /
-                        "dist" / wheel_name], cwd=WORKDIR / "dist")
-        wheel_path = WORKDIR / "dist" / fname / \
-            (fname + ".dist-info") / "WHEEL"
+        subprocess.call(["wheel", "unpack", WORKDIR / "dist" / wheel_name], cwd=WORKDIR / "dist")
+        wheel_path = WORKDIR / "dist" / fname / (fname + ".dist-info") / "WHEEL"
         wheel = open(wheel_path, "r").read()
         arch_value = arch.value
         if _os == OS.MAC:
@@ -83,16 +124,9 @@ def repack(_os: OS, arch: ARCH):
                 file.write(wheel.replace("py3-none-any", "py310-none-win32"))
                 print(wheel.replace("py3-none-any", "py310-none-win32"))
             else:
-                file.write(
-                    wheel.replace(
-                        "py3-none-any",
-                        f"py310-none-{_os.value}_{arch_value}"))
-                print(
-                    wheel.replace(
-                        "py3-none-any",
-                        f"py310-none-{_os.value}_{arch_value}"))
-        subprocess.call(["wheel", "pack", WORKDIR / "dist" /
-                        fname], cwd=WORKDIR / "dist")
+                file.write(wheel.replace("py3-none-any", f"py310-none-{_os.value}_{arch_value}"))
+                print(wheel.replace("py3-none-any", f"py310-none-{_os.value}_{arch_value}"))
+        subprocess.call(["wheel", "pack", WORKDIR / "dist" / fname], cwd=WORKDIR / "dist")
         os.remove(WORKDIR / "dist" / wheel_name)
         os.remove(WORKDIR / "dist" / (fname + ".tar.gz"))
         shutil.rmtree(WORKDIR / "dist" / fname)

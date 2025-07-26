@@ -58,13 +58,10 @@ def __build():
     if (Path(cwd) / "defproto").exists():
         shutil.rmtree(f"{cwd}/defproto")
     os.mkdir(f"{cwd}/defproto")
-    os.rename(
-        f"{cwd}/github.com/krypton-byte/neonize/defproto/",
-        f"{cwd}/defproto")
+    os.rename(f"{cwd}/github.com/krypton-byte/neonize/defproto/", f"{cwd}/defproto")
     shutil.rmtree(f"{cwd}/github.com")
     subprocess.call(
-        shlex.split(
-            f"go build -buildmode=c-shared -ldflags=-s -o {filename} main.go"),
+        shlex.split(f"go build -buildmode=c-shared -ldflags=-s -o {filename} main.go"),
         cwd=cwd,
         env=os.environ.update({"CGO_ENABLED": "1"}),
     )
@@ -93,18 +90,13 @@ def build_neonize():
     filename = generated_name(os_name, arch_name)
     print(filename)
     subprocess.call(
-        shlex.split(
-            f"go build -buildmode=c-shared -ldflags=-s -o {filename} "),
+        shlex.split(f"go build -buildmode=c-shared -ldflags=-s -o {filename} "),
         cwd=cwd,
         env=os.environ.update({"CGO_ENABLED": "1"}),
     )
     if (Path(cwd).parent / f"neonize/{filename}").exists():
         os.remove(os.path.dirname(cwd) + "/neonize/" + filename)
-    os.rename(
-        f"{cwd}/{filename}",
-        os.path.dirname(cwd) +
-        "/neonize/" +
-        filename)
+    os.rename(f"{cwd}/{filename}", os.path.dirname(cwd) + "/neonize/" + filename)
 
 
 def build():
@@ -132,9 +124,7 @@ def build_android():
     if (Path(cwd) / "defproto").exists():
         shutil.rmtree(f"{cwd}/defproto")
     os.mkdir(f"{cwd}/defproto")
-    os.rename(
-        f"{cwd}/github.com/krypton-byte/neonize/defproto/",
-        f"{cwd}/defproto")
+    os.rename(f"{cwd}/github.com/krypton-byte/neonize/defproto/", f"{cwd}/defproto")
     shutil.rmtree(f"{cwd}/github.com")
     os.environ.update(
         {
@@ -144,8 +134,7 @@ def build_android():
         }
     )
     subprocess.call(
-        shlex.split(
-            f"go build -buildmode=c-shared -ldflags=-s -o {filename} main.go"),
+        shlex.split(f"go build -buildmode=c-shared -ldflags=-s -o {filename} main.go"),
         cwd=cwd,
         env=os.environ,
     )
