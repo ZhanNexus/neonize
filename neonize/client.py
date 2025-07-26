@@ -923,7 +923,7 @@ class NewClient:
         :return: The constructed sticker message
         :rtype: Message
         """
-        sticker = await get_bytes_from_name_or_url(file)
+        sticker = get_bytes_from_name_or_url(file)
         animated = is_webm = is_webp = is_image = saved_exif = False
         mime = magic.from_buffer(sticker, mime=True)
         if mime == "image/webp":
@@ -1025,7 +1025,7 @@ class NewClient:
         """
         return self.send_message(
             to,
-            await self.build_sticker_message(
+            self.build_sticker_message(
                 file,
                 quoted,
                 name,
@@ -1083,7 +1083,7 @@ class NewClient:
         img_hash = (
             base64.b64encode(thumbnail.FileSHA256).decode("utf-8").replace("/", "-")
         )
-        upload = await self.upload(sticker_pack, MediaType.MediaStickerPack)
+        upload = self.upload(sticker_pack, MediaType.MediaStickerPack)
 
         message = Message(
             stickerPackMessage=StickerPackMessage(
