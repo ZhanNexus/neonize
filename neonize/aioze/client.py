@@ -1509,9 +1509,15 @@ class NewAClient:
         )
 
     async def build_album_content(self, file, media_type, msg_association, **kwargs):
-        build_message = self.build_image_message if media_type == "image" else self.build_video_message
+        build_message = (
+            self.build_image_message
+            if media_type == "image"
+            else self.build_video_message
+        )
         msg = await build_message(file, **kwargs)
-        msg.messageContextInfo.MergeFrom(msg.messageContextInfo.__class__(messageAssociation=msg_association))
+        msg.messageContextInfo.MergeFrom(
+            msg.messageContextInfo.__class__(messageAssociation=msg_association)
+        )
         return msg
 
     async def send_album_message(
@@ -1535,7 +1541,9 @@ class NewAClient:
             elif media_type == "video":
                 video_count += 1
             else:
-                _log_.warning(f"File with mime_type: {mime} was wrongly passed to send_album_message, ignoring…")
+                _log_.warning(
+                    f"File with mime_type: {mime} was wrongly passed to send_album_message, ignoring…"
+                )
                 continue
             medias.append((file, media_type))
         if not (image_count or video_count):
@@ -1548,7 +1556,7 @@ class NewAClient:
                     (ghost_mentions or caption), mentions_are_lids
                 ),
                 groupMentions=(await self._parse_group_mention(caption)),
-            )
+            ),
         )
         if quoted:
             message.albumMessage.contextInfo.MergeFrom(
@@ -1561,12 +1569,33 @@ class NewAClient:
                 remoteJID=Jid2String(to),
                 fromMe=True,
                 ID=response.ID,
-            )
+            ),
         )
-        funcs = [self.build_album_content(file, media_type, msg_association, caption=caption, quoted=quoted, ghost_mentions=ghost_mentions, mentions_are_lids=mentions_are_lids) for file, media_type in medias[:1]]
-        funcs.extend([self.build_album_content(file, media_type, msg_association, quoted=quoted) for file, media_type in medias[1:]])
+        funcs = [
+            self.build_album_content(
+                file,
+                media_type,
+                msg_association,
+                caption=caption,
+                quoted=quoted,
+                ghost_mentions=ghost_mentions,
+                mentions_are_lids=mentions_are_lids,
+            )
+            for file, media_type in medias[:1]
+        ]
+        funcs.extend(
+            [
+                self.build_album_content(
+                    file, media_type, msg_association, quoted=quoted
+                )
+                for file, media_type in medias[1:]
+            ]
+        )
         messages = await asyncio.gather(*funcs)
-        funcs = [self.send_message(to, message, add_msg_secret=add_msg_secret) for message in messages]
+        funcs = [
+            self.send_message(to, message, add_msg_secret=add_msg_secret)
+            for message in messages
+        ]
         responses = await asyncio.gather(*funcs)
         return [response, responses]
 
