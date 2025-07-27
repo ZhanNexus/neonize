@@ -148,7 +148,7 @@ from ..proto.Neonize_pb2 import (
     UploadResponse,
     UploadReturnFunction,
 )
-from .proto.waCommon.WACommon_pb2 import MessageKey
+from ..proto.waCommon.WACommon_pb2 import MessageKey
 from ..proto.waCompanionReg.WAWebProtobufsCompanionReg_pb2 import DeviceProps
 from ..proto.waConsumerApplication.WAConsumerApplication_pb2 import ConsumerApplication
 from ..proto.waE2E.WAWebProtobufsE2E_pb2 import (
