@@ -628,7 +628,7 @@ class NewAClient:
         :type link_preview: bool, optional
         :param ghost_mentions: List of users to tag silently (Takes precedence over auto detected mentions)
         :type ghost_mentions: str, optional
-        :param mentions_are_lids: whether mentions contained in mesage or ghost_mentions are lids, defaults to False.
+        :param mentions_are_lids: whether mentions contained in message or ghost_mentions are lids, defaults to False.
         :type mentions_are_lids: bool, optional
         :param add_msg_secret: Whether to generate 32 random bytes for messageSecret inside MessageContextInfo before sending, defaults to False
         :type add_msg_secret: bool, optional
@@ -698,7 +698,7 @@ class NewAClient:
         :type reply_privately: bool, optional
         :param ghost_mentions: List of users to tag silently (Takes precedence over auto detected mentions)
         :type ghost_mentions: str, optional
-        :param mentions_are_lids: whether mentions contained in mesage or ghost_mentions are lids, defaults to False.
+        :param mentions_are_lids: whether mentions contained in message or ghost_mentions are lids, defaults to False.
         :type mentions_are_lids: bool, optional
         :return: Response of the send operation.
         :rtype: SendResponse
@@ -755,7 +755,7 @@ class NewAClient:
         :type reply_privately: bool, optional
         :param ghost_mentions: List of users to tag silently (Takes precedence over auto detected mentions)
         :type ghost_mentions: str, optional
-        :param mentions_are_lids: whether mentions contained in mesage or ghost_mentions are lids, defaults to False.
+        :param mentions_are_lids: whether mentions contained in message or ghost_mentions are lids, defaults to False.
         :type mentions_are_lids: bool, optional
         :param add_msg_secret: If set to True generate 32 random bytes for messageSecret inside MessageContextInfo before sending, defaults to False
         :type add_msg_secret: bool, optional
@@ -1218,9 +1218,9 @@ class NewAClient:
             stickers[i : i + CHUNK_SIZE] for i in range(0, len(stickers), CHUNK_SIZE)
         ]
         tasks = []
-
+        total = len(chunks)
         for idx, chunk in enumerate(chunks):
-            pack_suffix = f" ({idx + 1})" if len(chunks) > 1 else ""
+            pack_suffix = f" ({idx + 1})" if total > 1 else ""
             task = self._process_single_pack(
                 stickers=chunk,
                 pack_name=packname + pack_suffix,
@@ -1508,7 +1508,13 @@ class NewAClient:
             add_msg_secret=add_msg_secret,
         )
 
-    async def build_album_content(self, file, media_type, msg_association, **kwargs) -> Message:
+    async def build_album_content(
+        self,
+        file: str | bytes,
+        media_type: str,
+        msg_association: MessageAssociation,
+        **kwargs,
+    ) -> Message:
         build_message = (
             self.build_image_message
             if media_type == "image"
@@ -1520,7 +1526,7 @@ class NewAClient:
         )
         return msg
 
-    async def send_album_message(
+    async def send_album(
         self,
         to: JID,
         files: list,
@@ -1530,6 +1536,23 @@ class NewAClient:
         mentions_are_lids: bool = False,
         add_msg_secret: bool = False,
     ) -> List[SendResponse, List[SendResponse]]:
+        """Sends an album containing images, videos or both to the specified recipient.
+
+        :param to: The JID (Jabber Identifier) of the recipient.
+        :type to: JID
+        :param files: A list containing either a file path (str), url (str) or binary data (bytes) representing the image/video.
+        :type file: List[typing.Union[str | bytes]]
+        :param caption: Optional. The caption of the first media in the album. Defaults to None.
+        :type caption: Optional[str], optional
+        :param quoted: Optional. The message to which the album is a reply. Defaults to None.
+        :type quoted: Optional[Message], optional
+        :param ghost_mentions: List of users to tag silently (Takes precedence over auto detected mentions)
+        :type ghost_mentions: str, optional
+        :param add_msg_secret: Optional. Whether to generate 32 random bytes for messageSecret inside MessageContextInfo before sending, defaults to False
+        :type add_msg_secret: bool, optional
+        :return: A function for handling the result of the album sending process.
+        :rtype: List[SendResponse, List[SendResponse]]
+        """
         image_count = video_count = 0
         medias = []
         for file in files:
@@ -1548,6 +1571,8 @@ class NewAClient:
             medias.append((file, media_type))
         if not (image_count or video_count):
             raise SendMessageError("No media found to send!")
+        elif len(medias) < 2:
+            raise SendMessageError("No enough media to send an album")
         message = Message(
             albumMessage=AlbumMessage(
                 expectedImageCount=image_count,
