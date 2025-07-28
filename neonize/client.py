@@ -1575,20 +1575,21 @@ class NewClient:
                 )
                 for file, media_type in medias[:1]
             ]
-            futures += [
-                executor.submit(
-                    self.build_album_content,
-                    file,
-                    media_type,
-                    msg_association,
-                    quoted=quoted,
-                )
-                for file, media_type in medias[1:]
-            ]
+            futures.extend(
+                [
+                    executor.submit(
+                        self.build_album_content,
+                        file,
+                        media_type,
+                        msg_association,
+                        quoted=quoted,
+                    )
+                    for file, media_type in medias[1:]
+                ]
+            )
 
             messages = [fut.result() for fut in futures]
 
-        responses = []
         with ThreadPoolExecutor(max_workers=25) as executor:
             send_futures = [
                 executor.submit(
