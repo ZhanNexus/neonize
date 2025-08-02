@@ -1619,11 +1619,17 @@ class NewAClient:
             ]
         )
         messages = await asyncio.gather(*funcs)
-        funcs = [
-            self.send_message(to, message, add_msg_secret=add_msg_secret)
-            for message in messages
-        ]
-        responses = await asyncio.gather(*funcs)
+        # funcs = [
+        #    self.send_message(to, message, add_msg_secret=add_msg_secret)
+        #    for message in messages
+        # ]
+        # responses = await asyncio.gather(*funcs)
+        
+        # Test: Try to enforce order
+        responses = []
+        for message in messages:
+            resp = await self.send_message(to,  message, add_msg_secret=add_msg_secret)
+            responses.append(resp)
         return [response, responses]
 
     async def build_audio_message(
