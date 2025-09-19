@@ -1,29 +1,34 @@
 module github.com/krypton-byte/neonize
 
-go 1.23.4
+go 1.24.0
+
+toolchain go1.24.5
 
 require (
 	github.com/lib/pq v1.10.9
-	github.com/mattn/go-sqlite3 v1.14.30
+	github.com/mattn/go-sqlite3 v1.14.32
 	go.mau.fi/whatsmeow v0.0.0-20250801095850-a23b35dea4be
-	google.golang.org/protobuf v1.36.6
+	google.golang.org/protobuf v1.36.9
 )
 
-replace go.mau.fi/whatsmeow v0.0.0-20250717084138-aecc878ab213 => github.com/Nubuki-all/whatsmeow v0.0.0-20250720232147-0f134620d5be
+replace go.mau.fi/whatsmeow => github.com/ginkohub/whatsmeow v0.0.0-20250919115030-76fc2d4f9d87
 
 require (
 	filippo.io/edwards25519 v1.1.0 // indirect
+	github.com/beeper/argo-go v1.1.2 // indirect
+	github.com/elliotchance/orderedmap/v3 v3.1.0 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/gorilla/websocket v1.5.3 // indirect
 	github.com/mattn/go-colorable v0.1.14 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
-	github.com/petermattis/goid v0.0.0-20250721140440-ea1c0173183e // indirect
+	github.com/petermattis/goid v0.0.0-20250904145737-900bdf8bb490 // indirect
 	github.com/rs/zerolog v1.34.0 // indirect
+	github.com/vektah/gqlparser/v2 v2.5.27 // indirect
 	go.mau.fi/libsignal v0.2.0 // indirect
-	go.mau.fi/util v0.8.8 // indirect
-	golang.org/x/crypto v0.40.0 // indirect
-	golang.org/x/exp v0.0.0-20250718183923-645b1fa84792 // indirect
-	golang.org/x/net v0.42.0 // indirect
-	golang.org/x/sys v0.34.0 // indirect
-	golang.org/x/text v0.27.0 // indirect
+	go.mau.fi/util v0.9.1 // indirect
+	golang.org/x/crypto v0.42.0 // indirect
+	golang.org/x/exp v0.0.0-20250911091902-df9299821621 // indirect
+	golang.org/x/net v0.44.0 // indirect
+	golang.org/x/sys v0.36.0 // indirect
+	golang.org/x/text v0.29.0 // indirect
 )

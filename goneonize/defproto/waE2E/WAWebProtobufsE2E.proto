@@ -3,7 +3,7 @@ package WAWebProtobufsE2E;
 option go_package = "go.mau.fi/whatsmeow/proto/waE2E";
 
 import "waAdv/WAAdv.proto";
-import "waBotMetadata/WAWebProtobufsBotMetadata.proto";
+import "waBotMetadata/WABotMetadata.proto";
 import "waCompanionReg/WACompanionReg.proto";
 import "waMmsRetry/WAMmsRetry.proto";
 import "waCommon/WACommon.proto";
@@ -319,6 +319,18 @@ message InteractiveResponseMessage {
 }
 
 message InteractiveMessage {
+	message CarouselMessage {
+		enum CarouselCardType {
+			UNKNOWN = 0;
+			HSCROLL_CARDS = 1;
+			ALBUM_IMAGE = 2;
+		}
+
+		repeated InteractiveMessage cards = 1;
+		optional int32 messageVersion = 2;
+		optional CarouselCardType carouselCardType = 3;
+	}
+
 	message ShopMessage {
 		enum Surface {
 			UNKNOWN_SURFACE = 0;
@@ -330,11 +342,6 @@ message InteractiveMessage {
 		optional string ID = 1;
 		optional Surface surface = 2;
 		optional int32 messageVersion = 3;
-	}
-
-	message CarouselMessage {
-		repeated InteractiveMessage cards = 1;
-		optional int32 messageVersion = 2;
 	}
 
 	message NativeFlowMessage {
@@ -577,6 +584,8 @@ message PeerDataOperationRequestResponseMessage {
 
 		message CompanionCanonicalUserNonceFetchResponse {
 			optional string nonce = 1;
+			optional string waFbid = 2;
+			optional bool forceRefresh = 3;
 		}
 
 		message CompanionMetaNonceFetchResponse {
@@ -792,12 +801,29 @@ message BotFeedbackMessage {
 		BOT_FEEDBACK_NEGATIVE = 14;
 	}
 
+	message SideBySideSurveyMetadata {
+		message SideBySideSurveyAnalyticsData {
+			optional string tessaEvent = 1;
+			optional string tessaSessionFbid = 2;
+		}
+
+		optional string selectedRequestID = 1;
+		optional uint32 surveyID = 2;
+		optional string simonSessionFbid = 3;
+		optional string responseOtid = 4;
+		optional string responseTimestampMSString = 5;
+		optional bool isSelectedResponsePrimary = 6;
+		optional string messageIDToEdit = 7;
+		optional SideBySideSurveyAnalyticsData analyticsData = 8;
+	}
+
 	optional WACommon.MessageKey messageKey = 1;
 	optional BotFeedbackKind kind = 2;
 	optional string text = 3;
 	optional uint64 kindNegative = 4;
 	optional uint64 kindPositive = 5;
 	optional ReportKind kindReport = 6;
+	optional SideBySideSurveyMetadata sideBySideSurveyMetadata = 7;
 }
 
 message VideoMessage {
@@ -1014,6 +1040,7 @@ message ImageMessage {
 	optional ImageSourceType imageSourceType = 31;
 	optional string accessibilityLabel = 32;
 	optional MediaKeyDomain mediaKeyDomain = 33;
+	optional string qrURL = 34;
 }
 
 message ContextInfo {
@@ -1023,6 +1050,7 @@ message ContextInfo {
 		STATUS = 2;
 		CHANNELS = 3;
 		META_AI = 4;
+		UGC = 5;
 	}
 
 	enum StatusSourceType {
@@ -1133,6 +1161,7 @@ message ContextInfo {
 		optional bool wtwaAdFormat = 24;
 		optional AdType adType = 25;
 		optional string wtwaWebsiteURL = 26;
+		optional string adPreviewURL = 27;
 	}
 
 	message AdReplyInfo {
@@ -1228,6 +1257,7 @@ message ContextInfo {
 	optional ForwardOrigin forwardOrigin = 67;
 	optional QuestionReplyQuotedMessage questionReplyQuotedMessage = 68;
 	optional StatusAudienceMetadata statusAudienceMetadata = 69;
+	optional uint32 nonJIDMentions = 70;
 }
 
 message AIRichResponseMessage {
@@ -1425,6 +1455,7 @@ message ThreadID {
 	enum ThreadType {
 		UNKNOWN = 0;
 		VIEW_REPLIES = 1;
+		AI_THREAD = 2;
 	}
 
 	optional ThreadType threadType = 1;
@@ -1443,7 +1474,7 @@ message MessageContextInfo {
 	optional bytes paddingBytes = 4;
 	optional uint32 messageAddOnDurationInSecs = 5;
 	optional bytes botMessageSecret = 6;
-	optional WAWebProtobufsBotMetadata.BotMetadata botMetadata = 7;
+	optional WABotMetadata.BotMetadata botMetadata = 7;
 	optional int32 reportingTokenVersion = 8;
 	optional MessageAddonExpiryType messageAddOnExpiryType = 9;
 	optional MessageAssociation messageAssociation = 10;
@@ -1664,6 +1695,7 @@ message Message {
 	optional FutureProofMessage groupStatusMessageV2 = 103;
 	optional FutureProofMessage botForwardedMessage = 104;
 	optional StatusQuestionAnswerMessage statusQuestionAnswerMessage = 105;
+	optional FutureProofMessage questionReplyMessage = 106;
 	optional QuestionResponseMessage questionResponseMessage = 107;
 }
 
@@ -1675,7 +1707,7 @@ message AlbumMessage {
 
 message MessageHistoryMetadata {
 	repeated string historyReceivers = 1;
-	optional int64 firstMessageTimestamp = 2;
+	optional int64 oldestMessageTimestamp = 2;
 	optional int64 messageCount = 3;
 }
 
@@ -1952,6 +1984,7 @@ message SendPaymentMessage {
 	optional Message noteMessage = 2;
 	optional WACommon.MessageKey requestMessageKey = 3;
 	optional PaymentBackground background = 4;
+	optional string transactionData = 5;
 }
 
 message ContactsArrayMessage {
