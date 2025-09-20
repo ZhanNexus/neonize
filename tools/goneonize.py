@@ -85,47 +85,42 @@ def build_neonize():
     
     print(f"Building for: os={os_name}, arch={arch_name}")
     
-    # FIX: Proper environment setup
     build_env = os.environ.copy()
-    build_env["CGO_ENABLED"] = "1"
-    build_env["GOOS"] = os_name
-    build_env["GOARCH"] = arch_name
+    build_env.update({
+        "CGO_ENABLED": "1",
+        "GOOS": os_name,
+        "GOARCH": arch_name,
+    })
     
-    # Set CC compiler for Linux if not set
     if os_name == "linux" and "CC" not in build_env:
-        if shutil.which("gcc"):
-            build_env["CC"] = "gcc"
+        cc = shutil.which("gcc")
+        if cc:
+            build_env["CC"] = cc
         else:
-            print("Warning: Could not find 'gcc'. Build might fail.")
-    
+            raise RuntimeError("gcc not found. Install it with: sudo apt install gcc")
+
     filename = generated_name(os_name, arch_name)
     print(f"Output file: {filename}")
-    
-    # FIX: Use the corrected environment and proper build command
-    result = subprocess.call(
-        shlex.split(f"go build -buildmode=c-shared -ldflags='-s -w' -o {filename} ."),
+
+    cmd = f"go build -buildmode=c-shared -ldflags='-s -w' -o {filename} ."
+    print(f"Running: {cmd}")
+
+    result = subprocess.run(
+        shlex.split(cmd),
         cwd=cwd,
         env=build_env,
+        check=True,  # <-- Ini penting! Akan raise exception jika gagal
     )
     
-    if result != 0:
-        print("Build failed!")
-        exit(1)
-    
-    # Move the built file
-    target_dir = Path(cwd).parent / "neonize"
-    target_path = target_dir / filename
-    source_path = Path(cwd) / filename
-    
-    if not target_dir.exists():
-        target_dir.mkdir(parents=True)
+    target_path = Path(cwd).parent / "neonize" / filename
+    target_path.parent.mkdir(parents=True, exist_ok=True)
     
     if target_path.exists():
         target_path.unlink()
     
-    shutil.move(str(source_path), str(target_path))
-    print(f"Build successful! Library moved to: {target_path}")
-
+    shutil.move(str(Path(cwd) / filename), str(target_path))
+    print(f"✅ Build successful! Library saved to: {target_path}")
+    
 def build():
     args = argparse.ArgumentParser()
     sub = args.add_subparsers(dest="build", required=True)
@@ -170,7 +165,7 @@ def build_android():
     subprocess.call(
         shlex.split(f"go build -buildmode=c-shared -ldflags=-s -o {filename} main.go"),
         cwd=cwd,
-        env=build_env,  # Use the corrected environment
+        env=build_env, 
     )
     
     if (Path(cwd).parent / filename).exists():
