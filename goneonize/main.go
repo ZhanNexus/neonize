@@ -41,11 +41,6 @@ import (
 
 var clients = make(map[string]*whatsmeow.Client)
 
-//export GetVersion
-func GetVersion() *C.char {
-    return C.CString("v1")
-}
-
 type MessageEvent struct {
 	eventType int
 	message   proto.Message
