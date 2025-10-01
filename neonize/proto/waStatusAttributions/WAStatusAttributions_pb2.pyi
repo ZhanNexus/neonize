@@ -122,6 +122,7 @@ class StatusAttribution(google.protobuf.message.Message):
             YOUTUBE: StatusAttribution.ExternalShare._Source.ValueType  # 5
             PINTEREST: StatusAttribution.ExternalShare._Source.ValueType  # 6
             THREADS: StatusAttribution.ExternalShare._Source.ValueType  # 7
+            APPLE_MUSIC: StatusAttribution.ExternalShare._Source.ValueType  # 8
 
         class Source(_Source, metaclass=_SourceEnumTypeWrapper): ...
         UNKNOWN: StatusAttribution.ExternalShare.Source.ValueType  # 0
@@ -132,6 +133,7 @@ class StatusAttribution(google.protobuf.message.Message):
         YOUTUBE: StatusAttribution.ExternalShare.Source.ValueType  # 5
         PINTEREST: StatusAttribution.ExternalShare.Source.ValueType  # 6
         THREADS: StatusAttribution.ExternalShare.Source.ValueType  # 7
+        APPLE_MUSIC: StatusAttribution.ExternalShare.Source.ValueType  # 8
 
         ACTIONURL_FIELD_NUMBER: builtins.int
         SOURCE_FIELD_NUMBER: builtins.int
@@ -166,12 +168,14 @@ class StatusAttribution(google.protobuf.message.Message):
             INTERNAL_RESHARE: StatusAttribution.StatusReshare._Source.ValueType  # 1
             MENTION_RESHARE: StatusAttribution.StatusReshare._Source.ValueType  # 2
             CHANNEL_RESHARE: StatusAttribution.StatusReshare._Source.ValueType  # 3
+            FORWARD: StatusAttribution.StatusReshare._Source.ValueType  # 4
 
         class Source(_Source, metaclass=_SourceEnumTypeWrapper): ...
         UNKNOWN: StatusAttribution.StatusReshare.Source.ValueType  # 0
         INTERNAL_RESHARE: StatusAttribution.StatusReshare.Source.ValueType  # 1
         MENTION_RESHARE: StatusAttribution.StatusReshare.Source.ValueType  # 2
         CHANNEL_RESHARE: StatusAttribution.StatusReshare.Source.ValueType  # 3
+        FORWARD: StatusAttribution.StatusReshare.Source.ValueType  # 4
 
         @typing.final
         class Metadata(google.protobuf.message.Message):

@@ -653,16 +653,19 @@ class HandshakeMessage(google.protobuf.message.Message):
 
         STATIC_FIELD_NUMBER: builtins.int
         PAYLOAD_FIELD_NUMBER: builtins.int
+        EXTENDEDCIPHERTEXT_FIELD_NUMBER: builtins.int
         static: builtins.bytes
         payload: builtins.bytes
+        extendedCiphertext: builtins.bytes
         def __init__(
             self,
             *,
             static: builtins.bytes | None = ...,
             payload: builtins.bytes | None = ...,
+            extendedCiphertext: builtins.bytes | None = ...,
         ) -> None: ...
-        def HasField(self, field_name: typing.Literal["payload", b"payload", "static", b"static"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing.Literal["payload", b"payload", "static", b"static"]) -> None: ...
+        def HasField(self, field_name: typing.Literal["extendedCiphertext", b"extendedCiphertext", "payload", b"payload", "static", b"static"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["extendedCiphertext", b"extendedCiphertext", "payload", b"payload", "static", b"static"]) -> None: ...
 
     @typing.final
     class ServerHello(google.protobuf.message.Message):
@@ -671,18 +674,21 @@ class HandshakeMessage(google.protobuf.message.Message):
         EPHEMERAL_FIELD_NUMBER: builtins.int
         STATIC_FIELD_NUMBER: builtins.int
         PAYLOAD_FIELD_NUMBER: builtins.int
+        EXTENDEDSTATIC_FIELD_NUMBER: builtins.int
         ephemeral: builtins.bytes
         static: builtins.bytes
         payload: builtins.bytes
+        extendedStatic: builtins.bytes
         def __init__(
             self,
             *,
             ephemeral: builtins.bytes | None = ...,
             static: builtins.bytes | None = ...,
             payload: builtins.bytes | None = ...,
+            extendedStatic: builtins.bytes | None = ...,
         ) -> None: ...
-        def HasField(self, field_name: typing.Literal["ephemeral", b"ephemeral", "payload", b"payload", "static", b"static"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing.Literal["ephemeral", b"ephemeral", "payload", b"payload", "static", b"static"]) -> None: ...
+        def HasField(self, field_name: typing.Literal["ephemeral", b"ephemeral", "extendedStatic", b"extendedStatic", "payload", b"payload", "static", b"static"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["ephemeral", b"ephemeral", "extendedStatic", b"extendedStatic", "payload", b"payload", "static", b"static"]) -> None: ...
 
     @typing.final
     class ClientHello(google.protobuf.message.Message):
@@ -691,18 +697,24 @@ class HandshakeMessage(google.protobuf.message.Message):
         EPHEMERAL_FIELD_NUMBER: builtins.int
         STATIC_FIELD_NUMBER: builtins.int
         PAYLOAD_FIELD_NUMBER: builtins.int
+        USEEXTENDED_FIELD_NUMBER: builtins.int
+        EXTENDEDCIPHERTEXT_FIELD_NUMBER: builtins.int
         ephemeral: builtins.bytes
         static: builtins.bytes
         payload: builtins.bytes
+        useExtended: builtins.bool
+        extendedCiphertext: builtins.bytes
         def __init__(
             self,
             *,
             ephemeral: builtins.bytes | None = ...,
             static: builtins.bytes | None = ...,
             payload: builtins.bytes | None = ...,
+            useExtended: builtins.bool | None = ...,
+            extendedCiphertext: builtins.bytes | None = ...,
         ) -> None: ...
-        def HasField(self, field_name: typing.Literal["ephemeral", b"ephemeral", "payload", b"payload", "static", b"static"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing.Literal["ephemeral", b"ephemeral", "payload", b"payload", "static", b"static"]) -> None: ...
+        def HasField(self, field_name: typing.Literal["ephemeral", b"ephemeral", "extendedCiphertext", b"extendedCiphertext", "payload", b"payload", "static", b"static", "useExtended", b"useExtended"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["ephemeral", b"ephemeral", "extendedCiphertext", b"extendedCiphertext", "payload", b"payload", "static", b"static", "useExtended", b"useExtended"]) -> None: ...
 
     CLIENTHELLO_FIELD_NUMBER: builtins.int
     SERVERHELLO_FIELD_NUMBER: builtins.int
