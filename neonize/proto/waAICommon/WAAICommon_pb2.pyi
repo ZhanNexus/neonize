@@ -59,8 +59,10 @@ class _BotMetricsEntryPointEnumTypeWrapper(google.protobuf.internal.enum_type_wr
     INVOKE_META_AI_GROUP: _BotMetricsEntryPoint.ValueType  # 30
     META_AI_FORWARD: _BotMetricsEntryPoint.ValueType  # 31
     NEW_CHAT_AI_CONTACT: _BotMetricsEntryPoint.ValueType  # 32
-    MESSAGE_QUICK_ACTION: _BotMetricsEntryPoint.ValueType  # 33
-    ATTACHMENT_TRAY: _BotMetricsEntryPoint.ValueType  # 34
+    MESSAGE_QUICK_ACTION_1_ON_1_CHAT: _BotMetricsEntryPoint.ValueType  # 33
+    MESSAGE_QUICK_ACTION_GROUP_CHAT: _BotMetricsEntryPoint.ValueType  # 34
+    ATTACHMENT_TRAY_1_ON_1_CHAT: _BotMetricsEntryPoint.ValueType  # 35
+    ATTACHMENT_TRAY_GROUP_CHAT: _BotMetricsEntryPoint.ValueType  # 36
 
 class BotMetricsEntryPoint(_BotMetricsEntryPoint, metaclass=_BotMetricsEntryPointEnumTypeWrapper): ...
 
@@ -97,8 +99,10 @@ INVOKE_META_AI_1ON1: BotMetricsEntryPoint.ValueType  # 29
 INVOKE_META_AI_GROUP: BotMetricsEntryPoint.ValueType  # 30
 META_AI_FORWARD: BotMetricsEntryPoint.ValueType  # 31
 NEW_CHAT_AI_CONTACT: BotMetricsEntryPoint.ValueType  # 32
-MESSAGE_QUICK_ACTION: BotMetricsEntryPoint.ValueType  # 33
-ATTACHMENT_TRAY: BotMetricsEntryPoint.ValueType  # 34
+MESSAGE_QUICK_ACTION_1_ON_1_CHAT: BotMetricsEntryPoint.ValueType  # 33
+MESSAGE_QUICK_ACTION_GROUP_CHAT: BotMetricsEntryPoint.ValueType  # 34
+ATTACHMENT_TRAY_1_ON_1_CHAT: BotMetricsEntryPoint.ValueType  # 35
+ATTACHMENT_TRAY_GROUP_CHAT: BotMetricsEntryPoint.ValueType  # 36
 global___BotMetricsEntryPoint = BotMetricsEntryPoint
 
 class _BotMetricsThreadEntryPoint:
@@ -938,6 +942,41 @@ class BotImagineMetadata(google.protobuf.message.Message):
 global___BotImagineMetadata = BotImagineMetadata
 
 @typing.final
+class BotAgeCollectionMetadata(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    class _AgeCollectionType:
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
+
+    class _AgeCollectionTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[BotAgeCollectionMetadata._AgeCollectionType.ValueType], builtins.type):
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+        O18_BINARY: BotAgeCollectionMetadata._AgeCollectionType.ValueType  # 0
+        WAFFLE: BotAgeCollectionMetadata._AgeCollectionType.ValueType  # 1
+
+    class AgeCollectionType(_AgeCollectionType, metaclass=_AgeCollectionTypeEnumTypeWrapper): ...
+    O18_BINARY: BotAgeCollectionMetadata.AgeCollectionType.ValueType  # 0
+    WAFFLE: BotAgeCollectionMetadata.AgeCollectionType.ValueType  # 1
+
+    AGECOLLECTIONELIGIBLE_FIELD_NUMBER: builtins.int
+    SHOULDTRIGGERAGECOLLECTIONONCLIENT_FIELD_NUMBER: builtins.int
+    AGECOLLECTIONTYPE_FIELD_NUMBER: builtins.int
+    ageCollectionEligible: builtins.bool
+    shouldTriggerAgeCollectionOnClient: builtins.bool
+    ageCollectionType: global___BotAgeCollectionMetadata.AgeCollectionType.ValueType
+    def __init__(
+        self,
+        *,
+        ageCollectionEligible: builtins.bool | None = ...,
+        shouldTriggerAgeCollectionOnClient: builtins.bool | None = ...,
+        ageCollectionType: global___BotAgeCollectionMetadata.AgeCollectionType.ValueType | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["ageCollectionEligible", b"ageCollectionEligible", "ageCollectionType", b"ageCollectionType", "shouldTriggerAgeCollectionOnClient", b"shouldTriggerAgeCollectionOnClient"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["ageCollectionEligible", b"ageCollectionEligible", "ageCollectionType", b"ageCollectionType", "shouldTriggerAgeCollectionOnClient", b"shouldTriggerAgeCollectionOnClient"]) -> None: ...
+
+global___BotAgeCollectionMetadata = BotAgeCollectionMetadata
+
+@typing.final
 class BotSourcesMetadata(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1749,25 +1788,6 @@ class BotMemuMetadata(google.protobuf.message.Message):
 global___BotMemuMetadata = BotMemuMetadata
 
 @typing.final
-class BotAgeCollectionMetadata(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    AGECOLLECTIONELIGIBLE_FIELD_NUMBER: builtins.int
-    SHOULDTRIGGERAGECOLLECTIONONCLIENT_FIELD_NUMBER: builtins.int
-    ageCollectionEligible: builtins.bool
-    shouldTriggerAgeCollectionOnClient: builtins.bool
-    def __init__(
-        self,
-        *,
-        ageCollectionEligible: builtins.bool | None = ...,
-        shouldTriggerAgeCollectionOnClient: builtins.bool | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["ageCollectionEligible", b"ageCollectionEligible", "shouldTriggerAgeCollectionOnClient", b"shouldTriggerAgeCollectionOnClient"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["ageCollectionEligible", b"ageCollectionEligible", "shouldTriggerAgeCollectionOnClient", b"shouldTriggerAgeCollectionOnClient"]) -> None: ...
-
-global___BotAgeCollectionMetadata = BotAgeCollectionMetadata
-
-@typing.final
 class InThreadSurveyMetadata(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -2118,6 +2138,25 @@ class ForwardedAIBotMessageInfo(google.protobuf.message.Message):
     def ClearField(self, field_name: typing.Literal["botJID", b"botJID", "botName", b"botName", "creatorName", b"creatorName"]) -> None: ...
 
 global___ForwardedAIBotMessageInfo = ForwardedAIBotMessageInfo
+
+@typing.final
+class BotMessageSharingInfo(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    BOTENTRYPOINTORIGIN_FIELD_NUMBER: builtins.int
+    FORWARDSCORE_FIELD_NUMBER: builtins.int
+    botEntryPointOrigin: global___BotMetricsEntryPoint.ValueType
+    forwardScore: builtins.int
+    def __init__(
+        self,
+        *,
+        botEntryPointOrigin: global___BotMetricsEntryPoint.ValueType | None = ...,
+        forwardScore: builtins.int | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["botEntryPointOrigin", b"botEntryPointOrigin", "forwardScore", b"forwardScore"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["botEntryPointOrigin", b"botEntryPointOrigin", "forwardScore", b"forwardScore"]) -> None: ...
+
+global___BotMessageSharingInfo = BotMessageSharingInfo
 
 @typing.final
 class AIRichResponseImageURL(google.protobuf.message.Message):
