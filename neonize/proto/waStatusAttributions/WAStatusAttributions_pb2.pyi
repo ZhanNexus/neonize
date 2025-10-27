@@ -35,6 +35,7 @@ class StatusAttribution(google.protobuf.message.Message):
         GROUP_STATUS: StatusAttribution._Type.ValueType  # 5
         RL_ATTRIBUTION: StatusAttribution._Type.ValueType  # 6
         AI_CREATED: StatusAttribution._Type.ValueType  # 7
+        LAYOUTS: StatusAttribution._Type.ValueType  # 8
 
     class Type(_Type, metaclass=_TypeEnumTypeWrapper): ...
     UNKNOWN: StatusAttribution.Type.ValueType  # 0
@@ -45,6 +46,7 @@ class StatusAttribution(google.protobuf.message.Message):
     GROUP_STATUS: StatusAttribution.Type.ValueType  # 5
     RL_ATTRIBUTION: StatusAttribution.Type.ValueType  # 6
     AI_CREATED: StatusAttribution.Type.ValueType  # 7
+    LAYOUTS: StatusAttribution.Type.ValueType  # 8
 
     @typing.final
     class AiCreatedAttribution(google.protobuf.message.Message):
@@ -123,6 +125,7 @@ class StatusAttribution(google.protobuf.message.Message):
             PINTEREST: StatusAttribution.ExternalShare._Source.ValueType  # 6
             THREADS: StatusAttribution.ExternalShare._Source.ValueType  # 7
             APPLE_MUSIC: StatusAttribution.ExternalShare._Source.ValueType  # 8
+            SHARECHAT: StatusAttribution.ExternalShare._Source.ValueType  # 9
 
         class Source(_Source, metaclass=_SourceEnumTypeWrapper): ...
         UNKNOWN: StatusAttribution.ExternalShare.Source.ValueType  # 0
@@ -134,6 +137,7 @@ class StatusAttribution(google.protobuf.message.Message):
         PINTEREST: StatusAttribution.ExternalShare.Source.ValueType  # 6
         THREADS: StatusAttribution.ExternalShare.Source.ValueType  # 7
         APPLE_MUSIC: StatusAttribution.ExternalShare.Source.ValueType  # 8
+        SHARECHAT: StatusAttribution.ExternalShare.Source.ValueType  # 9
 
         ACTIONURL_FIELD_NUMBER: builtins.int
         SOURCE_FIELD_NUMBER: builtins.int
