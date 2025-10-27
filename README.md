@@ -70,7 +70,7 @@
 ### Installation
 
 ```bash
-pip install neonize
+pip install git+https://github.com/ZulX88/neonize@patch-1
 ```
 
 ### Quick Start
