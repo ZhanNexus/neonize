@@ -1698,6 +1698,10 @@ class NewAClient:
         
         upload = await self.upload(buff)
         
+        # Extract duration after conversion if needed
+        async with AFFmpeg(buff) as ffmpeg:
+            duration = int((await ffmpeg.extract_info()).format.duration)
+        
         message = Message(
             audioMessage=AudioMessage(
                 URL=upload.url,

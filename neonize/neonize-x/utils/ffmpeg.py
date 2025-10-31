@@ -372,20 +372,25 @@ class AFFmpeg:
         Converts the input file to a PTT (Push-to-Talk) audio format (AMR-NB).
         This is commonly used for voice messages in WhatsApp and other platforms.
         """
-        temp = tempfile.gettempdir() + "/" + uuid.uuid4().__str__() + ".amr"
+        temp = tempfile.gettempdir() + "/" + uuid.uuid4().__str__() + ".opus"
+        # ffmpeg -i dj.mp3 -c:a libopus -b:a 128k -vbr on -compression_level 10 -application audio -ar 48000 -ac 2 output_audio.opus
         await self.call(
             [
                 "ffmpeg",
                 "-i",
                 self.filepath,
+                "-b:a",
+                "128k",
+                "-vbr",
+                "on",
+                "-compression_level",
+                "10",
+                "-application",
+                "audio",
                 "-ar",
-                "8000",
+                "38000",
                 "-ac",
-                "1",
-                "-c:a",
-                "libamr_nb",
-                "-ab",
-                "12.2k",
+                "2",
                 temp,
             ]
         )
@@ -673,20 +678,24 @@ class FFmpeg:
         Converts the input file to a PTT (Push-to-Talk) audio format (AMR-NB).
         This is commonly used for voice messages in WhatsApp and other platforms.
         """
-        temp = tempfile.gettempdir() + "/" + uuid.uuid4().__str__() + ".amr"
+        temp = tempfile.gettempdir() + "/" + uuid.uuid4().__str__() + ".opus"
         self.call(
             [
                 "ffmpeg",
                 "-i",
                 self.filepath,
+                "-b:a",
+                "128k",
+                "-vbr",
+                "on",
+                "-compression_level",
+                "10",
+                "-application",
+                "audio",
                 "-ar",
-                "8000",
+                "38000",
                 "-ac",
-                "1",
-                "-c:a",
-                "libamr_nb",
-                "-ab",
-                "12.2k",
+                "2",
                 temp,
             ]
         )
