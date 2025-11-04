@@ -1709,7 +1709,7 @@ class NewAClient:
                 fileLength=upload.FileLength,
                 fileSHA256=upload.FileSHA256,
                 mediaKey=upload.MediaKey,
-                mimetype=magic.from_buffer(buff, mime=True),
+                mimetype='audio/ogg; codecs=opus' if ptt else magic.from_buffer(buff,mime=True),
                 PTT=ptt,
             )
         )
