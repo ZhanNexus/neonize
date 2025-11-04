@@ -15,6 +15,8 @@ import (
     "context"
     "encoding/hex"
     "encoding/binary"
+    "crypto/sha256"
+    "go.mau.fi/util/random"
     "fmt"
     "strings"
     "time"
