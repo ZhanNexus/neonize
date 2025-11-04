@@ -1690,9 +1690,18 @@ class NewAClient:
         io = BytesIO(await get_bytes_from_name_or_url_async(file))
         io.seek(0)
         buff = io.read()
+        
+        # If ptt is True, convert the audio to PTT format using AFFmpeg
+        if ptt:
+            async with AFFmpeg(buff) as ffmpeg:
+                buff = await ffmpeg.to_ptt()
+        
         upload = await self.upload(buff)
-        async with AFFmpeg(io.getvalue()) as ffmpeg:
+        
+        # Extract duration after conversion if needed
+        async with AFFmpeg(buff) as ffmpeg:
             duration = int((await ffmpeg.extract_info()).format.duration)
+        
         message = Message(
             audioMessage=AudioMessage(
                 URL=upload.url,

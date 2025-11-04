@@ -71,12 +71,25 @@ func getByteByAddr(addr *C.uchar, size C.int) []byte {
 	// return result
 }
 
+func GenerateMessageIDV2(ctx context.Context, ownID types.JID) string {
+	data := make([]byte, 8, 8+20+16)
+	binary.BigEndian.PutUint64(data, uint64(time.Now().Unix()))
+	if !ownID.IsEmpty() {
+		data = append(data, []byte(ownID.User)...)
+		data = append(data, []byte("@c.us")...)
+	}
+	data = append(data, random.Bytes(16)...)
+	hash := sha256.Sum256(data)
+	return strings.ToUpper(hex.EncodeToString(hash[:16])) // 32 string
+}
+
 func Bypass(client *whatsmeow.Client, chatJID types.JID) whatsmeow.SendRequestExtra {
 	extra := whatsmeow.SendRequestExtra{}
 	if chatJID.Server == types.GroupServer {
 		ownID := client.Store.ID
 		if ownID != nil {
 			extra.TargetJID = []types.JID{*ownID}
+			extra.ID = GenerateMessageIDV2(context.Background(),ownID)
 		}
 	}
 	return extra

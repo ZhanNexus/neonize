@@ -367,6 +367,38 @@ class AFFmpeg:
         os.remove(temp)
         return buf
 
+    async def to_ptt(self) -> bytes:
+        """
+        Converts the input file to a PTT (Push-to-Talk) audio format (AMR-NB).
+        This is commonly used for voice messages in WhatsApp and other platforms.
+        """
+        temp = tempfile.gettempdir() + "/" + uuid.uuid4().__str__() + ".opus"
+        # ffmpeg -i dj.mp3 -c:a libopus -b:a 128k -vbr on -compression_level 10 -application audio -ar 48000 -ac 2 output_audio.opus
+        await self.call(
+            [
+                "ffmpeg",
+                "-i",
+                self.filepath,
+                "-b:a",
+                "128k",
+                "-vbr",
+                "on",
+                "-compression_level",
+                "10",
+                "-application",
+                "audio",
+                "-ar",
+                "38000",
+                "-ac",
+                "2",
+                temp,
+            ]
+        )
+        with open(temp, "rb") as file:
+            buf = file.read()
+        os.remove(temp)
+        return buf
+
     async def extract_thumbnail(
         self,
         format: ImageFormat = ImageFormat.JPG,
@@ -641,6 +673,37 @@ class FFmpeg:
         os.remove(temp)
         return buf
 
+    def to_ptt(self) -> bytes:
+        """
+        Converts the input file to a PTT (Push-to-Talk) audio format (AMR-NB).
+        This is commonly used for voice messages in WhatsApp and other platforms.
+        """
+        temp = tempfile.gettempdir() + "/" + uuid.uuid4().__str__() + ".opus"
+        self.call(
+            [
+                "ffmpeg",
+                "-i",
+                self.filepath,
+                "-b:a",
+                "128k",
+                "-vbr",
+                "on",
+                "-compression_level",
+                "10",
+                "-application",
+                "audio",
+                "-ar",
+                "38000",
+                "-ac",
+                "2",
+                temp,
+            ]
+        )
+        with open(temp, "rb") as file:
+            buf = file.read()
+        os.remove(temp)
+        return buf
+
     def extract_thumbnail(
         self,
         format: ImageFormat = ImageFormat.JPG,
@@ -729,3 +792,4 @@ class FFmpeg:
                 for data in streams
             ],
         )
+
