@@ -1,6 +1,6 @@
 module github.com/krypton-byte/neonize
 
-go 1.25.3
+go 1.24.5
 
 require (
 	github.com/lib/pq v1.10.9
