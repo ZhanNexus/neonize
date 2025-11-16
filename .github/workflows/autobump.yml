@@ -51,7 +51,7 @@ jobs:
         isort neonize --skip "neonize/proto"
         black neonize  --exclude "neonize/proto"
     - name: update golang dependencies
-      run: cd goneonize && go get -u && go mod tidy
+      run: cd goneonize && go get -u ./... && go mod tidy
     - name: Run golangci-lint
       uses: golangci/golangci-lint-action@v8
       with:
