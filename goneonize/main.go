@@ -22,8 +22,8 @@ import (
     "time"
     "unsafe"
 
-    "github.com/krypton-byte/neonize/defproto"
-    "github.com/krypton-byte/neonize/utils"
+    "github.com/krypton-byte/neonize"
+    "github.com/krypton-byte/neonize"
     _ "github.com/mattn/go-sqlite3"
     "go.mau.fi/whatsmeow"
     "go.mau.fi/whatsmeow/proto/waCompanionReg"
