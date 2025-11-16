@@ -13,27 +13,26 @@ jobs:
     - uses: actions/checkout@v4
     - uses: actions/setup-go@v4
       with:
-        go-version: '^1.25.3'
+        go-version: '^1.21.5'
     - name: installing proto-gen-go
       run: |
+        cd goneonize
         go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
         go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
-      working-directory: goneonize
     - uses: actions/setup-python@v4
       with:
         python-version: "3.11.8"
     - name: Install Protoc
       uses: arduino/setup-protoc@v3
       with:
-        version: "30.2"
+        version: "32.1"
     - name: Install uv
       uses: astral-sh/setup-uv@v5
     - name: fetch new proto files
       run: |
         uv sync --group dev
         uv run task proto
-        # git diff --exit-code || uv run task build proto
-        uv run task build proto
+        git diff --exit-code || uv run task build proto
     - uses: astral-sh/ruff-action@v3
       with:
         args: "check --fix"
@@ -51,13 +50,7 @@ jobs:
         isort neonize --skip "neonize/proto"
         black neonize  --exclude "neonize/proto"
     - name: update golang dependencies
-      working-directory: goneonize
-      run: |
-        go mod edit -replace github.com/krypton-byte/neonize=./
-        rm go.sum
-        go get -u
-        go mod tidy
-        go mod edit -dropreplace github.com/krypton-byte/neonize
+      run: cd goneonize && go get -u && go mod tidy
     - name: Run golangci-lint
       uses: golangci/golangci-lint-action@v8
       with:
@@ -89,6 +82,6 @@ jobs:
           whatsmeow
           goneonize
           automated pr
-        assignees: nubuki-all
-        reviewers: nubuki-all
+        assignees: krypton-byte
+        reviewers: krypton-byte
         draft: false
