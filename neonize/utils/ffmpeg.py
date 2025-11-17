@@ -1,4 +1,7 @@
 import asyncio
+import io
+import wave
+import struct
 import json
 import logging
 import os
@@ -379,21 +382,101 @@ class AFFmpeg:
         await self.call(
             [
                 "ffmpeg",
-                "-y",                 # overwrite output file if exists
-                "-i", self.filepath,  # input file
-                "-vn",                # disable video
-                "-c:a", "libopus",    # use Opus audio codec
-                "-ar", "16000",       # sample rate 16 kHz
-                "-ac", "1",           # mono channel
-                "-b:a", "64k",        # bitrate 64 kbps
-                temp,                 # output path
+                "-y",                 
+                "-i", self.filepath,  
+                "-vn",               
+                "-c:a", "libopus",    
+                "-ar", "48000",       
+                "-ac", "1",           
+                "-b:a", "128k",
+                temp,                 
             ]
         )
+
     
         with open(temp, "rb") as file:
             buf = file.read()
         os.remove(temp)
         return buf
+
+    async def get_audio_waveform(self, logger=None) -> bytes:
+        """
+        Generate a 64-byte waveform summary from the file referenced by self.filepath.
+        """
+        try:
+            with open(self.filepath, "rb") as f:
+                audio_bytes = f.read()
+
+            samples = None
+
+            try:
+                audio_stream = io.BytesIO(audio_bytes)
+                with wave.open(audio_stream, "rb") as wav_file:
+                    frames = wav_file.readframes(wav_file.getnframes())
+                    sample_width = wav_file.getsampwidth()
+                    num_channels = wav_file.getnchannels()
+
+                    if sample_width == 1:
+                        samples = [s - 128 for s in struct.unpack(f"{len(frames)}B", frames)]
+                    elif sample_width == 2:
+                        samples = struct.unpack(f"{len(frames)//2}h", frames)
+                    elif sample_width == 4:
+                        samples = struct.unpack(f"{len(frames)//4}i", frames)
+                    else:
+                        raise ValueError(f"Unsupported sample width: {sample_width}")
+
+                    if num_channels == 2:
+                        samples = samples[::2]
+
+            except wave.Error:
+                # fallback: use ffmpeg via asyncio to decode to s16le mono 22050
+                ff = await asyncio.create_subprocess_exec(
+                    "ffmpeg",
+                    "-i", "pipe:0",
+                    "-f", "s16le",
+                    "-acodec", "pcm_s16le",
+                    "-ac", "1",
+                    "-ar", "22050",
+                    "-hide_banner",
+                    "-loglevel", "error",
+                    "pipe:1",
+                    stdin=asyncio.subprocess.PIPE,
+                    stdout=asyncio.subprocess.PIPE,
+                    stderr=asyncio.subprocess.PIPE,
+                )
+                stdout, stderr = await ff.communicate(input=audio_bytes)
+                if ff.returncode != 0:
+                    raise RuntimeError(f"ffmpeg failed: {stderr.decode(errors='ignore')}")
+                samples = struct.unpack(f"{len(stdout)//2}h", stdout)
+
+            if not samples:
+                return bytes([0] * 64)
+
+            # compute 64-point waveform
+            samples_count = 64
+            block_size = max(1, len(samples) // samples_count)
+            waveform_data = []
+            for i in range(samples_count):
+                start_idx = i * block_size
+                end_idx = min(start_idx + block_size, len(samples))
+                block = samples[start_idx:end_idx]
+                sum_squares = sum((s * s) for s in block) if block else 0
+                rms = (sum_squares / len(block)) ** 0.5 if block else 0
+                waveform_data.append(rms)
+
+            max_val = max(waveform_data) if waveform_data else 1
+            if max_val > 0:
+                normalized_data = [min(1.0, (val / max_val) ** 0.7) for val in waveform_data]
+            else:
+                normalized_data = [0] * len(waveform_data)
+
+            return bytes(int(100 * n) for n in normalized_data)
+
+        except Exception as e:
+            if logger:
+                logger.debug(f"Waveform generation failed: {e}")
+            return bytes([0] * 64)
+
     
     async def extract_thumbnail(
         self,
@@ -678,27 +761,91 @@ class FFmpeg:
         self.call(
             [
                 "ffmpeg",
-                "-i",
-                self.filepath,
-                "-b:a",
-                "128k",
-                "-vbr",
-                "on",
-                "-compression_level",
-                "10",
-                "-application",
-                "audio",
-                "-ar",
-                "38000",
-                "-ac",
-                "2",
-                temp,
+                "-y",                 
+                "-i", self.filepath,  
+                "-vn",               
+                "-c:a", "libopus",    
+                "-ar", "48000",       
+                "-ac", "1",           
+                "-b:a", "128k",
+                temp,                 
             ]
         )
         with open(temp, "rb") as file:
             buf = file.read()
         os.remove(temp)
         return buf
+
+    def get_audio_waveform(self, logger=None) -> bytes:
+        """
+        Generate a 64-byte waveform summary from the file referenced by self.filepath.
+        """
+        try:
+            with open(self.filepath, "rb") as f:
+                audio_bytes = f.read()
+
+            samples = None
+
+            try:
+                audio_stream = io.BytesIO(audio_bytes)
+                with wave.open(audio_stream, "rb") as wav_file:
+                    frames = wav_file.readframes(wav_file.getnframes())
+                    sample_width = wav_file.getsampwidth()
+                    num_channels = wav_file.getnchannels()
+
+                    if sample_width == 1:
+                        samples = [s - 128 for s in struct.unpack(f"{len(frames)}B", frames)]
+                    elif sample_width == 2:
+                        samples = struct.unpack(f"{len(frames)//2}h", frames)
+                    elif sample_width == 4:
+                        samples = struct.unpack(f"{len(frames)//4}i", frames)
+                    else:
+                        raise ValueError(f"Unsupported sample width: {sample_width}")
+
+                    if num_channels == 2:
+                        samples = samples[::2]
+
+            except wave.Error:
+                # fallback: run ffmpeg to convert to s16le mono 22050
+                cmd = [
+                    "ffmpeg", "-i", "pipe:0",
+                    "-f", "s16le", "-acodec", "pcm_s16le",
+                    "-ac", "1", "-ar", "22050",
+                    "-hide_banner", "-loglevel", "error",
+                    "pipe:1"
+                ]
+                proc = subprocess.run(cmd, input=audio_bytes, capture_output=True, check=True)
+                stdout = proc.stdout
+                samples = struct.unpack(f"{len(stdout)//2}h", stdout)
+
+            if not samples:
+                return bytes([0] * 64)
+
+            # compute 64-point waveform
+            samples_count = 64
+            block_size = max(1, len(samples) // samples_count)
+            waveform_data = []
+            for i in range(samples_count):
+                start_idx = i * block_size
+                end_idx = min(start_idx + block_size, len(samples))
+                block = samples[start_idx:end_idx]
+                sum_squares = sum((s * s) for s in block) if block else 0
+                rms = (sum_squares / len(block)) ** 0.5 if block else 0
+                waveform_data.append(rms)
+
+            max_val = max(waveform_data) if waveform_data else 1
+            if max_val > 0:
+                normalized_data = [min(1.0, (val / max_val) ** 0.7) for val in waveform_data]
+            else:
+                normalized_data = [0] * len(waveform_data)
+
+            return bytes(int(100 * n) for n in normalized_data)
+
+        except Exception as e:
+            if logger:
+                logger.debug(f"Waveform generation failed: {e}")
+            return bytes([0] * 64)
+
 
     def extract_thumbnail(
         self,

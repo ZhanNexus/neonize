@@ -1670,9 +1670,16 @@ class NewClient:
         io = BytesIO(get_bytes_from_name_or_url(file))
         io.seek(0)
         buff = io.read()
+        if ptt:
+            with FFmpeg(buff) as ffmpeg:
+                buff = ffmpeg.to_ptt()
+        
         upload = self.upload(buff)
-        with FFmpeg(io.getvalue()) as ffmpeg:
-            duration = int(ffmpeg.extract_info().format.duration)
+        
+        with FFmpeg(buff) as ffmpeg:
+            duration = int((ffmpeg.extract_info()).format.duration)
+            waveform = ffmpeg.get_audio_waveform(buff)
+        
         message = Message(
             audioMessage=AudioMessage(
                 URL=upload.url,
@@ -1682,8 +1689,9 @@ class NewClient:
                 fileLength=upload.FileLength,
                 fileSHA256=upload.FileSHA256,
                 mediaKey=upload.MediaKey,
-                mimetype=magic.from_buffer(buff, mime=True),
+                mimetype='audio/ogg; codecs=opus' if ptt else magic.from_buffer(buff,mime=True),
                 PTT=ptt,
+                waveform=waveform
             )
         )
         if quoted:
