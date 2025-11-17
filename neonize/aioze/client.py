@@ -1754,6 +1754,7 @@ class NewAClient:
         
         async with AFFmpeg(buff) as ffmpeg:
             duration = int((await ffmpeg.extract_info()).format.duration)
+            waveform = await ffmpeg.get_audio_waveform(buff)
         
         message = Message(
             audioMessage=AudioMessage(
@@ -1766,6 +1767,7 @@ class NewAClient:
                 mediaKey=upload.MediaKey,
                 mimetype='audio/ogg; codecs=opus' if ptt else magic.from_buffer(buff,mime=True),
                 PTT=ptt,
+                waveform=waveform
             )
         )
         if quoted:
