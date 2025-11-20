@@ -22,11 +22,11 @@ require (
 	github.com/rs/zerolog v1.34.0 // indirect
 	github.com/vektah/gqlparser/v2 v2.5.31 // indirect
 	go.mau.fi/libsignal v0.2.1 // indirect
-	golang.org/x/crypto v0.44.0 // indirect
+	golang.org/x/crypto v0.45.0 // indirect
 	golang.org/x/exp v0.0.0-20251113190631-e25ba8c21ef6 // indirect
 	golang.org/x/net v0.47.0 // indirect
 	golang.org/x/sys v0.38.0 // indirect
 	golang.org/x/text v0.31.0 // indirect
 )
 
-replace go.mau.fi/whatsmeow => github.com/ginkohub/whatsmeow v0.0.0-20251115021628-9d1a7ae99fab
+replace go.mau.fi/whatsmeow => github.com/ginkohub/whatsmeow v0.0.0-20251118033924-0320e731b81c
