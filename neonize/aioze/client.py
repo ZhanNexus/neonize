@@ -619,6 +619,7 @@ class NewAClient:
         ghost_mentions: Optional[str] = None,
         mentions_are_lids: bool = False,
         add_msg_secret: bool = False,
+        context_info: Optional[ContextInfo] = None,
     ) -> SendResponse:
         """Send a message to the specified JID.
 
@@ -634,6 +635,8 @@ class NewAClient:
         :type mentions_are_lids: bool, optional
         :param add_msg_secret: Whether to generate 32 random bytes for messageSecret inside MessageContextInfo before sending, defaults to False
         :type add_msg_secret: bool, optional
+        :param context_info: Additional ContextInfo to merge with existing ContextInfo
+        :type context_info: Optional[ContextInfo], optional
         :raises SendMessageError: If there was an error sending the message.
         :return: The response from the server.
         :rtype: SendResponse
@@ -687,6 +690,31 @@ class NewAClient:
 
             # Apply to the main message object
             add_expiration_to_context_info(msg)
+
+        # Merge additional context_info if provided
+        if context_info is not None:
+            def merge_additional_context_info(proto_obj):
+                """Recursively merge additional ContextInfo to any ContextInfo found in the protobuf object"""
+                # Check if the object has contextInfo field directly
+                if hasattr(proto_obj, 'contextInfo'):
+                    # If contextInfo field exists but not set, create it first
+                    if not proto_obj.HasField('contextInfo'):
+                        proto_obj.contextInfo.MergeFrom(ContextInfo())
+                    # Then merge additional context info
+                    proto_obj.contextInfo.MergeFrom(context_info)
+
+                # Recursively check all fields for nested messages that might have contextInfo
+                for field, value in proto_obj.ListFields():
+                    if field.type == field.TYPE_MESSAGE:
+                        if hasattr(value, 'ListFields'):  # It's a message
+                            if field.label == field.LABEL_REPEATED:  # Repeated message fields
+                                for item in value:
+                                    merge_additional_context_info(item)
+                            else:  # Single message field
+                                merge_additional_context_info(value)
+
+            # Apply to the main message object
+            merge_additional_context_info(msg)
 
         if add_msg_secret:
             # optionally patch message with messageSecret to allow reactions and replies to messages sent to community announcements
@@ -1404,6 +1432,7 @@ class NewAClient:
         ghost_mentions: Optional[str] = None,
         mentions_are_lids: bool = False,
         add_msg_secret: bool = False,
+        context_info: Optional[ContextInfo] = None,
     ) -> SendResponse:
         """Sends a video to the specified recipient.
 
@@ -1429,6 +1458,8 @@ class NewAClient:
         :type mentions_are_lids: bool, optional
         :param add_msg_secret: Optional. Whether to generate 32 random bytes for messageSecret inside MessageContextInfo before sending, defaults to False
         :type add_msg_secret: bool, optional
+        :param context_info: Additional ContextInfo to merge with existing ContextInfo
+        :type context_info: Optional[ContextInfo], optional
         :return: A function for handling the result of the video sending process.
         :rtype: SendResponse
         """
@@ -1446,6 +1477,7 @@ class NewAClient:
                 mentions_are_lids,
             ),
             add_msg_secret=add_msg_secret,
+            context_info=context_info,
         )
      
     async def send_carousel(
@@ -1588,6 +1620,7 @@ class NewAClient:
         ghost_mentions: Optional[str] = None,
         mentions_are_lids: bool = False,
         add_msg_secret: bool = False,
+        context_info: Optional[ContextInfo] = None,
     ) -> SendResponse:
         """Sends an image to the specified recipient.
 
@@ -1609,6 +1642,8 @@ class NewAClient:
         :type mentions_are_lids: bool, optional
         :param add_msg_secret: Optional. Whether to generate 32 random bytes for messageSecret inside MessageContextInfo before sending, defaults to False
         :type add_msg_secret: bool, optional
+        :param context_info: Additional ContextInfo to merge with existing ContextInfo
+        :type context_info: Optional[ContextInfo], optional
         :return: A function for handling the result of the image sending process.
         :rtype: SendResponse
         """
@@ -1624,6 +1659,7 @@ class NewAClient:
                 mentions_are_lids=mentions_are_lids,
             ),
             add_msg_secret=add_msg_secret,
+            context_info=context_info,
         )
 
     async def build_album_content(
@@ -1812,6 +1848,7 @@ class NewAClient:
         ptt: bool = False,
         quoted: Optional[neonize_proto.Message] = None,
         add_msg_secret: bool = False,
+        context_info: Optional[ContextInfo] = None,
     ) -> SendResponse:
         """Sends an audio to the specified recipient.
 
@@ -1825,6 +1862,8 @@ class NewAClient:
         :type quoted: Optional[Message], optional
         :param add_msg_secret: Optional. Whether to  generate 32 random bytes for messageSecret inside MessageContextInfo before sending, defaults to False
         :type add_msg_secret: bool, optional
+        :param context_info: Additional ContextInfo to merge with existing ContextInfo
+        :type context_info: Optional[ContextInfo], optional
         :return: A function for handling the result of the audio sending process.
         :rtype: SendResponse
         """
@@ -1833,6 +1872,7 @@ class NewAClient:
             to,
             await self.build_audio_message(file, ptt, quoted),
             add_msg_secret=add_msg_secret,
+            context_info=context_info,
         )
 
     async def build_document_message(
@@ -1888,6 +1928,7 @@ class NewAClient:
         ghost_mentions: Optional[str] = None,
         mentions_are_lids: bool = False,
         add_msg_secret: bool = False,
+        context_info: Optional[ContextInfo] = None,
     ) -> SendResponse:
         """Sends a document to the specified recipient.
 
@@ -1909,6 +1950,8 @@ class NewAClient:
         :type mentions_are_lids: bool, optional
         :param add_msg_secret: Optional. Whether to generate 32 random bytes for messageSecret inside MessageContextInfo before sending, defaults to False
         :type add_msg_secret: bool, optional
+        :param context_info: Additional ContextInfo to merge with existing ContextInfo
+        :type context_info: Optional[ContextInfo], optional
         :return: A function for handling the result of the document sending process.
         :rtype: SendResponse
         """
@@ -1925,6 +1968,7 @@ class NewAClient:
                 mentions_are_lids,
             ),
             add_msg_secret=add_msg_secret,
+            context_info=context_info,
         )
 
     async def send_contact(
