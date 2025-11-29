@@ -15,6 +15,8 @@ github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/elliotchance/orderedmap/v3 v3.1.0 h1:j4DJ5ObEmMBt/lcwIecKcoRxIQUEnw0L804lXYDt/pg=
 github.com/elliotchance/orderedmap/v3 v3.1.0/go.mod h1:G+Hc2RwaZvJMcS4JpGCOyViCnGeKf0bTYCGTO4uhjSo=
+github.com/fawwaz37/libsignal-protocol-go v0.2.1-0.20250920101933-ae5672c024d5 h1:iLK5KWv/kZNCDwh+evj5eh5ExmVYn6ke+H9jofdT8UM=
+github.com/fawwaz37/libsignal-protocol-go v0.2.1-0.20250920101933-ae5672c024d5/go.mod h1:tvjoDsMejgT38CXTXwqaYu8itBiY8O2Mb6biWvZBb9k=
 github.com/ginkohub/whatsmeow v0.0.0-20251118033924-0320e731b81c h1:UwFN7ikKO8K+q0mWap5x/W65dHmE1nroah7YLwt9waI=
 github.com/ginkohub/whatsmeow v0.0.0-20251118033924-0320e731b81c/go.mod h1:5aYaEa3FF5e5XWsA8Xa80ttUXZvb6HyaBGgo2SfzUkE=
 github.com/godbus/dbus/v5 v5.0.4/go.mod h1:xhWf0FNVPg57R7Z0UbKHbJfkEywrmjJnf7w5xrFpKfA=
@@ -47,8 +49,6 @@ github.com/stretchr/testify v1.11.1 h1:7s2iGBzp5EwR7/aIZr8ao5+dra3wiQyKjjFuvgVKu
 github.com/stretchr/testify v1.11.1/go.mod h1:wZwfW3scLgRK+23gO65QZefKpKQRnfz6sD981Nm4B6U=
 github.com/vektah/gqlparser/v2 v2.5.31 h1:YhWGA1mfTjID7qJhd1+Vxhpk5HTgydrGU9IgkWBTJ7k=
 github.com/vektah/gqlparser/v2 v2.5.31/go.mod h1:c1I28gSOVNzlfc4WuDlqU7voQnsqI6OG2amkBAFmgts=
-go.mau.fi/libsignal v0.2.1 h1:vRZG4EzTn70XY6Oh/pVKrQGuMHBkAWlGRC22/85m9L0=
-go.mau.fi/libsignal v0.2.1/go.mod h1:iVvjrHyfQqWajOUaMEsIfo3IqgVMrhWcPiiEzk7NgoU=
 go.mau.fi/util v0.9.3 h1:aqNF8KDIN8bFpFbybSk+mEBil7IHeBwlujfyTnvP0uU=
 go.mau.fi/util v0.9.3/go.mod h1:krWWfBM1jWTb5f8NCa2TLqWMQuM81X7TGQjhMjBeXmQ=
 golang.org/x/crypto v0.45.0 h1:jMBrvKuj23MTlT0bQEOBcAE0mjg8mK9RXFhRH6nyF3Q=
