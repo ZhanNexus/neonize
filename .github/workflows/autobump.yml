@@ -54,7 +54,7 @@ jobs:
     - name: Run golangci-lint
       uses: golangci/golangci-lint-action@v8
       with:
-        version: v2.1 # Specify a golangci-lint version
+        version: latest # Specify a golangci-lint version
         working-directory: goneonize
         args: --issues-exit-code=0 # Exit with 0 even if issues are found, useful for reformatting
     - name: Install gofumpt
