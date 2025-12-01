@@ -279,8 +279,11 @@ func SendMessage(id *C.char, JIDByte *C.uchar, JIDSize C.int, messageByte *C.uch
 		return_.Error = proto.String(err_message.Error())
 		return ProtoReturnV3(&return_)
 	}
-	extra := whatsmeow.SendRequestExtra{}
-	extra.ID = GenerateMessageIDV2()
+	ownID := client.Store.ID
+	if ownID != nil {
+    	extra := whatsmeow.SendRequestExtra{}
+    	extra.ID = GenerateMessageIDV2(context.Background(), ownID)
+	}
 	// fmt.Println("SendMessage: Sending message to WhatsApp")
 	sendresponse, err := client.SendMessage(context.Background(), utils.DecodeJidProto(&neonize_jid), &message, extra)
 	if err != nil {
