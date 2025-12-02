@@ -655,8 +655,7 @@ class NewAClient:
                     groupMentions=mentioned_groups,
                 ),
             )
-            # Add expiration=1 to ContextInfo using MergeFrom
-            partial_msg.contextInfo.MergeFrom(ContextInfo(expiration=1))
+            partial_msg.contextInfo.MergeFrom(ContextInfo(expiration=86400))
             if link_preview:
                 preview = await self._generate_link_preview(message)
                 if preview:
@@ -669,62 +668,46 @@ class NewAClient:
                 msg = Message(extendedTextMessage=partial_msg)
         else:
             msg = message
-
-            # Function to add expiration=1 to any ContextInfo found in the
-            # protobuf object
             def add_expiration_to_context_info(proto_obj):
-                """Recursively add expiration=1 to any ContextInfo found in the protobuf object"""
-                # Check if the object has contextInfo field directly
+                """Recursively add expiration=86400 to any ContextInfo found in the protobuf object"""
                 if hasattr(proto_obj, "contextInfo"):
-                    # If contextInfo field exists but not set, create it first
                     if not proto_obj.HasField("contextInfo"):
                         proto_obj.contextInfo.MergeFrom(ContextInfo())
-                    # Then add expiration=1
-                    proto_obj.contextInfo.MergeFrom(ContextInfo(expiration=1))
+                    proto_obj.contextInfo.MergeFrom(ContextInfo(expiration=86400))
 
-                # Recursively check all fields for nested messages that might
-                # have contextInfo
                 for field, value in proto_obj.ListFields():
                     if field.type == field.TYPE_MESSAGE:
-                        if hasattr(value, "ListFields"):  # It's a message
+                        if hasattr(value, "ListFields"):  
                             if (
                                 field.label == field.LABEL_REPEATED
-                            ):  # Repeated message fields
+                            ):
                                 for item in value:
                                     add_expiration_to_context_info(item)
-                            else:  # Single message field
+                            else:  
                                 add_expiration_to_context_info(value)
 
-            # Apply to the main message object
             add_expiration_to_context_info(msg)
 
-        # Merge additional context_info if provided
         if context_info is not None:
 
             def merge_additional_context_info(proto_obj):
                 """Recursively merge additional ContextInfo to any ContextInfo found in the protobuf object"""
-                # Check if the object has contextInfo field directly
                 if hasattr(proto_obj, "contextInfo"):
-                    # If contextInfo field exists but not set, create it first
                     if not proto_obj.HasField("contextInfo"):
                         proto_obj.contextInfo.MergeFrom(ContextInfo())
-                    # Then merge additional context info
                     proto_obj.contextInfo.MergeFrom(context_info)
 
-                # Recursively check all fields for nested messages that might
-                # have contextInfo
                 for field, value in proto_obj.ListFields():
                     if field.type == field.TYPE_MESSAGE:
-                        if hasattr(value, "ListFields"):  # It's a message
+                        if hasattr(value, "ListFields"): 
                             if (
                                 field.label == field.LABEL_REPEATED
-                            ):  # Repeated message fields
+                            ):  
                                 for item in value:
                                     merge_additional_context_info(item)
-                            else:  # Single message field
+                            else:  
                                 merge_additional_context_info(value)
 
-            # Apply to the main message object
             merge_additional_context_info(msg)
 
         if add_msg_secret:
@@ -779,7 +762,7 @@ class NewAClient:
                         (ghost_mentions or message), mentions_are_lids
                     ),
                     groupMentions=(await self._parse_group_mention(message)),
-                    expiration=1,
+                    expiration=86400,
                 ),
             )
             if link_preview:
