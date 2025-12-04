@@ -25,6 +25,7 @@ from typing import (
     overload,
 )
 from uuid import uuid4
+from time import time
 
 import magic
 from google.protobuf.internal.containers import RepeatedCompositeFieldContainer
@@ -463,6 +464,8 @@ class NewAClient:
         self.connected = False
         self.loop = event_global_loop
         self.me = None
+        self._group_disappearing_cache = {}  # Cache for group disappearing timers {group_jid: (expiration, timestamp)}
+        self._group_cache_ttl = 300  # 5 minutes TTL for cache entries
         _log_.debug("🔨 Creating a NewClient instance")
 
     def __onLoginStatus(self, uuid: int, status: int):
@@ -612,6 +615,30 @@ class NewAClient:
             ),
         )
 
+    async def _get_group_disappearing_time(self, jid: JID) -> int:
+        """
+        Get group disappearing time with caching to avoid multiple API calls.
+
+        :param jid: The group JID
+        :return: Disappearing timer value in seconds
+        """
+        jid_str = Jid2String(jid)
+        current_time = time()
+
+        if jid_str in self._group_disappearing_cache:
+            cached_time, timestamp = self._group_disappearing_cache[jid_str]
+            if current_time - timestamp < self._group_cache_ttl:
+                return cached_time
+
+        try:
+            get_ephemeral = await self.get_group_info(jid)
+            disappearing_time = get_ephemeral.GroupEphemeral.DisappearingTimer
+            self._group_disappearing_cache[jid_str] = (disappearing_time, current_time)
+            return disappearing_time
+        except Exception as e:
+            _log_.warning(f"Could not get group info for {jid_str}: {e}")
+            return 0
+
     async def send_message(
         self,
         to: JID,
@@ -643,12 +670,11 @@ class NewAClient:
         :rtype: SendResponse
         """
         to_bytes = to.SerializeToString()
-        disappearing_time=0
+        disappearing_time = 0
         if to.Server == "g.us":
-            get_ephemeral = await self.get_group_info(to)
-            disappearing_time= get_ephemeral.GroupEphemeral.DisappearingTimer
+            disappearing_time = await self._get_group_disappearing_time(to)
         elif to.Server == "s.whatsapp.net" or to.Server == "lid":
-            disappearing_time=86400
+            disappearing_time = 86400
         if isinstance(message, str):
             mentioned_groups = await self._parse_group_mention(message)
             mentioned_jid = self._parse_mention(
@@ -683,13 +709,13 @@ class NewAClient:
 
                 for field, value in proto_obj.ListFields():
                     if field.type == field.TYPE_MESSAGE:
-                        if hasattr(value, "ListFields"):  
+                        if hasattr(value, "ListFields"):
                             if (
                                 field.label == field.LABEL_REPEATED
                             ):
                                 for item in value:
                                     add_expiration_to_context_info(item)
-                            else:  
+                            else:
                                 add_expiration_to_context_info(value)
 
             add_expiration_to_context_info(msg)
@@ -705,13 +731,13 @@ class NewAClient:
 
                 for field, value in proto_obj.ListFields():
                     if field.type == field.TYPE_MESSAGE:
-                        if hasattr(value, "ListFields"): 
+                        if hasattr(value, "ListFields"):
                             if (
                                 field.label == field.LABEL_REPEATED
-                            ):  
+                            ):
                                 for item in value:
                                     merge_additional_context_info(item)
-                            else:  
+                            else:
                                 merge_additional_context_info(value)
 
             merge_additional_context_info(msg)
@@ -732,6 +758,14 @@ class NewAClient:
             raise SendMessageError(model.Error)
         model.SendResponse.MergeFrom(model.SendResponse.__class__(Message=msg))
         return model.SendResponse
+
+    def clear_group_cache(self):
+        """Clear the group disappearing time cache."""
+        self._group_disappearing_cache.clear()
+
+    def set_group_cache_ttl(self, ttl: int):
+        """Set the TTL for group cache entries in seconds."""
+        self._group_cache_ttl = ttl
 
     async def build_reply_message(
         self,
