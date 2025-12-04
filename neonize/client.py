@@ -582,7 +582,7 @@ class NewClient:
         to_bytes = to.SerializeToString()
         disappearing_time=0
         if to.Server == "g.us":
-            get_ephemeral = await self.get_group_info(to)
+            get_ephemeral = self.get_group_info(to)
             disappearing_time= get_ephemeral.GroupEphemeral.DisappearingTimer
         elif to.Server == "s.whatsapp.net" or to.Server == "lid":
             disappearing_time=86400
