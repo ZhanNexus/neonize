@@ -1,9 +1,9 @@
 from ..proto import Neonize_pb2 as neonize_proto
 from ..proto.waE2E.WAWebProtobufsE2E_pb2 import (
-    Message
+    Message,
+    PollUpdateMessage
 )
 from ..types import MessageWithContextInfo
-
 
 def get_message_type(message: Message) -> str:
     """
