@@ -25,7 +25,6 @@ from typing import (
     overload,
 )
 from uuid import uuid4
-from time import time
 
 import magic
 from google.protobuf.internal.containers import RepeatedCompositeFieldContainer
