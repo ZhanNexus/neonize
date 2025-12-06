@@ -1,16 +1,11 @@
 from ..proto import Neonize_pb2 as neonize_proto
 from ..proto.waE2E.WAWebProtobufsE2E_pb2 import (
-    DocumentMessage,
-    ExtendedTextMessage,
-    ImageMessage,
-    Message,
-    PollUpdateMessage,
-    VideoMessage,
+    Message
 )
-from ..types import MediaMessageType, MessageWithContextInfo, TextMessageType
+from ..types import MessageWithContextInfo
 
 
-def get_message_type(message: Message) -> MediaMessageType | TextMessageType:
+def get_message_type(message: Message) -> str:
     """
     Determines the type of message.
 
@@ -18,17 +13,14 @@ def get_message_type(message: Message) -> MediaMessageType | TextMessageType:
     :type message: Message
     :raises IndexError: If the message type cannot be determined.
     :return: The type of the message.
-    :rtype: MediaMessageType | TextMessageType
+    :rtype: str
     """
-    for field_name, v in message.ListFields():
-        if field_name.name.endswith(("Message", "MessageV2", "MessageV3")):
-            return v
-        elif field_name.name == "conversation":
-            return v
-    raise IndexError()
+    msg_fields = message.ListFields()
+    field_name = msg_fields[0][0].name
+    return field_name 
 
 
-def extract_text(message: Message):
+def extract_text(message: Message) -> str:
     """
     Extracts text content from a message.
 
@@ -37,20 +29,17 @@ def extract_text(message: Message):
     :return: The extracted text content.
     :rtype: str
     """
-    if message.imageMessage.ListFields():
-        imageMessage: ImageMessage = message.imageMessage
-        return imageMessage.caption
-    elif message.extendedTextMessage.ListFields():
-        extendedTextMessage: ExtendedTextMessage = message.extendedTextMessage
-        return extendedTextMessage.text
-    elif message.videoMessage.ListFields():
-        videoMessage: VideoMessage = message.videoMessage
-        return videoMessage.caption
-    elif message.documentMessage.ListFields():
-        documentMessage: DocumentMessage = message.documentMessage
-        return documentMessage.caption
-    elif message.conversation:
-        return message.conversation
+    msg_fields = message.ListFields()
+    
+    _, field_value = msg_fields[0]
+    if isinstance(field_value, str):
+        return field_value
+    text_attrs = ["text", "caption", "name", "conversation"]
+    for attr in text_attrs:
+        if hasattr(field_value, attr):
+            val = getattr(field_value, attr)
+            if isinstance(val, str) and val.strip():
+                return val
     return ""
 
 

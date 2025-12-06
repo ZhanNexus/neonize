@@ -465,7 +465,7 @@ class NewAClient:
         self.loop = event_global_loop
         self.me = None
         self._group_disappearing_cache = {}  # Cache for group disappearing timers {group_jid: (expiration, timestamp)}
-        self._group_cache_ttl = 300  # 5 minutes TTL for cache entries
+        self._group_cache_ttl = 900  # TTL for cache entries
         _log_.debug("🔨 Creating a NewClient instance")
 
     def __onLoginStatus(self, uuid: int, status: int):
