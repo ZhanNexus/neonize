@@ -82,6 +82,6 @@ jobs:
           whatsmeow
           goneonize
           automated pr
-        assignees: krypton-byte
-        reviewers: krypton-byte
+        assignees: ZulX88
+        reviewers: ZulX88
         draft: false
