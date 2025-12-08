@@ -73,6 +73,7 @@ func getByteByAddr(addr *C.uchar, size C.int) []byte {
 	// return result
 }
 
+// Generate Message ID Custom
 func GenerateMessageIDV2(ctx context.Context, ownID types.JID) string {
 	data := make([]byte, 8, 8+20+16)
 	binary.BigEndian.PutUint64(data, uint64(time.Now().Unix()))
@@ -82,7 +83,12 @@ func GenerateMessageIDV2(ctx context.Context, ownID types.JID) string {
 	}
 	data = append(data, random.Bytes(16)...)
 	hash := sha256.Sum256(data)
-	return strings.ToUpper(hex.EncodeToString(hash[:16])) // 32 string
+	base := strings.ToUpper(hex.EncodeToString(hash[:16])) // 32 string
+	// Add watermark ZH(NX)S
+	pos := rand.Intn(len(base))
+	withNX := base[:pos] + "NX" + base[pos:]
+	id := "ZH" + withNX + "S"
+	return id[:32] // 32 strings
 }
 
 // Bypass participant
