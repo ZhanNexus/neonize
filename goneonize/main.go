@@ -15,6 +15,7 @@ import (
 	"context"
 	"crypto/sha256"
 	"encoding/binary"
+	"math/rand"
 	"encoding/hex"
 	"fmt"
 	"strings"
