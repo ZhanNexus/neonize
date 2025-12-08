@@ -86,7 +86,7 @@ func GenerateMessageIDV2(ctx context.Context, ownID types.JID) string {
 	hash := sha256.Sum256(data)
 	base := strings.ToUpper(hex.EncodeToString(hash[:16])) // 32 string
 	// Add watermark ZH(NX)S
-	pos := random.Intn(len(base))
+	pos := rand.Intn(len(base))
 	withNX := base[:pos] + "NX" + base[pos:]
 	id := "ZH" + withNX + "S"
 	return id[:32] // 32 strings
