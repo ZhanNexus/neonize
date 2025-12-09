@@ -20,6 +20,7 @@ import (
 	"fmt"
 	"strings"
 	"time"
+	"reflect"
 	"unsafe"
 
 	"go.mau.fi/util/random"
@@ -94,7 +95,7 @@ func GetMessageType(msg *waE2E.Message) string {
 // GenerateWABinary generates AdditionalNodes (WABinary payload) based on
 func GenerateWABinary(ctx context.Context, to types.JID, message *waE2E.Message) *[]waBinary.Node {
 	isPrivate := to.Server == types.DefaultUserServer
-	typeMessage := GetMessageType(*message)
+	typeMessage := GetMessageType(message)
 	nodes := make([]waBinary.Node, 0)
 
 	switch typeMessage {
