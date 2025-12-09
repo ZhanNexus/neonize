@@ -17,7 +17,7 @@ dependencies = [
     "tqdm>=4.67.1",
 ]
 [project.urls]
-HomePage = "https://github.com/krypton-byte/neonize"
+HomePage = "https://github.com/ZulX88/neonize"
 [dependency-groups]
 dev = [
     "mypy-protobuf>=3.6.0",
