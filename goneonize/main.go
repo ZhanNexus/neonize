@@ -36,7 +36,7 @@ import (
 	"go.mau.fi/whatsmeow/store/sqlstore"
 	"go.mau.fi/whatsmeow/types"
 	"go.mau.fi/whatsmeow/types/events"
-
+	waBinary "go.mau.fi/whatsmeow/binary"
 	_ "github.com/lib/pq"
 
 	"google.golang.org/protobuf/proto"
@@ -74,6 +74,112 @@ func getByteByAddr(addr *C.uchar, size C.int) []byte {
 	// return result
 }
 
+func GetMessageType(msg *waE2E.Message) string {
+    v := reflect.ValueOf(msg).Elem()
+    t := v.Type()
+
+    for i := 0; i < v.NumField(); i++ {
+        f := v.Field(i)
+
+        if f.Kind() == reflect.Ptr && !f.IsNil() {
+            raw := t.Field(i).Name
+            base := strings.TrimSuffix(raw, "Message")
+            return strings.ToLower(base)
+        }
+    }
+
+    return "unknown"
+}
+
+// GenerateWABinary generates AdditionalNodes (WABinary payload) based on
+func GenerateWABinary(ctx context.Context, to types.JID, message *waE2E.Message) *[]waBinary.Node {
+	isPrivate := to.Server == types.DefaultUserServer
+	typeMessage := GetMessageType(*message)
+	nodes := make([]waBinary.Node, 0)
+
+	switch typeMessage {
+	case "interactive":
+		bizNode := waBinary.Node{
+			Tag:   "biz",
+			Attrs: waBinary.Attrs{},
+			Content: []waBinary.Node{
+				{
+					Tag:   "interactive",
+					Attrs: waBinary.Attrs{"type": "native_flow", "v": "1"},
+					Content: []waBinary.Node{
+						{
+							Tag:   "native_flow",
+							Attrs: waBinary.Attrs{"v": "9", "name": "mixed"},
+						},
+					},
+				},
+			},
+		}
+		nodes = append(nodes, bizNode)
+
+		if isPrivate {
+			botNode := waBinary.Node{
+				Tag:   "bot",
+				Attrs: waBinary.Attrs{"biz_bot": "1"},
+			}
+			nodes = append(nodes, botNode)
+		}
+
+	case "list":
+		bizNode := waBinary.Node{
+			Tag:   "biz",
+			Attrs: waBinary.Attrs{},
+			Content: []waBinary.Node{
+				{
+					Tag:   "list",
+					Attrs: waBinary.Attrs{"v": "2", "type": "product_list"},
+				},
+			},
+		}
+		nodes = append(nodes, bizNode)
+
+	case "buttons":
+
+		bizNode := waBinary.Node{
+			Tag:   "biz",
+			Attrs: waBinary.Attrs{},
+			Content: []waBinary.Node{
+				{
+					Tag:   "interactive",
+					Attrs: waBinary.Attrs{"type": "native_flow", "v": "1"},
+					Content: []waBinary.Node{
+						{
+							Tag:   "native_flow",
+							Attrs: waBinary.Attrs{"v": "9", "name": "mixed"},
+						},
+					},
+				},
+			},
+		}
+		nodes = append(nodes, bizNode)
+
+		if isPrivate {
+			botNode := waBinary.Node{
+				Tag:   "bot",
+				Attrs: waBinary.Attrs{"biz_bot": "1"},
+			}
+			nodes = append(nodes, botNode)
+		}
+
+	default:
+		if isPrivate {
+			botNode := waBinary.Node{
+				Tag:   "bot",
+				Attrs: waBinary.Attrs{"biz_bot": "1"},
+			}
+			nodes = append(nodes, botNode)
+		}
+	}
+
+	optionsAdditional := &nodes
+	return optionsAdditional
+}
+
 // Generate Message ID Custom
 func GenerateMessageIDV2(ctx context.Context, ownID types.JID) string {
 	data := make([]byte, 8, 8+20+16)
@@ -93,15 +199,18 @@ func GenerateMessageIDV2(ctx context.Context, ownID types.JID) string {
 }
 
 // Bypass participant
-func Bypass(client *whatsmeow.Client, chatJID types.JID) whatsmeow.SendRequestExtra {
+func Bypass(client *whatsmeow.Client, chatJID types.JID, message *waE2E.Message) whatsmeow.SendRequestExtra {
 	extra := whatsmeow.SendRequestExtra{}
 	ownID := client.Store.ID
+
 	if ownID != nil {
 		if chatJID.Server == types.GroupServer {
 			extra.TargetJID = []types.JID{*ownID}
 		}
 		extra.ID = GenerateMessageIDV2(context.Background(), client.Store.GetJID())
 	}
+	extra.AdditionalNodes = GenerateWABinary(context.Background(), chatJID, message)
+
 	return extra
 }
 
@@ -286,7 +395,7 @@ func SendMessage(id *C.char, JIDByte *C.uchar, JIDSize C.int, messageByte *C.uch
 		return_.Error = proto.String(err_message.Error())
 		return ProtoReturnV3(&return_)
 	}
-	bypasser := Bypass(client, utils.DecodeJidProto(&neonize_jid))
+	bypasser := Bypass(client, utils.DecodeJidProto(&neonize_jid),&message)
 	// fmt.Println("SendMessage: Sending message to WhatsApp")
 	sendresponse, err := client.SendMessage(context.Background(), utils.DecodeJidProto(&neonize_jid), &message, bypasser)
 	if err != nil {
