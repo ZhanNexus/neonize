@@ -624,7 +624,7 @@ class NewAClient:
         :return: Disappearing timer value in seconds
         """
         jid_str = Jid2String(jid)
-        current_time = time()
+        current_time = time.time()
 
         if jid_str in self._group_disappearing_cache:
             cached_time, timestamp = self._group_disappearing_cache[jid_str]
