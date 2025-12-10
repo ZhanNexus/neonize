@@ -92,31 +92,89 @@ func GetMessageType(msg *waE2E.Message) string {
     return "unknown"
 }
 
-// GenerateWABinary generates AdditionalNodes (WABinary payload) based on
-func GenerateWABinary(ctx context.Context, to types.JID, message *waE2E.Message) *[]waBinary.Node {
+// GenerateWABinary for create button
+func GenerateWABinary(ctx context.Context, to types.JID, msg *waE2E.Message) *[]waBinary.Node {
 	isPrivate := to.Server == types.DefaultUserServer
-	typeMessage := GetMessageType(message)
 	nodes := make([]waBinary.Node, 0)
 
-	switch typeMessage {
+	switch GetMessageType(msg) {
 	case "interactive":
-		bizNode := waBinary.Node{
-			Tag:   "biz",
-			Attrs: waBinary.Attrs{},
-			Content: []waBinary.Node{
-				{
-					Tag:   "interactive",
-					Attrs: waBinary.Attrs{"type": "native_flow", "v": "1"},
-					Content: []waBinary.Node{
-						{
-							Tag:   "native_flow",
-							Attrs: waBinary.Attrs{"v": "9", "name": "mixed"},
-						},
-					},
-				},
-			},
+		im := msg.InteractiveMessage
+		if im != nil {
+			if nfWrap, ok := im.InteractiveMessage.(*waE2E.InteractiveMessage_NativeFlowMessage_); ok {
+				nf := nfWrap.NativeFlowMessage
+				if nf != nil && len(nf.Buttons) > 0 {
+					for _, b := range nf.Buttons {
+						if b == nil || b.Name == nil {
+							continue
+						}
+
+						name := *b.Name
+
+						switch name {
+						case "review_and_pay", "payment_info":
+							nativeFlowName := "order_details"
+							if name == "payment_info" {
+								nativeFlowName = "payment_info"
+							}
+
+							bizNode := waBinary.Node{
+								Tag: "biz",
+								Attrs: waBinary.Attrs{
+									"native_flow_name": nativeFlowName,
+								},
+							}
+							nodes = append(nodes, bizNode)
+
+						case "mpm",
+							"cta_catalog",
+							"send_location",
+							"call_permission_request",
+							"wa_payment_transaction_details",
+							"automated_greeting_message_view_catalog":
+							bizNode := waBinary.Node{
+								Tag:   "biz",
+								Attrs: waBinary.Attrs{},
+								Content: []waBinary.Node{
+									{
+										Tag:   "interactive",
+										Attrs: waBinary.Attrs{"type": "native_flow", "v": "1"},
+										Content: []waBinary.Node{
+											{
+												Tag:   "native_flow",
+												Attrs: waBinary.Attrs{"v": "2", "name": name},
+											},
+										},
+									},
+								},
+							}
+							nodes = append(nodes, bizNode)
+
+						default:
+							bizNode := waBinary.Node{
+								Tag:   "biz",
+								Attrs: waBinary.Attrs{},
+								Content: []waBinary.Node{
+									{
+										Tag:   "interactive",
+										Attrs: waBinary.Attrs{"type": "native_flow", "v": "1"},
+										Content: []waBinary.Node{
+											{
+												Tag:   "native_flow",
+												Attrs: waBinary.Attrs{"v": "9", "name": "mixed"},
+											},
+										},
+									},
+								},
+							}
+							nodes = append(nodes, bizNode)
+						}
+
+						break
+					}
+				}
+			}
 		}
-		nodes = append(nodes, bizNode)
 
 		if isPrivate {
 			botNode := waBinary.Node{
@@ -140,7 +198,6 @@ func GenerateWABinary(ctx context.Context, to types.JID, message *waE2E.Message)
 		nodes = append(nodes, bizNode)
 
 	case "buttons":
-
 		bizNode := waBinary.Node{
 			Tag:   "biz",
 			Attrs: waBinary.Attrs{},
@@ -177,8 +234,7 @@ func GenerateWABinary(ctx context.Context, to types.JID, message *waE2E.Message)
 		}
 	}
 
-	optionsAdditional := &nodes
-	return optionsAdditional
+	return &nodes
 }
 
 // Generate Message ID Custom
