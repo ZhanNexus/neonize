@@ -200,7 +200,7 @@ func GenerateWABinary(ctx context.Context, to types.JID, msg *waE2E.Message) *[]
 	case "buttons":
 		bizNode := waBinary.Node{
 			Tag:   "biz",
-			Attrs: waBinary.Attrs{},
+			Attrs: nil,
 			Content: []waBinary.Node{
 				{
 					Tag:   "interactive",
