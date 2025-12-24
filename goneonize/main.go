@@ -114,10 +114,12 @@ func GenerateWABinary(ctx context.Context, to types.JID, msg *waE2E.Message) *[]
 						name := *b.Name
 
 						switch name {
-						case "review_and_pay", "payment_info":
+						case "payment_key_info", "review_and_pay", "payment_info":
 							nativeFlowName := "order_details"
 							if name == "payment_info" {
 								nativeFlowName = "payment_info"
+							} else if name == "payment_key_info" {
+							    nativeFlowName = "payment_key_info"
 							}
 
 							bizNode := waBinary.Node{
