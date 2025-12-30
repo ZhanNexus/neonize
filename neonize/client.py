@@ -644,7 +644,7 @@ class NewClient:
             msg.messageContextInfo.messageSecret = urandom(32)
         message_bytes = msg.SerializeToString()
         extra_params = extra.SerializeToString()
-        bytes_ptr = await self.__client.SendMessage(
+        bytes_ptr = self.__client.SendMessage(
             self.uuid, to_bytes, len(to_bytes), message_bytes, len(message_bytes),extra_params,len(extra_params),
         )
         protobytes = bytes_ptr.contents.get_bytes()
