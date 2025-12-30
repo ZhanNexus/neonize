@@ -440,36 +440,39 @@ func SendMessage(
 	client := clients[C.GoString(id)]
 	return_ := defproto.SendMessageReturnFunction{}
 
+	// ===== Decode JID =====
 	jidBytes := getByteByAddr(JIDByte, JIDSize)
 	var neonizeJID defproto.JID
 	if err := proto.Unmarshal(jidBytes, &neonizeJID); err != nil {
 		return_.Error = proto.String(err.Error())
 		return ProtoReturnV3(&return_)
 	}
-	jid := DecodeJidProto(&neonizeJID)
+	jid := utils.DecodeJidProto(&neonizeJID)
 
+	// ===== Decode Message =====
 	msgBytes := getByteByAddr(messageByte, messageSize)
 	var message waE2E.Message
 	if err := proto.Unmarshal(msgBytes, &message); err != nil {
 		return_.Error = proto.String(err.Error())
 		return ProtoReturnV3(&return_)
 	}
-	
+
+	// ===== Extra Params =====
 	var protoExtra *whatsmeow.SendRequestExtra
 	if extraByte != nil && extraSize > 0 {
 		extraBytes := getByteByAddr(extraByte, extraSize)
 		var extraProto defproto.SendRequestExtra
 		if err := proto.Unmarshal(extraBytes, &extraProto); err == nil {
-			protoExtra = utils.DecodeSendRequestExtra(&extraProto)
+			tempExtra := utils.DecodeSendRequestExtra(&extraProto)
+			protoExtra = &tempExtra
 		}
 	}
-	bypassExtra := Bypass(client, jid, &message)
-	finalExtra := whatsmeow.SendRequestExtra{}
 
-	if bypassExtra != nil {
-		finalExtra = *bypassExtra
-	}
-	
+	// ===== bypass =====
+	bypassExtra := Bypass(client, jid, &message)
+
+	// ===== Merge bypass and extra params =====
+	finalExtra := bypassExtra 
 	if protoExtra != nil {
 		if protoExtra.ID != "" {
 			finalExtra.ID = protoExtra.ID
@@ -503,11 +506,13 @@ func SendMessage(
 			}
 		}
 	}
+
+	// ===== SendResponse =====
 	sendResponse, err := client.SendMessage(
 		context.Background(),
 		jid,
 		&message,
-		&finalExtra, 
+		finalExtra,
 	)
 	if err != nil {
 		return_.Error = proto.String(err.Error())

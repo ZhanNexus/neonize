@@ -236,36 +236,44 @@ func DecodeNodeProto(n *defproto.Node) *waBinary.Node {
 	}
 
 	node := &waBinary.Node{
-		Tag: n.Tag,
+		Tag: *n.Tag, // ✅ pointer -> value
 	}
 
-	// attrs
+	// ===== ATTRS =====
 	if len(n.Attrs) > 0 {
 		node.Attrs = make(map[string]interface{}, len(n.Attrs))
 		for _, a := range n.Attrs {
+			key := *a.Name // ✅ pointer -> value
+
 			switch v := a.Value.(type) {
 			case *defproto.NodeAttrs_Boolean:
-				node.Attrs[a.Name] = v.Boolean
+				node.Attrs[key] = v.Boolean
 			case *defproto.NodeAttrs_Integer:
-				node.Attrs[a.Name] = v.Integer
+				node.Attrs[key] = v.Integer
 			case *defproto.NodeAttrs_Text:
-				node.Attrs[a.Name] = v.Text
+				node.Attrs[key] = v.Text
 			case *defproto.NodeAttrs_Jid:
-				node.Attrs[a.Name] = DecodeJidProto(v.Jid)
+				node.Attrs[key] = DecodeJidProto(v.Jid)
 			}
 		}
 	}
 
-	// children
-	for _, c := range n.Nodes {
-		if child := DecodeNodeProto(c); child != nil {
-			node.Children = append(node.Children, *child)
+	// ===== CHILD NODES =====
+	if len(n.Nodes) > 0 {
+		children := make([]waBinary.Node, 0, len(n.Nodes))
+		for _, c := range n.Nodes {
+			if cn := DecodeNodeProto(c); cn != nil {
+				children = append(children, *cn)
+			}
+		}
+		if len(children) > 0 {
+			node.Content = children // ✅ via Content
 		}
 	}
 
-	// raw bytes node
+	// ===== RAW BYTES CONTENT =====
 	if len(n.Bytes) > 0 {
-		node.Data = n.Bytes
+		node.Content = n.Bytes // ✅ bytes juga lewat Content
 	}
 
 	return node
