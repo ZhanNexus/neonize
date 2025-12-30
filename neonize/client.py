@@ -643,7 +643,10 @@ class NewClient:
         if add_msg_secret:
             msg.messageContextInfo.messageSecret = urandom(32)
         message_bytes = msg.SerializeToString()
-        extra_params = extra.SerializeToString()
+        if extra is not None:
+            extra_params = extra.SerializeToString()
+        else:
+            extra_params = None
         bytes_ptr = self.__client.SendMessage(
             self.uuid, to_bytes, len(to_bytes), message_bytes, len(message_bytes),extra_params,len(extra_params),
         )
