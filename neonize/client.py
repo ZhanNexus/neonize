@@ -1048,6 +1048,7 @@ class NewClient:
         animated_gif: bool = False,
         passthrough: bool = False,
         add_msg_secret: bool = False,
+        context_info: Optional[ContextInfo] = None,
     ) -> SendResponse:
         """
         Send a sticker to a specific JID.
@@ -1088,6 +1089,7 @@ class NewClient:
                 passthrough,
             ),
             add_msg_secret=add_msg_secret,
+            context_info=context_info,
         )
 
     def _process_single_pack(
@@ -1246,6 +1248,7 @@ class NewClient:
         animated_gif: bool = False,
         passthrough: bool = False,
         add_msg_secret: bool = False,
+        context_info: Optional[ContextInfo] = None,
     ) -> List[SendResponse]:
         """
         Send a sticker pack to a specific JID.
@@ -1276,6 +1279,7 @@ class NewClient:
                 to,
                 msg,
                 add_msg_secret=add_msg_secret,
+                context_info=context_info,
             )
             responses.append(response)
         return responses
