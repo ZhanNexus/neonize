@@ -33,7 +33,7 @@ jobs:
       - name: Cache dependencies
         uses: actions/cache@v4
         with:
-          path: **/.venv
+          path: "**/.venv" # Fixed: Added quotes to handle wildcards
           key: ${{ runner.os }}-${{ hashFiles('**/uv.lock') }}
 
       - name: Install dependencies & Set Version
@@ -55,28 +55,28 @@ jobs:
           export CXX=$(which aarch64-linux-android28-clang++)
           export GOOS=android
           export GOARCH=arm64
-          uv run task build goneonize --smart
+          uv run task build goneonize
 
           # ARM
           export CC=$(which armv7a-linux-androideabi28-clang)
           export CXX=$(which armv7a-linux-androideabi28-clang++)
           export GOOS=android
           export GOARCH=arm
-          uv run task build goneonize --smart
+          uv run task build goneonize
           
           # AMD64
           export CC=$(which x86_64-linux-android28-clang)
           export CXX=$(which x86_64-linux-android28-clang++)
           export GOOS=android
           export GOARCH=amd64
-          uv run task build goneonize --smart
+          uv run task build goneonize
           
           # 386
           export CC=$(which i686-linux-android28-clang)
           export CXX=$(which i686-linux-android28-clang++)
           export GOOS=android
           export GOARCH=386
-          uv run task build goneonize --smart
+          uv run task build goneonize
       
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
@@ -97,6 +97,12 @@ jobs:
           python-version: "3.11"
       - uses: mlugg/setup-zig@v2
       - uses: astral-sh/setup-uv@v5
+
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: "**/.venv" # Fixed
+          key: ${{ runner.os }}-${{ hashFiles('**/uv.lock') }}
       
       - name: Install dependencies & Set Version
         run: |
@@ -113,7 +119,7 @@ jobs:
           export GOOS=windows
           export GOARCH=amd64
           export CC="zig cc -target x86_64-windows"
-          uv run task build goneonize --smart
+          uv run task build goneonize
           uv build
           uv run task repack
           mv neonize/*.dll LIBS
@@ -122,7 +128,7 @@ jobs:
           export GOOS=windows
           export GOARCH=arm64
           export CC="zig cc -target aarch64-windows"
-          uv run task build goneonize --smart
+          uv run task build goneonize
           uv build
           uv run task repack
           mv neonize/*.dll LIBS
@@ -131,7 +137,7 @@ jobs:
           export GOOS=windows
           export GOARCH=386
           export CC="zig cc -target x86-windows"
-          uv run task build goneonize --smart
+          uv run task build goneonize
           uv build
           uv run task repack
           mv neonize/*.dll LIBS
@@ -140,7 +146,7 @@ jobs:
           export GOOS=linux
           export GOARCH=386
           export CC="zig cc -target x86-linux"
-          uv run task build goneonize --smart
+          uv run task build goneonize
           uv build
           uv run task repack
           mv neonize/*.so LIBS
@@ -166,6 +172,12 @@ jobs:
           python-version: "3.11"
       - uses: astral-sh/setup-uv@v5
 
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: "**/.venv" # Fixed
+          key: ${{ runner.os }}-${{ hashFiles('**/uv.lock') }}
+
       - name: Install dependencies & Set Version
         run: |
           uv sync --dev
@@ -181,7 +193,7 @@ jobs:
           export CGO_ENABLED=1
           
           # AMD64
-          uv run task build goneonize --smart
+          uv run task build goneonize
           uv build
           uv run task repack
           mv neonize/*.so LIBS
@@ -191,7 +203,7 @@ jobs:
           export GOARCH=arm64
           export CC=$(which aarch64-linux-gnu-gcc)
           export CXX=$(which aarch64-linux-gnu-cpp)
-          uv run task build goneonize --smart
+          uv run task build goneonize
           uv build
           uv run task repack
           mv neonize/*.so LIBS
@@ -201,7 +213,7 @@ jobs:
           export GOARCH=riscv64
           export CC=$(which riscv64-linux-gnu-gcc)
           export CXX=$(which riscv64-linux-gnu-cpp)
-          uv run task build goneonize --smart
+          uv run task build goneonize
           mv neonize/*.so LIBS
           
           # S390X
@@ -209,7 +221,7 @@ jobs:
           export GOARCH=s390x
           export CC=$(which s390x-linux-gnu-gcc)
           export CXX=$(which s390x-linux-gnu-cpp)
-          uv run task build goneonize --smart
+          uv run task build goneonize
           uv build
           uv run task repack
           mv neonize/*.so LIBS
@@ -234,6 +246,12 @@ jobs:
         with:
           python-version: "3.11"
       - uses: astral-sh/setup-uv@v5
+
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: "**/.venv" # Fixed
+          key: ${{ runner.os }}-${{ hashFiles('**/uv.lock') }}
       
       - name: Install dependencies & Set Version
         run: |
@@ -252,7 +270,7 @@ jobs:
           export GOARCH=amd64
           export CC=$(which clang)
           export CXX=$(which clang++)
-          uv run task build goneonize --smart
+          uv run task build goneonize
           uv build
           uv run task repack
           mv neonize/*.dylib LIBS/
@@ -262,7 +280,7 @@ jobs:
           export GOARCH=arm64
           export CC=$(which clang)
           export CXX=$(which clang++)
-          uv run task build goneonize --smart
+          uv run task build goneonize
           uv build
           uv run task repack
           
