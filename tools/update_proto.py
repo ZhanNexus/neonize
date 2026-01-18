@@ -73,13 +73,13 @@ def download_whatsmeow():
         bar.n = total
     bar.close()
     # unzip
-    with zipfile.ZipFile(WORKDIR / "whatsmeow.zip") as zfile:
+    with zipfile.ZipFile("whatsmeow.zip") as zfile:
         for name in filter(lambda x: x.startswith(
                 "whatsmeow-main/proto"), zfile.namelist()):
-            zfile.extract(name, WORKDIR / ".dest")
+            zfile.extract(name, ".dest")
     # remove != .proto
     value = FileValue()
-    remove_not_proto(WORKDIR / ".dest", value)
+    remove_not_proto(Path(__file__).parent.parent / ".dest", value)
     print(f"{Fore.BLUE}[INFO] File extraction complete:")
     print(f"{Fore.RED}  - {Fore.GREEN}{value.folder} {Fore.YELLOW}folders created")
     print(f"{Fore.RED}  - {Fore.GREEN}{value.dropped}{Fore.YELLOW} files skipped/dropped")
