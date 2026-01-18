@@ -520,7 +520,7 @@ jobs:
         echo "TAG_NAME=$(uv run bump-my-version show current_version)" >> $GITHUB_ENV
         ls -R
         ls -lah sharedlib
-        git push origin master
+        git push origin patch-1
         # git push tag 
     - name: Upload shared library to draft release
       uses: softprops/action-gh-release@v1
