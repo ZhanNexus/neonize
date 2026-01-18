@@ -8,7 +8,6 @@ from pathlib import Path
 from typing import Dict
 from .version import Version
 import glob
-import asyncio
 
 cwd = (Path(__file__).parent.parent / "goneonize/").__str__()
 # shell = [
@@ -81,12 +80,13 @@ def build_proto():
             wf.write(file.read())
     for sh in shell:
         subprocess.call(shlex.split(sh), cwd=cwd + "/defproto")
-    
+
     # if (Path(cwd) / "defproto").exists():
     #     shutil.rmtree(f"{cwd}/defproto")
     # os.mkdir(f"{cwd}/defproto")
     # os.rename(f"{cwd}/github.com/krypton-byte/neonize/defproto/", f"{cwd}/defproto")
     # shutil.rmtree(f"{cwd}/github.com")
+
 
 def build_neonize(smart: bool = False):
     version = Version()
