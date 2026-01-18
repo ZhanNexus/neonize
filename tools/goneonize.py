@@ -6,9 +6,7 @@ import subprocess
 import shutil
 from pathlib import Path
 from typing import Dict
-from .version import Version
 import glob
-import asyncio
 
 cwd = (Path(__file__).parent.parent / "goneonize/").__str__()
 # shell = [
@@ -81,18 +79,14 @@ def build_proto():
             wf.write(file.read())
     for sh in shell:
         subprocess.call(shlex.split(sh), cwd=cwd + "/defproto")
-    
     # if (Path(cwd) / "defproto").exists():
     #     shutil.rmtree(f"{cwd}/defproto")
     # os.mkdir(f"{cwd}/defproto")
     # os.rename(f"{cwd}/github.com/krypton-byte/neonize/defproto/", f"{cwd}/defproto")
     # shutil.rmtree(f"{cwd}/github.com")
 
-def build_neonize(smart: bool = False):
-    version = Version()
-    if smart and version.goneonize != version.neonize:
-        print("goneonize version unchanged, skipping goneonize build.")
-        return
+
+def build_neonize():
     os_name = os.environ.get("GOOS") or platform.system().lower()
     arch_name = os.environ.get("GOARCH") or platform.machine().lower()
     print(f"os: {os_name}, arch: {arch_name}")
@@ -116,21 +110,19 @@ def build_neonize(smart: bool = False):
 def build():
     args = argparse.ArgumentParser()
     sub = args.add_subparsers(dest="build", required=True)
-    goparser = sub.add_parser("goneonize")
-    goparser.add_argument("--smart", action="store_true", default=False)
+    sub.add_parser("goneonize")
     # arg.add_argument("--out", type=str, default=os.path.dirname(cwd) + "/neonize/")
     sub.add_parser("proto")
     sub.add_parser("all")
     parse = args.parse_args()
-    smart = parse.smart if hasattr(parse, "smart") else False
     match parse.build:
         case "goneonize":
-            build_neonize(smart=smart)
+            build_neonize()
         case "proto":
             build_proto()
         case "all":
             build_proto()
-            build_neonize(smart=smart)
+            build_neonize()
 
 
 def build_android():
