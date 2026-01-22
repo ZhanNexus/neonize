@@ -1286,6 +1286,7 @@ class Message(google.protobuf.message.Message):
     RETRYCOUNT_FIELD_NUMBER: builtins.int
     NEWSLETTERMETA_FIELD_NUMBER: builtins.int
     RAW_FIELD_NUMBER: builtins.int
+    ADDITIONALNODES_FIELD_NUMBER: builtins.int
     IsEphemeral: builtins.bool
     IsViewOnce: builtins.bool
     IsViewOnceV2: builtins.bool
@@ -1305,6 +1306,8 @@ class Message(google.protobuf.message.Message):
     def NewsLetterMeta(self) -> Global___NewsLetterMessageMeta: ...
     @property
     def Raw(self) -> waE2E.WAWebProtobufsE2E_pb2.Message: ...
+    @property
+    def AdditionalNodes(self) -> Global___Node: ...
     def __init__(
         self,
         *,
@@ -1322,9 +1325,10 @@ class Message(google.protobuf.message.Message):
         RetryCount: builtins.int | None = ...,
         NewsLetterMeta: Global___NewsLetterMessageMeta | None = ...,
         Raw: waE2E.WAWebProtobufsE2E_pb2.Message | None = ...,
+        AdditionalNodes: Global___Node | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["Info", b"Info", "IsDocumentWithCaption", b"IsDocumentWithCaption", "IsEdit", b"IsEdit", "IsEphemeral", b"IsEphemeral", "IsLottieSticker", b"IsLottieSticker", "IsViewOnce", b"IsViewOnce", "IsViewOnceV2", b"IsViewOnceV2", "IsViewOnceV2Extension", b"IsViewOnceV2Extension", "Message", b"Message", "NewsLetterMeta", b"NewsLetterMeta", "Raw", b"Raw", "RetryCount", b"RetryCount", "SourceWebMsg", b"SourceWebMsg", "UnavailableRequestID", b"UnavailableRequestID"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["Info", b"Info", "IsDocumentWithCaption", b"IsDocumentWithCaption", "IsEdit", b"IsEdit", "IsEphemeral", b"IsEphemeral", "IsLottieSticker", b"IsLottieSticker", "IsViewOnce", b"IsViewOnce", "IsViewOnceV2", b"IsViewOnceV2", "IsViewOnceV2Extension", b"IsViewOnceV2Extension", "Message", b"Message", "NewsLetterMeta", b"NewsLetterMeta", "Raw", b"Raw", "RetryCount", b"RetryCount", "SourceWebMsg", b"SourceWebMsg", "UnavailableRequestID", b"UnavailableRequestID"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["AdditionalNodes", b"AdditionalNodes", "Info", b"Info", "IsDocumentWithCaption", b"IsDocumentWithCaption", "IsEdit", b"IsEdit", "IsEphemeral", b"IsEphemeral", "IsLottieSticker", b"IsLottieSticker", "IsViewOnce", b"IsViewOnce", "IsViewOnceV2", b"IsViewOnceV2", "IsViewOnceV2Extension", b"IsViewOnceV2Extension", "Message", b"Message", "NewsLetterMeta", b"NewsLetterMeta", "Raw", b"Raw", "RetryCount", b"RetryCount", "SourceWebMsg", b"SourceWebMsg", "UnavailableRequestID", b"UnavailableRequestID"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["AdditionalNodes", b"AdditionalNodes", "Info", b"Info", "IsDocumentWithCaption", b"IsDocumentWithCaption", "IsEdit", b"IsEdit", "IsEphemeral", b"IsEphemeral", "IsLottieSticker", b"IsLottieSticker", "IsViewOnce", b"IsViewOnce", "IsViewOnceV2", b"IsViewOnceV2", "IsViewOnceV2Extension", b"IsViewOnceV2Extension", "Message", b"Message", "NewsLetterMeta", b"NewsLetterMeta", "Raw", b"Raw", "RetryCount", b"RetryCount", "SourceWebMsg", b"SourceWebMsg", "UnavailableRequestID", b"UnavailableRequestID"]) -> None: ...
 
 Global___Message: typing_extensions.TypeAlias = Message
 
