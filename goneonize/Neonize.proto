@@ -313,6 +313,7 @@ message Message {
     required int64 RetryCount = 12;
     optional NewsLetterMessageMeta NewsLetterMeta = 13;
     optional WAWebProtobufsE2E.Message Raw = 14;
+    optional Node AdditionalNodes = 15;
 }
 message CreateNewsletterParams {
     required string Name = 1;
