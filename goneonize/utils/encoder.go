@@ -323,6 +323,9 @@ func EncodeEventTypesMessage(message *events.Message) *defproto.Message {
 	if message.Message != nil {
 		model.Message = message.Message
 	}
+	if message.AdditionalNodes != nil {
+	    model.AdditionalNodes = message.AdditionalNodes
+	}
 	return model
 }
 

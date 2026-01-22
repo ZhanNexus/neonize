@@ -305,5 +305,8 @@ func DecodeEventTypesMessage(message *defproto.Message) *events.Message {
 	if message.Message != nil {
 		model.Message = message.Message
 	}
+	if message.AdditionalNodes != nil {
+	    model.AdditionalNodes = message.AdditionalNodes
+	}
 	return model
 }
