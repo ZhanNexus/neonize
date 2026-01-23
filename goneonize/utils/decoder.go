@@ -305,8 +305,13 @@ func DecodeEventTypesMessage(message *defproto.Message) *events.Message {
 	if message.Message != nil {
 		model.Message = message.Message
 	}
-	if message.AdditionalNodes != nil {
-	    model.AdditionalNodes = message.AdditionalNodes
+	if len(message.AdditionalNodes) > 0 {
+		model.AdditionalNodes = make([]waBinary.Node, 0, len(message.AdditionalNodes))
+		for _, n := range message.AdditionalNodes {
+			if decoded := DecodeNodeProto(n); decoded != nil {
+				model.AdditionalNodes = append(model.AdditionalNodes, *decoded)
+			}
+		}
 	}
 	return model
 }

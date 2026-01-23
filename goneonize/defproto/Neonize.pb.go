@@ -4229,7 +4229,7 @@ type Message struct {
 	RetryCount            *int64                 `protobuf:"varint,12,req,name=RetryCount" json:"RetryCount,omitempty"`
 	NewsLetterMeta        *NewsLetterMessageMeta `protobuf:"bytes,13,opt,name=NewsLetterMeta" json:"NewsLetterMeta,omitempty"`
 	Raw                   *waE2E.Message         `protobuf:"bytes,14,opt,name=Raw" json:"Raw,omitempty"`
-	AdditionalNodes       *Node                  `protobuf:"bytes,15,opt,name=AdditionalNodes" json:"AdditionalNodes,omitempty"`
+	AdditionalNodes       []*Node                `protobuf:"bytes,15,rep,name=AdditionalNodes" json:"AdditionalNodes,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -4362,7 +4362,7 @@ func (x *Message) GetRaw() *waE2E.Message {
 	return nil
 }
 
-func (x *Message) GetAdditionalNodes() *Node {
+func (x *Message) GetAdditionalNodes() []*Node {
 	if x != nil {
 		return x.AdditionalNodes
 	}
@@ -10165,7 +10165,7 @@ const file_Neonize_proto_rawDesc = "" +
 	"RetryCount\x12F\n" +
 	"\x0eNewsLetterMeta\x18\r \x01(\v2\x1e.neonize.NewsLetterMessageMetaR\x0eNewsLetterMeta\x12,\n" +
 	"\x03Raw\x18\x0e \x01(\v2\x1a.WAWebProtobufsE2E.MessageR\x03Raw\x127\n" +
-	"\x0fAdditionalNodes\x18\x0f \x01(\v2\r.neonize.NodeR\x0fAdditionalNodes\"h\n" +
+	"\x0fAdditionalNodes\x18\x0f \x03(\v2\r.neonize.NodeR\x0fAdditionalNodes\"h\n" +
 	"\x16CreateNewsletterParams\x12\x12\n" +
 	"\x04Name\x18\x01 \x02(\tR\x04Name\x12 \n" +
 	"\vDescription\x18\x02 \x02(\tR\vDescription\x12\x18\n" +

@@ -320,11 +320,14 @@ func EncodeEventTypesMessage(message *events.Message) *defproto.Message {
 	if message.SourceWebMsg != nil {
 		model.SourceWebMsg = message.SourceWebMsg
 	}
-	if message.Message != nil {
+		if message.Message != nil {
 		model.Message = message.Message
 	}
-	if message.AdditionalNodes != nil {
-	    model.AdditionalNodes = message.AdditionalNodes
+	if len(message.AdditionalNodes) > 0 {
+		model.AdditionalNodes = make([]*defproto.Node, len(message.AdditionalNodes))
+		for i, n := range message.AdditionalNodes {
+			model.AdditionalNodes[i] = EncodeNode(&n)
+		}
 	}
 	return model
 }
