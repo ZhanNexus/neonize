@@ -599,14 +599,19 @@ class NewAClient:
             try:
                 msg.contextInfo.Clear()
             except Exception:
-                _log_.warning(
-                    "@_make_quoted_message; Couldn't clear the contextInfo of:"
-                )
+                _log_.warning("@_make_quoted_message; Couldn't clear the contextInfo of:")
                 _log_.warning(msg)
+        
+        try:
+            message.Message.messageContextInfo.Clear()
+        except Exception:
+            pass
+    
         sender = message.Info.MessageSource.Sender
         if jid_is_lid(sender):
             senderalt = message.Info.MessageSource.SenderAlt
             sender = senderalt if senderalt.ListFields() else sender
+    
         return ContextInfo(
             stanzaID=message.Info.ID,
             participant=Jid2String(JIDToNonAD(sender)),
@@ -617,6 +622,7 @@ class NewAClient:
                 else None
             ),
         )
+
 
     async def send_message(
         self,
