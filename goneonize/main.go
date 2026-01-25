@@ -98,6 +98,14 @@ func getButtonTypeFromMessage(msg *waE2E.Message) string {
 func GenerateWABinary(ctx context.Context, to types.JID, msg *waE2E.Message) *[]waBinary.Node {
 	isPrivate := to.Server == types.DefaultUserServer
 	nodes := make([]waBinary.Node, 0)
+	
+	if isPrivate {
+		botNode := waBinary.Node{
+			Tag:   "bot",
+			Attrs: waBinary.Attrs{"biz_bot": "1"},
+		}
+		nodes = append(nodes, botNode)
+	}
 
 	switch getButtonTypeFromMessage(msg) {
 	case "interactive":
@@ -180,14 +188,6 @@ func GenerateWABinary(ctx context.Context, to types.JID, msg *waE2E.Message) *[]
 			}
 		}
 
-		if isPrivate {
-			botNode := waBinary.Node{
-				Tag:   "bot",
-				Attrs: waBinary.Attrs{"biz_bot": "1"},
-			}
-			nodes = append(nodes, botNode)
-		}
-
 	case "list":
 		bizNode := waBinary.Node{
 			Tag:   "biz",
@@ -219,24 +219,6 @@ func GenerateWABinary(ctx context.Context, to types.JID, msg *waE2E.Message) *[]
 			},
 		}
 		nodes = append(nodes, bizNode)
-
-		if isPrivate {
-			botNode := waBinary.Node{
-				Tag:   "bot",
-				Attrs: waBinary.Attrs{"biz_bot": "1"},
-			}
-			nodes = append(nodes, botNode)
-		}
-
-	default:
-		if isPrivate {
-			botNode := waBinary.Node{
-				Tag:   "bot",
-				Attrs: waBinary.Attrs{"biz_bot": "1"},
-			}
-			nodes = append(nodes, botNode)
-		}
-	}
 
 	return &nodes
 }
