@@ -349,6 +349,21 @@ Global___CallLogRecord: typing_extensions.TypeAlias = CallLogRecord
 class SettingsSyncAction(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
+    class _MediaQualitySetting:
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
+
+    class _MediaQualitySettingEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[SettingsSyncAction._MediaQualitySetting.ValueType], builtins.type):
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+        MEDIA_QUALITY_UNKNOWN: SettingsSyncAction._MediaQualitySetting.ValueType  # 0
+        STANDARD: SettingsSyncAction._MediaQualitySetting.ValueType  # 1
+        HD: SettingsSyncAction._MediaQualitySetting.ValueType  # 2
+
+    class MediaQualitySetting(_MediaQualitySetting, metaclass=_MediaQualitySettingEnumTypeWrapper): ...
+    MEDIA_QUALITY_UNKNOWN: SettingsSyncAction.MediaQualitySetting.ValueType  # 0
+    STANDARD: SettingsSyncAction.MediaQualitySetting.ValueType  # 1
+    HD: SettingsSyncAction.MediaQualitySetting.ValueType  # 2
+
     class _DisplayMode:
         ValueType = typing.NewType("ValueType", builtins.int)
         V: typing_extensions.TypeAlias = ValueType
@@ -396,6 +411,14 @@ class SettingsSyncAction(google.protobuf.message.Message):
         IS_DOCUMENTS_AUTODOWNLOAD_ENABLED: SettingsSyncAction._SettingKey.ValueType  # 21
         DISABLE_LINK_PREVIEWS: SettingsSyncAction._SettingKey.ValueType  # 22
         NOTIFICATION_TONE_ID: SettingsSyncAction._SettingKey.ValueType  # 23
+        MEDIA_UPLOAD_QUALITY: SettingsSyncAction._SettingKey.ValueType  # 24
+        IS_SPELL_CHECK_ENABLED: SettingsSyncAction._SettingKey.ValueType  # 25
+        IS_ENTER_TO_SEND_ENABLED: SettingsSyncAction._SettingKey.ValueType  # 26
+        IS_GROUP_MESSAGE_NOTIFICATION_ENABLED: SettingsSyncAction._SettingKey.ValueType  # 27
+        IS_GROUP_REACTIONS_NOTIFICATION_ENABLED: SettingsSyncAction._SettingKey.ValueType  # 28
+        IS_STATUS_NOTIFICATION_ENABLED: SettingsSyncAction._SettingKey.ValueType  # 29
+        STATUS_NOTIFICATION_TONE_ID: SettingsSyncAction._SettingKey.ValueType  # 30
+        SHOULD_PLAY_SOUND_FOR_CALL_NOTIFICATION: SettingsSyncAction._SettingKey.ValueType  # 31
 
     class SettingKey(_SettingKey, metaclass=_SettingKeyEnumTypeWrapper): ...
     SETTING_KEY_UNKNOWN: SettingsSyncAction.SettingKey.ValueType  # 0
@@ -422,6 +445,14 @@ class SettingsSyncAction(google.protobuf.message.Message):
     IS_DOCUMENTS_AUTODOWNLOAD_ENABLED: SettingsSyncAction.SettingKey.ValueType  # 21
     DISABLE_LINK_PREVIEWS: SettingsSyncAction.SettingKey.ValueType  # 22
     NOTIFICATION_TONE_ID: SettingsSyncAction.SettingKey.ValueType  # 23
+    MEDIA_UPLOAD_QUALITY: SettingsSyncAction.SettingKey.ValueType  # 24
+    IS_SPELL_CHECK_ENABLED: SettingsSyncAction.SettingKey.ValueType  # 25
+    IS_ENTER_TO_SEND_ENABLED: SettingsSyncAction.SettingKey.ValueType  # 26
+    IS_GROUP_MESSAGE_NOTIFICATION_ENABLED: SettingsSyncAction.SettingKey.ValueType  # 27
+    IS_GROUP_REACTIONS_NOTIFICATION_ENABLED: SettingsSyncAction.SettingKey.ValueType  # 28
+    IS_STATUS_NOTIFICATION_ENABLED: SettingsSyncAction.SettingKey.ValueType  # 29
+    STATUS_NOTIFICATION_TONE_ID: SettingsSyncAction.SettingKey.ValueType  # 30
+    SHOULD_PLAY_SOUND_FOR_CALL_NOTIFICATION: SettingsSyncAction.SettingKey.ValueType  # 31
 
     class _SettingPlatform:
         ValueType = typing.NewType("ValueType", builtins.int)
@@ -465,6 +496,14 @@ class SettingsSyncAction(google.protobuf.message.Message):
     ISDOCUMENTSAUTODOWNLOADENABLED_FIELD_NUMBER: builtins.int
     DISABLELINKPREVIEWS_FIELD_NUMBER: builtins.int
     NOTIFICATIONTONEID_FIELD_NUMBER: builtins.int
+    MEDIAUPLOADQUALITY_FIELD_NUMBER: builtins.int
+    ISSPELLCHECKENABLED_FIELD_NUMBER: builtins.int
+    ISENTERTOSENDENABLED_FIELD_NUMBER: builtins.int
+    ISGROUPMESSAGENOTIFICATIONENABLED_FIELD_NUMBER: builtins.int
+    ISGROUPREACTIONSNOTIFICATIONENABLED_FIELD_NUMBER: builtins.int
+    ISSTATUSNOTIFICATIONENABLED_FIELD_NUMBER: builtins.int
+    STATUSNOTIFICATIONTONEID_FIELD_NUMBER: builtins.int
+    SHOULDPLAYSOUNDFORCALLNOTIFICATION_FIELD_NUMBER: builtins.int
     startAtLogin: builtins.bool
     minimizeToTray: builtins.bool
     language: builtins.str
@@ -488,6 +527,14 @@ class SettingsSyncAction(google.protobuf.message.Message):
     isDocumentsAutodownloadEnabled: builtins.bool
     disableLinkPreviews: builtins.bool
     notificationToneID: builtins.int
+    mediaUploadQuality: Global___SettingsSyncAction.MediaQualitySetting.ValueType
+    isSpellCheckEnabled: builtins.bool
+    isEnterToSendEnabled: builtins.bool
+    isGroupMessageNotificationEnabled: builtins.bool
+    isGroupReactionsNotificationEnabled: builtins.bool
+    isStatusNotificationEnabled: builtins.bool
+    statusNotificationToneID: builtins.int
+    shouldPlaySoundForCallNotification: builtins.bool
     def __init__(
         self,
         *,
@@ -514,9 +561,17 @@ class SettingsSyncAction(google.protobuf.message.Message):
         isDocumentsAutodownloadEnabled: builtins.bool | None = ...,
         disableLinkPreviews: builtins.bool | None = ...,
         notificationToneID: builtins.int | None = ...,
+        mediaUploadQuality: Global___SettingsSyncAction.MediaQualitySetting.ValueType | None = ...,
+        isSpellCheckEnabled: builtins.bool | None = ...,
+        isEnterToSendEnabled: builtins.bool | None = ...,
+        isGroupMessageNotificationEnabled: builtins.bool | None = ...,
+        isGroupReactionsNotificationEnabled: builtins.bool | None = ...,
+        isStatusNotificationEnabled: builtins.bool | None = ...,
+        statusNotificationToneID: builtins.int | None = ...,
+        shouldPlaySoundForCallNotification: builtins.bool | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["appTheme", b"appTheme", "bannerNotificationDisplayMode", b"bannerNotificationDisplayMode", "defaultNotificationToneID", b"defaultNotificationToneID", "disableLinkPreviews", b"disableLinkPreviews", "fontSize", b"fontSize", "groupDefaultNotificationToneID", b"groupDefaultNotificationToneID", "isAudiosAutodownloadEnabled", b"isAudiosAutodownloadEnabled", "isCallsNotificationEnabled", b"isCallsNotificationEnabled", "isDocumentsAutodownloadEnabled", b"isDocumentsAutodownloadEnabled", "isDoodleWallpaperEnabled", b"isDoodleWallpaperEnabled", "isMessagesNotificationEnabled", b"isMessagesNotificationEnabled", "isPhotosAutodownloadEnabled", b"isPhotosAutodownloadEnabled", "isReactionsNotificationEnabled", b"isReactionsNotificationEnabled", "isStatusReactionsNotificationEnabled", b"isStatusReactionsNotificationEnabled", "isTextPreviewForNotificationEnabled", b"isTextPreviewForNotificationEnabled", "isVideosAutodownloadEnabled", b"isVideosAutodownloadEnabled", "language", b"language", "minimizeToTray", b"minimizeToTray", "notificationToneID", b"notificationToneID", "replaceTextWithEmoji", b"replaceTextWithEmoji", "startAtLogin", b"startAtLogin", "unreadCounterBadgeDisplayMode", b"unreadCounterBadgeDisplayMode", "wallpaperID", b"wallpaperID"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["appTheme", b"appTheme", "bannerNotificationDisplayMode", b"bannerNotificationDisplayMode", "defaultNotificationToneID", b"defaultNotificationToneID", "disableLinkPreviews", b"disableLinkPreviews", "fontSize", b"fontSize", "groupDefaultNotificationToneID", b"groupDefaultNotificationToneID", "isAudiosAutodownloadEnabled", b"isAudiosAutodownloadEnabled", "isCallsNotificationEnabled", b"isCallsNotificationEnabled", "isDocumentsAutodownloadEnabled", b"isDocumentsAutodownloadEnabled", "isDoodleWallpaperEnabled", b"isDoodleWallpaperEnabled", "isMessagesNotificationEnabled", b"isMessagesNotificationEnabled", "isPhotosAutodownloadEnabled", b"isPhotosAutodownloadEnabled", "isReactionsNotificationEnabled", b"isReactionsNotificationEnabled", "isStatusReactionsNotificationEnabled", b"isStatusReactionsNotificationEnabled", "isTextPreviewForNotificationEnabled", b"isTextPreviewForNotificationEnabled", "isVideosAutodownloadEnabled", b"isVideosAutodownloadEnabled", "language", b"language", "minimizeToTray", b"minimizeToTray", "notificationToneID", b"notificationToneID", "replaceTextWithEmoji", b"replaceTextWithEmoji", "startAtLogin", b"startAtLogin", "unreadCounterBadgeDisplayMode", b"unreadCounterBadgeDisplayMode", "wallpaperID", b"wallpaperID"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["appTheme", b"appTheme", "bannerNotificationDisplayMode", b"bannerNotificationDisplayMode", "defaultNotificationToneID", b"defaultNotificationToneID", "disableLinkPreviews", b"disableLinkPreviews", "fontSize", b"fontSize", "groupDefaultNotificationToneID", b"groupDefaultNotificationToneID", "isAudiosAutodownloadEnabled", b"isAudiosAutodownloadEnabled", "isCallsNotificationEnabled", b"isCallsNotificationEnabled", "isDocumentsAutodownloadEnabled", b"isDocumentsAutodownloadEnabled", "isDoodleWallpaperEnabled", b"isDoodleWallpaperEnabled", "isEnterToSendEnabled", b"isEnterToSendEnabled", "isGroupMessageNotificationEnabled", b"isGroupMessageNotificationEnabled", "isGroupReactionsNotificationEnabled", b"isGroupReactionsNotificationEnabled", "isMessagesNotificationEnabled", b"isMessagesNotificationEnabled", "isPhotosAutodownloadEnabled", b"isPhotosAutodownloadEnabled", "isReactionsNotificationEnabled", b"isReactionsNotificationEnabled", "isSpellCheckEnabled", b"isSpellCheckEnabled", "isStatusNotificationEnabled", b"isStatusNotificationEnabled", "isStatusReactionsNotificationEnabled", b"isStatusReactionsNotificationEnabled", "isTextPreviewForNotificationEnabled", b"isTextPreviewForNotificationEnabled", "isVideosAutodownloadEnabled", b"isVideosAutodownloadEnabled", "language", b"language", "mediaUploadQuality", b"mediaUploadQuality", "minimizeToTray", b"minimizeToTray", "notificationToneID", b"notificationToneID", "replaceTextWithEmoji", b"replaceTextWithEmoji", "shouldPlaySoundForCallNotification", b"shouldPlaySoundForCallNotification", "startAtLogin", b"startAtLogin", "statusNotificationToneID", b"statusNotificationToneID", "unreadCounterBadgeDisplayMode", b"unreadCounterBadgeDisplayMode", "wallpaperID", b"wallpaperID"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["appTheme", b"appTheme", "bannerNotificationDisplayMode", b"bannerNotificationDisplayMode", "defaultNotificationToneID", b"defaultNotificationToneID", "disableLinkPreviews", b"disableLinkPreviews", "fontSize", b"fontSize", "groupDefaultNotificationToneID", b"groupDefaultNotificationToneID", "isAudiosAutodownloadEnabled", b"isAudiosAutodownloadEnabled", "isCallsNotificationEnabled", b"isCallsNotificationEnabled", "isDocumentsAutodownloadEnabled", b"isDocumentsAutodownloadEnabled", "isDoodleWallpaperEnabled", b"isDoodleWallpaperEnabled", "isEnterToSendEnabled", b"isEnterToSendEnabled", "isGroupMessageNotificationEnabled", b"isGroupMessageNotificationEnabled", "isGroupReactionsNotificationEnabled", b"isGroupReactionsNotificationEnabled", "isMessagesNotificationEnabled", b"isMessagesNotificationEnabled", "isPhotosAutodownloadEnabled", b"isPhotosAutodownloadEnabled", "isReactionsNotificationEnabled", b"isReactionsNotificationEnabled", "isSpellCheckEnabled", b"isSpellCheckEnabled", "isStatusNotificationEnabled", b"isStatusNotificationEnabled", "isStatusReactionsNotificationEnabled", b"isStatusReactionsNotificationEnabled", "isTextPreviewForNotificationEnabled", b"isTextPreviewForNotificationEnabled", "isVideosAutodownloadEnabled", b"isVideosAutodownloadEnabled", "language", b"language", "mediaUploadQuality", b"mediaUploadQuality", "minimizeToTray", b"minimizeToTray", "notificationToneID", b"notificationToneID", "replaceTextWithEmoji", b"replaceTextWithEmoji", "shouldPlaySoundForCallNotification", b"shouldPlaySoundForCallNotification", "startAtLogin", b"startAtLogin", "statusNotificationToneID", b"statusNotificationToneID", "unreadCounterBadgeDisplayMode", b"unreadCounterBadgeDisplayMode", "wallpaperID", b"wallpaperID"]) -> None: ...
 
 Global___SettingsSyncAction: typing_extensions.TypeAlias = SettingsSyncAction
 
@@ -2419,18 +2474,21 @@ class MuteAction(google.protobuf.message.Message):
     MUTED_FIELD_NUMBER: builtins.int
     MUTEENDTIMESTAMP_FIELD_NUMBER: builtins.int
     AUTOMUTED_FIELD_NUMBER: builtins.int
+    MUTEEVERYONEMENTIONENDTIMESTAMP_FIELD_NUMBER: builtins.int
     muted: builtins.bool
     muteEndTimestamp: builtins.int
     autoMuted: builtins.bool
+    muteEveryoneMentionEndTimestamp: builtins.int
     def __init__(
         self,
         *,
         muted: builtins.bool | None = ...,
         muteEndTimestamp: builtins.int | None = ...,
         autoMuted: builtins.bool | None = ...,
+        muteEveryoneMentionEndTimestamp: builtins.int | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["autoMuted", b"autoMuted", "muteEndTimestamp", b"muteEndTimestamp", "muted", b"muted"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["autoMuted", b"autoMuted", "muteEndTimestamp", b"muteEndTimestamp", "muted", b"muted"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["autoMuted", b"autoMuted", "muteEndTimestamp", b"muteEndTimestamp", "muteEveryoneMentionEndTimestamp", b"muteEveryoneMentionEndTimestamp", "muted", b"muted"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["autoMuted", b"autoMuted", "muteEndTimestamp", b"muteEndTimestamp", "muteEveryoneMentionEndTimestamp", b"muteEveryoneMentionEndTimestamp", "muted", b"muted"]) -> None: ...
 
 Global___MuteAction: typing_extensions.TypeAlias = MuteAction
 

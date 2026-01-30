@@ -219,7 +219,7 @@ func GenerateWABinary(ctx context.Context, to types.JID, msg *waE2E.Message) *[]
 			},
 		}
 		nodes = append(nodes, bizNode)
-
+    }
 	return &nodes
 }
 
