@@ -3,10 +3,10 @@ module github.com/krypton-byte/neonize
 go 1.25.3
 
 require (
-	github.com/lib/pq v1.10.9
+	github.com/lib/pq v1.11.1
 	github.com/mattn/go-sqlite3 v1.14.33
 	go.mau.fi/util v0.9.5
-	go.mau.fi/whatsmeow v0.0.0-20260122001212-37568b947bd4
+	go.mau.fi/whatsmeow v0.0.0-20260129212019-7787ab952245
 	google.golang.org/protobuf v1.36.11
 )
 
@@ -31,4 +31,4 @@ require (
 
 replace go.mau.fi/libsignal => github.com/fawwaz37/libsignal-protocol-go v0.2.1-0.20250920101933-ae5672c024d5
 
-replace go.mau.fi/whatsmeow => github.com/ZhanNexus/whatsmeow v0.0.0-20260122152739-b21cc52da956
+replace go.mau.fi/whatsmeow => github.com/ZhanNexus/whatsmeow v0.0.0-20260130235638-ee6433719a95

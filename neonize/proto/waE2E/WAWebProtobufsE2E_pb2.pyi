@@ -3426,14 +3426,20 @@ class ContextInfo(google.protobuf.message.Message):
         CLOSE_FRIENDS: ContextInfo.StatusAudienceMetadata.AudienceType.ValueType  # 1
 
         AUDIENCETYPE_FIELD_NUMBER: builtins.int
+        LISTNAME_FIELD_NUMBER: builtins.int
+        LISTEMOJI_FIELD_NUMBER: builtins.int
         audienceType: Global___ContextInfo.StatusAudienceMetadata.AudienceType.ValueType
+        listName: builtins.str
+        listEmoji: builtins.str
         def __init__(
             self,
             *,
             audienceType: Global___ContextInfo.StatusAudienceMetadata.AudienceType.ValueType | None = ...,
+            listName: builtins.str | None = ...,
+            listEmoji: builtins.str | None = ...,
         ) -> None: ...
-        def HasField(self, field_name: typing.Literal["audienceType", b"audienceType"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing.Literal["audienceType", b"audienceType"]) -> None: ...
+        def HasField(self, field_name: typing.Literal["audienceType", b"audienceType", "listEmoji", b"listEmoji", "listName", b"listName"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["audienceType", b"audienceType", "listEmoji", b"listEmoji", "listName", b"listName"]) -> None: ...
 
     @typing.final
     class DataSharingContext(google.protobuf.message.Message):
