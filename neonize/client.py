@@ -2248,7 +2248,16 @@ class NewClient:
         if model.Error:
             raise SetGroupPhotoError(model.Error)
         return model.PictureID
-
+    async def set_profile_name(self, name: str) -> str:
+        """
+        Set pushname on client side ( #source : https://github.com/tulir/whatsmeow/issues/374 )
+        :param name: Name 
+        :type name: str
+        """
+        err = self.__client.SetPushName(self.uuid, name.encode()).decode()
+        
+        if err:
+            raise SendAppStateError(err)
     def get_lid_from_pn(self, jid: JID | str) -> JID:
         """Retrieves the matching lid from the supplied jid.
 
