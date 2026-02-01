@@ -432,7 +432,27 @@ class ChatSettingsStore:
         if return_.Error:
             raise GetChatSettingsError(return_.Error)
         return return_.LocalChatSettings
+        
+    async def clear_chat(self, jid: JID, keep_starred: bool = False, delete_media: bool = True):
+        """
+        Clears the chat messages for the specified JID.
 
+        :param jid: The JID of the chat to clear.
+        :type jid: JID
+        :param keep_starred: Whether to keep starred messages, defaults to False.
+        :type keep_starred: bool, optional
+        :param delete_media: Whether to delete media files, defaults to True.
+        :type delete_media: bool, optional
+        :raises SendAppStateError: If there is an error during the app state synchronization.
+        """
+        err = (await self.__client.ClearChat(
+            self.__instance.uuid,
+            Jid2String(jid).encode(),
+            keep_starred,
+            delete_media
+        )).decode()
+        if err:
+            raise SendAppStateError(err)
 
 class NewAClient:
     def __init__(
