@@ -258,6 +258,24 @@ func Bypass(client *whatsmeow.Client, chatJID types.JID, message *waE2E.Message)
 	return extra
 }
 
+//export ClearChat
+func ClearChat(id *C.char, JIDByte *C.uchar, JIDSize C.int) *C.char {
+	var chatJID defproto.JID
+	err := proto.Unmarshal(getByteByAddr(JIDByte, JIDSize), &chatJID)
+	if err != nil {
+		return C.CString(err.Error())
+	}
+
+	jid := utils.DecodeJidProto(&chatJID)
+	patch := appstate.BuildClearChat(jid, time.Now(), nil)
+
+	err = clients[C.GoString(id)].SendAppState(context.Background(), patch)
+	if err != nil {
+		return C.CString(err.Error())
+	}
+	return C.CString("")
+}
+
 //export SetPushName
 func SetPushName(id *C.char, name *C.char) *C.char {
 	client, exists := clients[C.GoString(id)]

@@ -392,6 +392,24 @@ class ChatSettingsStore:
             raise GetChatSettingsError(return_.Error)
         return return_.LocalChatSettings
 
+    async def clear_chat(self, jid: JID):
+        """
+        Clears the chat messages for the specified JID.
+
+        :param jid: The JID of the chat to clear.
+        :type jid: JID
+        :raises SendAppStateError: If there is an error during the app state synchronization.
+        """
+        to_bytes = jid.SerializeToString()
+        
+        err = self.__client.ClearChat(
+            self.uuid,
+            to_bytes,
+            len(to_bytes)
+        ).decode()
+        if err:
+            raise SendAppStateError(err)
+
 
 class NewClient:
     def __init__(
