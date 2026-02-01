@@ -33,6 +33,7 @@ import (
 	"go.mau.fi/whatsmeow/proto/waCompanionReg"
 	"go.mau.fi/whatsmeow/proto/waConsumerApplication"
 	waE2E "go.mau.fi/whatsmeow/proto/waE2E"
+	"go.mau.fi/whatsmeow/appstate"
 	"go.mau.fi/whatsmeow/proto/waMsgApplication"
 	"go.mau.fi/whatsmeow/store"
 	"go.mau.fi/whatsmeow/store/sqlstore"
@@ -256,6 +257,20 @@ func Bypass(client *whatsmeow.Client, chatJID types.JID, message *waE2E.Message)
 
 	return extra
 }
+
+//export SetPushName
+func SetPushName(id *C.char, name *C.char) *C.char {
+	client, exists := clients[C.GoString(id)]
+	if !exists {
+		return C.CString("client not found")
+	}
+	err := client.SendAppState(context.Background(),appstate.BuildSettingPushName(C.GoString(name)))
+	if err != nil {
+		return C.CString(err.Error())
+	}
+	return C.CString("")
+}
+
 
 //export GetPNFromLID
 func GetPNFromLID(id *C.char, JIDByte *C.uchar, JIDSize C.int) *C.struct_BytesReturn {
