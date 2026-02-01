@@ -167,13 +167,19 @@ func DecodeMutationInfo(mutationInfo *defproto.MutationInfo) appstate.MutationIn
 
 func DecodePatchInfo(patchInfo *defproto.PatchInfo) *appstate.PatchInfo {
 	var Type appstate.WAPatchName
-	switch patchInfo.Type {
-	case defproto.PatchInfo_CRITICAL_BLOCK.Enum():
-		Type = appstate.WAPatchCriticalBlock
-	case defproto.PatchInfo_CRITICAL_UNBLOCK_LOW.Enum():
-		Type = appstate.WAPatchCriticalUnblockLow
-	case defproto.PatchInfo_REGULAR.Enum():
-		Type = appstate.WAPatchRegular
+	if patchInfo.Type != nil {
+		switch *patchInfo.Type {
+		case defproto.PatchInfo_CRITICAL_BLOCK:
+			Type = appstate.WAPatchCriticalBlock
+		case defproto.PatchInfo_CRITICAL_UNBLOCK_LOW:
+			Type = appstate.WAPatchCriticalUnblockLow
+		case defproto.PatchInfo_REGULAR_LOW:
+			Type = appstate.WAPatchRegularLow
+		case defproto.PatchInfo_REGULAR_HIGH:
+			Type = appstate.WAPatchRegularHigh
+		case defproto.PatchInfo_REGULAR:
+			Type = appstate.WAPatchRegular
+		}
 	}
 	mutationInfo := []appstate.MutationInfo{}
 	for _, mutation := range patchInfo.Mutations {
