@@ -610,7 +610,7 @@ class NewAClient:
             return msg
         return None
 
-    def _make_quoted_message(
+    async def _make_quoted_message(
         self, message: neonize_proto.Message, reply_privately: bool = False
     ) -> ContextInfo:
         if not isinstance((msg := get_message_type(message.Message)), str):
@@ -625,10 +625,15 @@ class NewAClient:
         except Exception:
             pass
     
-        sender = message.Info.MessageSource.Sender
-        if jid_is_lid(sender):
-            senderalt = message.Info.MessageSource.SenderAlt
-            sender = senderalt if senderalt.ListFields() else sender
+        if message.Info.MessageSource.IsFromMe:
+            me = await self.get_me()
+            user_jid = me.JID
+            sender = user_jid
+        else:
+            sender = message.Info.MessageSource.Sender
+            if jid_is_lid(sender):
+                senderalt = message.Info.MessageSource.SenderAlt
+                sender = senderalt if senderalt.ListFields() else sender
     
         return ContextInfo(
             stanzaID=message.Info.ID,
@@ -791,7 +796,7 @@ class NewAClient:
             + partial_message.__class__.__name__[1:]
         )  # type: ignore
         partial_message.contextInfo.MergeFrom(
-            self._make_quoted_message(quoted, reply_privately)
+            await self._make_quoted_message(quoted, reply_privately)
         )
         getattr(build_message, field_name).MergeFrom(partial_message)
         return build_message
@@ -922,7 +927,7 @@ class NewAClient:
         # result = Message.FromString(protobytes)
         if quoted:
             message.pollCreationMessage.contextInfo.MergeFrom(
-                self._make_quoted_message(quoted)
+                await self._make_quoted_message(quoted)
             )
         return message
 
@@ -1102,7 +1107,7 @@ class NewAClient:
         )
         if quoted:
             message.stickerMessage.contextInfo.MergeFrom(
-                self._make_quoted_message(quoted)
+                await self._make_quoted_message(quoted)
             )
         return message
 
@@ -1235,7 +1240,7 @@ class NewAClient:
         )
         if quoted:
             message.stickerPackMessage.contextInfo.MergeFrom(
-                self._make_quoted_message(quoted)
+                await self._make_quoted_message(quoted)
             )
         return message
 
@@ -1428,7 +1433,7 @@ class NewAClient:
         )
         if quoted:
             message.videoMessage.contextInfo.MergeFrom(
-                self._make_quoted_message(quoted)
+                await self._make_quoted_message(quoted)
             )
         return message
 
@@ -1598,7 +1603,7 @@ class NewAClient:
         )
         if quoted:
             message.imageMessage.contextInfo.MergeFrom(
-                self._make_quoted_message(quoted)
+                await self._make_quoted_message(quoted)
             )
         return message
 
@@ -1739,7 +1744,7 @@ class NewAClient:
         )
         if quoted:
             message.albumMessage.contextInfo.MergeFrom(
-                self._make_quoted_message(quoted)
+                await self._make_quoted_message(quoted)
             )
         response = await self.send_message(to, message, add_msg_secret=add_msg_secret)
         msg_association = MessageAssociation(
@@ -1834,7 +1839,7 @@ class NewAClient:
         )
         if quoted:
             message.audioMessage.contextInfo.MergeFrom(
-                self._make_quoted_message(quoted)
+                await self._make_quoted_message(quoted)
             )
         return message
 
@@ -1909,7 +1914,7 @@ class NewAClient:
         )
         if quoted:
             message.documentMessage.contextInfo.MergeFrom(
-                self._make_quoted_message(quoted)
+                await self._make_quoted_message(quoted)
             )
         return message
 
@@ -1996,7 +2001,7 @@ class NewAClient:
         )
         if quoted:
             message.contactMessage.contextInfo.MergeFrom(
-                self._make_quoted_message(quoted)
+                await self._make_quoted_message(quoted)
             )
         return await self.send_message(to, message)
 
