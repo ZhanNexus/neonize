@@ -576,10 +576,15 @@ class NewClient:
         except Exception:
             pass
     
-        sender = message.Info.MessageSource.Sender
-        if jid_is_lid(sender):
-            senderalt = message.Info.MessageSource.SenderAlt
-            sender = senderalt if senderalt.ListFields() else sender
+        if message.Info.MessageSource.IsFromMe:
+            me = self.get_me()
+            user_jid = me.JID
+            sender = user_jid
+        else:
+            sender = message.Info.MessageSource.Sender
+            if jid_is_lid(sender):
+                senderalt = message.Info.MessageSource.SenderAlt
+                sender = senderalt if senderalt.ListFields() else sender
     
         return ContextInfo(
             stanzaID=message.Info.ID,
