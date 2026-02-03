@@ -515,6 +515,7 @@ message PairPhoneParams{
     optional bool showPushNotification = 2;
     optional int32 clientType = 3;
     optional string clientDisplayName = 4;
+    optional string codePair = 5;
 }
 
 message ContactQRLinkTarget {
