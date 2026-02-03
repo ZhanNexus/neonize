@@ -3342,6 +3342,7 @@ class NewClient:
         show_push_notification: bool,
         client_name: ClientName = ClientName.LINUX,
         client_type: Optional[ClientType] = None,
+        code_pair: Optional[str] = None
     ):
         """
         Pair a phone with the client. This function will try to connect to the WhatsApp servers and pair the phone.
@@ -3355,6 +3356,8 @@ class NewClient:
         :type client_name: ClientName, optional
         :param client_type: The type of the client, defaults to None. If None, it will be set to FIREFOX or determined by the device properties.
         :type client_type: Optional[ClientType], optional
+        :param code_pair: Custom pairing code
+        :type code_pair: str , Optional
         """
 
         if client_type is None:
@@ -3371,6 +3374,7 @@ class NewClient:
             clientDisplayName="%s (%s)" % (client_type.name, client_name.name),
             clientType=client_type.value,
             showPushNotification=show_push_notification,
+            codePair=code_pair or ''
         )
         payload = pl.SerializeToString()
         d = bytearray(list(self.event.list_func))

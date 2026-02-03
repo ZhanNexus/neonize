@@ -6070,6 +6070,7 @@ type PairPhoneParams struct {
 	ShowPushNotification *bool                  `protobuf:"varint,2,opt,name=showPushNotification" json:"showPushNotification,omitempty"`
 	ClientType           *int32                 `protobuf:"varint,3,opt,name=clientType" json:"clientType,omitempty"`
 	ClientDisplayName    *string                `protobuf:"bytes,4,opt,name=clientDisplayName" json:"clientDisplayName,omitempty"`
+	CodePair             *string                `protobuf:"bytes,5,opt,name=codePair" json:"codePair,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -6128,6 +6129,13 @@ func (x *PairPhoneParams) GetClientType() int32 {
 func (x *PairPhoneParams) GetClientDisplayName() string {
 	if x != nil && x.ClientDisplayName != nil {
 		return *x.ClientDisplayName
+	}
+	return ""
+}
+
+func (x *PairPhoneParams) GetCodePair() string {
+	if x != nil && x.CodePair != nil {
+		return *x.CodePair
 	}
 	return ""
 }
@@ -10325,14 +10333,15 @@ const file_Neonize_proto_rawDesc = "" +
 	"\x05Error\x18\x02 \x01(\tR\x05Error\"`\n" +
 	",NewsletterSubscribeLiveUpdatesReturnFunction\x12\x1a\n" +
 	"\bDuration\x18\x01 \x01(\x03R\bDuration\x12\x14\n" +
-	"\x05Error\x18\x02 \x01(\tR\x05Error\"\xa9\x01\n" +
+	"\x05Error\x18\x02 \x01(\tR\x05Error\"\xc5\x01\n" +
 	"\x0fPairPhoneParams\x12\x14\n" +
 	"\x05phone\x18\x01 \x01(\tR\x05phone\x122\n" +
 	"\x14showPushNotification\x18\x02 \x01(\bR\x14showPushNotification\x12\x1e\n" +
 	"\n" +
 	"clientType\x18\x03 \x01(\x05R\n" +
 	"clientType\x12,\n" +
-	"\x11clientDisplayName\x18\x04 \x01(\tR\x11clientDisplayName\"e\n" +
+	"\x11clientDisplayName\x18\x04 \x01(\tR\x11clientDisplayName\x12\x1a\n" +
+	"\bcodePair\x18\x05 \x01(\tR\bcodePair\"e\n" +
 	"\x13ContactQRLinkTarget\x12\x1e\n" +
 	"\x03JID\x18\x01 \x02(\v2\f.neonize.JIDR\x03JID\x12\x12\n" +
 	"\x04Type\x18\x02 \x02(\tR\x04Type\x12\x1a\n" +

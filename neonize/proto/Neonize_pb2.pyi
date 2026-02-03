@@ -2070,10 +2070,12 @@ class PairPhoneParams(google.protobuf.message.Message):
     SHOWPUSHNOTIFICATION_FIELD_NUMBER: builtins.int
     CLIENTTYPE_FIELD_NUMBER: builtins.int
     CLIENTDISPLAYNAME_FIELD_NUMBER: builtins.int
+    CODEPAIR_FIELD_NUMBER: builtins.int
     phone: builtins.str
     showPushNotification: builtins.bool
     clientType: builtins.int
     clientDisplayName: builtins.str
+    codePair: builtins.str
     def __init__(
         self,
         *,
@@ -2081,9 +2083,10 @@ class PairPhoneParams(google.protobuf.message.Message):
         showPushNotification: builtins.bool | None = ...,
         clientType: builtins.int | None = ...,
         clientDisplayName: builtins.str | None = ...,
+        codePair: builtins.str | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["clientDisplayName", b"clientDisplayName", "clientType", b"clientType", "phone", b"phone", "showPushNotification", b"showPushNotification"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["clientDisplayName", b"clientDisplayName", "clientType", b"clientType", "phone", b"phone", "showPushNotification", b"showPushNotification"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["clientDisplayName", b"clientDisplayName", "clientType", b"clientType", "codePair", b"codePair", "phone", b"phone", "showPushNotification", b"showPushNotification"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["clientDisplayName", b"clientDisplayName", "clientType", b"clientType", "codePair", b"codePair", "phone", b"phone", "showPushNotification", b"showPushNotification"]) -> None: ...
 
 Global___PairPhoneParams: typing_extensions.TypeAlias = PairPhoneParams
 
