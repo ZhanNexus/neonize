@@ -8,16 +8,25 @@ on:
         required: true
         type: string
       goneonize:
-        description: "Build binaries"
+        description: "Build binaries (Master Switch)"
         type: boolean
         required: true
         default: true
+      build_windows_zig:
+        description: "Include Windows/Zig"
+        type: boolean
+        default: false
+      build_mac:
+        description: "Include MacOS"
+        type: boolean
+        default: false
 
 env:
   UV_PUBLISH_TOKEN: ${{ secrets.PYPI_TOKEN }}
 
 jobs:
   android:
+    # Selalu jalan jika master switch ON
     if: ${{ inputs.goneonize }}
     runs-on: ubuntu-22.04
     steps:
@@ -33,7 +42,7 @@ jobs:
       - name: Cache dependencies
         uses: actions/cache@v4
         with:
-          path: "**/.venv" # Fixed: Added quotes to handle wildcards
+          path: "**/.venv"
           key: ${{ runner.os }}-${{ hashFiles('**/uv.lock') }}
 
       - name: Install dependencies & Set Version
@@ -85,13 +94,14 @@ jobs:
           path: neonize/*.so
 
   zig:
-    if: ${{ inputs.goneonize }}
+    # Hanya jalan jika dicentang build_windows_zig
+    if: ${{ inputs.goneonize && inputs.build_windows_zig }}
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v4
         with:
-          go-version: '^1.21.5'
+          go-version: '^1.25.3'
       - uses: actions/setup-python@v4
         with:
           python-version: "3.11"
@@ -101,7 +111,7 @@ jobs:
       - name: Cache dependencies
         uses: actions/cache@v4
         with:
-          path: "**/.venv" # Fixed
+          path: "**/.venv"
           key: ${{ runner.os }}-${{ hashFiles('**/uv.lock') }}
       
       - name: Install dependencies & Set Version
@@ -160,13 +170,14 @@ jobs:
           path: LIBS/*
 
   linux:
+    # Selalu jalan jika master switch ON
     if: ${{ inputs.goneonize }}
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v4
         with:
-          go-version: '^1.21.5'
+          go-version: '^1.25.3'
       - uses: actions/setup-python@v4
         with:
           python-version: "3.11"
@@ -175,7 +186,7 @@ jobs:
       - name: Cache dependencies
         uses: actions/cache@v4
         with:
-          path: "**/.venv" # Fixed
+          path: "**/.venv"
           key: ${{ runner.os }}-${{ hashFiles('**/uv.lock') }}
 
       - name: Install dependencies & Set Version
@@ -235,13 +246,14 @@ jobs:
           path: LIBS/*
 
   darwin:
-    if: ${{ inputs.goneonize }}
+    # Hanya jalan jika dicentang build_mac
+    if: ${{ inputs.goneonize && inputs.build_mac }}
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v4
         with:
-          go-version: '^1.21.5'
+          go-version: '^1.25.3'
       - uses: actions/setup-python@v4
         with:
           python-version: "3.11"
@@ -250,7 +262,7 @@ jobs:
       - name: Cache dependencies
         uses: actions/cache@v4
         with:
-          path: "**/.venv" # Fixed
+          path: "**/.venv"
           key: ${{ runner.os }}-${{ hashFiles('**/uv.lock') }}
       
       - name: Install dependencies & Set Version
