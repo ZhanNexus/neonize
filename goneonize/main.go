@@ -29,11 +29,11 @@ import (
 	_ "github.com/lib/pq"
 	_ "github.com/mattn/go-sqlite3"
 	"go.mau.fi/whatsmeow"
+	"go.mau.fi/whatsmeow/appstate"
 	waBinary "go.mau.fi/whatsmeow/binary"
 	"go.mau.fi/whatsmeow/proto/waCompanionReg"
 	"go.mau.fi/whatsmeow/proto/waConsumerApplication"
 	waE2E "go.mau.fi/whatsmeow/proto/waE2E"
-	"go.mau.fi/whatsmeow/appstate"
 	"go.mau.fi/whatsmeow/proto/waMsgApplication"
 	"go.mau.fi/whatsmeow/store"
 	"go.mau.fi/whatsmeow/store/sqlstore"
@@ -75,7 +75,7 @@ func getByteByAddr(addr *C.uchar, size C.int) []byte {
 	// return result
 }
 
-// Get button type 
+// Get button type
 func getButtonTypeFromMessage(msg *waE2E.Message) string {
 	switch {
 	case msg.ViewOnceMessage != nil:
@@ -87,7 +87,7 @@ func getButtonTypeFromMessage(msg *waE2E.Message) string {
 	case msg.ButtonsMessage != nil:
 		return "buttons"
 	case msg.ListMessage != nil:
-		return "list"	
+		return "list"
 	case msg.InteractiveMessage != nil:
 		return "interactive"
 	default:
@@ -99,7 +99,7 @@ func getButtonTypeFromMessage(msg *waE2E.Message) string {
 func GenerateWABinary(ctx context.Context, to types.JID, msg *waE2E.Message) *[]waBinary.Node {
 	isPrivate := to.Server == types.DefaultUserServer
 	nodes := make([]waBinary.Node, 0)
-	
+
 	if isPrivate {
 		botNode := waBinary.Node{
 			Tag:   "bot",
@@ -128,7 +128,7 @@ func GenerateWABinary(ctx context.Context, to types.JID, msg *waE2E.Message) *[]
 							if name == "payment_info" {
 								nativeFlowName = "payment_info"
 							} else if name == "payment_key_info" {
-							    nativeFlowName = "payment_key_info"
+								nativeFlowName = "payment_key_info"
 							}
 
 							bizNode := waBinary.Node{
@@ -220,7 +220,7 @@ func GenerateWABinary(ctx context.Context, to types.JID, msg *waE2E.Message) *[]
 			},
 		}
 		nodes = append(nodes, bizNode)
-    }
+	}
 	return &nodes
 }
 
@@ -282,13 +282,12 @@ func SetPushName(id *C.char, name *C.char) *C.char {
 	if !exists {
 		return C.CString("client not found")
 	}
-	err := client.SendAppState(context.Background(),appstate.BuildSettingPushName(C.GoString(name)))
+	err := client.SendAppState(context.Background(), appstate.BuildSettingPushName(C.GoString(name)))
 	if err != nil {
 		return C.CString(err.Error())
 	}
 	return C.CString("")
 }
-
 
 //export GetPNFromLID
 func GetPNFromLID(id *C.char, JIDByte *C.uchar, JIDSize C.int) *C.struct_BytesReturn {
@@ -450,7 +449,6 @@ func SendMessage(
 	messageByte *C.uchar, messageSize C.int,
 	extraByte *C.uchar, extraSize C.int,
 ) *C.struct_BytesReturn {
-
 	client := clients[C.GoString(id)]
 	return_ := defproto.SendMessageReturnFunction{}
 
@@ -486,7 +484,7 @@ func SendMessage(
 	bypassExtra := Bypass(client, jid, &message)
 
 	// ===== Merge bypass and extra params =====
-	finalExtra := bypassExtra 
+	finalExtra := bypassExtra
 	if protoExtra != nil {
 		if protoExtra.ID != "" {
 			finalExtra.ID = protoExtra.ID
