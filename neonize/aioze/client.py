@@ -148,7 +148,6 @@ from ..proto.Neonize_pb2 import (
     UploadResponse,
     UploadReturnFunction,
 )
-from ..proto.waSyncAction.WAWebProtobufSyncAction_pb2 import SyncActionValue , PushNameSetting
 from ..proto.waCommon.WACommon_pb2 import MessageKey
 from ..proto.waCompanionReg.WAWebProtobufsCompanionReg_pb2 import DeviceProps
 from ..proto.waConsumerApplication.WAConsumerApplication_pb2 import ConsumerApplication
@@ -432,7 +431,7 @@ class ChatSettingsStore:
         if return_.Error:
             raise GetChatSettingsError(return_.Error)
         return return_.LocalChatSettings
-        
+
     async def clear_chat(self, jid: JID):
         """
         Clears the chat messages for the specified JID.
@@ -442,14 +441,13 @@ class ChatSettingsStore:
         :raises SendAppStateError: If there is an error during the app state synchronization.
         """
         to_bytes = jid.SerializeToString()
-        
-        err = (await self.__client.ClearChat(
-            self.uuid,
-            to_bytes,
-            len(to_bytes)
-        )).decode()
+
+        err = (
+            await self.__client.ClearChat(self.uuid, to_bytes, len(to_bytes))
+        ).decode()
         if err:
             raise SendAppStateError(err)
+
 
 class NewAClient:
     def __init__(
@@ -617,14 +615,16 @@ class NewAClient:
             try:
                 msg.contextInfo.Clear()
             except Exception:
-                _log_.warning("@_make_quoted_message; Couldn't clear the contextInfo of:")
+                _log_.warning(
+                    "@_make_quoted_message; Couldn't clear the contextInfo of:"
+                )
                 _log_.warning(msg)
-        
+
         try:
             message.Message.messageContextInfo.Clear()
         except Exception:
             pass
-    
+
         if message.Info.MessageSource.IsFromMe:
             me = await self.get_me()
             user_jid = me.JID
@@ -634,7 +634,7 @@ class NewAClient:
             if jid_is_lid(sender):
                 senderalt = message.Info.MessageSource.SenderAlt
                 sender = senderalt if senderalt.ListFields() else sender
-    
+
         return ContextInfo(
             stanzaID=message.Info.ID,
             participant=Jid2String(JIDToNonAD(sender)),
@@ -645,7 +645,6 @@ class NewAClient:
                 else None
             ),
         )
-
 
     async def send_message(
         self,
@@ -738,7 +737,13 @@ class NewAClient:
         extra_len = len(extra_params) if extra_params is not None else 0
 
         bytes_ptr = await self.__client.SendMessage(
-            self.uuid, to_bytes, len(to_bytes), message_bytes, len(message_bytes),extra_params,extra_len,
+            self.uuid,
+            to_bytes,
+            len(to_bytes),
+            message_bytes,
+            len(message_bytes),
+            extra_params,
+            extra_len,
         )
         protobytes = bytes_ptr.contents.get_bytes()
         free_bytes(bytes_ptr)
@@ -2352,18 +2357,18 @@ class NewAClient:
         if model.Error:
             raise SetGroupPhotoError(model.Error)
         return model.PictureID
-    
+
     async def set_profile_name(self, name: str) -> str:
         """
         Set pushname on client side ( #source : https://github.com/tulir/whatsmeow/issues/374 )
-        :param name: Name 
+        :param name: Name
         :type name: str
         """
         err = (await self.__client.SetPushName(self.uuid, name.encode())).decode()
-        
+
         if err:
             raise SendAppStateError(err)
-            
+
     async def get_lid_from_pn(self, jid: JID | str) -> JID:
         """Retrieves the matching lid from the supplied jid.
 
@@ -2964,7 +2969,9 @@ class NewAClient:
         if err:
             raise UnlinkGroupError(err)
 
-    async def update_blocklist(self, jid: JID | str, action: BlocklistAction) -> Blocklist:
+    async def update_blocklist(
+        self, jid: JID | str, action: BlocklistAction
+    ) -> Blocklist:
         """
         Function to update the blocklist with a given action on a specific JID.
 
@@ -2989,7 +2996,10 @@ class NewAClient:
         return model.Blocklist
 
     async def update_group_participants(
-        self, jid: JID | str, participants_changes: List[JID | str], action: ParticipantChange
+        self,
+        jid: JID | str,
+        participants_changes: List[JID | str],
+        action: ParticipantChange,
     ) -> RepeatedCompositeFieldContainer[GroupParticipant]:
         """
         This method is used to update the list of participants in a group.
@@ -3450,7 +3460,9 @@ class NewAClient:
             raise GetLinkedGroupParticipantsError(model.Error)
         return model.GetLinkedGroupsParticipants
 
-    async def get_newsletter_info(self, jid: JID | str) -> neonize_proto.NewsletterMetadata:
+    async def get_newsletter_info(
+        self, jid: JID | str
+    ) -> neonize_proto.NewsletterMetadata:
         """
         Fetches the metadata of a specific newsletter using its JID.
 
@@ -3510,7 +3522,7 @@ class NewAClient:
             clientDisplayName="%s (%s)" % (client_type.name, client_name.name),
             clientType=client_type.value,
             showPushNotification=show_push_notification,
-            codePair=code_pair or ''
+            codePair=code_pair or "",
         )
         payload = pl.SerializeToString()
         d = bytearray(list(self.event.list_func))

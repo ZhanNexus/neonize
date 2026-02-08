@@ -320,7 +320,7 @@ func EncodeEventTypesMessage(message *events.Message) *defproto.Message {
 	if message.SourceWebMsg != nil {
 		model.SourceWebMsg = message.SourceWebMsg
 	}
-		if message.Message != nil {
+	if message.Message != nil {
 		model.Message = message.Message
 	}
 	if len(message.AdditionalNodes) > 0 {
