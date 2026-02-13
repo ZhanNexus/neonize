@@ -510,11 +510,7 @@ if not os.environ.get("SPHINX"):
     gocode.FreeBytesStruct.restype = None
     gocode.SetPushName.argtypes = [ctypes.c_char_p, ctypes.c_char_p]
     gocode.SetPushName.restype = ctypes.c_char_p
-    gocode.ClearChat.argtypes = [
-        ctypes.c_char_p,
-        ctypes.c_char_p,
-        ctypes.c_int
-    ]
+    gocode.ClearChat.argtypes = [ctypes.c_char_p, ctypes.c_char_p, ctypes.c_int]
     gocode.ClearChat.restype = ctypes.c_char_p
 
 
