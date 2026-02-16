@@ -198,9 +198,10 @@ from ..utils.log import log, log_whatsmeow
 from ..utils.sticker import aio_convert_to_sticker, aio_convert_to_webp
 from .events import Event, EventsManager, event_global_loop
 from .preview.compose import link_preview
+from . import events
 
 _log_ = logging.getLogger(__name__)
-loop = get_event_loop()
+# loop = get_event_loop()
 
 SyncFunctionParams = ParamSpec("SyncFunctionParams")
 ReturnType = TypeVar("ReturnType")
@@ -485,6 +486,13 @@ class NewAClient:
         self.chat_settings = ChatSettingsStore(self.uuid)
         self.connect_task = None
         self.connected = False
+        # try:
+            # loop = asyncio.get_running_loop()
+        # except RuntimeError:
+            # loop = asyncio.new_event_loop()
+            # asyncio.set_event_loop(loop)
+        # if events.event_global_loop is None:
+            # events.event_global_loop = loop
         self.loop = event_global_loop
         self.me = None
         _log_.debug("🔨 Creating a NewClient instance")
