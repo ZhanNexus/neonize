@@ -99,7 +99,7 @@ func getMessageTypeFromMessage(msg *waE2E.Message) string {
 
 // GenerateWABinary for create button
 func GenerateWABinary(ctx context.Context, to types.JID, msg *waE2E.Message) *[]waBinary.Node {
-	isPrivate := to.Server == types.DefaultUserServer
+	isPrivate := to.Server == types.DefaultUserServer || to.Server == types.HiddenUserServer 
 	nodes := make([]waBinary.Node, 0)
 	
 	if isPrivate {
