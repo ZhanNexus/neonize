@@ -76,14 +76,16 @@ func getByteByAddr(addr *C.uchar, size C.int) []byte {
 }
 
 // Get button type 
-func getButtonTypeFromMessage(msg *waE2E.Message) string {
+func getMessageTypeFromMessage(msg *waE2E.Message) string {
 	switch {
 	case msg.ViewOnceMessage != nil:
-		return getButtonTypeFromMessage(msg.ViewOnceMessage.Message)
+		return getMessageTypeFromMessage(msg.ViewOnceMessage.Message)
 	case msg.ViewOnceMessageV2 != nil:
-		return getButtonTypeFromMessage(msg.ViewOnceMessageV2.Message)
+		return getMessageTypeFromMessage(msg.ViewOnceMessageV2.Message)
 	case msg.EphemeralMessage != nil:
-		return getButtonTypeFromMessage(msg.EphemeralMessage.Message)
+		return getMessageTypeFromMessage(msg.EphemeralMessage.Message)
+	case msg.EventMessage != nil:
+	    return "event"
 	case msg.ButtonsMessage != nil:
 		return "buttons"
 	case msg.ListMessage != nil:
@@ -108,7 +110,7 @@ func GenerateWABinary(ctx context.Context, to types.JID, msg *waE2E.Message) *[]
 		nodes = append(nodes, botNode)
 	}
 
-	switch getButtonTypeFromMessage(msg) {
+	switch getMessageTypeFromMessage(msg) {
 	case "interactive":
 		im := msg.InteractiveMessage
 		if im != nil {
@@ -220,6 +222,15 @@ func GenerateWABinary(ctx context.Context, to types.JID, msg *waE2E.Message) *[]
 			},
 		}
 		nodes = append(nodes, bizNode)
+		
+	case "event":
+	    eventNode := waBinary.Node{
+	        Tag:    "meta",
+	        Attrs:  waBinary.Attrs{
+	            "event_type":"creation",
+	        },
+	    }
+	    nodes = append(nodes, eventNode)
     }
 	return &nodes
 }
