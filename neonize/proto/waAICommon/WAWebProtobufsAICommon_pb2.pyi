@@ -69,6 +69,8 @@ class _BotMetricsEntryPointEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_
     MEDIA_PICKER_GROUP_CHAT: _BotMetricsEntryPoint.ValueType  # 40
     ASK_META_AI_NO_SEARCH_RESULTS: _BotMetricsEntryPoint.ValueType  # 41
     META_AI_SETTINGS: _BotMetricsEntryPoint.ValueType  # 45
+    WEB_INTRO_PANEL: _BotMetricsEntryPoint.ValueType  # 46
+    WEB_NAVIGATION_BAR: _BotMetricsEntryPoint.ValueType  # 47
 
 class BotMetricsEntryPoint(_BotMetricsEntryPoint, metaclass=_BotMetricsEntryPointEnumTypeWrapper): ...
 
@@ -115,6 +117,8 @@ MEDIA_PICKER_1_ON_1_CHAT: BotMetricsEntryPoint.ValueType  # 39
 MEDIA_PICKER_GROUP_CHAT: BotMetricsEntryPoint.ValueType  # 40
 ASK_META_AI_NO_SEARCH_RESULTS: BotMetricsEntryPoint.ValueType  # 41
 META_AI_SETTINGS: BotMetricsEntryPoint.ValueType  # 45
+WEB_INTRO_PANEL: BotMetricsEntryPoint.ValueType  # 46
+WEB_NAVIGATION_BAR: BotMetricsEntryPoint.ValueType  # 47
 Global___BotMetricsEntryPoint: _TypeAlias = BotMetricsEntryPoint  # noqa: Y015
 
 class _BotMetricsThreadEntryPoint:
@@ -1918,7 +1922,9 @@ class BotInfrastructureDiagnostics(_message.Message):
 
     BOTBACKEND_FIELD_NUMBER: _builtins.int
     TOOLSUSED_FIELD_NUMBER: _builtins.int
+    ISTHINKING_FIELD_NUMBER: _builtins.int
     botBackend: Global___BotInfrastructureDiagnostics.BotBackend.ValueType
+    isThinking: _builtins.bool
     @_builtins.property
     def toolsUsed(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]: ...
     def __init__(
@@ -1926,10 +1932,11 @@ class BotInfrastructureDiagnostics(_message.Message):
         *,
         botBackend: Global___BotInfrastructureDiagnostics.BotBackend.ValueType | None = ...,
         toolsUsed: _abc.Iterable[_builtins.str] | None = ...,
+        isThinking: _builtins.bool | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["botBackend", b"botBackend"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["botBackend", b"botBackend", "isThinking", b"isThinking"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["botBackend", b"botBackend", "toolsUsed", b"toolsUsed"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["botBackend", b"botBackend", "isThinking", b"isThinking", "toolsUsed", b"toolsUsed"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
 Global___BotInfrastructureDiagnostics: _TypeAlias = BotInfrastructureDiagnostics  # noqa: Y015
