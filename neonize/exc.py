@@ -8,7 +8,9 @@ class UploadError(Exception):
 
 class DownloadError(Exception):
     pass
-
+   
+class PairPhoneError(Exception):
+    pass
 
 class InviteLinkError(Exception):
     pass

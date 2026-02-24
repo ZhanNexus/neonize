@@ -35,6 +35,7 @@ from ._binder import (
 from .builder import build_edit, build_revoke
 from .events import Event, EventsManager
 from .exc import (
+    PairPhoneError,
     BuildPollVoteCreationError,
     BuildPollVoteError,
     ContactStoreError,
@@ -3343,11 +3344,8 @@ class NewClient:
         show_push_notification: bool,
         client_name: ClientName = ClientName.LINUX,
         client_type: Optional[ClientType] = None,
-        code_pair: Optional[str] = None
-    ):
-        """
-        Pair a phone with the client. This function will try to connect to the WhatsApp servers and pair the phone.
-        If successful, it will show a push notification on the paired phone.
+    ) -> str:
+        """Pair a phone with the client and return the pairing code.
 
         :param phone: The phone number to be paired.
         :type phone: str
@@ -3357,8 +3355,9 @@ class NewClient:
         :type client_name: ClientName, optional
         :param client_type: The type of the client, defaults to None. If None, it will be set to FIREFOX or determined by the device properties.
         :type client_type: Optional[ClientType], optional
-        :param code_pair: Custom pairing code
-        :type code_pair: str , Optional
+        :raises PairPhoneError: If an error occurs while pairing.
+        :return: The pairing code to enter in WhatsApp mobile app.
+        :rtype: str
         """
 
         if client_type is None:
@@ -3375,42 +3374,16 @@ class NewClient:
             clientDisplayName="%s (%s)" % (client_type.name, client_name.name),
             clientType=client_type.value,
             showPushNotification=show_push_notification,
-            codePair=code_pair or ''
         )
         payload = pl.SerializeToString()
-        d = bytearray(list(self.event.list_func))
 
-        _log_.debug("trying connect to whatsapp servers")
-
-        deviceprops = (
-            DeviceProps(os="Neonize", platformType=DeviceProps.SAFARI)
-            if self.device_props is None
-            else self.device_props
-        ).SerializeToString()
-
-        jidbuf_size = 0
-        jidbuf = b""
-        if self.jid:
-            jidbuf = self.jid.SerializeToString()
-            jidbuf_size = len(jidbuf)
-
-        self.__client.Neonize(
-            self.name.encode(),
-            self.uuid,
-            jidbuf,
-            jidbuf_size,
-            LogLevel.from_logging(log.level).level,
-            func_string(self.__onQr),
-            func_string(self.__onLoginStatus),
-            func_callback_bytes(self.event.execute),
-            func_callback_bytes2(log_whatsmeow),
-            (ctypes.c_char * self.event.list_func.__len__()).from_buffer(d),
-            len(d),
-            deviceprops,
-            len(deviceprops),
-            payload,
-            len(payload),
-        )
+        bytes_ptr = self.__client.PairPhone(self.uuid, payload, len(payload))
+        protobytes = bytes_ptr.contents.get_bytes()
+        free_bytes(bytes_ptr)
+        model = neonize_proto.PairPhoneReturnFunction.FromString(protobytes)
+        if model.Error:
+            raise PairPhoneError(model.Error)
+        return model.Code
 
     def stop(self):
         """
