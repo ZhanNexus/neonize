@@ -42,6 +42,7 @@ from .._binder import (
 )
 from ..builder import build_edit, build_revoke
 from ..exc import (
+    PairPhoneError,
     BuildPollVoteCreationError,
     BuildPollVoteError,
     ContactStoreError,
@@ -196,7 +197,8 @@ from ..utils.iofile import (
 from ..utils.jid import Jid2String, JIDToNonAD, build_jid, jid_is_lid, normalize_jid
 from ..utils.log import log, log_whatsmeow
 from ..utils.sticker import aio_convert_to_sticker, aio_convert_to_webp
-from .events import Event, EventsManager, event_global_loop
+from . import events as _events_module
+from .events import Event, EventsManager
 from .preview.compose import link_preview
 from . import events
 
@@ -486,14 +488,7 @@ class NewAClient:
         self.chat_settings = ChatSettingsStore(self.uuid)
         self.connect_task = None
         self.connected = False
-        # try:
-            # loop = asyncio.get_running_loop()
-        # except RuntimeError:
-            # loop = asyncio.new_event_loop()
-            # asyncio.set_event_loop(loop)
-        # if events.event_global_loop is None:
-            # events.event_global_loop = loop
-        self.loop = event_global_loop
+        self.loop: asyncio.AbstractEventLoop | None = None
         self.me = None
         _log_.debug("🔨 Creating a NewClient instance")
 
@@ -507,8 +502,11 @@ class NewAClient:
         :param qr_protoaddr: The address of the QR code in memory.
         :type qr_protoaddr: int
         """
+        loop = _events_module.event_global_loop
+        assert loop is not None, "Event loop not initialized. Call connect() first."
         asyncio.run_coroutine_threadsafe(
-            self.event._qr(self, ctypes.string_at(qr_protoaddr)), event_global_loop
+            self.event._qr(self, ctypes.string_at(qr_protoaddr)),
+            loop,
         )
 
     def _parse_mention(
@@ -3487,11 +3485,8 @@ class NewAClient:
         show_push_notification: bool,
         client_name: ClientName = ClientName.LINUX,
         client_type: Optional[ClientType] = None,
-        code_pair: Optional[str] = None,
-    ):
-        """
-        Pair a phone with the client. This function will try to connect to the WhatsApp servers and pair the phone.
-        If successful, it will show a push notification on the paired phone.
+    ) -> str:
+        """Pair a phone with the client and return the pairing code.
 
         :param phone: The phone number to be paired.
         :type phone: str
@@ -3501,8 +3496,9 @@ class NewAClient:
         :type client_name: ClientName, optional
         :param client_type: The type of the client, defaults to None. If None, it will be set to FIREFOX or determined by the device properties.
         :type client_type: Optional[ClientType], optional
-        :param code_pair: Custom pairing code
-        :type code_pair: str, Optional
+        :raises PairPhoneError: If an error occurs while pairing.
+        :return: The pairing code to enter in WhatsApp mobile app.
+        :rtype: str
         """
 
         if client_type is None:
@@ -3519,44 +3515,16 @@ class NewAClient:
             clientDisplayName="%s (%s)" % (client_type.name, client_name.name),
             clientType=client_type.value,
             showPushNotification=show_push_notification,
-            codePair=code_pair or ''
         )
         payload = pl.SerializeToString()
-        d = bytearray(list(self.event.list_func))
 
-        _log_.debug("trying connect to whatsapp servers")
-
-        deviceprops = (
-            DeviceProps(os="Neonize", platformType=DeviceProps.SAFARI)
-            if self.device_props is None
-            else self.device_props
-        ).SerializeToString()
-
-        jidbuf_size = 0
-        jidbuf = b""
-        if self.jid:
-            jidbuf = self.jid.SerializeToString()
-            jidbuf_size = len(jidbuf)
-
-        task = self.__client.Neonize(
-            self.name.encode(),
-            self.uuid,
-            jidbuf,
-            jidbuf_size,
-            LogLevel.from_logging(log.level).level,
-            func_string(self.__onQr),
-            func_string(self.__onLoginStatus),
-            func_callback_bytes(self.event.execute),
-            func_callback_bytes2(log_whatsmeow),
-            (ctypes.c_char * self.event.list_func.__len__()).from_buffer(d),
-            len(d),
-            deviceprops,
-            len(deviceprops),
-            payload,
-            len(payload),
-        )
-        self.connect_task = connect_task = self.loop.create_task(task)
-        return connect_task
+        bytes_ptr = await self.__client.PairPhone(self.uuid, payload, len(payload))
+        protobytes = bytes_ptr.contents.get_bytes()
+        free_bytes(bytes_ptr)
+        model = neonize_proto.PairPhoneReturnFunction.FromString(protobytes)
+        if model.Error:
+            raise PairPhoneError(model.Error)
+        return model.Code
 
     async def idle(self):
         """
@@ -3655,6 +3623,8 @@ class NewAClient:
 
     async def connect(self):
         """Establishes a connection to the WhatsApp servers."""
+        self.loop = asyncio.get_running_loop()
+        _events_module.set_event_loop(self.loop)
         # Convert the list of functions to a bytearray
         d = bytearray(list(self.event.list_func))
         _log_.debug("🔒 Attempting to connect to the WhatsApp servers.")
