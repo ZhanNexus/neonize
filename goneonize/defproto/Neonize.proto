@@ -518,11 +518,6 @@ message PairPhoneParams{
     optional string codePair = 5;
 }
 
-message PairPhoneReturnFunction {
-    optional string Code = 1;
-    optional string Error = 2;
-}
-
 message ContactQRLinkTarget {
     required JID JID = 1;
     required string Type = 2;

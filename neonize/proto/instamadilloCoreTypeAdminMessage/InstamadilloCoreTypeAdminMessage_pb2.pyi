@@ -3,52 +3,48 @@
 isort:skip_file
 """
 
-from google.protobuf import descriptor as _descriptor
-from google.protobuf import message as _message
-from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
-import builtins as _builtins
+import builtins
+import google.protobuf.descriptor
+import google.protobuf.internal.enum_type_wrapper
+import google.protobuf.message
 import sys
-import typing as _typing
+import typing
 
 if sys.version_info >= (3, 10):
-    from typing import TypeAlias as _TypeAlias
+    import typing as typing_extensions
 else:
-    from typing_extensions import TypeAlias as _TypeAlias
+    import typing_extensions
 
-DESCRIPTOR: _descriptor.FileDescriptor
+DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
-@_typing.final
-class AdminMessage(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class AdminMessage(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    DEVICEADMINMESSAGE_FIELD_NUMBER: _builtins.int
-    @_builtins.property
+    DEVICEADMINMESSAGE_FIELD_NUMBER: builtins.int
+    @property
     def deviceAdminMessage(self) -> Global___DeviceAdminMessage: ...
     def __init__(
         self,
         *,
         deviceAdminMessage: Global___DeviceAdminMessage | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["adminMessageSubtype", b"adminMessageSubtype", "deviceAdminMessage", b"deviceAdminMessage"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["adminMessageSubtype", b"adminMessageSubtype", "deviceAdminMessage", b"deviceAdminMessage"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    _WhichOneofReturnType_adminMessageSubtype: _TypeAlias = _typing.Literal["deviceAdminMessage"]  # noqa: Y015
-    _WhichOneofArgType_adminMessageSubtype: _TypeAlias = _typing.Literal["adminMessageSubtype", b"adminMessageSubtype"]  # noqa: Y015
-    def WhichOneof(self, oneof_group: _WhichOneofArgType_adminMessageSubtype) -> _WhichOneofReturnType_adminMessageSubtype | None: ...
+    def HasField(self, field_name: typing.Literal["adminMessageSubtype", b"adminMessageSubtype", "deviceAdminMessage", b"deviceAdminMessage"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["adminMessageSubtype", b"adminMessageSubtype", "deviceAdminMessage", b"deviceAdminMessage"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["adminMessageSubtype", b"adminMessageSubtype"]) -> typing.Literal["deviceAdminMessage"] | None: ...
 
-Global___AdminMessage: _TypeAlias = AdminMessage  # noqa: Y015
+Global___AdminMessage: typing_extensions.TypeAlias = AdminMessage
 
-@_typing.final
-class DeviceAdminMessage(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class DeviceAdminMessage(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     class _Type:
-        ValueType = _typing.NewType("ValueType", _builtins.int)
-        V: _TypeAlias = ValueType  # noqa: Y015
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
 
-    class _TypeEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[DeviceAdminMessage._Type.ValueType], _builtins.type):
-        DESCRIPTOR: _descriptor.EnumDescriptor
+    class _TypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[DeviceAdminMessage._Type.ValueType], builtins.type):
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         DEVICE_ADMIN_MESSAGE_TYPE_NONE: DeviceAdminMessage._Type.ValueType  # 0
         DEVICE_ADMIN_MESSAGE_TYPE_LOCAL_USER_CHANGED_IDENTITY_KEY_NAMED_DEVICE: DeviceAdminMessage._Type.ValueType  # 1
         DEVICE_ADMIN_MESSAGE_TYPE_SECURITY_ALERT_PARTICIPANT_KEY_CHANGE: DeviceAdminMessage._Type.ValueType  # 2
@@ -60,19 +56,17 @@ class DeviceAdminMessage(_message.Message):
     DEVICE_ADMIN_MESSAGE_TYPE_SECURITY_ALERT_PARTICIPANT_KEY_CHANGE: DeviceAdminMessage.Type.ValueType  # 2
     DEVICE_ADMIN_MESSAGE_TYPE_SECURITY_ALERT_PARTICIPANT_NEW_LOGIN: DeviceAdminMessage.Type.ValueType  # 3
 
-    DEVICEADMINMESSAGETYPE_FIELD_NUMBER: _builtins.int
-    DEVICENAME_FIELD_NUMBER: _builtins.int
+    DEVICEADMINMESSAGETYPE_FIELD_NUMBER: builtins.int
+    DEVICENAME_FIELD_NUMBER: builtins.int
     deviceAdminMessageType: Global___DeviceAdminMessage.Type.ValueType
-    deviceName: _builtins.str
+    deviceName: builtins.str
     def __init__(
         self,
         *,
         deviceAdminMessageType: Global___DeviceAdminMessage.Type.ValueType | None = ...,
-        deviceName: _builtins.str | None = ...,
+        deviceName: builtins.str | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["deviceAdminMessageType", b"deviceAdminMessageType", "deviceName", b"deviceName"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["deviceAdminMessageType", b"deviceAdminMessageType", "deviceName", b"deviceName"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["deviceAdminMessageType", b"deviceAdminMessageType", "deviceName", b"deviceName"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["deviceAdminMessageType", b"deviceAdminMessageType", "deviceName", b"deviceName"]) -> None: ...
 
-Global___DeviceAdminMessage: _TypeAlias = DeviceAdminMessage  # noqa: Y015
+Global___DeviceAdminMessage: typing_extensions.TypeAlias = DeviceAdminMessage

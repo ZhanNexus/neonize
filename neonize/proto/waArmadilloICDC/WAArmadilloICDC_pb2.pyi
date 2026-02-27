@@ -3,66 +3,62 @@
 isort:skip_file
 """
 
-from collections import abc as _abc
-from google.protobuf import descriptor as _descriptor
-from google.protobuf import message as _message
-from google.protobuf.internal import containers as _containers
-import builtins as _builtins
+import builtins
+import collections.abc
+import google.protobuf.descriptor
+import google.protobuf.internal.containers
+import google.protobuf.message
 import sys
-import typing as _typing
+import typing
 
 if sys.version_info >= (3, 10):
-    from typing import TypeAlias as _TypeAlias
+    import typing as typing_extensions
 else:
-    from typing_extensions import TypeAlias as _TypeAlias
+    import typing_extensions
 
-DESCRIPTOR: _descriptor.FileDescriptor
+DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
-@_typing.final
-class ICDCIdentityList(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class ICDCIdentityList(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    SEQ_FIELD_NUMBER: _builtins.int
-    TIMESTAMP_FIELD_NUMBER: _builtins.int
-    DEVICES_FIELD_NUMBER: _builtins.int
-    SIGNINGDEVICEINDEX_FIELD_NUMBER: _builtins.int
-    seq: _builtins.int
-    timestamp: _builtins.int
-    signingDeviceIndex: _builtins.int
-    @_builtins.property
-    def devices(self) -> _containers.RepeatedScalarFieldContainer[_builtins.bytes]: ...
+    SEQ_FIELD_NUMBER: builtins.int
+    TIMESTAMP_FIELD_NUMBER: builtins.int
+    DEVICES_FIELD_NUMBER: builtins.int
+    SIGNINGDEVICEINDEX_FIELD_NUMBER: builtins.int
+    seq: builtins.int
+    timestamp: builtins.int
+    signingDeviceIndex: builtins.int
+    @property
+    def devices(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.bytes]: ...
     def __init__(
         self,
         *,
-        seq: _builtins.int | None = ...,
-        timestamp: _builtins.int | None = ...,
-        devices: _abc.Iterable[_builtins.bytes] | None = ...,
-        signingDeviceIndex: _builtins.int | None = ...,
+        seq: builtins.int | None = ...,
+        timestamp: builtins.int | None = ...,
+        devices: collections.abc.Iterable[builtins.bytes] | None = ...,
+        signingDeviceIndex: builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["seq", b"seq", "signingDeviceIndex", b"signingDeviceIndex", "timestamp", b"timestamp"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["devices", b"devices", "seq", b"seq", "signingDeviceIndex", b"signingDeviceIndex", "timestamp", b"timestamp"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["seq", b"seq", "signingDeviceIndex", b"signingDeviceIndex", "timestamp", b"timestamp"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["devices", b"devices", "seq", b"seq", "signingDeviceIndex", b"signingDeviceIndex", "timestamp", b"timestamp"]) -> None: ...
 
-Global___ICDCIdentityList: _TypeAlias = ICDCIdentityList  # noqa: Y015
+Global___ICDCIdentityList: typing_extensions.TypeAlias = ICDCIdentityList
 
-@_typing.final
-class SignedICDCIdentityList(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class SignedICDCIdentityList(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    DETAILS_FIELD_NUMBER: _builtins.int
-    SIGNATURE_FIELD_NUMBER: _builtins.int
-    details: _builtins.bytes
-    signature: _builtins.bytes
+    DETAILS_FIELD_NUMBER: builtins.int
+    SIGNATURE_FIELD_NUMBER: builtins.int
+    details: builtins.bytes
+    signature: builtins.bytes
     def __init__(
         self,
         *,
-        details: _builtins.bytes | None = ...,
-        signature: _builtins.bytes | None = ...,
+        details: builtins.bytes | None = ...,
+        signature: builtins.bytes | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["details", b"details", "signature", b"signature"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["details", b"details", "signature", b"signature"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["details", b"details", "signature", b"signature"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["details", b"details", "signature", b"signature"]) -> None: ...
 
-Global___SignedICDCIdentityList: _TypeAlias = SignedICDCIdentityList  # noqa: Y015
+Global___SignedICDCIdentityList: typing_extensions.TypeAlias = SignedICDCIdentityList

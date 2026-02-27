@@ -3,30 +3,30 @@
 isort:skip_file
 """
 
-from google.protobuf import descriptor as _descriptor
-from google.protobuf import message as _message
-from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
-import builtins as _builtins
+import builtins
+import google.protobuf.descriptor
+import google.protobuf.internal.enum_type_wrapper
+import google.protobuf.message
 import sys
-import typing as _typing
+import typing
 
 if sys.version_info >= (3, 10):
-    from typing import TypeAlias as _TypeAlias
+    import typing as typing_extensions
 else:
-    from typing_extensions import TypeAlias as _TypeAlias
+    import typing_extensions
 
-DESCRIPTOR: _descriptor.FileDescriptor
+DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
-@_typing.final
-class MediaRetryNotification(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class MediaRetryNotification(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     class _ResultType:
-        ValueType = _typing.NewType("ValueType", _builtins.int)
-        V: _TypeAlias = ValueType  # noqa: Y015
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
 
-    class _ResultTypeEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[MediaRetryNotification._ResultType.ValueType], _builtins.type):
-        DESCRIPTOR: _descriptor.EnumDescriptor
+    class _ResultTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[MediaRetryNotification._ResultType.ValueType], builtins.type):
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         GENERAL_ERROR: MediaRetryNotification._ResultType.ValueType  # 0
         SUCCESS: MediaRetryNotification._ResultType.ValueType  # 1
         NOT_FOUND: MediaRetryNotification._ResultType.ValueType  # 2
@@ -38,43 +38,39 @@ class MediaRetryNotification(_message.Message):
     NOT_FOUND: MediaRetryNotification.ResultType.ValueType  # 2
     DECRYPTION_ERROR: MediaRetryNotification.ResultType.ValueType  # 3
 
-    STANZAID_FIELD_NUMBER: _builtins.int
-    DIRECTPATH_FIELD_NUMBER: _builtins.int
-    RESULT_FIELD_NUMBER: _builtins.int
-    MESSAGESECRET_FIELD_NUMBER: _builtins.int
-    stanzaID: _builtins.str
-    directPath: _builtins.str
+    STANZAID_FIELD_NUMBER: builtins.int
+    DIRECTPATH_FIELD_NUMBER: builtins.int
+    RESULT_FIELD_NUMBER: builtins.int
+    MESSAGESECRET_FIELD_NUMBER: builtins.int
+    stanzaID: builtins.str
+    directPath: builtins.str
     result: Global___MediaRetryNotification.ResultType.ValueType
-    messageSecret: _builtins.bytes
+    messageSecret: builtins.bytes
     def __init__(
         self,
         *,
-        stanzaID: _builtins.str | None = ...,
-        directPath: _builtins.str | None = ...,
+        stanzaID: builtins.str | None = ...,
+        directPath: builtins.str | None = ...,
         result: Global___MediaRetryNotification.ResultType.ValueType | None = ...,
-        messageSecret: _builtins.bytes | None = ...,
+        messageSecret: builtins.bytes | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["directPath", b"directPath", "messageSecret", b"messageSecret", "result", b"result", "stanzaID", b"stanzaID"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["directPath", b"directPath", "messageSecret", b"messageSecret", "result", b"result", "stanzaID", b"stanzaID"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["directPath", b"directPath", "messageSecret", b"messageSecret", "result", b"result", "stanzaID", b"stanzaID"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["directPath", b"directPath", "messageSecret", b"messageSecret", "result", b"result", "stanzaID", b"stanzaID"]) -> None: ...
 
-Global___MediaRetryNotification: _TypeAlias = MediaRetryNotification  # noqa: Y015
+Global___MediaRetryNotification: typing_extensions.TypeAlias = MediaRetryNotification
 
-@_typing.final
-class ServerErrorReceipt(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class ServerErrorReceipt(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    STANZAID_FIELD_NUMBER: _builtins.int
-    stanzaID: _builtins.str
+    STANZAID_FIELD_NUMBER: builtins.int
+    stanzaID: builtins.str
     def __init__(
         self,
         *,
-        stanzaID: _builtins.str | None = ...,
+        stanzaID: builtins.str | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["stanzaID", b"stanzaID"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["stanzaID", b"stanzaID"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["stanzaID", b"stanzaID"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["stanzaID", b"stanzaID"]) -> None: ...
 
-Global___ServerErrorReceipt: _TypeAlias = ServerErrorReceipt  # noqa: Y015
+Global___ServerErrorReceipt: typing_extensions.TypeAlias = ServerErrorReceipt

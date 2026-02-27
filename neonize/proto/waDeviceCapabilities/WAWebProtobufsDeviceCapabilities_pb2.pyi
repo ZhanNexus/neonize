@@ -3,30 +3,30 @@
 isort:skip_file
 """
 
-from google.protobuf import descriptor as _descriptor
-from google.protobuf import message as _message
-from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
-import builtins as _builtins
+import builtins
+import google.protobuf.descriptor
+import google.protobuf.internal.enum_type_wrapper
+import google.protobuf.message
 import sys
-import typing as _typing
+import typing
 
 if sys.version_info >= (3, 10):
-    from typing import TypeAlias as _TypeAlias
+    import typing as typing_extensions
 else:
-    from typing_extensions import TypeAlias as _TypeAlias
+    import typing_extensions
 
-DESCRIPTOR: _descriptor.FileDescriptor
+DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
-@_typing.final
-class DeviceCapabilities(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class DeviceCapabilities(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     class _MemberNameTagPrimarySupport:
-        ValueType = _typing.NewType("ValueType", _builtins.int)
-        V: _TypeAlias = ValueType  # noqa: Y015
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
 
-    class _MemberNameTagPrimarySupportEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[DeviceCapabilities._MemberNameTagPrimarySupport.ValueType], _builtins.type):
-        DESCRIPTOR: _descriptor.EnumDescriptor
+    class _MemberNameTagPrimarySupportEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[DeviceCapabilities._MemberNameTagPrimarySupport.ValueType], builtins.type):
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         DISABLED: DeviceCapabilities._MemberNameTagPrimarySupport.ValueType  # 0
         RECEIVER_ENABLED: DeviceCapabilities._MemberNameTagPrimarySupport.ValueType  # 1
         SENDER_ENABLED: DeviceCapabilities._MemberNameTagPrimarySupport.ValueType  # 2
@@ -37,11 +37,11 @@ class DeviceCapabilities(_message.Message):
     SENDER_ENABLED: DeviceCapabilities.MemberNameTagPrimarySupport.ValueType  # 2
 
     class _ChatLockSupportLevel:
-        ValueType = _typing.NewType("ValueType", _builtins.int)
-        V: _TypeAlias = ValueType  # noqa: Y015
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
 
-    class _ChatLockSupportLevelEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[DeviceCapabilities._ChatLockSupportLevel.ValueType], _builtins.type):
-        DESCRIPTOR: _descriptor.EnumDescriptor
+    class _ChatLockSupportLevelEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[DeviceCapabilities._ChatLockSupportLevel.ValueType], builtins.type):
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         NONE: DeviceCapabilities._ChatLockSupportLevel.ValueType  # 0
         MINIMAL: DeviceCapabilities._ChatLockSupportLevel.ValueType  # 1
         FULL: DeviceCapabilities._ChatLockSupportLevel.ValueType  # 2
@@ -51,16 +51,16 @@ class DeviceCapabilities(_message.Message):
     MINIMAL: DeviceCapabilities.ChatLockSupportLevel.ValueType  # 1
     FULL: DeviceCapabilities.ChatLockSupportLevel.ValueType  # 2
 
-    @_typing.final
-    class AiThread(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+    @typing.final
+    class AiThread(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
         class _SupportLevel:
-            ValueType = _typing.NewType("ValueType", _builtins.int)
-            V: _TypeAlias = ValueType  # noqa: Y015
+            ValueType = typing.NewType("ValueType", builtins.int)
+            V: typing_extensions.TypeAlias = ValueType
 
-        class _SupportLevelEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[DeviceCapabilities.AiThread._SupportLevel.ValueType], _builtins.type):
-            DESCRIPTOR: _descriptor.EnumDescriptor
+        class _SupportLevelEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[DeviceCapabilities.AiThread._SupportLevel.ValueType], builtins.type):
+            DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
             NONE: DeviceCapabilities.AiThread._SupportLevel.ValueType  # 0
             INFRA: DeviceCapabilities.AiThread._SupportLevel.ValueType  # 1
             FULL: DeviceCapabilities.AiThread._SupportLevel.ValueType  # 2
@@ -70,81 +70,73 @@ class DeviceCapabilities(_message.Message):
         INFRA: DeviceCapabilities.AiThread.SupportLevel.ValueType  # 1
         FULL: DeviceCapabilities.AiThread.SupportLevel.ValueType  # 2
 
-        SUPPORTLEVEL_FIELD_NUMBER: _builtins.int
+        SUPPORTLEVEL_FIELD_NUMBER: builtins.int
         supportLevel: Global___DeviceCapabilities.AiThread.SupportLevel.ValueType
         def __init__(
             self,
             *,
             supportLevel: Global___DeviceCapabilities.AiThread.SupportLevel.ValueType | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _TypeAlias = _typing.Literal["supportLevel", b"supportLevel"]  # noqa: Y015
-        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _TypeAlias = _typing.Literal["supportLevel", b"supportLevel"]  # noqa: Y015
-        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+        def HasField(self, field_name: typing.Literal["supportLevel", b"supportLevel"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["supportLevel", b"supportLevel"]) -> None: ...
 
-    @_typing.final
-    class UserHasAvatar(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+    @typing.final
+    class UserHasAvatar(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-        USERHASAVATAR_FIELD_NUMBER: _builtins.int
-        userHasAvatar: _builtins.bool
+        USERHASAVATAR_FIELD_NUMBER: builtins.int
+        userHasAvatar: builtins.bool
         def __init__(
             self,
             *,
-            userHasAvatar: _builtins.bool | None = ...,
+            userHasAvatar: builtins.bool | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _TypeAlias = _typing.Literal["userHasAvatar", b"userHasAvatar"]  # noqa: Y015
-        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _TypeAlias = _typing.Literal["userHasAvatar", b"userHasAvatar"]  # noqa: Y015
-        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+        def HasField(self, field_name: typing.Literal["userHasAvatar", b"userHasAvatar"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["userHasAvatar", b"userHasAvatar"]) -> None: ...
 
-    @_typing.final
-    class BusinessBroadcast(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+    @typing.final
+    class BusinessBroadcast(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-        IMPORTLISTENABLED_FIELD_NUMBER: _builtins.int
-        importListEnabled: _builtins.bool
+        IMPORTLISTENABLED_FIELD_NUMBER: builtins.int
+        importListEnabled: builtins.bool
         def __init__(
             self,
             *,
-            importListEnabled: _builtins.bool | None = ...,
+            importListEnabled: builtins.bool | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _TypeAlias = _typing.Literal["importListEnabled", b"importListEnabled"]  # noqa: Y015
-        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _TypeAlias = _typing.Literal["importListEnabled", b"importListEnabled"]  # noqa: Y015
-        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+        def HasField(self, field_name: typing.Literal["importListEnabled", b"importListEnabled"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["importListEnabled", b"importListEnabled"]) -> None: ...
 
-    @_typing.final
-    class LIDMigration(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+    @typing.final
+    class LIDMigration(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-        CHATDBMIGRATIONTIMESTAMP_FIELD_NUMBER: _builtins.int
-        chatDbMigrationTimestamp: _builtins.int
+        CHATDBMIGRATIONTIMESTAMP_FIELD_NUMBER: builtins.int
+        chatDbMigrationTimestamp: builtins.int
         def __init__(
             self,
             *,
-            chatDbMigrationTimestamp: _builtins.int | None = ...,
+            chatDbMigrationTimestamp: builtins.int | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _TypeAlias = _typing.Literal["chatDbMigrationTimestamp", b"chatDbMigrationTimestamp"]  # noqa: Y015
-        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _TypeAlias = _typing.Literal["chatDbMigrationTimestamp", b"chatDbMigrationTimestamp"]  # noqa: Y015
-        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+        def HasField(self, field_name: typing.Literal["chatDbMigrationTimestamp", b"chatDbMigrationTimestamp"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["chatDbMigrationTimestamp", b"chatDbMigrationTimestamp"]) -> None: ...
 
-    CHATLOCKSUPPORTLEVEL_FIELD_NUMBER: _builtins.int
-    LIDMIGRATION_FIELD_NUMBER: _builtins.int
-    BUSINESSBROADCAST_FIELD_NUMBER: _builtins.int
-    USERHASAVATAR_FIELD_NUMBER: _builtins.int
-    MEMBERNAMETAGPRIMARYSUPPORT_FIELD_NUMBER: _builtins.int
-    AITHREAD_FIELD_NUMBER: _builtins.int
+    CHATLOCKSUPPORTLEVEL_FIELD_NUMBER: builtins.int
+    LIDMIGRATION_FIELD_NUMBER: builtins.int
+    BUSINESSBROADCAST_FIELD_NUMBER: builtins.int
+    USERHASAVATAR_FIELD_NUMBER: builtins.int
+    MEMBERNAMETAGPRIMARYSUPPORT_FIELD_NUMBER: builtins.int
+    AITHREAD_FIELD_NUMBER: builtins.int
     chatLockSupportLevel: Global___DeviceCapabilities.ChatLockSupportLevel.ValueType
     memberNameTagPrimarySupport: Global___DeviceCapabilities.MemberNameTagPrimarySupport.ValueType
-    @_builtins.property
+    @property
     def lidMigration(self) -> Global___DeviceCapabilities.LIDMigration: ...
-    @_builtins.property
+    @property
     def businessBroadcast(self) -> Global___DeviceCapabilities.BusinessBroadcast: ...
-    @_builtins.property
+    @property
     def userHasAvatar(self) -> Global___DeviceCapabilities.UserHasAvatar: ...
-    @_builtins.property
+    @property
     def aiThread(self) -> Global___DeviceCapabilities.AiThread: ...
     def __init__(
         self,
@@ -156,9 +148,7 @@ class DeviceCapabilities(_message.Message):
         memberNameTagPrimarySupport: Global___DeviceCapabilities.MemberNameTagPrimarySupport.ValueType | None = ...,
         aiThread: Global___DeviceCapabilities.AiThread | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["aiThread", b"aiThread", "businessBroadcast", b"businessBroadcast", "chatLockSupportLevel", b"chatLockSupportLevel", "lidMigration", b"lidMigration", "memberNameTagPrimarySupport", b"memberNameTagPrimarySupport", "userHasAvatar", b"userHasAvatar"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["aiThread", b"aiThread", "businessBroadcast", b"businessBroadcast", "chatLockSupportLevel", b"chatLockSupportLevel", "lidMigration", b"lidMigration", "memberNameTagPrimarySupport", b"memberNameTagPrimarySupport", "userHasAvatar", b"userHasAvatar"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["aiThread", b"aiThread", "businessBroadcast", b"businessBroadcast", "chatLockSupportLevel", b"chatLockSupportLevel", "lidMigration", b"lidMigration", "memberNameTagPrimarySupport", b"memberNameTagPrimarySupport", "userHasAvatar", b"userHasAvatar"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["aiThread", b"aiThread", "businessBroadcast", b"businessBroadcast", "chatLockSupportLevel", b"chatLockSupportLevel", "lidMigration", b"lidMigration", "memberNameTagPrimarySupport", b"memberNameTagPrimarySupport", "userHasAvatar", b"userHasAvatar"]) -> None: ...
 
-Global___DeviceCapabilities: _TypeAlias = DeviceCapabilities  # noqa: Y015
+Global___DeviceCapabilities: typing_extensions.TypeAlias = DeviceCapabilities

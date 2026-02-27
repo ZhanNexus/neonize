@@ -3,63 +3,59 @@
 isort:skip_file
 """
 
-from collections import abc as _abc
-from google.protobuf import descriptor as _descriptor
-from google.protobuf import message as _message
-from google.protobuf.internal import containers as _containers
-import builtins as _builtins
+import builtins
+import collections.abc
+import google.protobuf.descriptor
+import google.protobuf.internal.containers
+import google.protobuf.message
 import sys
-import typing as _typing
+import typing
 
 if sys.version_info >= (3, 10):
-    from typing import TypeAlias as _TypeAlias
+    import typing as typing_extensions
 else:
-    from typing_extensions import TypeAlias as _TypeAlias
+    import typing_extensions
 
-DESCRIPTOR: _descriptor.FileDescriptor
+DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
-@_typing.final
-class LIDMigrationMapping(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class LIDMigrationMapping(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    PN_FIELD_NUMBER: _builtins.int
-    ASSIGNEDLID_FIELD_NUMBER: _builtins.int
-    LATESTLID_FIELD_NUMBER: _builtins.int
-    pn: _builtins.int
-    assignedLid: _builtins.int
-    latestLid: _builtins.int
+    PN_FIELD_NUMBER: builtins.int
+    ASSIGNEDLID_FIELD_NUMBER: builtins.int
+    LATESTLID_FIELD_NUMBER: builtins.int
+    pn: builtins.int
+    assignedLid: builtins.int
+    latestLid: builtins.int
     def __init__(
         self,
         *,
-        pn: _builtins.int | None = ...,
-        assignedLid: _builtins.int | None = ...,
-        latestLid: _builtins.int | None = ...,
+        pn: builtins.int | None = ...,
+        assignedLid: builtins.int | None = ...,
+        latestLid: builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["assignedLid", b"assignedLid", "latestLid", b"latestLid", "pn", b"pn"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["assignedLid", b"assignedLid", "latestLid", b"latestLid", "pn", b"pn"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["assignedLid", b"assignedLid", "latestLid", b"latestLid", "pn", b"pn"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["assignedLid", b"assignedLid", "latestLid", b"latestLid", "pn", b"pn"]) -> None: ...
 
-Global___LIDMigrationMapping: _TypeAlias = LIDMigrationMapping  # noqa: Y015
+Global___LIDMigrationMapping: typing_extensions.TypeAlias = LIDMigrationMapping
 
-@_typing.final
-class LIDMigrationMappingSyncPayload(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class LIDMigrationMappingSyncPayload(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    PNTOLIDMAPPINGS_FIELD_NUMBER: _builtins.int
-    CHATDBMIGRATIONTIMESTAMP_FIELD_NUMBER: _builtins.int
-    chatDbMigrationTimestamp: _builtins.int
-    @_builtins.property
-    def pnToLidMappings(self) -> _containers.RepeatedCompositeFieldContainer[Global___LIDMigrationMapping]: ...
+    PNTOLIDMAPPINGS_FIELD_NUMBER: builtins.int
+    CHATDBMIGRATIONTIMESTAMP_FIELD_NUMBER: builtins.int
+    chatDbMigrationTimestamp: builtins.int
+    @property
+    def pnToLidMappings(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___LIDMigrationMapping]: ...
     def __init__(
         self,
         *,
-        pnToLidMappings: _abc.Iterable[Global___LIDMigrationMapping] | None = ...,
-        chatDbMigrationTimestamp: _builtins.int | None = ...,
+        pnToLidMappings: collections.abc.Iterable[Global___LIDMigrationMapping] | None = ...,
+        chatDbMigrationTimestamp: builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["chatDbMigrationTimestamp", b"chatDbMigrationTimestamp"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["chatDbMigrationTimestamp", b"chatDbMigrationTimestamp", "pnToLidMappings", b"pnToLidMappings"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["chatDbMigrationTimestamp", b"chatDbMigrationTimestamp"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["chatDbMigrationTimestamp", b"chatDbMigrationTimestamp", "pnToLidMappings", b"pnToLidMappings"]) -> None: ...
 
-Global___LIDMigrationMappingSyncPayload: _TypeAlias = LIDMigrationMappingSyncPayload  # noqa: Y015
+Global___LIDMigrationMappingSyncPayload: typing_extensions.TypeAlias = LIDMigrationMappingSyncPayload

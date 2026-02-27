@@ -3,136 +3,130 @@
 isort:skip_file
 """
 
-from collections import abc as _abc
-from google.protobuf import descriptor as _descriptor
-from google.protobuf import message as _message
-from google.protobuf.internal import containers as _containers
-import builtins as _builtins
+import builtins
+import collections.abc
+import google.protobuf.descriptor
+import google.protobuf.internal.containers
+import google.protobuf.message
 import sys
-import typing as _typing
+import typing
 
 if sys.version_info >= (3, 10):
-    from typing import TypeAlias as _TypeAlias
+    import typing as typing_extensions
 else:
-    from typing_extensions import TypeAlias as _TypeAlias
+    import typing_extensions
 
-DESCRIPTOR: _descriptor.FileDescriptor
+DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
-@_typing.final
-class MediaEntry(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class MediaEntry(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    @_typing.final
-    class ProgressiveJpegDetails(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+    @typing.final
+    class ProgressiveJpegDetails(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-        SCANLENGTHS_FIELD_NUMBER: _builtins.int
-        SIDECAR_FIELD_NUMBER: _builtins.int
-        sidecar: _builtins.bytes
-        @_builtins.property
-        def scanLengths(self) -> _containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+        SCANLENGTHS_FIELD_NUMBER: builtins.int
+        SIDECAR_FIELD_NUMBER: builtins.int
+        sidecar: builtins.bytes
+        @property
+        def scanLengths(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
         def __init__(
             self,
             *,
-            scanLengths: _abc.Iterable[_builtins.int] | None = ...,
-            sidecar: _builtins.bytes | None = ...,
+            scanLengths: collections.abc.Iterable[builtins.int] | None = ...,
+            sidecar: builtins.bytes | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _TypeAlias = _typing.Literal["sidecar", b"sidecar"]  # noqa: Y015
-        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _TypeAlias = _typing.Literal["scanLengths", b"scanLengths", "sidecar", b"sidecar"]  # noqa: Y015
-        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+        def HasField(self, field_name: typing.Literal["sidecar", b"sidecar"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["scanLengths", b"scanLengths", "sidecar", b"sidecar"]) -> None: ...
 
-    @_typing.final
-    class DownloadableThumbnail(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+    @typing.final
+    class DownloadableThumbnail(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-        FILESHA256_FIELD_NUMBER: _builtins.int
-        FILEENCSHA256_FIELD_NUMBER: _builtins.int
-        DIRECTPATH_FIELD_NUMBER: _builtins.int
-        MEDIAKEY_FIELD_NUMBER: _builtins.int
-        MEDIAKEYTIMESTAMP_FIELD_NUMBER: _builtins.int
-        OBJECTID_FIELD_NUMBER: _builtins.int
-        fileSHA256: _builtins.bytes
-        fileEncSHA256: _builtins.bytes
-        directPath: _builtins.str
-        mediaKey: _builtins.bytes
-        mediaKeyTimestamp: _builtins.int
-        objectID: _builtins.str
+        FILESHA256_FIELD_NUMBER: builtins.int
+        FILEENCSHA256_FIELD_NUMBER: builtins.int
+        DIRECTPATH_FIELD_NUMBER: builtins.int
+        MEDIAKEY_FIELD_NUMBER: builtins.int
+        MEDIAKEYTIMESTAMP_FIELD_NUMBER: builtins.int
+        OBJECTID_FIELD_NUMBER: builtins.int
+        fileSHA256: builtins.bytes
+        fileEncSHA256: builtins.bytes
+        directPath: builtins.str
+        mediaKey: builtins.bytes
+        mediaKeyTimestamp: builtins.int
+        objectID: builtins.str
         def __init__(
             self,
             *,
-            fileSHA256: _builtins.bytes | None = ...,
-            fileEncSHA256: _builtins.bytes | None = ...,
-            directPath: _builtins.str | None = ...,
-            mediaKey: _builtins.bytes | None = ...,
-            mediaKeyTimestamp: _builtins.int | None = ...,
-            objectID: _builtins.str | None = ...,
+            fileSHA256: builtins.bytes | None = ...,
+            fileEncSHA256: builtins.bytes | None = ...,
+            directPath: builtins.str | None = ...,
+            mediaKey: builtins.bytes | None = ...,
+            mediaKeyTimestamp: builtins.int | None = ...,
+            objectID: builtins.str | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _TypeAlias = _typing.Literal["directPath", b"directPath", "fileEncSHA256", b"fileEncSHA256", "fileSHA256", b"fileSHA256", "mediaKey", b"mediaKey", "mediaKeyTimestamp", b"mediaKeyTimestamp", "objectID", b"objectID"]  # noqa: Y015
-        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _TypeAlias = _typing.Literal["directPath", b"directPath", "fileEncSHA256", b"fileEncSHA256", "fileSHA256", b"fileSHA256", "mediaKey", b"mediaKey", "mediaKeyTimestamp", b"mediaKeyTimestamp", "objectID", b"objectID"]  # noqa: Y015
-        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+        def HasField(self, field_name: typing.Literal["directPath", b"directPath", "fileEncSHA256", b"fileEncSHA256", "fileSHA256", b"fileSHA256", "mediaKey", b"mediaKey", "mediaKeyTimestamp", b"mediaKeyTimestamp", "objectID", b"objectID"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["directPath", b"directPath", "fileEncSHA256", b"fileEncSHA256", "fileSHA256", b"fileSHA256", "mediaKey", b"mediaKey", "mediaKeyTimestamp", b"mediaKeyTimestamp", "objectID", b"objectID"]) -> None: ...
 
-    FILESHA256_FIELD_NUMBER: _builtins.int
-    MEDIAKEY_FIELD_NUMBER: _builtins.int
-    FILEENCSHA256_FIELD_NUMBER: _builtins.int
-    DIRECTPATH_FIELD_NUMBER: _builtins.int
-    MEDIAKEYTIMESTAMP_FIELD_NUMBER: _builtins.int
-    SERVERMEDIATYPE_FIELD_NUMBER: _builtins.int
-    UPLOADTOKEN_FIELD_NUMBER: _builtins.int
-    VALIDATEDTIMESTAMP_FIELD_NUMBER: _builtins.int
-    SIDECAR_FIELD_NUMBER: _builtins.int
-    OBJECTID_FIELD_NUMBER: _builtins.int
-    FBID_FIELD_NUMBER: _builtins.int
-    DOWNLOADABLETHUMBNAIL_FIELD_NUMBER: _builtins.int
-    HANDLE_FIELD_NUMBER: _builtins.int
-    FILENAME_FIELD_NUMBER: _builtins.int
-    PROGRESSIVEJPEGDETAILS_FIELD_NUMBER: _builtins.int
-    SIZE_FIELD_NUMBER: _builtins.int
-    LASTDOWNLOADATTEMPTTIMESTAMP_FIELD_NUMBER: _builtins.int
-    fileSHA256: _builtins.bytes
-    mediaKey: _builtins.bytes
-    fileEncSHA256: _builtins.bytes
-    directPath: _builtins.str
-    mediaKeyTimestamp: _builtins.int
-    serverMediaType: _builtins.str
-    uploadToken: _builtins.bytes
-    validatedTimestamp: _builtins.bytes
-    sidecar: _builtins.bytes
-    objectID: _builtins.str
-    FBID: _builtins.str
-    handle: _builtins.str
-    filename: _builtins.str
-    size: _builtins.int
-    lastDownloadAttemptTimestamp: _builtins.int
-    @_builtins.property
+    FILESHA256_FIELD_NUMBER: builtins.int
+    MEDIAKEY_FIELD_NUMBER: builtins.int
+    FILEENCSHA256_FIELD_NUMBER: builtins.int
+    DIRECTPATH_FIELD_NUMBER: builtins.int
+    MEDIAKEYTIMESTAMP_FIELD_NUMBER: builtins.int
+    SERVERMEDIATYPE_FIELD_NUMBER: builtins.int
+    UPLOADTOKEN_FIELD_NUMBER: builtins.int
+    VALIDATEDTIMESTAMP_FIELD_NUMBER: builtins.int
+    SIDECAR_FIELD_NUMBER: builtins.int
+    OBJECTID_FIELD_NUMBER: builtins.int
+    FBID_FIELD_NUMBER: builtins.int
+    DOWNLOADABLETHUMBNAIL_FIELD_NUMBER: builtins.int
+    HANDLE_FIELD_NUMBER: builtins.int
+    FILENAME_FIELD_NUMBER: builtins.int
+    PROGRESSIVEJPEGDETAILS_FIELD_NUMBER: builtins.int
+    SIZE_FIELD_NUMBER: builtins.int
+    LASTDOWNLOADATTEMPTTIMESTAMP_FIELD_NUMBER: builtins.int
+    fileSHA256: builtins.bytes
+    mediaKey: builtins.bytes
+    fileEncSHA256: builtins.bytes
+    directPath: builtins.str
+    mediaKeyTimestamp: builtins.int
+    serverMediaType: builtins.str
+    uploadToken: builtins.bytes
+    validatedTimestamp: builtins.bytes
+    sidecar: builtins.bytes
+    objectID: builtins.str
+    FBID: builtins.str
+    handle: builtins.str
+    filename: builtins.str
+    size: builtins.int
+    lastDownloadAttemptTimestamp: builtins.int
+    @property
     def downloadableThumbnail(self) -> Global___MediaEntry.DownloadableThumbnail: ...
-    @_builtins.property
+    @property
     def progressiveJPEGDetails(self) -> Global___MediaEntry.ProgressiveJpegDetails: ...
     def __init__(
         self,
         *,
-        fileSHA256: _builtins.bytes | None = ...,
-        mediaKey: _builtins.bytes | None = ...,
-        fileEncSHA256: _builtins.bytes | None = ...,
-        directPath: _builtins.str | None = ...,
-        mediaKeyTimestamp: _builtins.int | None = ...,
-        serverMediaType: _builtins.str | None = ...,
-        uploadToken: _builtins.bytes | None = ...,
-        validatedTimestamp: _builtins.bytes | None = ...,
-        sidecar: _builtins.bytes | None = ...,
-        objectID: _builtins.str | None = ...,
-        FBID: _builtins.str | None = ...,
+        fileSHA256: builtins.bytes | None = ...,
+        mediaKey: builtins.bytes | None = ...,
+        fileEncSHA256: builtins.bytes | None = ...,
+        directPath: builtins.str | None = ...,
+        mediaKeyTimestamp: builtins.int | None = ...,
+        serverMediaType: builtins.str | None = ...,
+        uploadToken: builtins.bytes | None = ...,
+        validatedTimestamp: builtins.bytes | None = ...,
+        sidecar: builtins.bytes | None = ...,
+        objectID: builtins.str | None = ...,
+        FBID: builtins.str | None = ...,
         downloadableThumbnail: Global___MediaEntry.DownloadableThumbnail | None = ...,
-        handle: _builtins.str | None = ...,
-        filename: _builtins.str | None = ...,
+        handle: builtins.str | None = ...,
+        filename: builtins.str | None = ...,
         progressiveJPEGDetails: Global___MediaEntry.ProgressiveJpegDetails | None = ...,
-        size: _builtins.int | None = ...,
-        lastDownloadAttemptTimestamp: _builtins.int | None = ...,
+        size: builtins.int | None = ...,
+        lastDownloadAttemptTimestamp: builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["FBID", b"FBID", "directPath", b"directPath", "downloadableThumbnail", b"downloadableThumbnail", "fileEncSHA256", b"fileEncSHA256", "fileSHA256", b"fileSHA256", "filename", b"filename", "handle", b"handle", "lastDownloadAttemptTimestamp", b"lastDownloadAttemptTimestamp", "mediaKey", b"mediaKey", "mediaKeyTimestamp", b"mediaKeyTimestamp", "objectID", b"objectID", "progressiveJPEGDetails", b"progressiveJPEGDetails", "serverMediaType", b"serverMediaType", "sidecar", b"sidecar", "size", b"size", "uploadToken", b"uploadToken", "validatedTimestamp", b"validatedTimestamp"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["FBID", b"FBID", "directPath", b"directPath", "downloadableThumbnail", b"downloadableThumbnail", "fileEncSHA256", b"fileEncSHA256", "fileSHA256", b"fileSHA256", "filename", b"filename", "handle", b"handle", "lastDownloadAttemptTimestamp", b"lastDownloadAttemptTimestamp", "mediaKey", b"mediaKey", "mediaKeyTimestamp", b"mediaKeyTimestamp", "objectID", b"objectID", "progressiveJPEGDetails", b"progressiveJPEGDetails", "serverMediaType", b"serverMediaType", "sidecar", b"sidecar", "size", b"size", "uploadToken", b"uploadToken", "validatedTimestamp", b"validatedTimestamp"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["FBID", b"FBID", "directPath", b"directPath", "downloadableThumbnail", b"downloadableThumbnail", "fileEncSHA256", b"fileEncSHA256", "fileSHA256", b"fileSHA256", "filename", b"filename", "handle", b"handle", "lastDownloadAttemptTimestamp", b"lastDownloadAttemptTimestamp", "mediaKey", b"mediaKey", "mediaKeyTimestamp", b"mediaKeyTimestamp", "objectID", b"objectID", "progressiveJPEGDetails", b"progressiveJPEGDetails", "serverMediaType", b"serverMediaType", "sidecar", b"sidecar", "size", b"size", "uploadToken", b"uploadToken", "validatedTimestamp", b"validatedTimestamp"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["FBID", b"FBID", "directPath", b"directPath", "downloadableThumbnail", b"downloadableThumbnail", "fileEncSHA256", b"fileEncSHA256", "fileSHA256", b"fileSHA256", "filename", b"filename", "handle", b"handle", "lastDownloadAttemptTimestamp", b"lastDownloadAttemptTimestamp", "mediaKey", b"mediaKey", "mediaKeyTimestamp", b"mediaKeyTimestamp", "objectID", b"objectID", "progressiveJPEGDetails", b"progressiveJPEGDetails", "serverMediaType", b"serverMediaType", "sidecar", b"sidecar", "size", b"size", "uploadToken", b"uploadToken", "validatedTimestamp", b"validatedTimestamp"]) -> None: ...
 
-Global___MediaEntry: _TypeAlias = MediaEntry  # noqa: Y015
+Global___MediaEntry: typing_extensions.TypeAlias = MediaEntry

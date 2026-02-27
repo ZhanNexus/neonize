@@ -3,72 +3,70 @@
 isort:skip_file
 """
 
-from google.protobuf import descriptor as _descriptor
-from google.protobuf import message as _message
-from instamadilloCoreTypeMedia import InstamadilloCoreTypeMedia_pb2 as _InstamadilloCoreTypeMedia_pb2
-import builtins as _builtins
+import builtins
+import google.protobuf.descriptor
+import google.protobuf.message
+import instamadilloCoreTypeMedia.InstamadilloCoreTypeMedia_pb2
 import sys
-import typing as _typing
+import typing
 
 if sys.version_info >= (3, 10):
-    from typing import TypeAlias as _TypeAlias
+    import typing as typing_extensions
 else:
-    from typing_extensions import TypeAlias as _TypeAlias
+    import typing_extensions
 
-DESCRIPTOR: _descriptor.FileDescriptor
+DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
-@_typing.final
-class SupplementMessagePayload(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class SupplementMessagePayload(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    TARGETMESSAGEOTID_FIELD_NUMBER: _builtins.int
-    UNIQUINGKEYFORSUPPLEMENTALDATA_FIELD_NUMBER: _builtins.int
-    CONTENT_FIELD_NUMBER: _builtins.int
-    TARGETMESSAGEWASERVERTIMESEC_FIELD_NUMBER: _builtins.int
-    TARGETWATHREADID_FIELD_NUMBER: _builtins.int
-    targetMessageOtid: _builtins.str
-    uniquingKeyForSupplementalData: _builtins.str
-    targetMessageWaServerTimeSec: _builtins.str
-    targetWaThreadID: _builtins.str
-    @_builtins.property
+    TARGETMESSAGEOTID_FIELD_NUMBER: builtins.int
+    UNIQUINGKEYFORSUPPLEMENTALDATA_FIELD_NUMBER: builtins.int
+    CONTENT_FIELD_NUMBER: builtins.int
+    TARGETMESSAGEWASERVERTIMESEC_FIELD_NUMBER: builtins.int
+    TARGETWATHREADID_FIELD_NUMBER: builtins.int
+    targetMessageOtid: builtins.str
+    uniquingKeyForSupplementalData: builtins.str
+    targetMessageWaServerTimeSec: builtins.str
+    targetWaThreadID: builtins.str
+    @property
     def content(self) -> Global___SupplementMessageContent: ...
     def __init__(
         self,
         *,
-        targetMessageOtid: _builtins.str | None = ...,
-        uniquingKeyForSupplementalData: _builtins.str | None = ...,
+        targetMessageOtid: builtins.str | None = ...,
+        uniquingKeyForSupplementalData: builtins.str | None = ...,
         content: Global___SupplementMessageContent | None = ...,
-        targetMessageWaServerTimeSec: _builtins.str | None = ...,
-        targetWaThreadID: _builtins.str | None = ...,
+        targetMessageWaServerTimeSec: builtins.str | None = ...,
+        targetWaThreadID: builtins.str | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["content", b"content", "targetMessageOtid", b"targetMessageOtid", "targetMessageWaServerTimeSec", b"targetMessageWaServerTimeSec", "targetWaThreadID", b"targetWaThreadID", "uniquingKeyForSupplementalData", b"uniquingKeyForSupplementalData"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["content", b"content", "targetMessageOtid", b"targetMessageOtid", "targetMessageWaServerTimeSec", b"targetMessageWaServerTimeSec", "targetWaThreadID", b"targetWaThreadID", "uniquingKeyForSupplementalData", b"uniquingKeyForSupplementalData"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["content", b"content", "targetMessageOtid", b"targetMessageOtid", "targetMessageWaServerTimeSec", b"targetMessageWaServerTimeSec", "targetWaThreadID", b"targetWaThreadID", "uniquingKeyForSupplementalData", b"uniquingKeyForSupplementalData"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["content", b"content", "targetMessageOtid", b"targetMessageOtid", "targetMessageWaServerTimeSec", b"targetMessageWaServerTimeSec", "targetWaThreadID", b"targetWaThreadID", "uniquingKeyForSupplementalData", b"uniquingKeyForSupplementalData"]) -> None: ...
 
-Global___SupplementMessagePayload: _TypeAlias = SupplementMessagePayload  # noqa: Y015
+Global___SupplementMessagePayload: typing_extensions.TypeAlias = SupplementMessagePayload
 
-@_typing.final
-class SupplementMessageContent(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class SupplementMessageContent(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    REACTION_FIELD_NUMBER: _builtins.int
-    CONTENTVIEW_FIELD_NUMBER: _builtins.int
-    EDITTEXT_FIELD_NUMBER: _builtins.int
-    MEDIAREACTION_FIELD_NUMBER: _builtins.int
-    ORIGINALTRANSPORTPAYLOAD_FIELD_NUMBER: _builtins.int
-    MEDIAINTERVENTIONS_FIELD_NUMBER: _builtins.int
-    @_builtins.property
+    REACTION_FIELD_NUMBER: builtins.int
+    CONTENTVIEW_FIELD_NUMBER: builtins.int
+    EDITTEXT_FIELD_NUMBER: builtins.int
+    MEDIAREACTION_FIELD_NUMBER: builtins.int
+    ORIGINALTRANSPORTPAYLOAD_FIELD_NUMBER: builtins.int
+    MEDIAINTERVENTIONS_FIELD_NUMBER: builtins.int
+    @property
     def reaction(self) -> Global___Reaction: ...
-    @_builtins.property
+    @property
     def contentView(self) -> Global___ContentView: ...
-    @_builtins.property
+    @property
     def editText(self) -> Global___EditText: ...
-    @_builtins.property
+    @property
     def mediaReaction(self) -> Global___MediaReaction: ...
-    @_builtins.property
+    @property
     def originalTransportPayload(self) -> Global___OriginalTransportPayload: ...
-    @_builtins.property
+    @property
     def mediaInterventions(self) -> Global___MediaInterventions: ...
     def __init__(
         self,
@@ -80,154 +78,138 @@ class SupplementMessageContent(_message.Message):
         originalTransportPayload: Global___OriginalTransportPayload | None = ...,
         mediaInterventions: Global___MediaInterventions | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["contentView", b"contentView", "editText", b"editText", "mediaInterventions", b"mediaInterventions", "mediaReaction", b"mediaReaction", "originalTransportPayload", b"originalTransportPayload", "reaction", b"reaction", "supplementMessageContent", b"supplementMessageContent"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["contentView", b"contentView", "editText", b"editText", "mediaInterventions", b"mediaInterventions", "mediaReaction", b"mediaReaction", "originalTransportPayload", b"originalTransportPayload", "reaction", b"reaction", "supplementMessageContent", b"supplementMessageContent"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    _WhichOneofReturnType_supplementMessageContent: _TypeAlias = _typing.Literal["reaction", "contentView", "editText", "mediaReaction", "originalTransportPayload", "mediaInterventions"]  # noqa: Y015
-    _WhichOneofArgType_supplementMessageContent: _TypeAlias = _typing.Literal["supplementMessageContent", b"supplementMessageContent"]  # noqa: Y015
-    def WhichOneof(self, oneof_group: _WhichOneofArgType_supplementMessageContent) -> _WhichOneofReturnType_supplementMessageContent | None: ...
+    def HasField(self, field_name: typing.Literal["contentView", b"contentView", "editText", b"editText", "mediaInterventions", b"mediaInterventions", "mediaReaction", b"mediaReaction", "originalTransportPayload", b"originalTransportPayload", "reaction", b"reaction", "supplementMessageContent", b"supplementMessageContent"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["contentView", b"contentView", "editText", b"editText", "mediaInterventions", b"mediaInterventions", "mediaReaction", b"mediaReaction", "originalTransportPayload", b"originalTransportPayload", "reaction", b"reaction", "supplementMessageContent", b"supplementMessageContent"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["supplementMessageContent", b"supplementMessageContent"]) -> typing.Literal["reaction", "contentView", "editText", "mediaReaction", "originalTransportPayload", "mediaInterventions"] | None: ...
 
-Global___SupplementMessageContent: _TypeAlias = SupplementMessageContent  # noqa: Y015
+Global___SupplementMessageContent: typing_extensions.TypeAlias = SupplementMessageContent
 
-@_typing.final
-class MediaReaction(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class MediaReaction(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    MEDIAID_FIELD_NUMBER: _builtins.int
-    REACTION_FIELD_NUMBER: _builtins.int
-    mediaID: _builtins.str
-    @_builtins.property
+    MEDIAID_FIELD_NUMBER: builtins.int
+    REACTION_FIELD_NUMBER: builtins.int
+    mediaID: builtins.str
+    @property
     def reaction(self) -> Global___Reaction: ...
     def __init__(
         self,
         *,
-        mediaID: _builtins.str | None = ...,
+        mediaID: builtins.str | None = ...,
         reaction: Global___Reaction | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["mediaID", b"mediaID", "reaction", b"reaction"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["mediaID", b"mediaID", "reaction", b"reaction"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["mediaID", b"mediaID", "reaction", b"reaction"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["mediaID", b"mediaID", "reaction", b"reaction"]) -> None: ...
 
-Global___MediaReaction: _TypeAlias = MediaReaction  # noqa: Y015
+Global___MediaReaction: typing_extensions.TypeAlias = MediaReaction
 
-@_typing.final
-class Reaction(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class Reaction(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    REACTIONTYPE_FIELD_NUMBER: _builtins.int
-    REACTIONSTATUS_FIELD_NUMBER: _builtins.int
-    EMOJI_FIELD_NUMBER: _builtins.int
-    SUPERREACTTYPE_FIELD_NUMBER: _builtins.int
-    ACTIONLOGOTID_FIELD_NUMBER: _builtins.int
-    reactionType: _builtins.str
-    reactionStatus: _builtins.str
-    emoji: _builtins.str
-    superReactType: _builtins.str
-    actionLogOtid: _builtins.str
+    REACTIONTYPE_FIELD_NUMBER: builtins.int
+    REACTIONSTATUS_FIELD_NUMBER: builtins.int
+    EMOJI_FIELD_NUMBER: builtins.int
+    SUPERREACTTYPE_FIELD_NUMBER: builtins.int
+    ACTIONLOGOTID_FIELD_NUMBER: builtins.int
+    reactionType: builtins.str
+    reactionStatus: builtins.str
+    emoji: builtins.str
+    superReactType: builtins.str
+    actionLogOtid: builtins.str
     def __init__(
         self,
         *,
-        reactionType: _builtins.str | None = ...,
-        reactionStatus: _builtins.str | None = ...,
-        emoji: _builtins.str | None = ...,
-        superReactType: _builtins.str | None = ...,
-        actionLogOtid: _builtins.str | None = ...,
+        reactionType: builtins.str | None = ...,
+        reactionStatus: builtins.str | None = ...,
+        emoji: builtins.str | None = ...,
+        superReactType: builtins.str | None = ...,
+        actionLogOtid: builtins.str | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["actionLogOtid", b"actionLogOtid", "emoji", b"emoji", "reactionStatus", b"reactionStatus", "reactionType", b"reactionType", "superReactType", b"superReactType"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["actionLogOtid", b"actionLogOtid", "emoji", b"emoji", "reactionStatus", b"reactionStatus", "reactionType", b"reactionType", "superReactType", b"superReactType"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["actionLogOtid", b"actionLogOtid", "emoji", b"emoji", "reactionStatus", b"reactionStatus", "reactionType", b"reactionType", "superReactType", b"superReactType"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["actionLogOtid", b"actionLogOtid", "emoji", b"emoji", "reactionStatus", b"reactionStatus", "reactionType", b"reactionType", "superReactType", b"superReactType"]) -> None: ...
 
-Global___Reaction: _TypeAlias = Reaction  # noqa: Y015
+Global___Reaction: typing_extensions.TypeAlias = Reaction
 
-@_typing.final
-class ContentView(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class ContentView(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    SEEN_FIELD_NUMBER: _builtins.int
-    SCREENSHOTTED_FIELD_NUMBER: _builtins.int
-    REPLAYED_FIELD_NUMBER: _builtins.int
-    MIMETYPE_FIELD_NUMBER: _builtins.int
-    OBJECTID_FIELD_NUMBER: _builtins.int
-    seen: _builtins.bool
-    screenshotted: _builtins.bool
-    replayed: _builtins.bool
-    mimetype: _builtins.str
-    objectID: _builtins.str
+    SEEN_FIELD_NUMBER: builtins.int
+    SCREENSHOTTED_FIELD_NUMBER: builtins.int
+    REPLAYED_FIELD_NUMBER: builtins.int
+    MIMETYPE_FIELD_NUMBER: builtins.int
+    OBJECTID_FIELD_NUMBER: builtins.int
+    seen: builtins.bool
+    screenshotted: builtins.bool
+    replayed: builtins.bool
+    mimetype: builtins.str
+    objectID: builtins.str
     def __init__(
         self,
         *,
-        seen: _builtins.bool | None = ...,
-        screenshotted: _builtins.bool | None = ...,
-        replayed: _builtins.bool | None = ...,
-        mimetype: _builtins.str | None = ...,
-        objectID: _builtins.str | None = ...,
+        seen: builtins.bool | None = ...,
+        screenshotted: builtins.bool | None = ...,
+        replayed: builtins.bool | None = ...,
+        mimetype: builtins.str | None = ...,
+        objectID: builtins.str | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["mimetype", b"mimetype", "objectID", b"objectID", "replayed", b"replayed", "screenshotted", b"screenshotted", "seen", b"seen"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["mimetype", b"mimetype", "objectID", b"objectID", "replayed", b"replayed", "screenshotted", b"screenshotted", "seen", b"seen"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["mimetype", b"mimetype", "objectID", b"objectID", "replayed", b"replayed", "screenshotted", b"screenshotted", "seen", b"seen"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["mimetype", b"mimetype", "objectID", b"objectID", "replayed", b"replayed", "screenshotted", b"screenshotted", "seen", b"seen"]) -> None: ...
 
-Global___ContentView: _TypeAlias = ContentView  # noqa: Y015
+Global___ContentView: typing_extensions.TypeAlias = ContentView
 
-@_typing.final
-class EditText(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class EditText(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    NEWCONTENT_FIELD_NUMBER: _builtins.int
-    EDITCOUNT_FIELD_NUMBER: _builtins.int
-    newContent: _builtins.str
-    editCount: _builtins.int
+    NEWCONTENT_FIELD_NUMBER: builtins.int
+    EDITCOUNT_FIELD_NUMBER: builtins.int
+    newContent: builtins.str
+    editCount: builtins.int
     def __init__(
         self,
         *,
-        newContent: _builtins.str | None = ...,
-        editCount: _builtins.int | None = ...,
+        newContent: builtins.str | None = ...,
+        editCount: builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["editCount", b"editCount", "newContent", b"newContent"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["editCount", b"editCount", "newContent", b"newContent"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["editCount", b"editCount", "newContent", b"newContent"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["editCount", b"editCount", "newContent", b"newContent"]) -> None: ...
 
-Global___EditText: _TypeAlias = EditText  # noqa: Y015
+Global___EditText: typing_extensions.TypeAlias = EditText
 
-@_typing.final
-class OriginalTransportPayload(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class OriginalTransportPayload(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    ORIGINALTRANSPORTPAYLOAD_FIELD_NUMBER: _builtins.int
-    originalTransportPayload: _builtins.bytes
+    ORIGINALTRANSPORTPAYLOAD_FIELD_NUMBER: builtins.int
+    originalTransportPayload: builtins.bytes
     def __init__(
         self,
         *,
-        originalTransportPayload: _builtins.bytes | None = ...,
+        originalTransportPayload: builtins.bytes | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["originalTransportPayload", b"originalTransportPayload"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["originalTransportPayload", b"originalTransportPayload"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["originalTransportPayload", b"originalTransportPayload"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["originalTransportPayload", b"originalTransportPayload"]) -> None: ...
 
-Global___OriginalTransportPayload: _TypeAlias = OriginalTransportPayload  # noqa: Y015
+Global___OriginalTransportPayload: typing_extensions.TypeAlias = OriginalTransportPayload
 
-@_typing.final
-class MediaInterventions(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class MediaInterventions(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    MEDIAID_FIELD_NUMBER: _builtins.int
-    INTERVENTIONTYPE_FIELD_NUMBER: _builtins.int
-    mediaID: _builtins.str
-    interventionType: _InstamadilloCoreTypeMedia_pb2.Media.InterventionType.ValueType
+    MEDIAID_FIELD_NUMBER: builtins.int
+    INTERVENTIONTYPE_FIELD_NUMBER: builtins.int
+    mediaID: builtins.str
+    interventionType: instamadilloCoreTypeMedia.InstamadilloCoreTypeMedia_pb2.Media.InterventionType.ValueType
     def __init__(
         self,
         *,
-        mediaID: _builtins.str | None = ...,
-        interventionType: _InstamadilloCoreTypeMedia_pb2.Media.InterventionType.ValueType | None = ...,
+        mediaID: builtins.str | None = ...,
+        interventionType: instamadilloCoreTypeMedia.InstamadilloCoreTypeMedia_pb2.Media.InterventionType.ValueType | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["interventionType", b"interventionType", "mediaID", b"mediaID"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["interventionType", b"interventionType", "mediaID", b"mediaID"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["interventionType", b"interventionType", "mediaID", b"mediaID"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["interventionType", b"interventionType", "mediaID", b"mediaID"]) -> None: ...
 
-Global___MediaInterventions: _TypeAlias = MediaInterventions  # noqa: Y015
+Global___MediaInterventions: typing_extensions.TypeAlias = MediaInterventions

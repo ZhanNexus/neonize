@@ -3,30 +3,30 @@
 isort:skip_file
 """
 
-from google.protobuf import descriptor as _descriptor
-from google.protobuf import message as _message
-from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
-import builtins as _builtins
+import builtins
+import google.protobuf.descriptor
+import google.protobuf.internal.enum_type_wrapper
+import google.protobuf.message
 import sys
-import typing as _typing
+import typing
 
 if sys.version_info >= (3, 10):
-    from typing import TypeAlias as _TypeAlias
+    import typing as typing_extensions
 else:
-    from typing_extensions import TypeAlias as _TypeAlias
+    import typing_extensions
 
-DESCRIPTOR: _descriptor.FileDescriptor
+DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
-@_typing.final
-class StatusAttribution(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class StatusAttribution(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     class _Type:
-        ValueType = _typing.NewType("ValueType", _builtins.int)
-        V: _TypeAlias = ValueType  # noqa: Y015
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
 
-    class _TypeEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[StatusAttribution._Type.ValueType], _builtins.type):
-        DESCRIPTOR: _descriptor.EnumDescriptor
+    class _TypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[StatusAttribution._Type.ValueType], builtins.type):
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         UNKNOWN: StatusAttribution._Type.ValueType  # 0
         RESHARE: StatusAttribution._Type.ValueType  # 1
         EXTERNAL_SHARE: StatusAttribution._Type.ValueType  # 2
@@ -48,16 +48,16 @@ class StatusAttribution(_message.Message):
     AI_CREATED: StatusAttribution.Type.ValueType  # 7
     LAYOUTS: StatusAttribution.Type.ValueType  # 8
 
-    @_typing.final
-    class AiCreatedAttribution(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+    @typing.final
+    class AiCreatedAttribution(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
         class _Source:
-            ValueType = _typing.NewType("ValueType", _builtins.int)
-            V: _TypeAlias = ValueType  # noqa: Y015
+            ValueType = typing.NewType("ValueType", builtins.int)
+            V: typing_extensions.TypeAlias = ValueType
 
-        class _SourceEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[StatusAttribution.AiCreatedAttribution._Source.ValueType], _builtins.type):
-            DESCRIPTOR: _descriptor.EnumDescriptor
+        class _SourceEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[StatusAttribution.AiCreatedAttribution._Source.ValueType], builtins.type):
+            DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
             UNKNOWN: StatusAttribution.AiCreatedAttribution._Source.ValueType  # 0
             STATUS_MIMICRY: StatusAttribution.AiCreatedAttribution._Source.ValueType  # 1
 
@@ -65,28 +65,26 @@ class StatusAttribution(_message.Message):
         UNKNOWN: StatusAttribution.AiCreatedAttribution.Source.ValueType  # 0
         STATUS_MIMICRY: StatusAttribution.AiCreatedAttribution.Source.ValueType  # 1
 
-        SOURCE_FIELD_NUMBER: _builtins.int
+        SOURCE_FIELD_NUMBER: builtins.int
         source: Global___StatusAttribution.AiCreatedAttribution.Source.ValueType
         def __init__(
             self,
             *,
             source: Global___StatusAttribution.AiCreatedAttribution.Source.ValueType | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _TypeAlias = _typing.Literal["source", b"source"]  # noqa: Y015
-        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _TypeAlias = _typing.Literal["source", b"source"]  # noqa: Y015
-        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+        def HasField(self, field_name: typing.Literal["source", b"source"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["source", b"source"]) -> None: ...
 
-    @_typing.final
-    class RLAttribution(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+    @typing.final
+    class RLAttribution(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
         class _Source:
-            ValueType = _typing.NewType("ValueType", _builtins.int)
-            V: _TypeAlias = ValueType  # noqa: Y015
+            ValueType = typing.NewType("ValueType", builtins.int)
+            V: typing_extensions.TypeAlias = ValueType
 
-        class _SourceEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[StatusAttribution.RLAttribution._Source.ValueType], _builtins.type):
-            DESCRIPTOR: _descriptor.EnumDescriptor
+        class _SourceEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[StatusAttribution.RLAttribution._Source.ValueType], builtins.type):
+            DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
             UNKNOWN: StatusAttribution.RLAttribution._Source.ValueType  # 0
             RAY_BAN_META_GLASSES: StatusAttribution.RLAttribution._Source.ValueType  # 1
             OAKLEY_META_GLASSES: StatusAttribution.RLAttribution._Source.ValueType  # 2
@@ -98,28 +96,26 @@ class StatusAttribution(_message.Message):
         OAKLEY_META_GLASSES: StatusAttribution.RLAttribution.Source.ValueType  # 2
         HYPERNOVA_GLASSES: StatusAttribution.RLAttribution.Source.ValueType  # 3
 
-        SOURCE_FIELD_NUMBER: _builtins.int
+        SOURCE_FIELD_NUMBER: builtins.int
         source: Global___StatusAttribution.RLAttribution.Source.ValueType
         def __init__(
             self,
             *,
             source: Global___StatusAttribution.RLAttribution.Source.ValueType | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _TypeAlias = _typing.Literal["source", b"source"]  # noqa: Y015
-        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _TypeAlias = _typing.Literal["source", b"source"]  # noqa: Y015
-        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+        def HasField(self, field_name: typing.Literal["source", b"source"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["source", b"source"]) -> None: ...
 
-    @_typing.final
-    class ExternalShare(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+    @typing.final
+    class ExternalShare(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
         class _Source:
-            ValueType = _typing.NewType("ValueType", _builtins.int)
-            V: _TypeAlias = ValueType  # noqa: Y015
+            ValueType = typing.NewType("ValueType", builtins.int)
+            V: typing_extensions.TypeAlias = ValueType
 
-        class _SourceEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[StatusAttribution.ExternalShare._Source.ValueType], _builtins.type):
-            DESCRIPTOR: _descriptor.EnumDescriptor
+        class _SourceEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[StatusAttribution.ExternalShare._Source.ValueType], builtins.type):
+            DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
             UNKNOWN: StatusAttribution.ExternalShare._Source.ValueType  # 0
             INSTAGRAM: StatusAttribution.ExternalShare._Source.ValueType  # 1
             FACEBOOK: StatusAttribution.ExternalShare._Source.ValueType  # 2
@@ -145,37 +141,35 @@ class StatusAttribution(_message.Message):
         SHARECHAT: StatusAttribution.ExternalShare.Source.ValueType  # 9
         GOOGLE_PHOTOS: StatusAttribution.ExternalShare.Source.ValueType  # 10
 
-        ACTIONURL_FIELD_NUMBER: _builtins.int
-        SOURCE_FIELD_NUMBER: _builtins.int
-        DURATION_FIELD_NUMBER: _builtins.int
-        ACTIONFALLBACKURL_FIELD_NUMBER: _builtins.int
-        actionURL: _builtins.str
+        ACTIONURL_FIELD_NUMBER: builtins.int
+        SOURCE_FIELD_NUMBER: builtins.int
+        DURATION_FIELD_NUMBER: builtins.int
+        ACTIONFALLBACKURL_FIELD_NUMBER: builtins.int
+        actionURL: builtins.str
         source: Global___StatusAttribution.ExternalShare.Source.ValueType
-        duration: _builtins.int
-        actionFallbackURL: _builtins.str
+        duration: builtins.int
+        actionFallbackURL: builtins.str
         def __init__(
             self,
             *,
-            actionURL: _builtins.str | None = ...,
+            actionURL: builtins.str | None = ...,
             source: Global___StatusAttribution.ExternalShare.Source.ValueType | None = ...,
-            duration: _builtins.int | None = ...,
-            actionFallbackURL: _builtins.str | None = ...,
+            duration: builtins.int | None = ...,
+            actionFallbackURL: builtins.str | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _TypeAlias = _typing.Literal["actionFallbackURL", b"actionFallbackURL", "actionURL", b"actionURL", "duration", b"duration", "source", b"source"]  # noqa: Y015
-        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _TypeAlias = _typing.Literal["actionFallbackURL", b"actionFallbackURL", "actionURL", b"actionURL", "duration", b"duration", "source", b"source"]  # noqa: Y015
-        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+        def HasField(self, field_name: typing.Literal["actionFallbackURL", b"actionFallbackURL", "actionURL", b"actionURL", "duration", b"duration", "source", b"source"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["actionFallbackURL", b"actionFallbackURL", "actionURL", b"actionURL", "duration", b"duration", "source", b"source"]) -> None: ...
 
-    @_typing.final
-    class StatusReshare(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+    @typing.final
+    class StatusReshare(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
         class _Source:
-            ValueType = _typing.NewType("ValueType", _builtins.int)
-            V: _TypeAlias = ValueType  # noqa: Y015
+            ValueType = typing.NewType("ValueType", builtins.int)
+            V: typing_extensions.TypeAlias = ValueType
 
-        class _SourceEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[StatusAttribution.StatusReshare._Source.ValueType], _builtins.type):
-            DESCRIPTOR: _descriptor.EnumDescriptor
+        class _SourceEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[StatusAttribution.StatusReshare._Source.ValueType], builtins.type):
+            DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
             UNKNOWN: StatusAttribution.StatusReshare._Source.ValueType  # 0
             INTERNAL_RESHARE: StatusAttribution.StatusReshare._Source.ValueType  # 1
             MENTION_RESHARE: StatusAttribution.StatusReshare._Source.ValueType  # 2
@@ -189,35 +183,33 @@ class StatusAttribution(_message.Message):
         CHANNEL_RESHARE: StatusAttribution.StatusReshare.Source.ValueType  # 3
         FORWARD: StatusAttribution.StatusReshare.Source.ValueType  # 4
 
-        @_typing.final
-        class Metadata(_message.Message):
-            DESCRIPTOR: _descriptor.Descriptor
+        @typing.final
+        class Metadata(google.protobuf.message.Message):
+            DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-            DURATION_FIELD_NUMBER: _builtins.int
-            CHANNELJID_FIELD_NUMBER: _builtins.int
-            CHANNELMESSAGEID_FIELD_NUMBER: _builtins.int
-            HASMULTIPLERESHARES_FIELD_NUMBER: _builtins.int
-            duration: _builtins.int
-            channelJID: _builtins.str
-            channelMessageID: _builtins.int
-            hasMultipleReshares: _builtins.bool
+            DURATION_FIELD_NUMBER: builtins.int
+            CHANNELJID_FIELD_NUMBER: builtins.int
+            CHANNELMESSAGEID_FIELD_NUMBER: builtins.int
+            HASMULTIPLERESHARES_FIELD_NUMBER: builtins.int
+            duration: builtins.int
+            channelJID: builtins.str
+            channelMessageID: builtins.int
+            hasMultipleReshares: builtins.bool
             def __init__(
                 self,
                 *,
-                duration: _builtins.int | None = ...,
-                channelJID: _builtins.str | None = ...,
-                channelMessageID: _builtins.int | None = ...,
-                hasMultipleReshares: _builtins.bool | None = ...,
+                duration: builtins.int | None = ...,
+                channelJID: builtins.str | None = ...,
+                channelMessageID: builtins.int | None = ...,
+                hasMultipleReshares: builtins.bool | None = ...,
             ) -> None: ...
-            _HasFieldArgType: _TypeAlias = _typing.Literal["channelJID", b"channelJID", "channelMessageID", b"channelMessageID", "duration", b"duration", "hasMultipleReshares", b"hasMultipleReshares"]  # noqa: Y015
-            def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-            _ClearFieldArgType: _TypeAlias = _typing.Literal["channelJID", b"channelJID", "channelMessageID", b"channelMessageID", "duration", b"duration", "hasMultipleReshares", b"hasMultipleReshares"]  # noqa: Y015
-            def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+            def HasField(self, field_name: typing.Literal["channelJID", b"channelJID", "channelMessageID", b"channelMessageID", "duration", b"duration", "hasMultipleReshares", b"hasMultipleReshares"]) -> builtins.bool: ...
+            def ClearField(self, field_name: typing.Literal["channelJID", b"channelJID", "channelMessageID", b"channelMessageID", "duration", b"duration", "hasMultipleReshares", b"hasMultipleReshares"]) -> None: ...
 
-        SOURCE_FIELD_NUMBER: _builtins.int
-        METADATA_FIELD_NUMBER: _builtins.int
+        SOURCE_FIELD_NUMBER: builtins.int
+        METADATA_FIELD_NUMBER: builtins.int
         source: Global___StatusAttribution.StatusReshare.Source.ValueType
-        @_builtins.property
+        @property
         def metadata(self) -> Global___StatusAttribution.StatusReshare.Metadata: ...
         def __init__(
             self,
@@ -225,79 +217,73 @@ class StatusAttribution(_message.Message):
             source: Global___StatusAttribution.StatusReshare.Source.ValueType | None = ...,
             metadata: Global___StatusAttribution.StatusReshare.Metadata | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _TypeAlias = _typing.Literal["metadata", b"metadata", "source", b"source"]  # noqa: Y015
-        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _TypeAlias = _typing.Literal["metadata", b"metadata", "source", b"source"]  # noqa: Y015
-        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+        def HasField(self, field_name: typing.Literal["metadata", b"metadata", "source", b"source"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["metadata", b"metadata", "source", b"source"]) -> None: ...
 
-    @_typing.final
-    class GroupStatus(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+    @typing.final
+    class GroupStatus(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-        AUTHORJID_FIELD_NUMBER: _builtins.int
-        authorJID: _builtins.str
+        AUTHORJID_FIELD_NUMBER: builtins.int
+        authorJID: builtins.str
         def __init__(
             self,
             *,
-            authorJID: _builtins.str | None = ...,
+            authorJID: builtins.str | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _TypeAlias = _typing.Literal["authorJID", b"authorJID"]  # noqa: Y015
-        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _TypeAlias = _typing.Literal["authorJID", b"authorJID"]  # noqa: Y015
-        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+        def HasField(self, field_name: typing.Literal["authorJID", b"authorJID"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["authorJID", b"authorJID"]) -> None: ...
 
-    @_typing.final
-    class Music(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+    @typing.final
+    class Music(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-        AUTHORNAME_FIELD_NUMBER: _builtins.int
-        SONGID_FIELD_NUMBER: _builtins.int
-        TITLE_FIELD_NUMBER: _builtins.int
-        AUTHOR_FIELD_NUMBER: _builtins.int
-        ARTISTATTRIBUTION_FIELD_NUMBER: _builtins.int
-        ISEXPLICIT_FIELD_NUMBER: _builtins.int
-        authorName: _builtins.str
-        songID: _builtins.str
-        title: _builtins.str
-        author: _builtins.str
-        artistAttribution: _builtins.str
-        isExplicit: _builtins.bool
+        AUTHORNAME_FIELD_NUMBER: builtins.int
+        SONGID_FIELD_NUMBER: builtins.int
+        TITLE_FIELD_NUMBER: builtins.int
+        AUTHOR_FIELD_NUMBER: builtins.int
+        ARTISTATTRIBUTION_FIELD_NUMBER: builtins.int
+        ISEXPLICIT_FIELD_NUMBER: builtins.int
+        authorName: builtins.str
+        songID: builtins.str
+        title: builtins.str
+        author: builtins.str
+        artistAttribution: builtins.str
+        isExplicit: builtins.bool
         def __init__(
             self,
             *,
-            authorName: _builtins.str | None = ...,
-            songID: _builtins.str | None = ...,
-            title: _builtins.str | None = ...,
-            author: _builtins.str | None = ...,
-            artistAttribution: _builtins.str | None = ...,
-            isExplicit: _builtins.bool | None = ...,
+            authorName: builtins.str | None = ...,
+            songID: builtins.str | None = ...,
+            title: builtins.str | None = ...,
+            author: builtins.str | None = ...,
+            artistAttribution: builtins.str | None = ...,
+            isExplicit: builtins.bool | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _TypeAlias = _typing.Literal["artistAttribution", b"artistAttribution", "author", b"author", "authorName", b"authorName", "isExplicit", b"isExplicit", "songID", b"songID", "title", b"title"]  # noqa: Y015
-        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _TypeAlias = _typing.Literal["artistAttribution", b"artistAttribution", "author", b"author", "authorName", b"authorName", "isExplicit", b"isExplicit", "songID", b"songID", "title", b"title"]  # noqa: Y015
-        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+        def HasField(self, field_name: typing.Literal["artistAttribution", b"artistAttribution", "author", b"author", "authorName", b"authorName", "isExplicit", b"isExplicit", "songID", b"songID", "title", b"title"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["artistAttribution", b"artistAttribution", "author", b"author", "authorName", b"authorName", "isExplicit", b"isExplicit", "songID", b"songID", "title", b"title"]) -> None: ...
 
-    STATUSRESHARE_FIELD_NUMBER: _builtins.int
-    EXTERNALSHARE_FIELD_NUMBER: _builtins.int
-    MUSIC_FIELD_NUMBER: _builtins.int
-    GROUPSTATUS_FIELD_NUMBER: _builtins.int
-    RLATTRIBUTION_FIELD_NUMBER: _builtins.int
-    AICREATEDATTRIBUTION_FIELD_NUMBER: _builtins.int
-    TYPE_FIELD_NUMBER: _builtins.int
-    ACTIONURL_FIELD_NUMBER: _builtins.int
+    STATUSRESHARE_FIELD_NUMBER: builtins.int
+    EXTERNALSHARE_FIELD_NUMBER: builtins.int
+    MUSIC_FIELD_NUMBER: builtins.int
+    GROUPSTATUS_FIELD_NUMBER: builtins.int
+    RLATTRIBUTION_FIELD_NUMBER: builtins.int
+    AICREATEDATTRIBUTION_FIELD_NUMBER: builtins.int
+    TYPE_FIELD_NUMBER: builtins.int
+    ACTIONURL_FIELD_NUMBER: builtins.int
     type: Global___StatusAttribution.Type.ValueType
-    actionURL: _builtins.str
-    @_builtins.property
+    actionURL: builtins.str
+    @property
     def statusReshare(self) -> Global___StatusAttribution.StatusReshare: ...
-    @_builtins.property
+    @property
     def externalShare(self) -> Global___StatusAttribution.ExternalShare: ...
-    @_builtins.property
+    @property
     def music(self) -> Global___StatusAttribution.Music: ...
-    @_builtins.property
+    @property
     def groupStatus(self) -> Global___StatusAttribution.GroupStatus: ...
-    @_builtins.property
+    @property
     def rlAttribution(self) -> Global___StatusAttribution.RLAttribution: ...
-    @_builtins.property
+    @property
     def aiCreatedAttribution(self) -> Global___StatusAttribution.AiCreatedAttribution: ...
     def __init__(
         self,
@@ -309,14 +295,10 @@ class StatusAttribution(_message.Message):
         rlAttribution: Global___StatusAttribution.RLAttribution | None = ...,
         aiCreatedAttribution: Global___StatusAttribution.AiCreatedAttribution | None = ...,
         type: Global___StatusAttribution.Type.ValueType | None = ...,
-        actionURL: _builtins.str | None = ...,
+        actionURL: builtins.str | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["actionURL", b"actionURL", "aiCreatedAttribution", b"aiCreatedAttribution", "attributionData", b"attributionData", "externalShare", b"externalShare", "groupStatus", b"groupStatus", "music", b"music", "rlAttribution", b"rlAttribution", "statusReshare", b"statusReshare", "type", b"type"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["actionURL", b"actionURL", "aiCreatedAttribution", b"aiCreatedAttribution", "attributionData", b"attributionData", "externalShare", b"externalShare", "groupStatus", b"groupStatus", "music", b"music", "rlAttribution", b"rlAttribution", "statusReshare", b"statusReshare", "type", b"type"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    _WhichOneofReturnType_attributionData: _TypeAlias = _typing.Literal["statusReshare", "externalShare", "music", "groupStatus", "rlAttribution", "aiCreatedAttribution"]  # noqa: Y015
-    _WhichOneofArgType_attributionData: _TypeAlias = _typing.Literal["attributionData", b"attributionData"]  # noqa: Y015
-    def WhichOneof(self, oneof_group: _WhichOneofArgType_attributionData) -> _WhichOneofReturnType_attributionData | None: ...
+    def HasField(self, field_name: typing.Literal["actionURL", b"actionURL", "aiCreatedAttribution", b"aiCreatedAttribution", "attributionData", b"attributionData", "externalShare", b"externalShare", "groupStatus", b"groupStatus", "music", b"music", "rlAttribution", b"rlAttribution", "statusReshare", b"statusReshare", "type", b"type"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["actionURL", b"actionURL", "aiCreatedAttribution", b"aiCreatedAttribution", "attributionData", b"attributionData", "externalShare", b"externalShare", "groupStatus", b"groupStatus", "music", b"music", "rlAttribution", b"rlAttribution", "statusReshare", b"statusReshare", "type", b"type"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["attributionData", b"attributionData"]) -> typing.Literal["statusReshare", "externalShare", "music", "groupStatus", "rlAttribution", "aiCreatedAttribution"] | None: ...
 
-Global___StatusAttribution: _TypeAlias = StatusAttribution  # noqa: Y015
+Global___StatusAttribution: typing_extensions.TypeAlias = StatusAttribution

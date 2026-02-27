@@ -3,150 +3,142 @@
 isort:skip_file
 """
 
-from collections import abc as _abc
-from google.protobuf import descriptor as _descriptor
-from google.protobuf import message as _message
-from google.protobuf.internal import containers as _containers
-from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
-from waCommon import WACommon_pb2 as _WACommon_pb2
-import builtins as _builtins
+import builtins
+import collections.abc
+import google.protobuf.descriptor
+import google.protobuf.internal.containers
+import google.protobuf.internal.enum_type_wrapper
+import google.protobuf.message
 import sys
-import typing as _typing
+import typing
+import waCommon.WACommon_pb2
 
 if sys.version_info >= (3, 10):
-    from typing import TypeAlias as _TypeAlias
+    import typing as typing_extensions
 else:
-    from typing_extensions import TypeAlias as _TypeAlias
+    import typing_extensions
 
-DESCRIPTOR: _descriptor.FileDescriptor
+DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
-@_typing.final
-class WAMediaTransport(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class WAMediaTransport(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    @_typing.final
-    class Ancillary(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+    @typing.final
+    class Ancillary(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-        @_typing.final
-        class Thumbnail(_message.Message):
-            DESCRIPTOR: _descriptor.Descriptor
+        @typing.final
+        class Thumbnail(google.protobuf.message.Message):
+            DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-            @_typing.final
-            class DownloadableThumbnail(_message.Message):
-                DESCRIPTOR: _descriptor.Descriptor
+            @typing.final
+            class DownloadableThumbnail(google.protobuf.message.Message):
+                DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-                FILESHA256_FIELD_NUMBER: _builtins.int
-                FILEENCSHA256_FIELD_NUMBER: _builtins.int
-                DIRECTPATH_FIELD_NUMBER: _builtins.int
-                MEDIAKEY_FIELD_NUMBER: _builtins.int
-                MEDIAKEYTIMESTAMP_FIELD_NUMBER: _builtins.int
-                OBJECTID_FIELD_NUMBER: _builtins.int
-                THUMBNAILSCANSSIDECAR_FIELD_NUMBER: _builtins.int
-                THUMBNAILSCANLENGTHS_FIELD_NUMBER: _builtins.int
-                fileSHA256: _builtins.bytes
-                fileEncSHA256: _builtins.bytes
-                directPath: _builtins.str
-                mediaKey: _builtins.bytes
-                mediaKeyTimestamp: _builtins.int
-                objectID: _builtins.str
-                thumbnailScansSidecar: _builtins.bytes
-                @_builtins.property
-                def thumbnailScanLengths(self) -> _containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+                FILESHA256_FIELD_NUMBER: builtins.int
+                FILEENCSHA256_FIELD_NUMBER: builtins.int
+                DIRECTPATH_FIELD_NUMBER: builtins.int
+                MEDIAKEY_FIELD_NUMBER: builtins.int
+                MEDIAKEYTIMESTAMP_FIELD_NUMBER: builtins.int
+                OBJECTID_FIELD_NUMBER: builtins.int
+                THUMBNAILSCANSSIDECAR_FIELD_NUMBER: builtins.int
+                THUMBNAILSCANLENGTHS_FIELD_NUMBER: builtins.int
+                fileSHA256: builtins.bytes
+                fileEncSHA256: builtins.bytes
+                directPath: builtins.str
+                mediaKey: builtins.bytes
+                mediaKeyTimestamp: builtins.int
+                objectID: builtins.str
+                thumbnailScansSidecar: builtins.bytes
+                @property
+                def thumbnailScanLengths(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
                 def __init__(
                     self,
                     *,
-                    fileSHA256: _builtins.bytes | None = ...,
-                    fileEncSHA256: _builtins.bytes | None = ...,
-                    directPath: _builtins.str | None = ...,
-                    mediaKey: _builtins.bytes | None = ...,
-                    mediaKeyTimestamp: _builtins.int | None = ...,
-                    objectID: _builtins.str | None = ...,
-                    thumbnailScansSidecar: _builtins.bytes | None = ...,
-                    thumbnailScanLengths: _abc.Iterable[_builtins.int] | None = ...,
+                    fileSHA256: builtins.bytes | None = ...,
+                    fileEncSHA256: builtins.bytes | None = ...,
+                    directPath: builtins.str | None = ...,
+                    mediaKey: builtins.bytes | None = ...,
+                    mediaKeyTimestamp: builtins.int | None = ...,
+                    objectID: builtins.str | None = ...,
+                    thumbnailScansSidecar: builtins.bytes | None = ...,
+                    thumbnailScanLengths: collections.abc.Iterable[builtins.int] | None = ...,
                 ) -> None: ...
-                _HasFieldArgType: _TypeAlias = _typing.Literal["directPath", b"directPath", "fileEncSHA256", b"fileEncSHA256", "fileSHA256", b"fileSHA256", "mediaKey", b"mediaKey", "mediaKeyTimestamp", b"mediaKeyTimestamp", "objectID", b"objectID", "thumbnailScansSidecar", b"thumbnailScansSidecar"]  # noqa: Y015
-                def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-                _ClearFieldArgType: _TypeAlias = _typing.Literal["directPath", b"directPath", "fileEncSHA256", b"fileEncSHA256", "fileSHA256", b"fileSHA256", "mediaKey", b"mediaKey", "mediaKeyTimestamp", b"mediaKeyTimestamp", "objectID", b"objectID", "thumbnailScanLengths", b"thumbnailScanLengths", "thumbnailScansSidecar", b"thumbnailScansSidecar"]  # noqa: Y015
-                def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+                def HasField(self, field_name: typing.Literal["directPath", b"directPath", "fileEncSHA256", b"fileEncSHA256", "fileSHA256", b"fileSHA256", "mediaKey", b"mediaKey", "mediaKeyTimestamp", b"mediaKeyTimestamp", "objectID", b"objectID", "thumbnailScansSidecar", b"thumbnailScansSidecar"]) -> builtins.bool: ...
+                def ClearField(self, field_name: typing.Literal["directPath", b"directPath", "fileEncSHA256", b"fileEncSHA256", "fileSHA256", b"fileSHA256", "mediaKey", b"mediaKey", "mediaKeyTimestamp", b"mediaKeyTimestamp", "objectID", b"objectID", "thumbnailScanLengths", b"thumbnailScanLengths", "thumbnailScansSidecar", b"thumbnailScansSidecar"]) -> None: ...
 
-            JPEGTHUMBNAIL_FIELD_NUMBER: _builtins.int
-            DOWNLOADABLETHUMBNAIL_FIELD_NUMBER: _builtins.int
-            THUMBNAILWIDTH_FIELD_NUMBER: _builtins.int
-            THUMBNAILHEIGHT_FIELD_NUMBER: _builtins.int
-            JPEGThumbnail: _builtins.bytes
-            thumbnailWidth: _builtins.int
-            thumbnailHeight: _builtins.int
-            @_builtins.property
+            JPEGTHUMBNAIL_FIELD_NUMBER: builtins.int
+            DOWNLOADABLETHUMBNAIL_FIELD_NUMBER: builtins.int
+            THUMBNAILWIDTH_FIELD_NUMBER: builtins.int
+            THUMBNAILHEIGHT_FIELD_NUMBER: builtins.int
+            JPEGThumbnail: builtins.bytes
+            thumbnailWidth: builtins.int
+            thumbnailHeight: builtins.int
+            @property
             def downloadableThumbnail(self) -> Global___WAMediaTransport.Ancillary.Thumbnail.DownloadableThumbnail: ...
             def __init__(
                 self,
                 *,
-                JPEGThumbnail: _builtins.bytes | None = ...,
+                JPEGThumbnail: builtins.bytes | None = ...,
                 downloadableThumbnail: Global___WAMediaTransport.Ancillary.Thumbnail.DownloadableThumbnail | None = ...,
-                thumbnailWidth: _builtins.int | None = ...,
-                thumbnailHeight: _builtins.int | None = ...,
+                thumbnailWidth: builtins.int | None = ...,
+                thumbnailHeight: builtins.int | None = ...,
             ) -> None: ...
-            _HasFieldArgType: _TypeAlias = _typing.Literal["JPEGThumbnail", b"JPEGThumbnail", "downloadableThumbnail", b"downloadableThumbnail", "thumbnailHeight", b"thumbnailHeight", "thumbnailWidth", b"thumbnailWidth"]  # noqa: Y015
-            def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-            _ClearFieldArgType: _TypeAlias = _typing.Literal["JPEGThumbnail", b"JPEGThumbnail", "downloadableThumbnail", b"downloadableThumbnail", "thumbnailHeight", b"thumbnailHeight", "thumbnailWidth", b"thumbnailWidth"]  # noqa: Y015
-            def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+            def HasField(self, field_name: typing.Literal["JPEGThumbnail", b"JPEGThumbnail", "downloadableThumbnail", b"downloadableThumbnail", "thumbnailHeight", b"thumbnailHeight", "thumbnailWidth", b"thumbnailWidth"]) -> builtins.bool: ...
+            def ClearField(self, field_name: typing.Literal["JPEGThumbnail", b"JPEGThumbnail", "downloadableThumbnail", b"downloadableThumbnail", "thumbnailHeight", b"thumbnailHeight", "thumbnailWidth", b"thumbnailWidth"]) -> None: ...
 
-        FILELENGTH_FIELD_NUMBER: _builtins.int
-        MIMETYPE_FIELD_NUMBER: _builtins.int
-        THUMBNAIL_FIELD_NUMBER: _builtins.int
-        OBJECTID_FIELD_NUMBER: _builtins.int
-        fileLength: _builtins.int
-        mimetype: _builtins.str
-        objectID: _builtins.str
-        @_builtins.property
+        FILELENGTH_FIELD_NUMBER: builtins.int
+        MIMETYPE_FIELD_NUMBER: builtins.int
+        THUMBNAIL_FIELD_NUMBER: builtins.int
+        OBJECTID_FIELD_NUMBER: builtins.int
+        fileLength: builtins.int
+        mimetype: builtins.str
+        objectID: builtins.str
+        @property
         def thumbnail(self) -> Global___WAMediaTransport.Ancillary.Thumbnail: ...
         def __init__(
             self,
             *,
-            fileLength: _builtins.int | None = ...,
-            mimetype: _builtins.str | None = ...,
+            fileLength: builtins.int | None = ...,
+            mimetype: builtins.str | None = ...,
             thumbnail: Global___WAMediaTransport.Ancillary.Thumbnail | None = ...,
-            objectID: _builtins.str | None = ...,
+            objectID: builtins.str | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _TypeAlias = _typing.Literal["fileLength", b"fileLength", "mimetype", b"mimetype", "objectID", b"objectID", "thumbnail", b"thumbnail"]  # noqa: Y015
-        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _TypeAlias = _typing.Literal["fileLength", b"fileLength", "mimetype", b"mimetype", "objectID", b"objectID", "thumbnail", b"thumbnail"]  # noqa: Y015
-        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+        def HasField(self, field_name: typing.Literal["fileLength", b"fileLength", "mimetype", b"mimetype", "objectID", b"objectID", "thumbnail", b"thumbnail"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["fileLength", b"fileLength", "mimetype", b"mimetype", "objectID", b"objectID", "thumbnail", b"thumbnail"]) -> None: ...
 
-    @_typing.final
-    class Integral(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+    @typing.final
+    class Integral(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-        FILESHA256_FIELD_NUMBER: _builtins.int
-        MEDIAKEY_FIELD_NUMBER: _builtins.int
-        FILEENCSHA256_FIELD_NUMBER: _builtins.int
-        DIRECTPATH_FIELD_NUMBER: _builtins.int
-        MEDIAKEYTIMESTAMP_FIELD_NUMBER: _builtins.int
-        fileSHA256: _builtins.bytes
-        mediaKey: _builtins.bytes
-        fileEncSHA256: _builtins.bytes
-        directPath: _builtins.str
-        mediaKeyTimestamp: _builtins.int
+        FILESHA256_FIELD_NUMBER: builtins.int
+        MEDIAKEY_FIELD_NUMBER: builtins.int
+        FILEENCSHA256_FIELD_NUMBER: builtins.int
+        DIRECTPATH_FIELD_NUMBER: builtins.int
+        MEDIAKEYTIMESTAMP_FIELD_NUMBER: builtins.int
+        fileSHA256: builtins.bytes
+        mediaKey: builtins.bytes
+        fileEncSHA256: builtins.bytes
+        directPath: builtins.str
+        mediaKeyTimestamp: builtins.int
         def __init__(
             self,
             *,
-            fileSHA256: _builtins.bytes | None = ...,
-            mediaKey: _builtins.bytes | None = ...,
-            fileEncSHA256: _builtins.bytes | None = ...,
-            directPath: _builtins.str | None = ...,
-            mediaKeyTimestamp: _builtins.int | None = ...,
+            fileSHA256: builtins.bytes | None = ...,
+            mediaKey: builtins.bytes | None = ...,
+            fileEncSHA256: builtins.bytes | None = ...,
+            directPath: builtins.str | None = ...,
+            mediaKeyTimestamp: builtins.int | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _TypeAlias = _typing.Literal["directPath", b"directPath", "fileEncSHA256", b"fileEncSHA256", "fileSHA256", b"fileSHA256", "mediaKey", b"mediaKey", "mediaKeyTimestamp", b"mediaKeyTimestamp"]  # noqa: Y015
-        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _TypeAlias = _typing.Literal["directPath", b"directPath", "fileEncSHA256", b"fileEncSHA256", "fileSHA256", b"fileSHA256", "mediaKey", b"mediaKey", "mediaKeyTimestamp", b"mediaKeyTimestamp"]  # noqa: Y015
-        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+        def HasField(self, field_name: typing.Literal["directPath", b"directPath", "fileEncSHA256", b"fileEncSHA256", "fileSHA256", b"fileSHA256", "mediaKey", b"mediaKey", "mediaKeyTimestamp", b"mediaKeyTimestamp"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["directPath", b"directPath", "fileEncSHA256", b"fileEncSHA256", "fileSHA256", b"fileSHA256", "mediaKey", b"mediaKey", "mediaKeyTimestamp", b"mediaKeyTimestamp"]) -> None: ...
 
-    INTEGRAL_FIELD_NUMBER: _builtins.int
-    ANCILLARY_FIELD_NUMBER: _builtins.int
-    @_builtins.property
+    INTEGRAL_FIELD_NUMBER: builtins.int
+    ANCILLARY_FIELD_NUMBER: builtins.int
+    @property
     def integral(self) -> Global___WAMediaTransport.Integral: ...
-    @_builtins.property
+    @property
     def ancillary(self) -> Global___WAMediaTransport.Ancillary: ...
     def __init__(
         self,
@@ -154,27 +146,25 @@ class WAMediaTransport(_message.Message):
         integral: Global___WAMediaTransport.Integral | None = ...,
         ancillary: Global___WAMediaTransport.Ancillary | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["ancillary", b"ancillary", "integral", b"integral"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["ancillary", b"ancillary", "integral", b"integral"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["ancillary", b"ancillary", "integral", b"integral"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["ancillary", b"ancillary", "integral", b"integral"]) -> None: ...
 
-Global___WAMediaTransport: _TypeAlias = WAMediaTransport  # noqa: Y015
+Global___WAMediaTransport: typing_extensions.TypeAlias = WAMediaTransport
 
-@_typing.final
-class ImageTransport(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class ImageTransport(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    @_typing.final
-    class Ancillary(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+    @typing.final
+    class Ancillary(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
         class _HdType:
-            ValueType = _typing.NewType("ValueType", _builtins.int)
-            V: _TypeAlias = ValueType  # noqa: Y015
+            ValueType = typing.NewType("ValueType", builtins.int)
+            V: typing_extensions.TypeAlias = ValueType
 
-        class _HdTypeEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[ImageTransport.Ancillary._HdType.ValueType], _builtins.type):
-            DESCRIPTOR: _descriptor.EnumDescriptor
+        class _HdTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[ImageTransport.Ancillary._HdType.ValueType], builtins.type):
+            DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
             NONE: ImageTransport.Ancillary._HdType.ValueType  # 0
             LQ_4K: ImageTransport.Ancillary._HdType.ValueType  # 1
             HQ_4K: ImageTransport.Ancillary._HdType.ValueType  # 2
@@ -184,64 +174,60 @@ class ImageTransport(_message.Message):
         LQ_4K: ImageTransport.Ancillary.HdType.ValueType  # 1
         HQ_4K: ImageTransport.Ancillary.HdType.ValueType  # 2
 
-        HEIGHT_FIELD_NUMBER: _builtins.int
-        WIDTH_FIELD_NUMBER: _builtins.int
-        SCANSSIDECAR_FIELD_NUMBER: _builtins.int
-        SCANLENGTHS_FIELD_NUMBER: _builtins.int
-        MIDQUALITYFILESHA256_FIELD_NUMBER: _builtins.int
-        HDTYPE_FIELD_NUMBER: _builtins.int
-        MEMORIESCONCEPTSCORES_FIELD_NUMBER: _builtins.int
-        MEMORIESCONCEPTIDS_FIELD_NUMBER: _builtins.int
-        height: _builtins.int
-        width: _builtins.int
-        scansSidecar: _builtins.bytes
-        midQualityFileSHA256: _builtins.bytes
+        HEIGHT_FIELD_NUMBER: builtins.int
+        WIDTH_FIELD_NUMBER: builtins.int
+        SCANSSIDECAR_FIELD_NUMBER: builtins.int
+        SCANLENGTHS_FIELD_NUMBER: builtins.int
+        MIDQUALITYFILESHA256_FIELD_NUMBER: builtins.int
+        HDTYPE_FIELD_NUMBER: builtins.int
+        MEMORIESCONCEPTSCORES_FIELD_NUMBER: builtins.int
+        MEMORIESCONCEPTIDS_FIELD_NUMBER: builtins.int
+        height: builtins.int
+        width: builtins.int
+        scansSidecar: builtins.bytes
+        midQualityFileSHA256: builtins.bytes
         hdType: Global___ImageTransport.Ancillary.HdType.ValueType
-        @_builtins.property
-        def scanLengths(self) -> _containers.RepeatedScalarFieldContainer[_builtins.int]: ...
-        @_builtins.property
-        def memoriesConceptScores(self) -> _containers.RepeatedScalarFieldContainer[_builtins.float]: ...
-        @_builtins.property
-        def memoriesConceptIDs(self) -> _containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+        @property
+        def scanLengths(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
+        @property
+        def memoriesConceptScores(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]: ...
+        @property
+        def memoriesConceptIDs(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
         def __init__(
             self,
             *,
-            height: _builtins.int | None = ...,
-            width: _builtins.int | None = ...,
-            scansSidecar: _builtins.bytes | None = ...,
-            scanLengths: _abc.Iterable[_builtins.int] | None = ...,
-            midQualityFileSHA256: _builtins.bytes | None = ...,
+            height: builtins.int | None = ...,
+            width: builtins.int | None = ...,
+            scansSidecar: builtins.bytes | None = ...,
+            scanLengths: collections.abc.Iterable[builtins.int] | None = ...,
+            midQualityFileSHA256: builtins.bytes | None = ...,
             hdType: Global___ImageTransport.Ancillary.HdType.ValueType | None = ...,
-            memoriesConceptScores: _abc.Iterable[_builtins.float] | None = ...,
-            memoriesConceptIDs: _abc.Iterable[_builtins.int] | None = ...,
+            memoriesConceptScores: collections.abc.Iterable[builtins.float] | None = ...,
+            memoriesConceptIDs: collections.abc.Iterable[builtins.int] | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _TypeAlias = _typing.Literal["hdType", b"hdType", "height", b"height", "midQualityFileSHA256", b"midQualityFileSHA256", "scansSidecar", b"scansSidecar", "width", b"width"]  # noqa: Y015
-        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _TypeAlias = _typing.Literal["hdType", b"hdType", "height", b"height", "memoriesConceptIDs", b"memoriesConceptIDs", "memoriesConceptScores", b"memoriesConceptScores", "midQualityFileSHA256", b"midQualityFileSHA256", "scanLengths", b"scanLengths", "scansSidecar", b"scansSidecar", "width", b"width"]  # noqa: Y015
-        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+        def HasField(self, field_name: typing.Literal["hdType", b"hdType", "height", b"height", "midQualityFileSHA256", b"midQualityFileSHA256", "scansSidecar", b"scansSidecar", "width", b"width"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["hdType", b"hdType", "height", b"height", "memoriesConceptIDs", b"memoriesConceptIDs", "memoriesConceptScores", b"memoriesConceptScores", "midQualityFileSHA256", b"midQualityFileSHA256", "scanLengths", b"scanLengths", "scansSidecar", b"scansSidecar", "width", b"width"]) -> None: ...
 
-    @_typing.final
-    class Integral(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+    @typing.final
+    class Integral(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-        TRANSPORT_FIELD_NUMBER: _builtins.int
-        @_builtins.property
+        TRANSPORT_FIELD_NUMBER: builtins.int
+        @property
         def transport(self) -> Global___WAMediaTransport: ...
         def __init__(
             self,
             *,
             transport: Global___WAMediaTransport | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _TypeAlias = _typing.Literal["transport", b"transport"]  # noqa: Y015
-        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _TypeAlias = _typing.Literal["transport", b"transport"]  # noqa: Y015
-        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+        def HasField(self, field_name: typing.Literal["transport", b"transport"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["transport", b"transport"]) -> None: ...
 
-    INTEGRAL_FIELD_NUMBER: _builtins.int
-    ANCILLARY_FIELD_NUMBER: _builtins.int
-    @_builtins.property
+    INTEGRAL_FIELD_NUMBER: builtins.int
+    ANCILLARY_FIELD_NUMBER: builtins.int
+    @property
     def integral(self) -> Global___ImageTransport.Integral: ...
-    @_builtins.property
+    @property
     def ancillary(self) -> Global___ImageTransport.Ancillary: ...
     def __init__(
         self,
@@ -249,27 +235,25 @@ class ImageTransport(_message.Message):
         integral: Global___ImageTransport.Integral | None = ...,
         ancillary: Global___ImageTransport.Ancillary | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["ancillary", b"ancillary", "integral", b"integral"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["ancillary", b"ancillary", "integral", b"integral"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["ancillary", b"ancillary", "integral", b"integral"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["ancillary", b"ancillary", "integral", b"integral"]) -> None: ...
 
-Global___ImageTransport: _TypeAlias = ImageTransport  # noqa: Y015
+Global___ImageTransport: typing_extensions.TypeAlias = ImageTransport
 
-@_typing.final
-class VideoTransport(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class VideoTransport(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    @_typing.final
-    class Ancillary(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+    @typing.final
+    class Ancillary(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
         class _Attribution:
-            ValueType = _typing.NewType("ValueType", _builtins.int)
-            V: _TypeAlias = ValueType  # noqa: Y015
+            ValueType = typing.NewType("ValueType", builtins.int)
+            V: typing_extensions.TypeAlias = ValueType
 
-        class _AttributionEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[VideoTransport.Ancillary._Attribution.ValueType], _builtins.type):
-            DESCRIPTOR: _descriptor.EnumDescriptor
+        class _AttributionEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[VideoTransport.Ancillary._Attribution.ValueType], builtins.type):
+            DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
             NONE: VideoTransport.Ancillary._Attribution.ValueType  # 0
             GIPHY: VideoTransport.Ancillary._Attribution.ValueType  # 1
             TENOR: VideoTransport.Ancillary._Attribution.ValueType  # 2
@@ -279,65 +263,61 @@ class VideoTransport(_message.Message):
         GIPHY: VideoTransport.Ancillary.Attribution.ValueType  # 1
         TENOR: VideoTransport.Ancillary.Attribution.ValueType  # 2
 
-        SECONDS_FIELD_NUMBER: _builtins.int
-        CAPTION_FIELD_NUMBER: _builtins.int
-        GIFPLAYBACK_FIELD_NUMBER: _builtins.int
-        HEIGHT_FIELD_NUMBER: _builtins.int
-        WIDTH_FIELD_NUMBER: _builtins.int
-        SIDECAR_FIELD_NUMBER: _builtins.int
-        GIFATTRIBUTION_FIELD_NUMBER: _builtins.int
-        ACCESSIBILITYLABEL_FIELD_NUMBER: _builtins.int
-        ISHD_FIELD_NUMBER: _builtins.int
-        seconds: _builtins.int
-        gifPlayback: _builtins.bool
-        height: _builtins.int
-        width: _builtins.int
-        sidecar: _builtins.bytes
+        SECONDS_FIELD_NUMBER: builtins.int
+        CAPTION_FIELD_NUMBER: builtins.int
+        GIFPLAYBACK_FIELD_NUMBER: builtins.int
+        HEIGHT_FIELD_NUMBER: builtins.int
+        WIDTH_FIELD_NUMBER: builtins.int
+        SIDECAR_FIELD_NUMBER: builtins.int
+        GIFATTRIBUTION_FIELD_NUMBER: builtins.int
+        ACCESSIBILITYLABEL_FIELD_NUMBER: builtins.int
+        ISHD_FIELD_NUMBER: builtins.int
+        seconds: builtins.int
+        gifPlayback: builtins.bool
+        height: builtins.int
+        width: builtins.int
+        sidecar: builtins.bytes
         gifAttribution: Global___VideoTransport.Ancillary.Attribution.ValueType
-        accessibilityLabel: _builtins.str
-        isHd: _builtins.bool
-        @_builtins.property
-        def caption(self) -> _WACommon_pb2.MessageText: ...
+        accessibilityLabel: builtins.str
+        isHd: builtins.bool
+        @property
+        def caption(self) -> waCommon.WACommon_pb2.MessageText: ...
         def __init__(
             self,
             *,
-            seconds: _builtins.int | None = ...,
-            caption: _WACommon_pb2.MessageText | None = ...,
-            gifPlayback: _builtins.bool | None = ...,
-            height: _builtins.int | None = ...,
-            width: _builtins.int | None = ...,
-            sidecar: _builtins.bytes | None = ...,
+            seconds: builtins.int | None = ...,
+            caption: waCommon.WACommon_pb2.MessageText | None = ...,
+            gifPlayback: builtins.bool | None = ...,
+            height: builtins.int | None = ...,
+            width: builtins.int | None = ...,
+            sidecar: builtins.bytes | None = ...,
             gifAttribution: Global___VideoTransport.Ancillary.Attribution.ValueType | None = ...,
-            accessibilityLabel: _builtins.str | None = ...,
-            isHd: _builtins.bool | None = ...,
+            accessibilityLabel: builtins.str | None = ...,
+            isHd: builtins.bool | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _TypeAlias = _typing.Literal["accessibilityLabel", b"accessibilityLabel", "caption", b"caption", "gifAttribution", b"gifAttribution", "gifPlayback", b"gifPlayback", "height", b"height", "isHd", b"isHd", "seconds", b"seconds", "sidecar", b"sidecar", "width", b"width"]  # noqa: Y015
-        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _TypeAlias = _typing.Literal["accessibilityLabel", b"accessibilityLabel", "caption", b"caption", "gifAttribution", b"gifAttribution", "gifPlayback", b"gifPlayback", "height", b"height", "isHd", b"isHd", "seconds", b"seconds", "sidecar", b"sidecar", "width", b"width"]  # noqa: Y015
-        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+        def HasField(self, field_name: typing.Literal["accessibilityLabel", b"accessibilityLabel", "caption", b"caption", "gifAttribution", b"gifAttribution", "gifPlayback", b"gifPlayback", "height", b"height", "isHd", b"isHd", "seconds", b"seconds", "sidecar", b"sidecar", "width", b"width"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["accessibilityLabel", b"accessibilityLabel", "caption", b"caption", "gifAttribution", b"gifAttribution", "gifPlayback", b"gifPlayback", "height", b"height", "isHd", b"isHd", "seconds", b"seconds", "sidecar", b"sidecar", "width", b"width"]) -> None: ...
 
-    @_typing.final
-    class Integral(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+    @typing.final
+    class Integral(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-        TRANSPORT_FIELD_NUMBER: _builtins.int
-        @_builtins.property
+        TRANSPORT_FIELD_NUMBER: builtins.int
+        @property
         def transport(self) -> Global___WAMediaTransport: ...
         def __init__(
             self,
             *,
             transport: Global___WAMediaTransport | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _TypeAlias = _typing.Literal["transport", b"transport"]  # noqa: Y015
-        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _TypeAlias = _typing.Literal["transport", b"transport"]  # noqa: Y015
-        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+        def HasField(self, field_name: typing.Literal["transport", b"transport"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["transport", b"transport"]) -> None: ...
 
-    INTEGRAL_FIELD_NUMBER: _builtins.int
-    ANCILLARY_FIELD_NUMBER: _builtins.int
-    @_builtins.property
+    INTEGRAL_FIELD_NUMBER: builtins.int
+    ANCILLARY_FIELD_NUMBER: builtins.int
+    @property
     def integral(self) -> Global___VideoTransport.Integral: ...
-    @_builtins.property
+    @property
     def ancillary(self) -> Global___VideoTransport.Ancillary: ...
     def __init__(
         self,
@@ -345,31 +325,29 @@ class VideoTransport(_message.Message):
         integral: Global___VideoTransport.Integral | None = ...,
         ancillary: Global___VideoTransport.Ancillary | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["ancillary", b"ancillary", "integral", b"integral"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["ancillary", b"ancillary", "integral", b"integral"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["ancillary", b"ancillary", "integral", b"integral"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["ancillary", b"ancillary", "integral", b"integral"]) -> None: ...
 
-Global___VideoTransport: _TypeAlias = VideoTransport  # noqa: Y015
+Global___VideoTransport: typing_extensions.TypeAlias = VideoTransport
 
-@_typing.final
-class AudioTransport(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class AudioTransport(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    @_typing.final
-    class Ancillary(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+    @typing.final
+    class Ancillary(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-        @_typing.final
-        class AvatarAudio(_message.Message):
-            DESCRIPTOR: _descriptor.Descriptor
+        @typing.final
+        class AvatarAudio(google.protobuf.message.Message):
+            DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
             class _AnimationsType:
-                ValueType = _typing.NewType("ValueType", _builtins.int)
-                V: _TypeAlias = ValueType  # noqa: Y015
+                ValueType = typing.NewType("ValueType", builtins.int)
+                V: typing_extensions.TypeAlias = ValueType
 
-            class _AnimationsTypeEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[AudioTransport.Ancillary.AvatarAudio._AnimationsType.ValueType], _builtins.type):
-                DESCRIPTOR: _descriptor.EnumDescriptor
+            class _AnimationsTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[AudioTransport.Ancillary.AvatarAudio._AnimationsType.ValueType], builtins.type):
+                DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
                 TALKING_A: AudioTransport.Ancillary.AvatarAudio._AnimationsType.ValueType  # 0
                 IDLE_A: AudioTransport.Ancillary.AvatarAudio._AnimationsType.ValueType  # 1
                 TALKING_B: AudioTransport.Ancillary.AvatarAudio._AnimationsType.ValueType  # 2
@@ -383,88 +361,82 @@ class AudioTransport(_message.Message):
             IDLE_B: AudioTransport.Ancillary.AvatarAudio.AnimationsType.ValueType  # 3
             BACKGROUND: AudioTransport.Ancillary.AvatarAudio.AnimationsType.ValueType  # 4
 
-            @_typing.final
-            class DownloadableAvatarAnimations(_message.Message):
-                DESCRIPTOR: _descriptor.Descriptor
+            @typing.final
+            class DownloadableAvatarAnimations(google.protobuf.message.Message):
+                DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-                FILESHA256_FIELD_NUMBER: _builtins.int
-                FILEENCSHA256_FIELD_NUMBER: _builtins.int
-                DIRECTPATH_FIELD_NUMBER: _builtins.int
-                MEDIAKEY_FIELD_NUMBER: _builtins.int
-                MEDIAKEYTIMESTAMP_FIELD_NUMBER: _builtins.int
-                OBJECTID_FIELD_NUMBER: _builtins.int
-                ANIMATIONSTYPE_FIELD_NUMBER: _builtins.int
-                fileSHA256: _builtins.bytes
-                fileEncSHA256: _builtins.bytes
-                directPath: _builtins.str
-                mediaKey: _builtins.bytes
-                mediaKeyTimestamp: _builtins.int
-                objectID: _builtins.str
+                FILESHA256_FIELD_NUMBER: builtins.int
+                FILEENCSHA256_FIELD_NUMBER: builtins.int
+                DIRECTPATH_FIELD_NUMBER: builtins.int
+                MEDIAKEY_FIELD_NUMBER: builtins.int
+                MEDIAKEYTIMESTAMP_FIELD_NUMBER: builtins.int
+                OBJECTID_FIELD_NUMBER: builtins.int
+                ANIMATIONSTYPE_FIELD_NUMBER: builtins.int
+                fileSHA256: builtins.bytes
+                fileEncSHA256: builtins.bytes
+                directPath: builtins.str
+                mediaKey: builtins.bytes
+                mediaKeyTimestamp: builtins.int
+                objectID: builtins.str
                 animationsType: Global___AudioTransport.Ancillary.AvatarAudio.AnimationsType.ValueType
                 def __init__(
                     self,
                     *,
-                    fileSHA256: _builtins.bytes | None = ...,
-                    fileEncSHA256: _builtins.bytes | None = ...,
-                    directPath: _builtins.str | None = ...,
-                    mediaKey: _builtins.bytes | None = ...,
-                    mediaKeyTimestamp: _builtins.int | None = ...,
-                    objectID: _builtins.str | None = ...,
+                    fileSHA256: builtins.bytes | None = ...,
+                    fileEncSHA256: builtins.bytes | None = ...,
+                    directPath: builtins.str | None = ...,
+                    mediaKey: builtins.bytes | None = ...,
+                    mediaKeyTimestamp: builtins.int | None = ...,
+                    objectID: builtins.str | None = ...,
                     animationsType: Global___AudioTransport.Ancillary.AvatarAudio.AnimationsType.ValueType | None = ...,
                 ) -> None: ...
-                _HasFieldArgType: _TypeAlias = _typing.Literal["animationsType", b"animationsType", "directPath", b"directPath", "fileEncSHA256", b"fileEncSHA256", "fileSHA256", b"fileSHA256", "mediaKey", b"mediaKey", "mediaKeyTimestamp", b"mediaKeyTimestamp", "objectID", b"objectID"]  # noqa: Y015
-                def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-                _ClearFieldArgType: _TypeAlias = _typing.Literal["animationsType", b"animationsType", "directPath", b"directPath", "fileEncSHA256", b"fileEncSHA256", "fileSHA256", b"fileSHA256", "mediaKey", b"mediaKey", "mediaKeyTimestamp", b"mediaKeyTimestamp", "objectID", b"objectID"]  # noqa: Y015
-                def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+                def HasField(self, field_name: typing.Literal["animationsType", b"animationsType", "directPath", b"directPath", "fileEncSHA256", b"fileEncSHA256", "fileSHA256", b"fileSHA256", "mediaKey", b"mediaKey", "mediaKeyTimestamp", b"mediaKeyTimestamp", "objectID", b"objectID"]) -> builtins.bool: ...
+                def ClearField(self, field_name: typing.Literal["animationsType", b"animationsType", "directPath", b"directPath", "fileEncSHA256", b"fileEncSHA256", "fileSHA256", b"fileSHA256", "mediaKey", b"mediaKey", "mediaKeyTimestamp", b"mediaKeyTimestamp", "objectID", b"objectID"]) -> None: ...
 
-            POSEID_FIELD_NUMBER: _builtins.int
-            AVATARANIMATIONS_FIELD_NUMBER: _builtins.int
-            poseID: _builtins.int
-            @_builtins.property
-            def avatarAnimations(self) -> _containers.RepeatedCompositeFieldContainer[Global___AudioTransport.Ancillary.AvatarAudio.DownloadableAvatarAnimations]: ...
+            POSEID_FIELD_NUMBER: builtins.int
+            AVATARANIMATIONS_FIELD_NUMBER: builtins.int
+            poseID: builtins.int
+            @property
+            def avatarAnimations(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___AudioTransport.Ancillary.AvatarAudio.DownloadableAvatarAnimations]: ...
             def __init__(
                 self,
                 *,
-                poseID: _builtins.int | None = ...,
-                avatarAnimations: _abc.Iterable[Global___AudioTransport.Ancillary.AvatarAudio.DownloadableAvatarAnimations] | None = ...,
+                poseID: builtins.int | None = ...,
+                avatarAnimations: collections.abc.Iterable[Global___AudioTransport.Ancillary.AvatarAudio.DownloadableAvatarAnimations] | None = ...,
             ) -> None: ...
-            _HasFieldArgType: _TypeAlias = _typing.Literal["poseID", b"poseID"]  # noqa: Y015
-            def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-            _ClearFieldArgType: _TypeAlias = _typing.Literal["avatarAnimations", b"avatarAnimations", "poseID", b"poseID"]  # noqa: Y015
-            def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+            def HasField(self, field_name: typing.Literal["poseID", b"poseID"]) -> builtins.bool: ...
+            def ClearField(self, field_name: typing.Literal["avatarAnimations", b"avatarAnimations", "poseID", b"poseID"]) -> None: ...
 
-        SECONDS_FIELD_NUMBER: _builtins.int
-        AVATARAUDIO_FIELD_NUMBER: _builtins.int
-        WAVEFORMDATA_FIELD_NUMBER: _builtins.int
-        WAVEFORM_FIELD_NUMBER: _builtins.int
-        seconds: _builtins.int
-        waveformData: _builtins.str
-        waveform: _builtins.bytes
-        @_builtins.property
+        SECONDS_FIELD_NUMBER: builtins.int
+        AVATARAUDIO_FIELD_NUMBER: builtins.int
+        WAVEFORMDATA_FIELD_NUMBER: builtins.int
+        WAVEFORM_FIELD_NUMBER: builtins.int
+        seconds: builtins.int
+        waveformData: builtins.str
+        waveform: builtins.bytes
+        @property
         def avatarAudio(self) -> Global___AudioTransport.Ancillary.AvatarAudio: ...
         def __init__(
             self,
             *,
-            seconds: _builtins.int | None = ...,
+            seconds: builtins.int | None = ...,
             avatarAudio: Global___AudioTransport.Ancillary.AvatarAudio | None = ...,
-            waveformData: _builtins.str | None = ...,
-            waveform: _builtins.bytes | None = ...,
+            waveformData: builtins.str | None = ...,
+            waveform: builtins.bytes | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _TypeAlias = _typing.Literal["avatarAudio", b"avatarAudio", "seconds", b"seconds", "waveform", b"waveform", "waveformData", b"waveformData"]  # noqa: Y015
-        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _TypeAlias = _typing.Literal["avatarAudio", b"avatarAudio", "seconds", b"seconds", "waveform", b"waveform", "waveformData", b"waveformData"]  # noqa: Y015
-        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+        def HasField(self, field_name: typing.Literal["avatarAudio", b"avatarAudio", "seconds", b"seconds", "waveform", b"waveform", "waveformData", b"waveformData"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["avatarAudio", b"avatarAudio", "seconds", b"seconds", "waveform", b"waveform", "waveformData", b"waveformData"]) -> None: ...
 
-    @_typing.final
-    class Integral(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+    @typing.final
+    class Integral(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
         class _AudioFormat:
-            ValueType = _typing.NewType("ValueType", _builtins.int)
-            V: _TypeAlias = ValueType  # noqa: Y015
+            ValueType = typing.NewType("ValueType", builtins.int)
+            V: typing_extensions.TypeAlias = ValueType
 
-        class _AudioFormatEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[AudioTransport.Integral._AudioFormat.ValueType], _builtins.type):
-            DESCRIPTOR: _descriptor.EnumDescriptor
+        class _AudioFormatEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[AudioTransport.Integral._AudioFormat.ValueType], builtins.type):
+            DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
             UNKNOWN: AudioTransport.Integral._AudioFormat.ValueType  # 0
             OPUS: AudioTransport.Integral._AudioFormat.ValueType  # 1
 
@@ -472,10 +444,10 @@ class AudioTransport(_message.Message):
         UNKNOWN: AudioTransport.Integral.AudioFormat.ValueType  # 0
         OPUS: AudioTransport.Integral.AudioFormat.ValueType  # 1
 
-        TRANSPORT_FIELD_NUMBER: _builtins.int
-        AUDIOFORMAT_FIELD_NUMBER: _builtins.int
+        TRANSPORT_FIELD_NUMBER: builtins.int
+        AUDIOFORMAT_FIELD_NUMBER: builtins.int
         audioFormat: Global___AudioTransport.Integral.AudioFormat.ValueType
-        @_builtins.property
+        @property
         def transport(self) -> Global___WAMediaTransport: ...
         def __init__(
             self,
@@ -483,16 +455,14 @@ class AudioTransport(_message.Message):
             transport: Global___WAMediaTransport | None = ...,
             audioFormat: Global___AudioTransport.Integral.AudioFormat.ValueType | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _TypeAlias = _typing.Literal["audioFormat", b"audioFormat", "transport", b"transport"]  # noqa: Y015
-        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _TypeAlias = _typing.Literal["audioFormat", b"audioFormat", "transport", b"transport"]  # noqa: Y015
-        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+        def HasField(self, field_name: typing.Literal["audioFormat", b"audioFormat", "transport", b"transport"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["audioFormat", b"audioFormat", "transport", b"transport"]) -> None: ...
 
-    INTEGRAL_FIELD_NUMBER: _builtins.int
-    ANCILLARY_FIELD_NUMBER: _builtins.int
-    @_builtins.property
+    INTEGRAL_FIELD_NUMBER: builtins.int
+    ANCILLARY_FIELD_NUMBER: builtins.int
+    @property
     def integral(self) -> Global___AudioTransport.Integral: ...
-    @_builtins.property
+    @property
     def ancillary(self) -> Global___AudioTransport.Ancillary: ...
     def __init__(
         self,
@@ -500,55 +470,49 @@ class AudioTransport(_message.Message):
         integral: Global___AudioTransport.Integral | None = ...,
         ancillary: Global___AudioTransport.Ancillary | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["ancillary", b"ancillary", "integral", b"integral"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["ancillary", b"ancillary", "integral", b"integral"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["ancillary", b"ancillary", "integral", b"integral"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["ancillary", b"ancillary", "integral", b"integral"]) -> None: ...
 
-Global___AudioTransport: _TypeAlias = AudioTransport  # noqa: Y015
+Global___AudioTransport: typing_extensions.TypeAlias = AudioTransport
 
-@_typing.final
-class DocumentTransport(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class DocumentTransport(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    @_typing.final
-    class Ancillary(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+    @typing.final
+    class Ancillary(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-        PAGECOUNT_FIELD_NUMBER: _builtins.int
-        pageCount: _builtins.int
+        PAGECOUNT_FIELD_NUMBER: builtins.int
+        pageCount: builtins.int
         def __init__(
             self,
             *,
-            pageCount: _builtins.int | None = ...,
+            pageCount: builtins.int | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _TypeAlias = _typing.Literal["pageCount", b"pageCount"]  # noqa: Y015
-        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _TypeAlias = _typing.Literal["pageCount", b"pageCount"]  # noqa: Y015
-        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+        def HasField(self, field_name: typing.Literal["pageCount", b"pageCount"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["pageCount", b"pageCount"]) -> None: ...
 
-    @_typing.final
-    class Integral(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+    @typing.final
+    class Integral(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-        TRANSPORT_FIELD_NUMBER: _builtins.int
-        @_builtins.property
+        TRANSPORT_FIELD_NUMBER: builtins.int
+        @property
         def transport(self) -> Global___WAMediaTransport: ...
         def __init__(
             self,
             *,
             transport: Global___WAMediaTransport | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _TypeAlias = _typing.Literal["transport", b"transport"]  # noqa: Y015
-        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _TypeAlias = _typing.Literal["transport", b"transport"]  # noqa: Y015
-        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+        def HasField(self, field_name: typing.Literal["transport", b"transport"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["transport", b"transport"]) -> None: ...
 
-    INTEGRAL_FIELD_NUMBER: _builtins.int
-    ANCILLARY_FIELD_NUMBER: _builtins.int
-    @_builtins.property
+    INTEGRAL_FIELD_NUMBER: builtins.int
+    ANCILLARY_FIELD_NUMBER: builtins.int
+    @property
     def integral(self) -> Global___DocumentTransport.Integral: ...
-    @_builtins.property
+    @property
     def ancillary(self) -> Global___DocumentTransport.Ancillary: ...
     def __init__(
         self,
@@ -556,85 +520,79 @@ class DocumentTransport(_message.Message):
         integral: Global___DocumentTransport.Integral | None = ...,
         ancillary: Global___DocumentTransport.Ancillary | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["ancillary", b"ancillary", "integral", b"integral"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["ancillary", b"ancillary", "integral", b"integral"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["ancillary", b"ancillary", "integral", b"integral"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["ancillary", b"ancillary", "integral", b"integral"]) -> None: ...
 
-Global___DocumentTransport: _TypeAlias = DocumentTransport  # noqa: Y015
+Global___DocumentTransport: typing_extensions.TypeAlias = DocumentTransport
 
-@_typing.final
-class StickerTransport(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class StickerTransport(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    @_typing.final
-    class Ancillary(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+    @typing.final
+    class Ancillary(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-        PAGECOUNT_FIELD_NUMBER: _builtins.int
-        HEIGHT_FIELD_NUMBER: _builtins.int
-        WIDTH_FIELD_NUMBER: _builtins.int
-        FIRSTFRAMELENGTH_FIELD_NUMBER: _builtins.int
-        FIRSTFRAMESIDECAR_FIELD_NUMBER: _builtins.int
-        MUSTACHETEXT_FIELD_NUMBER: _builtins.int
-        ISTHIRDPARTY_FIELD_NUMBER: _builtins.int
-        RECEIVERFETCHID_FIELD_NUMBER: _builtins.int
-        ACCESSIBILITYLABEL_FIELD_NUMBER: _builtins.int
-        pageCount: _builtins.int
-        height: _builtins.int
-        width: _builtins.int
-        firstFrameLength: _builtins.int
-        firstFrameSidecar: _builtins.bytes
-        mustacheText: _builtins.str
-        isThirdParty: _builtins.bool
-        receiverFetchID: _builtins.str
-        accessibilityLabel: _builtins.str
+        PAGECOUNT_FIELD_NUMBER: builtins.int
+        HEIGHT_FIELD_NUMBER: builtins.int
+        WIDTH_FIELD_NUMBER: builtins.int
+        FIRSTFRAMELENGTH_FIELD_NUMBER: builtins.int
+        FIRSTFRAMESIDECAR_FIELD_NUMBER: builtins.int
+        MUSTACHETEXT_FIELD_NUMBER: builtins.int
+        ISTHIRDPARTY_FIELD_NUMBER: builtins.int
+        RECEIVERFETCHID_FIELD_NUMBER: builtins.int
+        ACCESSIBILITYLABEL_FIELD_NUMBER: builtins.int
+        pageCount: builtins.int
+        height: builtins.int
+        width: builtins.int
+        firstFrameLength: builtins.int
+        firstFrameSidecar: builtins.bytes
+        mustacheText: builtins.str
+        isThirdParty: builtins.bool
+        receiverFetchID: builtins.str
+        accessibilityLabel: builtins.str
         def __init__(
             self,
             *,
-            pageCount: _builtins.int | None = ...,
-            height: _builtins.int | None = ...,
-            width: _builtins.int | None = ...,
-            firstFrameLength: _builtins.int | None = ...,
-            firstFrameSidecar: _builtins.bytes | None = ...,
-            mustacheText: _builtins.str | None = ...,
-            isThirdParty: _builtins.bool | None = ...,
-            receiverFetchID: _builtins.str | None = ...,
-            accessibilityLabel: _builtins.str | None = ...,
+            pageCount: builtins.int | None = ...,
+            height: builtins.int | None = ...,
+            width: builtins.int | None = ...,
+            firstFrameLength: builtins.int | None = ...,
+            firstFrameSidecar: builtins.bytes | None = ...,
+            mustacheText: builtins.str | None = ...,
+            isThirdParty: builtins.bool | None = ...,
+            receiverFetchID: builtins.str | None = ...,
+            accessibilityLabel: builtins.str | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _TypeAlias = _typing.Literal["accessibilityLabel", b"accessibilityLabel", "firstFrameLength", b"firstFrameLength", "firstFrameSidecar", b"firstFrameSidecar", "height", b"height", "isThirdParty", b"isThirdParty", "mustacheText", b"mustacheText", "pageCount", b"pageCount", "receiverFetchID", b"receiverFetchID", "width", b"width"]  # noqa: Y015
-        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _TypeAlias = _typing.Literal["accessibilityLabel", b"accessibilityLabel", "firstFrameLength", b"firstFrameLength", "firstFrameSidecar", b"firstFrameSidecar", "height", b"height", "isThirdParty", b"isThirdParty", "mustacheText", b"mustacheText", "pageCount", b"pageCount", "receiverFetchID", b"receiverFetchID", "width", b"width"]  # noqa: Y015
-        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+        def HasField(self, field_name: typing.Literal["accessibilityLabel", b"accessibilityLabel", "firstFrameLength", b"firstFrameLength", "firstFrameSidecar", b"firstFrameSidecar", "height", b"height", "isThirdParty", b"isThirdParty", "mustacheText", b"mustacheText", "pageCount", b"pageCount", "receiverFetchID", b"receiverFetchID", "width", b"width"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["accessibilityLabel", b"accessibilityLabel", "firstFrameLength", b"firstFrameLength", "firstFrameSidecar", b"firstFrameSidecar", "height", b"height", "isThirdParty", b"isThirdParty", "mustacheText", b"mustacheText", "pageCount", b"pageCount", "receiverFetchID", b"receiverFetchID", "width", b"width"]) -> None: ...
 
-    @_typing.final
-    class Integral(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+    @typing.final
+    class Integral(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-        TRANSPORT_FIELD_NUMBER: _builtins.int
-        ISANIMATED_FIELD_NUMBER: _builtins.int
-        RECEIVERFETCHID_FIELD_NUMBER: _builtins.int
-        isAnimated: _builtins.bool
-        receiverFetchID: _builtins.str
-        @_builtins.property
+        TRANSPORT_FIELD_NUMBER: builtins.int
+        ISANIMATED_FIELD_NUMBER: builtins.int
+        RECEIVERFETCHID_FIELD_NUMBER: builtins.int
+        isAnimated: builtins.bool
+        receiverFetchID: builtins.str
+        @property
         def transport(self) -> Global___WAMediaTransport: ...
         def __init__(
             self,
             *,
             transport: Global___WAMediaTransport | None = ...,
-            isAnimated: _builtins.bool | None = ...,
-            receiverFetchID: _builtins.str | None = ...,
+            isAnimated: builtins.bool | None = ...,
+            receiverFetchID: builtins.str | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _TypeAlias = _typing.Literal["isAnimated", b"isAnimated", "receiverFetchID", b"receiverFetchID", "transport", b"transport"]  # noqa: Y015
-        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _TypeAlias = _typing.Literal["isAnimated", b"isAnimated", "receiverFetchID", b"receiverFetchID", "transport", b"transport"]  # noqa: Y015
-        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+        def HasField(self, field_name: typing.Literal["isAnimated", b"isAnimated", "receiverFetchID", b"receiverFetchID", "transport", b"transport"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["isAnimated", b"isAnimated", "receiverFetchID", b"receiverFetchID", "transport", b"transport"]) -> None: ...
 
-    INTEGRAL_FIELD_NUMBER: _builtins.int
-    ANCILLARY_FIELD_NUMBER: _builtins.int
-    @_builtins.property
+    INTEGRAL_FIELD_NUMBER: builtins.int
+    ANCILLARY_FIELD_NUMBER: builtins.int
+    @property
     def integral(self) -> Global___StickerTransport.Integral: ...
-    @_builtins.property
+    @property
     def ancillary(self) -> Global___StickerTransport.Ancillary: ...
     def __init__(
         self,
@@ -642,61 +600,53 @@ class StickerTransport(_message.Message):
         integral: Global___StickerTransport.Integral | None = ...,
         ancillary: Global___StickerTransport.Ancillary | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["ancillary", b"ancillary", "integral", b"integral"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["ancillary", b"ancillary", "integral", b"integral"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["ancillary", b"ancillary", "integral", b"integral"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["ancillary", b"ancillary", "integral", b"integral"]) -> None: ...
 
-Global___StickerTransport: _TypeAlias = StickerTransport  # noqa: Y015
+Global___StickerTransport: typing_extensions.TypeAlias = StickerTransport
 
-@_typing.final
-class ContactTransport(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class ContactTransport(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    @_typing.final
-    class Ancillary(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+    @typing.final
+    class Ancillary(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-        DISPLAYNAME_FIELD_NUMBER: _builtins.int
-        displayName: _builtins.str
+        DISPLAYNAME_FIELD_NUMBER: builtins.int
+        displayName: builtins.str
         def __init__(
             self,
             *,
-            displayName: _builtins.str | None = ...,
+            displayName: builtins.str | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _TypeAlias = _typing.Literal["displayName", b"displayName"]  # noqa: Y015
-        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _TypeAlias = _typing.Literal["displayName", b"displayName"]  # noqa: Y015
-        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+        def HasField(self, field_name: typing.Literal["displayName", b"displayName"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["displayName", b"displayName"]) -> None: ...
 
-    @_typing.final
-    class Integral(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+    @typing.final
+    class Integral(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-        VCARD_FIELD_NUMBER: _builtins.int
-        DOWNLOADABLEVCARD_FIELD_NUMBER: _builtins.int
-        vcard: _builtins.str
-        @_builtins.property
+        VCARD_FIELD_NUMBER: builtins.int
+        DOWNLOADABLEVCARD_FIELD_NUMBER: builtins.int
+        vcard: builtins.str
+        @property
         def downloadableVcard(self) -> Global___WAMediaTransport: ...
         def __init__(
             self,
             *,
-            vcard: _builtins.str | None = ...,
+            vcard: builtins.str | None = ...,
             downloadableVcard: Global___WAMediaTransport | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _TypeAlias = _typing.Literal["contact", b"contact", "downloadableVcard", b"downloadableVcard", "vcard", b"vcard"]  # noqa: Y015
-        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _TypeAlias = _typing.Literal["contact", b"contact", "downloadableVcard", b"downloadableVcard", "vcard", b"vcard"]  # noqa: Y015
-        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-        _WhichOneofReturnType_contact: _TypeAlias = _typing.Literal["vcard", "downloadableVcard"]  # noqa: Y015
-        _WhichOneofArgType_contact: _TypeAlias = _typing.Literal["contact", b"contact"]  # noqa: Y015
-        def WhichOneof(self, oneof_group: _WhichOneofArgType_contact) -> _WhichOneofReturnType_contact | None: ...
+        def HasField(self, field_name: typing.Literal["contact", b"contact", "downloadableVcard", b"downloadableVcard", "vcard", b"vcard"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["contact", b"contact", "downloadableVcard", b"downloadableVcard", "vcard", b"vcard"]) -> None: ...
+        def WhichOneof(self, oneof_group: typing.Literal["contact", b"contact"]) -> typing.Literal["vcard", "downloadableVcard"] | None: ...
 
-    INTEGRAL_FIELD_NUMBER: _builtins.int
-    ANCILLARY_FIELD_NUMBER: _builtins.int
-    @_builtins.property
+    INTEGRAL_FIELD_NUMBER: builtins.int
+    ANCILLARY_FIELD_NUMBER: builtins.int
+    @property
     def integral(self) -> Global___ContactTransport.Integral: ...
-    @_builtins.property
+    @property
     def ancillary(self) -> Global___ContactTransport.Ancillary: ...
     def __init__(
         self,
@@ -704,9 +654,7 @@ class ContactTransport(_message.Message):
         integral: Global___ContactTransport.Integral | None = ...,
         ancillary: Global___ContactTransport.Ancillary | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["ancillary", b"ancillary", "integral", b"integral"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["ancillary", b"ancillary", "integral", b"integral"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["ancillary", b"ancillary", "integral", b"integral"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["ancillary", b"ancillary", "integral", b"integral"]) -> None: ...
 
-Global___ContactTransport: _TypeAlias = ContactTransport  # noqa: Y015
+Global___ContactTransport: typing_extensions.TypeAlias = ContactTransport

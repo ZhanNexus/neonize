@@ -3,28 +3,28 @@
 isort:skip_file
 """
 
-from collections import abc as _abc
-from google.protobuf import descriptor as _descriptor
-from google.protobuf import message as _message
-from google.protobuf.internal import containers as _containers
-from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
-import builtins as _builtins
+import builtins
+import collections.abc
+import google.protobuf.descriptor
+import google.protobuf.internal.containers
+import google.protobuf.internal.enum_type_wrapper
+import google.protobuf.message
 import sys
-import typing as _typing
+import typing
 
 if sys.version_info >= (3, 10):
-    from typing import TypeAlias as _TypeAlias
+    import typing as typing_extensions
 else:
-    from typing_extensions import TypeAlias as _TypeAlias
+    import typing_extensions
 
-DESCRIPTOR: _descriptor.FileDescriptor
+DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
 class _FutureProofBehavior:
-    ValueType = _typing.NewType("ValueType", _builtins.int)
-    V: _TypeAlias = ValueType  # noqa: Y015
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
 
-class _FutureProofBehaviorEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_FutureProofBehavior.ValueType], _builtins.type):
-    DESCRIPTOR: _descriptor.EnumDescriptor
+class _FutureProofBehaviorEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_FutureProofBehavior.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     PLACEHOLDER: _FutureProofBehavior.ValueType  # 0
     NO_PLACEHOLDER: _FutureProofBehavior.ValueType  # 1
     IGNORE: _FutureProofBehavior.ValueType  # 2
@@ -34,45 +34,43 @@ class FutureProofBehavior(_FutureProofBehavior, metaclass=_FutureProofBehaviorEn
 PLACEHOLDER: FutureProofBehavior.ValueType  # 0
 NO_PLACEHOLDER: FutureProofBehavior.ValueType  # 1
 IGNORE: FutureProofBehavior.ValueType  # 2
-Global___FutureProofBehavior: _TypeAlias = FutureProofBehavior  # noqa: Y015
+Global___FutureProofBehavior: typing_extensions.TypeAlias = FutureProofBehavior
 
-@_typing.final
-class MessageKey(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class MessageKey(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    REMOTEJID_FIELD_NUMBER: _builtins.int
-    FROMME_FIELD_NUMBER: _builtins.int
-    ID_FIELD_NUMBER: _builtins.int
-    PARTICIPANT_FIELD_NUMBER: _builtins.int
-    remoteJID: _builtins.str
-    fromMe: _builtins.bool
-    ID: _builtins.str
-    participant: _builtins.str
+    REMOTEJID_FIELD_NUMBER: builtins.int
+    FROMME_FIELD_NUMBER: builtins.int
+    ID_FIELD_NUMBER: builtins.int
+    PARTICIPANT_FIELD_NUMBER: builtins.int
+    remoteJID: builtins.str
+    fromMe: builtins.bool
+    ID: builtins.str
+    participant: builtins.str
     def __init__(
         self,
         *,
-        remoteJID: _builtins.str | None = ...,
-        fromMe: _builtins.bool | None = ...,
-        ID: _builtins.str | None = ...,
-        participant: _builtins.str | None = ...,
+        remoteJID: builtins.str | None = ...,
+        fromMe: builtins.bool | None = ...,
+        ID: builtins.str | None = ...,
+        participant: builtins.str | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["ID", b"ID", "fromMe", b"fromMe", "participant", b"participant", "remoteJID", b"remoteJID"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["ID", b"ID", "fromMe", b"fromMe", "participant", b"participant", "remoteJID", b"remoteJID"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["ID", b"ID", "fromMe", b"fromMe", "participant", b"participant", "remoteJID", b"remoteJID"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["ID", b"ID", "fromMe", b"fromMe", "participant", b"participant", "remoteJID", b"remoteJID"]) -> None: ...
 
-Global___MessageKey: _TypeAlias = MessageKey  # noqa: Y015
+Global___MessageKey: typing_extensions.TypeAlias = MessageKey
 
-@_typing.final
-class Command(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class Command(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     class _CommandType:
-        ValueType = _typing.NewType("ValueType", _builtins.int)
-        V: _TypeAlias = ValueType  # noqa: Y015
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
 
-    class _CommandTypeEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[Command._CommandType.ValueType], _builtins.type):
-        DESCRIPTOR: _descriptor.EnumDescriptor
+    class _CommandTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[Command._CommandType.ValueType], builtins.type):
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         EVERYONE: Command._CommandType.ValueType  # 1
         SILENT: Command._CommandType.ValueType  # 2
         AI: Command._CommandType.ValueType  # 3
@@ -84,128 +82,120 @@ class Command(_message.Message):
     AI: Command.CommandType.ValueType  # 3
     AI_IMAGINE: Command.CommandType.ValueType  # 4
 
-    COMMANDTYPE_FIELD_NUMBER: _builtins.int
-    OFFSET_FIELD_NUMBER: _builtins.int
-    LENGTH_FIELD_NUMBER: _builtins.int
-    VALIDATIONTOKEN_FIELD_NUMBER: _builtins.int
+    COMMANDTYPE_FIELD_NUMBER: builtins.int
+    OFFSET_FIELD_NUMBER: builtins.int
+    LENGTH_FIELD_NUMBER: builtins.int
+    VALIDATIONTOKEN_FIELD_NUMBER: builtins.int
     commandType: Global___Command.CommandType.ValueType
-    offset: _builtins.int
-    length: _builtins.int
-    validationToken: _builtins.str
+    offset: builtins.int
+    length: builtins.int
+    validationToken: builtins.str
     def __init__(
         self,
         *,
         commandType: Global___Command.CommandType.ValueType | None = ...,
-        offset: _builtins.int | None = ...,
-        length: _builtins.int | None = ...,
-        validationToken: _builtins.str | None = ...,
+        offset: builtins.int | None = ...,
+        length: builtins.int | None = ...,
+        validationToken: builtins.str | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["commandType", b"commandType", "length", b"length", "offset", b"offset", "validationToken", b"validationToken"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["commandType", b"commandType", "length", b"length", "offset", b"offset", "validationToken", b"validationToken"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["commandType", b"commandType", "length", b"length", "offset", b"offset", "validationToken", b"validationToken"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["commandType", b"commandType", "length", b"length", "offset", b"offset", "validationToken", b"validationToken"]) -> None: ...
 
-Global___Command: _TypeAlias = Command  # noqa: Y015
+Global___Command: typing_extensions.TypeAlias = Command
 
-@_typing.final
-class Mention(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class Mention(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     class _MentionType:
-        ValueType = _typing.NewType("ValueType", _builtins.int)
-        V: _TypeAlias = ValueType  # noqa: Y015
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
 
-    class _MentionTypeEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[Mention._MentionType.ValueType], _builtins.type):
-        DESCRIPTOR: _descriptor.EnumDescriptor
+    class _MentionTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[Mention._MentionType.ValueType], builtins.type):
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         PROFILE: Mention._MentionType.ValueType  # 0
 
     class MentionType(_MentionType, metaclass=_MentionTypeEnumTypeWrapper): ...
     PROFILE: Mention.MentionType.ValueType  # 0
 
-    MENTIONTYPE_FIELD_NUMBER: _builtins.int
-    MENTIONEDJID_FIELD_NUMBER: _builtins.int
-    OFFSET_FIELD_NUMBER: _builtins.int
-    LENGTH_FIELD_NUMBER: _builtins.int
+    MENTIONTYPE_FIELD_NUMBER: builtins.int
+    MENTIONEDJID_FIELD_NUMBER: builtins.int
+    OFFSET_FIELD_NUMBER: builtins.int
+    LENGTH_FIELD_NUMBER: builtins.int
     mentionType: Global___Mention.MentionType.ValueType
-    mentionedJID: _builtins.str
-    offset: _builtins.int
-    length: _builtins.int
+    mentionedJID: builtins.str
+    offset: builtins.int
+    length: builtins.int
     def __init__(
         self,
         *,
         mentionType: Global___Mention.MentionType.ValueType | None = ...,
-        mentionedJID: _builtins.str | None = ...,
-        offset: _builtins.int | None = ...,
-        length: _builtins.int | None = ...,
+        mentionedJID: builtins.str | None = ...,
+        offset: builtins.int | None = ...,
+        length: builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["length", b"length", "mentionType", b"mentionType", "mentionedJID", b"mentionedJID", "offset", b"offset"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["length", b"length", "mentionType", b"mentionType", "mentionedJID", b"mentionedJID", "offset", b"offset"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["length", b"length", "mentionType", b"mentionType", "mentionedJID", b"mentionedJID", "offset", b"offset"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["length", b"length", "mentionType", b"mentionType", "mentionedJID", b"mentionedJID", "offset", b"offset"]) -> None: ...
 
-Global___Mention: _TypeAlias = Mention  # noqa: Y015
+Global___Mention: typing_extensions.TypeAlias = Mention
 
-@_typing.final
-class MessageText(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class MessageText(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    TEXT_FIELD_NUMBER: _builtins.int
-    MENTIONEDJID_FIELD_NUMBER: _builtins.int
-    COMMANDS_FIELD_NUMBER: _builtins.int
-    MENTIONS_FIELD_NUMBER: _builtins.int
-    text: _builtins.str
-    @_builtins.property
-    def mentionedJID(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]: ...
-    @_builtins.property
-    def commands(self) -> _containers.RepeatedCompositeFieldContainer[Global___Command]: ...
-    @_builtins.property
-    def mentions(self) -> _containers.RepeatedCompositeFieldContainer[Global___Mention]: ...
+    TEXT_FIELD_NUMBER: builtins.int
+    MENTIONEDJID_FIELD_NUMBER: builtins.int
+    COMMANDS_FIELD_NUMBER: builtins.int
+    MENTIONS_FIELD_NUMBER: builtins.int
+    text: builtins.str
+    @property
+    def mentionedJID(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    @property
+    def commands(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___Command]: ...
+    @property
+    def mentions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___Mention]: ...
     def __init__(
         self,
         *,
-        text: _builtins.str | None = ...,
-        mentionedJID: _abc.Iterable[_builtins.str] | None = ...,
-        commands: _abc.Iterable[Global___Command] | None = ...,
-        mentions: _abc.Iterable[Global___Mention] | None = ...,
+        text: builtins.str | None = ...,
+        mentionedJID: collections.abc.Iterable[builtins.str] | None = ...,
+        commands: collections.abc.Iterable[Global___Command] | None = ...,
+        mentions: collections.abc.Iterable[Global___Mention] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["text", b"text"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["commands", b"commands", "mentionedJID", b"mentionedJID", "mentions", b"mentions", "text", b"text"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["text", b"text"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["commands", b"commands", "mentionedJID", b"mentionedJID", "mentions", b"mentions", "text", b"text"]) -> None: ...
 
-Global___MessageText: _TypeAlias = MessageText  # noqa: Y015
+Global___MessageText: typing_extensions.TypeAlias = MessageText
 
-@_typing.final
-class SubProtocol(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class SubProtocol(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    PAYLOAD_FIELD_NUMBER: _builtins.int
-    VERSION_FIELD_NUMBER: _builtins.int
-    payload: _builtins.bytes
-    version: _builtins.int
+    PAYLOAD_FIELD_NUMBER: builtins.int
+    VERSION_FIELD_NUMBER: builtins.int
+    payload: builtins.bytes
+    version: builtins.int
     def __init__(
         self,
         *,
-        payload: _builtins.bytes | None = ...,
-        version: _builtins.int | None = ...,
+        payload: builtins.bytes | None = ...,
+        version: builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["payload", b"payload", "version", b"version"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["payload", b"payload", "version", b"version"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["payload", b"payload", "version", b"version"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["payload", b"payload", "version", b"version"]) -> None: ...
 
-Global___SubProtocol: _TypeAlias = SubProtocol  # noqa: Y015
+Global___SubProtocol: typing_extensions.TypeAlias = SubProtocol
 
-@_typing.final
-class LimitSharing(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class LimitSharing(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     class _Trigger:
-        ValueType = _typing.NewType("ValueType", _builtins.int)
-        V: _TypeAlias = ValueType  # noqa: Y015
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
 
-    class _TriggerEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[LimitSharing._Trigger.ValueType], _builtins.type):
-        DESCRIPTOR: _descriptor.EnumDescriptor
+    class _TriggerEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[LimitSharing._Trigger.ValueType], builtins.type):
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         UNKNOWN: LimitSharing._Trigger.ValueType  # 0
         CHAT_SETTING: LimitSharing._Trigger.ValueType  # 1
         BIZ_SUPPORTS_FB_HOSTING: LimitSharing._Trigger.ValueType  # 2
@@ -217,25 +207,23 @@ class LimitSharing(_message.Message):
     BIZ_SUPPORTS_FB_HOSTING: LimitSharing.Trigger.ValueType  # 2
     UNKNOWN_GROUP: LimitSharing.Trigger.ValueType  # 3
 
-    SHARINGLIMITED_FIELD_NUMBER: _builtins.int
-    TRIGGER_FIELD_NUMBER: _builtins.int
-    LIMITSHARINGSETTINGTIMESTAMP_FIELD_NUMBER: _builtins.int
-    INITIATEDBYME_FIELD_NUMBER: _builtins.int
-    sharingLimited: _builtins.bool
+    SHARINGLIMITED_FIELD_NUMBER: builtins.int
+    TRIGGER_FIELD_NUMBER: builtins.int
+    LIMITSHARINGSETTINGTIMESTAMP_FIELD_NUMBER: builtins.int
+    INITIATEDBYME_FIELD_NUMBER: builtins.int
+    sharingLimited: builtins.bool
     trigger: Global___LimitSharing.Trigger.ValueType
-    limitSharingSettingTimestamp: _builtins.int
-    initiatedByMe: _builtins.bool
+    limitSharingSettingTimestamp: builtins.int
+    initiatedByMe: builtins.bool
     def __init__(
         self,
         *,
-        sharingLimited: _builtins.bool | None = ...,
+        sharingLimited: builtins.bool | None = ...,
         trigger: Global___LimitSharing.Trigger.ValueType | None = ...,
-        limitSharingSettingTimestamp: _builtins.int | None = ...,
-        initiatedByMe: _builtins.bool | None = ...,
+        limitSharingSettingTimestamp: builtins.int | None = ...,
+        initiatedByMe: builtins.bool | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["initiatedByMe", b"initiatedByMe", "limitSharingSettingTimestamp", b"limitSharingSettingTimestamp", "sharingLimited", b"sharingLimited", "trigger", b"trigger"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["initiatedByMe", b"initiatedByMe", "limitSharingSettingTimestamp", b"limitSharingSettingTimestamp", "sharingLimited", b"sharingLimited", "trigger", b"trigger"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["initiatedByMe", b"initiatedByMe", "limitSharingSettingTimestamp", b"limitSharingSettingTimestamp", "sharingLimited", b"sharingLimited", "trigger", b"trigger"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["initiatedByMe", b"initiatedByMe", "limitSharingSettingTimestamp", b"limitSharingSettingTimestamp", "sharingLimited", b"sharingLimited", "trigger", b"trigger"]) -> None: ...
 
-Global___LimitSharing: _TypeAlias = LimitSharing  # noqa: Y015
+Global___LimitSharing: typing_extensions.TypeAlias = LimitSharing

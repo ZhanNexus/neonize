@@ -3,33 +3,33 @@
 isort:skip_file
 """
 
-from collections import abc as _abc
-from google.protobuf import descriptor as _descriptor
-from google.protobuf import message as _message
-from google.protobuf.internal import containers as _containers
-from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
-from waChatLockSettings import WAWebProtobufsChatLockSettings_pb2 as _WAWebProtobufsChatLockSettings_pb2
-from waCommon import WACommon_pb2 as _WACommon_pb2
-from waE2E import WAWebProtobufsE2E_pb2 as _WAWebProtobufsE2E_pb2
-from waSyncAction import WAWebProtobufSyncAction_pb2 as _WAWebProtobufSyncAction_pb2
-from waWeb import WAWebProtobufsWeb_pb2 as _WAWebProtobufsWeb_pb2
-import builtins as _builtins
+import builtins
+import collections.abc
+import google.protobuf.descriptor
+import google.protobuf.internal.containers
+import google.protobuf.internal.enum_type_wrapper
+import google.protobuf.message
 import sys
-import typing as _typing
+import typing
+import waChatLockSettings.WAWebProtobufsChatLockSettings_pb2
+import waCommon.WACommon_pb2
+import waE2E.WAWebProtobufsE2E_pb2
+import waSyncAction.WAWebProtobufSyncAction_pb2
+import waWeb.WAWebProtobufsWeb_pb2
 
 if sys.version_info >= (3, 10):
-    from typing import TypeAlias as _TypeAlias
+    import typing as typing_extensions
 else:
-    from typing_extensions import TypeAlias as _TypeAlias
+    import typing_extensions
 
-DESCRIPTOR: _descriptor.FileDescriptor
+DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
 class _MediaVisibility:
-    ValueType = _typing.NewType("ValueType", _builtins.int)
-    V: _TypeAlias = ValueType  # noqa: Y015
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
 
-class _MediaVisibilityEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_MediaVisibility.ValueType], _builtins.type):
-    DESCRIPTOR: _descriptor.EnumDescriptor
+class _MediaVisibilityEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_MediaVisibility.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     DEFAULT: _MediaVisibility.ValueType  # 0
     OFF: _MediaVisibility.ValueType  # 1
     ON: _MediaVisibility.ValueType  # 2
@@ -39,14 +39,14 @@ class MediaVisibility(_MediaVisibility, metaclass=_MediaVisibilityEnumTypeWrappe
 DEFAULT: MediaVisibility.ValueType  # 0
 OFF: MediaVisibility.ValueType  # 1
 ON: MediaVisibility.ValueType  # 2
-Global___MediaVisibility: _TypeAlias = MediaVisibility  # noqa: Y015
+Global___MediaVisibility: typing_extensions.TypeAlias = MediaVisibility
 
 class _PrivacySystemMessage:
-    ValueType = _typing.NewType("ValueType", _builtins.int)
-    V: _TypeAlias = ValueType  # noqa: Y015
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
 
-class _PrivacySystemMessageEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_PrivacySystemMessage.ValueType], _builtins.type):
-    DESCRIPTOR: _descriptor.EnumDescriptor
+class _PrivacySystemMessageEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_PrivacySystemMessage.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     E2EE_MSG: _PrivacySystemMessage.ValueType  # 1
     NE2EE_SELF: _PrivacySystemMessage.ValueType  # 2
     NE2EE_OTHER: _PrivacySystemMessage.ValueType  # 3
@@ -56,18 +56,18 @@ class PrivacySystemMessage(_PrivacySystemMessage, metaclass=_PrivacySystemMessag
 E2EE_MSG: PrivacySystemMessage.ValueType  # 1
 NE2EE_SELF: PrivacySystemMessage.ValueType  # 2
 NE2EE_OTHER: PrivacySystemMessage.ValueType  # 3
-Global___PrivacySystemMessage: _TypeAlias = PrivacySystemMessage  # noqa: Y015
+Global___PrivacySystemMessage: typing_extensions.TypeAlias = PrivacySystemMessage
 
-@_typing.final
-class HistorySync(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class HistorySync(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     class _BotAIWaitListState:
-        ValueType = _typing.NewType("ValueType", _builtins.int)
-        V: _TypeAlias = ValueType  # noqa: Y015
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
 
-    class _BotAIWaitListStateEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[HistorySync._BotAIWaitListState.ValueType], _builtins.type):
-        DESCRIPTOR: _descriptor.EnumDescriptor
+    class _BotAIWaitListStateEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[HistorySync._BotAIWaitListState.ValueType], builtins.type):
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         IN_WAITLIST: HistorySync._BotAIWaitListState.ValueType  # 0
         AI_AVAILABLE: HistorySync._BotAIWaitListState.ValueType  # 1
 
@@ -76,11 +76,11 @@ class HistorySync(_message.Message):
     AI_AVAILABLE: HistorySync.BotAIWaitListState.ValueType  # 1
 
     class _HistorySyncType:
-        ValueType = _typing.NewType("ValueType", _builtins.int)
-        V: _TypeAlias = ValueType  # noqa: Y015
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
 
-    class _HistorySyncTypeEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[HistorySync._HistorySyncType.ValueType], _builtins.type):
-        DESCRIPTOR: _descriptor.EnumDescriptor
+    class _HistorySyncTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[HistorySync._HistorySyncType.ValueType], builtins.type):
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         INITIAL_BOOTSTRAP: HistorySync._HistorySyncType.ValueType  # 0
         INITIAL_STATUS_V3: HistorySync._HistorySyncType.ValueType  # 1
         FULL: HistorySync._HistorySyncType.ValueType  # 2
@@ -98,87 +98,85 @@ class HistorySync(_message.Message):
     NON_BLOCKING_DATA: HistorySync.HistorySyncType.ValueType  # 5
     ON_DEMAND: HistorySync.HistorySyncType.ValueType  # 6
 
-    SYNCTYPE_FIELD_NUMBER: _builtins.int
-    CONVERSATIONS_FIELD_NUMBER: _builtins.int
-    STATUSV3MESSAGES_FIELD_NUMBER: _builtins.int
-    CHUNKORDER_FIELD_NUMBER: _builtins.int
-    PROGRESS_FIELD_NUMBER: _builtins.int
-    PUSHNAMES_FIELD_NUMBER: _builtins.int
-    GLOBALSETTINGS_FIELD_NUMBER: _builtins.int
-    THREADIDUSERSECRET_FIELD_NUMBER: _builtins.int
-    THREADDSTIMEFRAMEOFFSET_FIELD_NUMBER: _builtins.int
-    RECENTSTICKERS_FIELD_NUMBER: _builtins.int
-    PASTPARTICIPANTS_FIELD_NUMBER: _builtins.int
-    CALLLOGRECORDS_FIELD_NUMBER: _builtins.int
-    AIWAITLISTSTATE_FIELD_NUMBER: _builtins.int
-    PHONENUMBERTOLIDMAPPINGS_FIELD_NUMBER: _builtins.int
-    COMPANIONMETANONCE_FIELD_NUMBER: _builtins.int
-    SHAREABLECHATIDENTIFIERENCRYPTIONKEY_FIELD_NUMBER: _builtins.int
-    ACCOUNTS_FIELD_NUMBER: _builtins.int
+    SYNCTYPE_FIELD_NUMBER: builtins.int
+    CONVERSATIONS_FIELD_NUMBER: builtins.int
+    STATUSV3MESSAGES_FIELD_NUMBER: builtins.int
+    CHUNKORDER_FIELD_NUMBER: builtins.int
+    PROGRESS_FIELD_NUMBER: builtins.int
+    PUSHNAMES_FIELD_NUMBER: builtins.int
+    GLOBALSETTINGS_FIELD_NUMBER: builtins.int
+    THREADIDUSERSECRET_FIELD_NUMBER: builtins.int
+    THREADDSTIMEFRAMEOFFSET_FIELD_NUMBER: builtins.int
+    RECENTSTICKERS_FIELD_NUMBER: builtins.int
+    PASTPARTICIPANTS_FIELD_NUMBER: builtins.int
+    CALLLOGRECORDS_FIELD_NUMBER: builtins.int
+    AIWAITLISTSTATE_FIELD_NUMBER: builtins.int
+    PHONENUMBERTOLIDMAPPINGS_FIELD_NUMBER: builtins.int
+    COMPANIONMETANONCE_FIELD_NUMBER: builtins.int
+    SHAREABLECHATIDENTIFIERENCRYPTIONKEY_FIELD_NUMBER: builtins.int
+    ACCOUNTS_FIELD_NUMBER: builtins.int
     syncType: Global___HistorySync.HistorySyncType.ValueType
-    chunkOrder: _builtins.int
-    progress: _builtins.int
-    threadIDUserSecret: _builtins.bytes
-    threadDsTimeframeOffset: _builtins.int
+    chunkOrder: builtins.int
+    progress: builtins.int
+    threadIDUserSecret: builtins.bytes
+    threadDsTimeframeOffset: builtins.int
     aiWaitListState: Global___HistorySync.BotAIWaitListState.ValueType
-    companionMetaNonce: _builtins.str
-    shareableChatIdentifierEncryptionKey: _builtins.bytes
-    @_builtins.property
-    def conversations(self) -> _containers.RepeatedCompositeFieldContainer[Global___Conversation]: ...
-    @_builtins.property
-    def statusV3Messages(self) -> _containers.RepeatedCompositeFieldContainer[_WAWebProtobufsWeb_pb2.WebMessageInfo]: ...
-    @_builtins.property
-    def pushnames(self) -> _containers.RepeatedCompositeFieldContainer[Global___Pushname]: ...
-    @_builtins.property
+    companionMetaNonce: builtins.str
+    shareableChatIdentifierEncryptionKey: builtins.bytes
+    @property
+    def conversations(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___Conversation]: ...
+    @property
+    def statusV3Messages(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[waWeb.WAWebProtobufsWeb_pb2.WebMessageInfo]: ...
+    @property
+    def pushnames(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___Pushname]: ...
+    @property
     def globalSettings(self) -> Global___GlobalSettings: ...
-    @_builtins.property
-    def recentStickers(self) -> _containers.RepeatedCompositeFieldContainer[Global___StickerMetadata]: ...
-    @_builtins.property
-    def pastParticipants(self) -> _containers.RepeatedCompositeFieldContainer[Global___PastParticipants]: ...
-    @_builtins.property
-    def callLogRecords(self) -> _containers.RepeatedCompositeFieldContainer[_WAWebProtobufSyncAction_pb2.CallLogRecord]: ...
-    @_builtins.property
-    def phoneNumberToLidMappings(self) -> _containers.RepeatedCompositeFieldContainer[Global___PhoneNumberToLIDMapping]: ...
-    @_builtins.property
-    def accounts(self) -> _containers.RepeatedCompositeFieldContainer[Global___Account]: ...
+    @property
+    def recentStickers(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___StickerMetadata]: ...
+    @property
+    def pastParticipants(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___PastParticipants]: ...
+    @property
+    def callLogRecords(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[waSyncAction.WAWebProtobufSyncAction_pb2.CallLogRecord]: ...
+    @property
+    def phoneNumberToLidMappings(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___PhoneNumberToLIDMapping]: ...
+    @property
+    def accounts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___Account]: ...
     def __init__(
         self,
         *,
         syncType: Global___HistorySync.HistorySyncType.ValueType | None = ...,
-        conversations: _abc.Iterable[Global___Conversation] | None = ...,
-        statusV3Messages: _abc.Iterable[_WAWebProtobufsWeb_pb2.WebMessageInfo] | None = ...,
-        chunkOrder: _builtins.int | None = ...,
-        progress: _builtins.int | None = ...,
-        pushnames: _abc.Iterable[Global___Pushname] | None = ...,
+        conversations: collections.abc.Iterable[Global___Conversation] | None = ...,
+        statusV3Messages: collections.abc.Iterable[waWeb.WAWebProtobufsWeb_pb2.WebMessageInfo] | None = ...,
+        chunkOrder: builtins.int | None = ...,
+        progress: builtins.int | None = ...,
+        pushnames: collections.abc.Iterable[Global___Pushname] | None = ...,
         globalSettings: Global___GlobalSettings | None = ...,
-        threadIDUserSecret: _builtins.bytes | None = ...,
-        threadDsTimeframeOffset: _builtins.int | None = ...,
-        recentStickers: _abc.Iterable[Global___StickerMetadata] | None = ...,
-        pastParticipants: _abc.Iterable[Global___PastParticipants] | None = ...,
-        callLogRecords: _abc.Iterable[_WAWebProtobufSyncAction_pb2.CallLogRecord] | None = ...,
+        threadIDUserSecret: builtins.bytes | None = ...,
+        threadDsTimeframeOffset: builtins.int | None = ...,
+        recentStickers: collections.abc.Iterable[Global___StickerMetadata] | None = ...,
+        pastParticipants: collections.abc.Iterable[Global___PastParticipants] | None = ...,
+        callLogRecords: collections.abc.Iterable[waSyncAction.WAWebProtobufSyncAction_pb2.CallLogRecord] | None = ...,
         aiWaitListState: Global___HistorySync.BotAIWaitListState.ValueType | None = ...,
-        phoneNumberToLidMappings: _abc.Iterable[Global___PhoneNumberToLIDMapping] | None = ...,
-        companionMetaNonce: _builtins.str | None = ...,
-        shareableChatIdentifierEncryptionKey: _builtins.bytes | None = ...,
-        accounts: _abc.Iterable[Global___Account] | None = ...,
+        phoneNumberToLidMappings: collections.abc.Iterable[Global___PhoneNumberToLIDMapping] | None = ...,
+        companionMetaNonce: builtins.str | None = ...,
+        shareableChatIdentifierEncryptionKey: builtins.bytes | None = ...,
+        accounts: collections.abc.Iterable[Global___Account] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["aiWaitListState", b"aiWaitListState", "chunkOrder", b"chunkOrder", "companionMetaNonce", b"companionMetaNonce", "globalSettings", b"globalSettings", "progress", b"progress", "shareableChatIdentifierEncryptionKey", b"shareableChatIdentifierEncryptionKey", "syncType", b"syncType", "threadDsTimeframeOffset", b"threadDsTimeframeOffset", "threadIDUserSecret", b"threadIDUserSecret"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["accounts", b"accounts", "aiWaitListState", b"aiWaitListState", "callLogRecords", b"callLogRecords", "chunkOrder", b"chunkOrder", "companionMetaNonce", b"companionMetaNonce", "conversations", b"conversations", "globalSettings", b"globalSettings", "pastParticipants", b"pastParticipants", "phoneNumberToLidMappings", b"phoneNumberToLidMappings", "progress", b"progress", "pushnames", b"pushnames", "recentStickers", b"recentStickers", "shareableChatIdentifierEncryptionKey", b"shareableChatIdentifierEncryptionKey", "statusV3Messages", b"statusV3Messages", "syncType", b"syncType", "threadDsTimeframeOffset", b"threadDsTimeframeOffset", "threadIDUserSecret", b"threadIDUserSecret"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["aiWaitListState", b"aiWaitListState", "chunkOrder", b"chunkOrder", "companionMetaNonce", b"companionMetaNonce", "globalSettings", b"globalSettings", "progress", b"progress", "shareableChatIdentifierEncryptionKey", b"shareableChatIdentifierEncryptionKey", "syncType", b"syncType", "threadDsTimeframeOffset", b"threadDsTimeframeOffset", "threadIDUserSecret", b"threadIDUserSecret"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["accounts", b"accounts", "aiWaitListState", b"aiWaitListState", "callLogRecords", b"callLogRecords", "chunkOrder", b"chunkOrder", "companionMetaNonce", b"companionMetaNonce", "conversations", b"conversations", "globalSettings", b"globalSettings", "pastParticipants", b"pastParticipants", "phoneNumberToLidMappings", b"phoneNumberToLidMappings", "progress", b"progress", "pushnames", b"pushnames", "recentStickers", b"recentStickers", "shareableChatIdentifierEncryptionKey", b"shareableChatIdentifierEncryptionKey", "statusV3Messages", b"statusV3Messages", "syncType", b"syncType", "threadDsTimeframeOffset", b"threadDsTimeframeOffset", "threadIDUserSecret", b"threadIDUserSecret"]) -> None: ...
 
-Global___HistorySync: _TypeAlias = HistorySync  # noqa: Y015
+Global___HistorySync: typing_extensions.TypeAlias = HistorySync
 
-@_typing.final
-class Conversation(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class Conversation(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     class _EndOfHistoryTransferType:
-        ValueType = _typing.NewType("ValueType", _builtins.int)
-        V: _TypeAlias = ValueType  # noqa: Y015
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
 
-    class _EndOfHistoryTransferTypeEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[Conversation._EndOfHistoryTransferType.ValueType], _builtins.type):
-        DESCRIPTOR: _descriptor.EnumDescriptor
+    class _EndOfHistoryTransferTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[Conversation._EndOfHistoryTransferType.ValueType], builtins.type):
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         COMPLETE_BUT_MORE_MESSAGES_REMAIN_ON_PRIMARY: Conversation._EndOfHistoryTransferType.ValueType  # 0
         COMPLETE_AND_NO_MORE_MESSAGE_REMAIN_ON_PRIMARY: Conversation._EndOfHistoryTransferType.ValueType  # 1
         COMPLETE_ON_DEMAND_SYNC_BUT_MORE_MSG_REMAIN_ON_PRIMARY: Conversation._EndOfHistoryTransferType.ValueType  # 2
@@ -190,193 +188,191 @@ class Conversation(_message.Message):
     COMPLETE_ON_DEMAND_SYNC_BUT_MORE_MSG_REMAIN_ON_PRIMARY: Conversation.EndOfHistoryTransferType.ValueType  # 2
     COMPLETE_ON_DEMAND_SYNC_WITH_MORE_MSG_ON_PRIMARY_BUT_NO_ACCESS: Conversation.EndOfHistoryTransferType.ValueType  # 3
 
-    ID_FIELD_NUMBER: _builtins.int
-    MESSAGES_FIELD_NUMBER: _builtins.int
-    NEWJID_FIELD_NUMBER: _builtins.int
-    OLDJID_FIELD_NUMBER: _builtins.int
-    LASTMSGTIMESTAMP_FIELD_NUMBER: _builtins.int
-    UNREADCOUNT_FIELD_NUMBER: _builtins.int
-    READONLY_FIELD_NUMBER: _builtins.int
-    ENDOFHISTORYTRANSFER_FIELD_NUMBER: _builtins.int
-    EPHEMERALEXPIRATION_FIELD_NUMBER: _builtins.int
-    EPHEMERALSETTINGTIMESTAMP_FIELD_NUMBER: _builtins.int
-    ENDOFHISTORYTRANSFERTYPE_FIELD_NUMBER: _builtins.int
-    CONVERSATIONTIMESTAMP_FIELD_NUMBER: _builtins.int
-    NAME_FIELD_NUMBER: _builtins.int
-    PHASH_FIELD_NUMBER: _builtins.int
-    NOTSPAM_FIELD_NUMBER: _builtins.int
-    ARCHIVED_FIELD_NUMBER: _builtins.int
-    DISAPPEARINGMODE_FIELD_NUMBER: _builtins.int
-    UNREADMENTIONCOUNT_FIELD_NUMBER: _builtins.int
-    MARKEDASUNREAD_FIELD_NUMBER: _builtins.int
-    PARTICIPANT_FIELD_NUMBER: _builtins.int
-    TCTOKEN_FIELD_NUMBER: _builtins.int
-    TCTOKENTIMESTAMP_FIELD_NUMBER: _builtins.int
-    CONTACTPRIMARYIDENTITYKEY_FIELD_NUMBER: _builtins.int
-    PINNED_FIELD_NUMBER: _builtins.int
-    MUTEENDTIME_FIELD_NUMBER: _builtins.int
-    WALLPAPER_FIELD_NUMBER: _builtins.int
-    MEDIAVISIBILITY_FIELD_NUMBER: _builtins.int
-    TCTOKENSENDERTIMESTAMP_FIELD_NUMBER: _builtins.int
-    SUSPENDED_FIELD_NUMBER: _builtins.int
-    TERMINATED_FIELD_NUMBER: _builtins.int
-    CREATEDAT_FIELD_NUMBER: _builtins.int
-    CREATEDBY_FIELD_NUMBER: _builtins.int
-    DESCRIPTION_FIELD_NUMBER: _builtins.int
-    SUPPORT_FIELD_NUMBER: _builtins.int
-    ISPARENTGROUP_FIELD_NUMBER: _builtins.int
-    PARENTGROUPID_FIELD_NUMBER: _builtins.int
-    ISDEFAULTSUBGROUP_FIELD_NUMBER: _builtins.int
-    DISPLAYNAME_FIELD_NUMBER: _builtins.int
-    PNJID_FIELD_NUMBER: _builtins.int
-    SHAREOWNPN_FIELD_NUMBER: _builtins.int
-    PNHDUPLICATELIDTHREAD_FIELD_NUMBER: _builtins.int
-    LIDJID_FIELD_NUMBER: _builtins.int
-    USERNAME_FIELD_NUMBER: _builtins.int
-    LIDORIGINTYPE_FIELD_NUMBER: _builtins.int
-    COMMENTSCOUNT_FIELD_NUMBER: _builtins.int
-    LOCKED_FIELD_NUMBER: _builtins.int
-    SYSTEMMESSAGETOINSERT_FIELD_NUMBER: _builtins.int
-    CAPICREATEDGROUP_FIELD_NUMBER: _builtins.int
-    ACCOUNTLID_FIELD_NUMBER: _builtins.int
-    LIMITSHARING_FIELD_NUMBER: _builtins.int
-    LIMITSHARINGSETTINGTIMESTAMP_FIELD_NUMBER: _builtins.int
-    LIMITSHARINGTRIGGER_FIELD_NUMBER: _builtins.int
-    LIMITSHARINGINITIATEDBYME_FIELD_NUMBER: _builtins.int
-    MAIBAAITHREADENABLED_FIELD_NUMBER: _builtins.int
-    ID: _builtins.str
-    newJID: _builtins.str
-    oldJID: _builtins.str
-    lastMsgTimestamp: _builtins.int
-    unreadCount: _builtins.int
-    readOnly: _builtins.bool
-    endOfHistoryTransfer: _builtins.bool
-    ephemeralExpiration: _builtins.int
-    ephemeralSettingTimestamp: _builtins.int
+    ID_FIELD_NUMBER: builtins.int
+    MESSAGES_FIELD_NUMBER: builtins.int
+    NEWJID_FIELD_NUMBER: builtins.int
+    OLDJID_FIELD_NUMBER: builtins.int
+    LASTMSGTIMESTAMP_FIELD_NUMBER: builtins.int
+    UNREADCOUNT_FIELD_NUMBER: builtins.int
+    READONLY_FIELD_NUMBER: builtins.int
+    ENDOFHISTORYTRANSFER_FIELD_NUMBER: builtins.int
+    EPHEMERALEXPIRATION_FIELD_NUMBER: builtins.int
+    EPHEMERALSETTINGTIMESTAMP_FIELD_NUMBER: builtins.int
+    ENDOFHISTORYTRANSFERTYPE_FIELD_NUMBER: builtins.int
+    CONVERSATIONTIMESTAMP_FIELD_NUMBER: builtins.int
+    NAME_FIELD_NUMBER: builtins.int
+    PHASH_FIELD_NUMBER: builtins.int
+    NOTSPAM_FIELD_NUMBER: builtins.int
+    ARCHIVED_FIELD_NUMBER: builtins.int
+    DISAPPEARINGMODE_FIELD_NUMBER: builtins.int
+    UNREADMENTIONCOUNT_FIELD_NUMBER: builtins.int
+    MARKEDASUNREAD_FIELD_NUMBER: builtins.int
+    PARTICIPANT_FIELD_NUMBER: builtins.int
+    TCTOKEN_FIELD_NUMBER: builtins.int
+    TCTOKENTIMESTAMP_FIELD_NUMBER: builtins.int
+    CONTACTPRIMARYIDENTITYKEY_FIELD_NUMBER: builtins.int
+    PINNED_FIELD_NUMBER: builtins.int
+    MUTEENDTIME_FIELD_NUMBER: builtins.int
+    WALLPAPER_FIELD_NUMBER: builtins.int
+    MEDIAVISIBILITY_FIELD_NUMBER: builtins.int
+    TCTOKENSENDERTIMESTAMP_FIELD_NUMBER: builtins.int
+    SUSPENDED_FIELD_NUMBER: builtins.int
+    TERMINATED_FIELD_NUMBER: builtins.int
+    CREATEDAT_FIELD_NUMBER: builtins.int
+    CREATEDBY_FIELD_NUMBER: builtins.int
+    DESCRIPTION_FIELD_NUMBER: builtins.int
+    SUPPORT_FIELD_NUMBER: builtins.int
+    ISPARENTGROUP_FIELD_NUMBER: builtins.int
+    PARENTGROUPID_FIELD_NUMBER: builtins.int
+    ISDEFAULTSUBGROUP_FIELD_NUMBER: builtins.int
+    DISPLAYNAME_FIELD_NUMBER: builtins.int
+    PNJID_FIELD_NUMBER: builtins.int
+    SHAREOWNPN_FIELD_NUMBER: builtins.int
+    PNHDUPLICATELIDTHREAD_FIELD_NUMBER: builtins.int
+    LIDJID_FIELD_NUMBER: builtins.int
+    USERNAME_FIELD_NUMBER: builtins.int
+    LIDORIGINTYPE_FIELD_NUMBER: builtins.int
+    COMMENTSCOUNT_FIELD_NUMBER: builtins.int
+    LOCKED_FIELD_NUMBER: builtins.int
+    SYSTEMMESSAGETOINSERT_FIELD_NUMBER: builtins.int
+    CAPICREATEDGROUP_FIELD_NUMBER: builtins.int
+    ACCOUNTLID_FIELD_NUMBER: builtins.int
+    LIMITSHARING_FIELD_NUMBER: builtins.int
+    LIMITSHARINGSETTINGTIMESTAMP_FIELD_NUMBER: builtins.int
+    LIMITSHARINGTRIGGER_FIELD_NUMBER: builtins.int
+    LIMITSHARINGINITIATEDBYME_FIELD_NUMBER: builtins.int
+    MAIBAAITHREADENABLED_FIELD_NUMBER: builtins.int
+    ID: builtins.str
+    newJID: builtins.str
+    oldJID: builtins.str
+    lastMsgTimestamp: builtins.int
+    unreadCount: builtins.int
+    readOnly: builtins.bool
+    endOfHistoryTransfer: builtins.bool
+    ephemeralExpiration: builtins.int
+    ephemeralSettingTimestamp: builtins.int
     endOfHistoryTransferType: Global___Conversation.EndOfHistoryTransferType.ValueType
-    conversationTimestamp: _builtins.int
-    name: _builtins.str
-    pHash: _builtins.str
-    notSpam: _builtins.bool
-    archived: _builtins.bool
-    unreadMentionCount: _builtins.int
-    markedAsUnread: _builtins.bool
-    tcToken: _builtins.bytes
-    tcTokenTimestamp: _builtins.int
-    contactPrimaryIdentityKey: _builtins.bytes
-    pinned: _builtins.int
-    muteEndTime: _builtins.int
+    conversationTimestamp: builtins.int
+    name: builtins.str
+    pHash: builtins.str
+    notSpam: builtins.bool
+    archived: builtins.bool
+    unreadMentionCount: builtins.int
+    markedAsUnread: builtins.bool
+    tcToken: builtins.bytes
+    tcTokenTimestamp: builtins.int
+    contactPrimaryIdentityKey: builtins.bytes
+    pinned: builtins.int
+    muteEndTime: builtins.int
     mediaVisibility: Global___MediaVisibility.ValueType
-    tcTokenSenderTimestamp: _builtins.int
-    suspended: _builtins.bool
-    terminated: _builtins.bool
-    createdAt: _builtins.int
-    createdBy: _builtins.str
-    description: _builtins.str
-    support: _builtins.bool
-    isParentGroup: _builtins.bool
-    parentGroupID: _builtins.str
-    isDefaultSubgroup: _builtins.bool
-    displayName: _builtins.str
-    pnJID: _builtins.str
-    shareOwnPn: _builtins.bool
-    pnhDuplicateLidThread: _builtins.bool
-    lidJID: _builtins.str
-    username: _builtins.str
-    lidOriginType: _builtins.str
-    commentsCount: _builtins.int
-    locked: _builtins.bool
+    tcTokenSenderTimestamp: builtins.int
+    suspended: builtins.bool
+    terminated: builtins.bool
+    createdAt: builtins.int
+    createdBy: builtins.str
+    description: builtins.str
+    support: builtins.bool
+    isParentGroup: builtins.bool
+    parentGroupID: builtins.str
+    isDefaultSubgroup: builtins.bool
+    displayName: builtins.str
+    pnJID: builtins.str
+    shareOwnPn: builtins.bool
+    pnhDuplicateLidThread: builtins.bool
+    lidJID: builtins.str
+    username: builtins.str
+    lidOriginType: builtins.str
+    commentsCount: builtins.int
+    locked: builtins.bool
     systemMessageToInsert: Global___PrivacySystemMessage.ValueType
-    capiCreatedGroup: _builtins.bool
-    accountLid: _builtins.str
-    limitSharing: _builtins.bool
-    limitSharingSettingTimestamp: _builtins.int
-    limitSharingTrigger: _WACommon_pb2.LimitSharing.Trigger.ValueType
-    limitSharingInitiatedByMe: _builtins.bool
-    maibaAiThreadEnabled: _builtins.bool
-    @_builtins.property
-    def messages(self) -> _containers.RepeatedCompositeFieldContainer[Global___HistorySyncMsg]: ...
-    @_builtins.property
-    def disappearingMode(self) -> _WAWebProtobufsE2E_pb2.DisappearingMode: ...
-    @_builtins.property
-    def participant(self) -> _containers.RepeatedCompositeFieldContainer[Global___GroupParticipant]: ...
-    @_builtins.property
+    capiCreatedGroup: builtins.bool
+    accountLid: builtins.str
+    limitSharing: builtins.bool
+    limitSharingSettingTimestamp: builtins.int
+    limitSharingTrigger: waCommon.WACommon_pb2.LimitSharing.Trigger.ValueType
+    limitSharingInitiatedByMe: builtins.bool
+    maibaAiThreadEnabled: builtins.bool
+    @property
+    def messages(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___HistorySyncMsg]: ...
+    @property
+    def disappearingMode(self) -> waE2E.WAWebProtobufsE2E_pb2.DisappearingMode: ...
+    @property
+    def participant(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___GroupParticipant]: ...
+    @property
     def wallpaper(self) -> Global___WallpaperSettings: ...
     def __init__(
         self,
         *,
-        ID: _builtins.str | None = ...,
-        messages: _abc.Iterable[Global___HistorySyncMsg] | None = ...,
-        newJID: _builtins.str | None = ...,
-        oldJID: _builtins.str | None = ...,
-        lastMsgTimestamp: _builtins.int | None = ...,
-        unreadCount: _builtins.int | None = ...,
-        readOnly: _builtins.bool | None = ...,
-        endOfHistoryTransfer: _builtins.bool | None = ...,
-        ephemeralExpiration: _builtins.int | None = ...,
-        ephemeralSettingTimestamp: _builtins.int | None = ...,
+        ID: builtins.str | None = ...,
+        messages: collections.abc.Iterable[Global___HistorySyncMsg] | None = ...,
+        newJID: builtins.str | None = ...,
+        oldJID: builtins.str | None = ...,
+        lastMsgTimestamp: builtins.int | None = ...,
+        unreadCount: builtins.int | None = ...,
+        readOnly: builtins.bool | None = ...,
+        endOfHistoryTransfer: builtins.bool | None = ...,
+        ephemeralExpiration: builtins.int | None = ...,
+        ephemeralSettingTimestamp: builtins.int | None = ...,
         endOfHistoryTransferType: Global___Conversation.EndOfHistoryTransferType.ValueType | None = ...,
-        conversationTimestamp: _builtins.int | None = ...,
-        name: _builtins.str | None = ...,
-        pHash: _builtins.str | None = ...,
-        notSpam: _builtins.bool | None = ...,
-        archived: _builtins.bool | None = ...,
-        disappearingMode: _WAWebProtobufsE2E_pb2.DisappearingMode | None = ...,
-        unreadMentionCount: _builtins.int | None = ...,
-        markedAsUnread: _builtins.bool | None = ...,
-        participant: _abc.Iterable[Global___GroupParticipant] | None = ...,
-        tcToken: _builtins.bytes | None = ...,
-        tcTokenTimestamp: _builtins.int | None = ...,
-        contactPrimaryIdentityKey: _builtins.bytes | None = ...,
-        pinned: _builtins.int | None = ...,
-        muteEndTime: _builtins.int | None = ...,
+        conversationTimestamp: builtins.int | None = ...,
+        name: builtins.str | None = ...,
+        pHash: builtins.str | None = ...,
+        notSpam: builtins.bool | None = ...,
+        archived: builtins.bool | None = ...,
+        disappearingMode: waE2E.WAWebProtobufsE2E_pb2.DisappearingMode | None = ...,
+        unreadMentionCount: builtins.int | None = ...,
+        markedAsUnread: builtins.bool | None = ...,
+        participant: collections.abc.Iterable[Global___GroupParticipant] | None = ...,
+        tcToken: builtins.bytes | None = ...,
+        tcTokenTimestamp: builtins.int | None = ...,
+        contactPrimaryIdentityKey: builtins.bytes | None = ...,
+        pinned: builtins.int | None = ...,
+        muteEndTime: builtins.int | None = ...,
         wallpaper: Global___WallpaperSettings | None = ...,
         mediaVisibility: Global___MediaVisibility.ValueType | None = ...,
-        tcTokenSenderTimestamp: _builtins.int | None = ...,
-        suspended: _builtins.bool | None = ...,
-        terminated: _builtins.bool | None = ...,
-        createdAt: _builtins.int | None = ...,
-        createdBy: _builtins.str | None = ...,
-        description: _builtins.str | None = ...,
-        support: _builtins.bool | None = ...,
-        isParentGroup: _builtins.bool | None = ...,
-        parentGroupID: _builtins.str | None = ...,
-        isDefaultSubgroup: _builtins.bool | None = ...,
-        displayName: _builtins.str | None = ...,
-        pnJID: _builtins.str | None = ...,
-        shareOwnPn: _builtins.bool | None = ...,
-        pnhDuplicateLidThread: _builtins.bool | None = ...,
-        lidJID: _builtins.str | None = ...,
-        username: _builtins.str | None = ...,
-        lidOriginType: _builtins.str | None = ...,
-        commentsCount: _builtins.int | None = ...,
-        locked: _builtins.bool | None = ...,
+        tcTokenSenderTimestamp: builtins.int | None = ...,
+        suspended: builtins.bool | None = ...,
+        terminated: builtins.bool | None = ...,
+        createdAt: builtins.int | None = ...,
+        createdBy: builtins.str | None = ...,
+        description: builtins.str | None = ...,
+        support: builtins.bool | None = ...,
+        isParentGroup: builtins.bool | None = ...,
+        parentGroupID: builtins.str | None = ...,
+        isDefaultSubgroup: builtins.bool | None = ...,
+        displayName: builtins.str | None = ...,
+        pnJID: builtins.str | None = ...,
+        shareOwnPn: builtins.bool | None = ...,
+        pnhDuplicateLidThread: builtins.bool | None = ...,
+        lidJID: builtins.str | None = ...,
+        username: builtins.str | None = ...,
+        lidOriginType: builtins.str | None = ...,
+        commentsCount: builtins.int | None = ...,
+        locked: builtins.bool | None = ...,
         systemMessageToInsert: Global___PrivacySystemMessage.ValueType | None = ...,
-        capiCreatedGroup: _builtins.bool | None = ...,
-        accountLid: _builtins.str | None = ...,
-        limitSharing: _builtins.bool | None = ...,
-        limitSharingSettingTimestamp: _builtins.int | None = ...,
-        limitSharingTrigger: _WACommon_pb2.LimitSharing.Trigger.ValueType | None = ...,
-        limitSharingInitiatedByMe: _builtins.bool | None = ...,
-        maibaAiThreadEnabled: _builtins.bool | None = ...,
+        capiCreatedGroup: builtins.bool | None = ...,
+        accountLid: builtins.str | None = ...,
+        limitSharing: builtins.bool | None = ...,
+        limitSharingSettingTimestamp: builtins.int | None = ...,
+        limitSharingTrigger: waCommon.WACommon_pb2.LimitSharing.Trigger.ValueType | None = ...,
+        limitSharingInitiatedByMe: builtins.bool | None = ...,
+        maibaAiThreadEnabled: builtins.bool | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["ID", b"ID", "accountLid", b"accountLid", "archived", b"archived", "capiCreatedGroup", b"capiCreatedGroup", "commentsCount", b"commentsCount", "contactPrimaryIdentityKey", b"contactPrimaryIdentityKey", "conversationTimestamp", b"conversationTimestamp", "createdAt", b"createdAt", "createdBy", b"createdBy", "description", b"description", "disappearingMode", b"disappearingMode", "displayName", b"displayName", "endOfHistoryTransfer", b"endOfHistoryTransfer", "endOfHistoryTransferType", b"endOfHistoryTransferType", "ephemeralExpiration", b"ephemeralExpiration", "ephemeralSettingTimestamp", b"ephemeralSettingTimestamp", "isDefaultSubgroup", b"isDefaultSubgroup", "isParentGroup", b"isParentGroup", "lastMsgTimestamp", b"lastMsgTimestamp", "lidJID", b"lidJID", "lidOriginType", b"lidOriginType", "limitSharing", b"limitSharing", "limitSharingInitiatedByMe", b"limitSharingInitiatedByMe", "limitSharingSettingTimestamp", b"limitSharingSettingTimestamp", "limitSharingTrigger", b"limitSharingTrigger", "locked", b"locked", "maibaAiThreadEnabled", b"maibaAiThreadEnabled", "markedAsUnread", b"markedAsUnread", "mediaVisibility", b"mediaVisibility", "muteEndTime", b"muteEndTime", "name", b"name", "newJID", b"newJID", "notSpam", b"notSpam", "oldJID", b"oldJID", "pHash", b"pHash", "parentGroupID", b"parentGroupID", "pinned", b"pinned", "pnJID", b"pnJID", "pnhDuplicateLidThread", b"pnhDuplicateLidThread", "readOnly", b"readOnly", "shareOwnPn", b"shareOwnPn", "support", b"support", "suspended", b"suspended", "systemMessageToInsert", b"systemMessageToInsert", "tcToken", b"tcToken", "tcTokenSenderTimestamp", b"tcTokenSenderTimestamp", "tcTokenTimestamp", b"tcTokenTimestamp", "terminated", b"terminated", "unreadCount", b"unreadCount", "unreadMentionCount", b"unreadMentionCount", "username", b"username", "wallpaper", b"wallpaper"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["ID", b"ID", "accountLid", b"accountLid", "archived", b"archived", "capiCreatedGroup", b"capiCreatedGroup", "commentsCount", b"commentsCount", "contactPrimaryIdentityKey", b"contactPrimaryIdentityKey", "conversationTimestamp", b"conversationTimestamp", "createdAt", b"createdAt", "createdBy", b"createdBy", "description", b"description", "disappearingMode", b"disappearingMode", "displayName", b"displayName", "endOfHistoryTransfer", b"endOfHistoryTransfer", "endOfHistoryTransferType", b"endOfHistoryTransferType", "ephemeralExpiration", b"ephemeralExpiration", "ephemeralSettingTimestamp", b"ephemeralSettingTimestamp", "isDefaultSubgroup", b"isDefaultSubgroup", "isParentGroup", b"isParentGroup", "lastMsgTimestamp", b"lastMsgTimestamp", "lidJID", b"lidJID", "lidOriginType", b"lidOriginType", "limitSharing", b"limitSharing", "limitSharingInitiatedByMe", b"limitSharingInitiatedByMe", "limitSharingSettingTimestamp", b"limitSharingSettingTimestamp", "limitSharingTrigger", b"limitSharingTrigger", "locked", b"locked", "maibaAiThreadEnabled", b"maibaAiThreadEnabled", "markedAsUnread", b"markedAsUnread", "mediaVisibility", b"mediaVisibility", "messages", b"messages", "muteEndTime", b"muteEndTime", "name", b"name", "newJID", b"newJID", "notSpam", b"notSpam", "oldJID", b"oldJID", "pHash", b"pHash", "parentGroupID", b"parentGroupID", "participant", b"participant", "pinned", b"pinned", "pnJID", b"pnJID", "pnhDuplicateLidThread", b"pnhDuplicateLidThread", "readOnly", b"readOnly", "shareOwnPn", b"shareOwnPn", "support", b"support", "suspended", b"suspended", "systemMessageToInsert", b"systemMessageToInsert", "tcToken", b"tcToken", "tcTokenSenderTimestamp", b"tcTokenSenderTimestamp", "tcTokenTimestamp", b"tcTokenTimestamp", "terminated", b"terminated", "unreadCount", b"unreadCount", "unreadMentionCount", b"unreadMentionCount", "username", b"username", "wallpaper", b"wallpaper"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["ID", b"ID", "accountLid", b"accountLid", "archived", b"archived", "capiCreatedGroup", b"capiCreatedGroup", "commentsCount", b"commentsCount", "contactPrimaryIdentityKey", b"contactPrimaryIdentityKey", "conversationTimestamp", b"conversationTimestamp", "createdAt", b"createdAt", "createdBy", b"createdBy", "description", b"description", "disappearingMode", b"disappearingMode", "displayName", b"displayName", "endOfHistoryTransfer", b"endOfHistoryTransfer", "endOfHistoryTransferType", b"endOfHistoryTransferType", "ephemeralExpiration", b"ephemeralExpiration", "ephemeralSettingTimestamp", b"ephemeralSettingTimestamp", "isDefaultSubgroup", b"isDefaultSubgroup", "isParentGroup", b"isParentGroup", "lastMsgTimestamp", b"lastMsgTimestamp", "lidJID", b"lidJID", "lidOriginType", b"lidOriginType", "limitSharing", b"limitSharing", "limitSharingInitiatedByMe", b"limitSharingInitiatedByMe", "limitSharingSettingTimestamp", b"limitSharingSettingTimestamp", "limitSharingTrigger", b"limitSharingTrigger", "locked", b"locked", "maibaAiThreadEnabled", b"maibaAiThreadEnabled", "markedAsUnread", b"markedAsUnread", "mediaVisibility", b"mediaVisibility", "muteEndTime", b"muteEndTime", "name", b"name", "newJID", b"newJID", "notSpam", b"notSpam", "oldJID", b"oldJID", "pHash", b"pHash", "parentGroupID", b"parentGroupID", "pinned", b"pinned", "pnJID", b"pnJID", "pnhDuplicateLidThread", b"pnhDuplicateLidThread", "readOnly", b"readOnly", "shareOwnPn", b"shareOwnPn", "support", b"support", "suspended", b"suspended", "systemMessageToInsert", b"systemMessageToInsert", "tcToken", b"tcToken", "tcTokenSenderTimestamp", b"tcTokenSenderTimestamp", "tcTokenTimestamp", b"tcTokenTimestamp", "terminated", b"terminated", "unreadCount", b"unreadCount", "unreadMentionCount", b"unreadMentionCount", "username", b"username", "wallpaper", b"wallpaper"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["ID", b"ID", "accountLid", b"accountLid", "archived", b"archived", "capiCreatedGroup", b"capiCreatedGroup", "commentsCount", b"commentsCount", "contactPrimaryIdentityKey", b"contactPrimaryIdentityKey", "conversationTimestamp", b"conversationTimestamp", "createdAt", b"createdAt", "createdBy", b"createdBy", "description", b"description", "disappearingMode", b"disappearingMode", "displayName", b"displayName", "endOfHistoryTransfer", b"endOfHistoryTransfer", "endOfHistoryTransferType", b"endOfHistoryTransferType", "ephemeralExpiration", b"ephemeralExpiration", "ephemeralSettingTimestamp", b"ephemeralSettingTimestamp", "isDefaultSubgroup", b"isDefaultSubgroup", "isParentGroup", b"isParentGroup", "lastMsgTimestamp", b"lastMsgTimestamp", "lidJID", b"lidJID", "lidOriginType", b"lidOriginType", "limitSharing", b"limitSharing", "limitSharingInitiatedByMe", b"limitSharingInitiatedByMe", "limitSharingSettingTimestamp", b"limitSharingSettingTimestamp", "limitSharingTrigger", b"limitSharingTrigger", "locked", b"locked", "maibaAiThreadEnabled", b"maibaAiThreadEnabled", "markedAsUnread", b"markedAsUnread", "mediaVisibility", b"mediaVisibility", "messages", b"messages", "muteEndTime", b"muteEndTime", "name", b"name", "newJID", b"newJID", "notSpam", b"notSpam", "oldJID", b"oldJID", "pHash", b"pHash", "parentGroupID", b"parentGroupID", "participant", b"participant", "pinned", b"pinned", "pnJID", b"pnJID", "pnhDuplicateLidThread", b"pnhDuplicateLidThread", "readOnly", b"readOnly", "shareOwnPn", b"shareOwnPn", "support", b"support", "suspended", b"suspended", "systemMessageToInsert", b"systemMessageToInsert", "tcToken", b"tcToken", "tcTokenSenderTimestamp", b"tcTokenSenderTimestamp", "tcTokenTimestamp", b"tcTokenTimestamp", "terminated", b"terminated", "unreadCount", b"unreadCount", "unreadMentionCount", b"unreadMentionCount", "username", b"username", "wallpaper", b"wallpaper"]) -> None: ...
 
-Global___Conversation: _TypeAlias = Conversation  # noqa: Y015
+Global___Conversation: typing_extensions.TypeAlias = Conversation
 
-@_typing.final
-class GroupParticipant(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class GroupParticipant(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     class _Rank:
-        ValueType = _typing.NewType("ValueType", _builtins.int)
-        V: _TypeAlias = ValueType  # noqa: Y015
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
 
-    class _RankEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[GroupParticipant._Rank.ValueType], _builtins.type):
-        DESCRIPTOR: _descriptor.EnumDescriptor
+    class _RankEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[GroupParticipant._Rank.ValueType], builtins.type):
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         REGULAR: GroupParticipant._Rank.ValueType  # 0
         ADMIN: GroupParticipant._Rank.ValueType  # 1
         SUPERADMIN: GroupParticipant._Rank.ValueType  # 2
@@ -386,37 +382,35 @@ class GroupParticipant(_message.Message):
     ADMIN: GroupParticipant.Rank.ValueType  # 1
     SUPERADMIN: GroupParticipant.Rank.ValueType  # 2
 
-    USERJID_FIELD_NUMBER: _builtins.int
-    RANK_FIELD_NUMBER: _builtins.int
-    MEMBERLABEL_FIELD_NUMBER: _builtins.int
-    userJID: _builtins.str
+    USERJID_FIELD_NUMBER: builtins.int
+    RANK_FIELD_NUMBER: builtins.int
+    MEMBERLABEL_FIELD_NUMBER: builtins.int
+    userJID: builtins.str
     rank: Global___GroupParticipant.Rank.ValueType
-    @_builtins.property
-    def memberLabel(self) -> _WAWebProtobufsE2E_pb2.MemberLabel: ...
+    @property
+    def memberLabel(self) -> waE2E.WAWebProtobufsE2E_pb2.MemberLabel: ...
     def __init__(
         self,
         *,
-        userJID: _builtins.str | None = ...,
+        userJID: builtins.str | None = ...,
         rank: Global___GroupParticipant.Rank.ValueType | None = ...,
-        memberLabel: _WAWebProtobufsE2E_pb2.MemberLabel | None = ...,
+        memberLabel: waE2E.WAWebProtobufsE2E_pb2.MemberLabel | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["memberLabel", b"memberLabel", "rank", b"rank", "userJID", b"userJID"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["memberLabel", b"memberLabel", "rank", b"rank", "userJID", b"userJID"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["memberLabel", b"memberLabel", "rank", b"rank", "userJID", b"userJID"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["memberLabel", b"memberLabel", "rank", b"rank", "userJID", b"userJID"]) -> None: ...
 
-Global___GroupParticipant: _TypeAlias = GroupParticipant  # noqa: Y015
+Global___GroupParticipant: typing_extensions.TypeAlias = GroupParticipant
 
-@_typing.final
-class PastParticipant(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class PastParticipant(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     class _LeaveReason:
-        ValueType = _typing.NewType("ValueType", _builtins.int)
-        V: _TypeAlias = ValueType  # noqa: Y015
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
 
-    class _LeaveReasonEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[PastParticipant._LeaveReason.ValueType], _builtins.type):
-        DESCRIPTOR: _descriptor.EnumDescriptor
+    class _LeaveReasonEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[PastParticipant._LeaveReason.ValueType], builtins.type):
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         LEFT: PastParticipant._LeaveReason.ValueType  # 0
         REMOVED: PastParticipant._LeaveReason.ValueType  # 1
 
@@ -424,191 +418,179 @@ class PastParticipant(_message.Message):
     LEFT: PastParticipant.LeaveReason.ValueType  # 0
     REMOVED: PastParticipant.LeaveReason.ValueType  # 1
 
-    USERJID_FIELD_NUMBER: _builtins.int
-    LEAVEREASON_FIELD_NUMBER: _builtins.int
-    LEAVETS_FIELD_NUMBER: _builtins.int
-    userJID: _builtins.str
+    USERJID_FIELD_NUMBER: builtins.int
+    LEAVEREASON_FIELD_NUMBER: builtins.int
+    LEAVETS_FIELD_NUMBER: builtins.int
+    userJID: builtins.str
     leaveReason: Global___PastParticipant.LeaveReason.ValueType
-    leaveTS: _builtins.int
+    leaveTS: builtins.int
     def __init__(
         self,
         *,
-        userJID: _builtins.str | None = ...,
+        userJID: builtins.str | None = ...,
         leaveReason: Global___PastParticipant.LeaveReason.ValueType | None = ...,
-        leaveTS: _builtins.int | None = ...,
+        leaveTS: builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["leaveReason", b"leaveReason", "leaveTS", b"leaveTS", "userJID", b"userJID"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["leaveReason", b"leaveReason", "leaveTS", b"leaveTS", "userJID", b"userJID"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["leaveReason", b"leaveReason", "leaveTS", b"leaveTS", "userJID", b"userJID"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["leaveReason", b"leaveReason", "leaveTS", b"leaveTS", "userJID", b"userJID"]) -> None: ...
 
-Global___PastParticipant: _TypeAlias = PastParticipant  # noqa: Y015
+Global___PastParticipant: typing_extensions.TypeAlias = PastParticipant
 
-@_typing.final
-class PhoneNumberToLIDMapping(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class PhoneNumberToLIDMapping(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    PNJID_FIELD_NUMBER: _builtins.int
-    LIDJID_FIELD_NUMBER: _builtins.int
-    pnJID: _builtins.str
-    lidJID: _builtins.str
+    PNJID_FIELD_NUMBER: builtins.int
+    LIDJID_FIELD_NUMBER: builtins.int
+    pnJID: builtins.str
+    lidJID: builtins.str
     def __init__(
         self,
         *,
-        pnJID: _builtins.str | None = ...,
-        lidJID: _builtins.str | None = ...,
+        pnJID: builtins.str | None = ...,
+        lidJID: builtins.str | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["lidJID", b"lidJID", "pnJID", b"pnJID"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["lidJID", b"lidJID", "pnJID", b"pnJID"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["lidJID", b"lidJID", "pnJID", b"pnJID"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["lidJID", b"lidJID", "pnJID", b"pnJID"]) -> None: ...
 
-Global___PhoneNumberToLIDMapping: _TypeAlias = PhoneNumberToLIDMapping  # noqa: Y015
+Global___PhoneNumberToLIDMapping: typing_extensions.TypeAlias = PhoneNumberToLIDMapping
 
-@_typing.final
-class Account(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class Account(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    LID_FIELD_NUMBER: _builtins.int
-    USERNAME_FIELD_NUMBER: _builtins.int
-    COUNTRYCODE_FIELD_NUMBER: _builtins.int
-    ISUSERNAMEDELETED_FIELD_NUMBER: _builtins.int
-    lid: _builtins.str
-    username: _builtins.str
-    countryCode: _builtins.str
-    isUsernameDeleted: _builtins.bool
+    LID_FIELD_NUMBER: builtins.int
+    USERNAME_FIELD_NUMBER: builtins.int
+    COUNTRYCODE_FIELD_NUMBER: builtins.int
+    ISUSERNAMEDELETED_FIELD_NUMBER: builtins.int
+    lid: builtins.str
+    username: builtins.str
+    countryCode: builtins.str
+    isUsernameDeleted: builtins.bool
     def __init__(
         self,
         *,
-        lid: _builtins.str | None = ...,
-        username: _builtins.str | None = ...,
-        countryCode: _builtins.str | None = ...,
-        isUsernameDeleted: _builtins.bool | None = ...,
+        lid: builtins.str | None = ...,
+        username: builtins.str | None = ...,
+        countryCode: builtins.str | None = ...,
+        isUsernameDeleted: builtins.bool | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["countryCode", b"countryCode", "isUsernameDeleted", b"isUsernameDeleted", "lid", b"lid", "username", b"username"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["countryCode", b"countryCode", "isUsernameDeleted", b"isUsernameDeleted", "lid", b"lid", "username", b"username"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["countryCode", b"countryCode", "isUsernameDeleted", b"isUsernameDeleted", "lid", b"lid", "username", b"username"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["countryCode", b"countryCode", "isUsernameDeleted", b"isUsernameDeleted", "lid", b"lid", "username", b"username"]) -> None: ...
 
-Global___Account: _TypeAlias = Account  # noqa: Y015
+Global___Account: typing_extensions.TypeAlias = Account
 
-@_typing.final
-class HistorySyncMsg(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class HistorySyncMsg(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    MESSAGE_FIELD_NUMBER: _builtins.int
-    MSGORDERID_FIELD_NUMBER: _builtins.int
-    msgOrderID: _builtins.int
-    @_builtins.property
-    def message(self) -> _WAWebProtobufsWeb_pb2.WebMessageInfo: ...
+    MESSAGE_FIELD_NUMBER: builtins.int
+    MSGORDERID_FIELD_NUMBER: builtins.int
+    msgOrderID: builtins.int
+    @property
+    def message(self) -> waWeb.WAWebProtobufsWeb_pb2.WebMessageInfo: ...
     def __init__(
         self,
         *,
-        message: _WAWebProtobufsWeb_pb2.WebMessageInfo | None = ...,
-        msgOrderID: _builtins.int | None = ...,
+        message: waWeb.WAWebProtobufsWeb_pb2.WebMessageInfo | None = ...,
+        msgOrderID: builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["message", b"message", "msgOrderID", b"msgOrderID"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["message", b"message", "msgOrderID", b"msgOrderID"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["message", b"message", "msgOrderID", b"msgOrderID"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["message", b"message", "msgOrderID", b"msgOrderID"]) -> None: ...
 
-Global___HistorySyncMsg: _TypeAlias = HistorySyncMsg  # noqa: Y015
+Global___HistorySyncMsg: typing_extensions.TypeAlias = HistorySyncMsg
 
-@_typing.final
-class Pushname(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class Pushname(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    ID_FIELD_NUMBER: _builtins.int
-    PUSHNAME_FIELD_NUMBER: _builtins.int
-    ID: _builtins.str
-    pushname: _builtins.str
+    ID_FIELD_NUMBER: builtins.int
+    PUSHNAME_FIELD_NUMBER: builtins.int
+    ID: builtins.str
+    pushname: builtins.str
     def __init__(
         self,
         *,
-        ID: _builtins.str | None = ...,
-        pushname: _builtins.str | None = ...,
+        ID: builtins.str | None = ...,
+        pushname: builtins.str | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["ID", b"ID", "pushname", b"pushname"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["ID", b"ID", "pushname", b"pushname"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["ID", b"ID", "pushname", b"pushname"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["ID", b"ID", "pushname", b"pushname"]) -> None: ...
 
-Global___Pushname: _TypeAlias = Pushname  # noqa: Y015
+Global___Pushname: typing_extensions.TypeAlias = Pushname
 
-@_typing.final
-class WallpaperSettings(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class WallpaperSettings(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    FILENAME_FIELD_NUMBER: _builtins.int
-    OPACITY_FIELD_NUMBER: _builtins.int
-    filename: _builtins.str
-    opacity: _builtins.int
+    FILENAME_FIELD_NUMBER: builtins.int
+    OPACITY_FIELD_NUMBER: builtins.int
+    filename: builtins.str
+    opacity: builtins.int
     def __init__(
         self,
         *,
-        filename: _builtins.str | None = ...,
-        opacity: _builtins.int | None = ...,
+        filename: builtins.str | None = ...,
+        opacity: builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["filename", b"filename", "opacity", b"opacity"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["filename", b"filename", "opacity", b"opacity"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["filename", b"filename", "opacity", b"opacity"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["filename", b"filename", "opacity", b"opacity"]) -> None: ...
 
-Global___WallpaperSettings: _TypeAlias = WallpaperSettings  # noqa: Y015
+Global___WallpaperSettings: typing_extensions.TypeAlias = WallpaperSettings
 
-@_typing.final
-class GlobalSettings(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class GlobalSettings(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    LIGHTTHEMEWALLPAPER_FIELD_NUMBER: _builtins.int
-    MEDIAVISIBILITY_FIELD_NUMBER: _builtins.int
-    DARKTHEMEWALLPAPER_FIELD_NUMBER: _builtins.int
-    AUTODOWNLOADWIFI_FIELD_NUMBER: _builtins.int
-    AUTODOWNLOADCELLULAR_FIELD_NUMBER: _builtins.int
-    AUTODOWNLOADROAMING_FIELD_NUMBER: _builtins.int
-    SHOWINDIVIDUALNOTIFICATIONSPREVIEW_FIELD_NUMBER: _builtins.int
-    SHOWGROUPNOTIFICATIONSPREVIEW_FIELD_NUMBER: _builtins.int
-    DISAPPEARINGMODEDURATION_FIELD_NUMBER: _builtins.int
-    DISAPPEARINGMODETIMESTAMP_FIELD_NUMBER: _builtins.int
-    AVATARUSERSETTINGS_FIELD_NUMBER: _builtins.int
-    FONTSIZE_FIELD_NUMBER: _builtins.int
-    SECURITYNOTIFICATIONS_FIELD_NUMBER: _builtins.int
-    AUTOUNARCHIVECHATS_FIELD_NUMBER: _builtins.int
-    VIDEOQUALITYMODE_FIELD_NUMBER: _builtins.int
-    PHOTOQUALITYMODE_FIELD_NUMBER: _builtins.int
-    INDIVIDUALNOTIFICATIONSETTINGS_FIELD_NUMBER: _builtins.int
-    GROUPNOTIFICATIONSETTINGS_FIELD_NUMBER: _builtins.int
-    CHATLOCKSETTINGS_FIELD_NUMBER: _builtins.int
-    CHATDBLIDMIGRATIONTIMESTAMP_FIELD_NUMBER: _builtins.int
+    LIGHTTHEMEWALLPAPER_FIELD_NUMBER: builtins.int
+    MEDIAVISIBILITY_FIELD_NUMBER: builtins.int
+    DARKTHEMEWALLPAPER_FIELD_NUMBER: builtins.int
+    AUTODOWNLOADWIFI_FIELD_NUMBER: builtins.int
+    AUTODOWNLOADCELLULAR_FIELD_NUMBER: builtins.int
+    AUTODOWNLOADROAMING_FIELD_NUMBER: builtins.int
+    SHOWINDIVIDUALNOTIFICATIONSPREVIEW_FIELD_NUMBER: builtins.int
+    SHOWGROUPNOTIFICATIONSPREVIEW_FIELD_NUMBER: builtins.int
+    DISAPPEARINGMODEDURATION_FIELD_NUMBER: builtins.int
+    DISAPPEARINGMODETIMESTAMP_FIELD_NUMBER: builtins.int
+    AVATARUSERSETTINGS_FIELD_NUMBER: builtins.int
+    FONTSIZE_FIELD_NUMBER: builtins.int
+    SECURITYNOTIFICATIONS_FIELD_NUMBER: builtins.int
+    AUTOUNARCHIVECHATS_FIELD_NUMBER: builtins.int
+    VIDEOQUALITYMODE_FIELD_NUMBER: builtins.int
+    PHOTOQUALITYMODE_FIELD_NUMBER: builtins.int
+    INDIVIDUALNOTIFICATIONSETTINGS_FIELD_NUMBER: builtins.int
+    GROUPNOTIFICATIONSETTINGS_FIELD_NUMBER: builtins.int
+    CHATLOCKSETTINGS_FIELD_NUMBER: builtins.int
+    CHATDBLIDMIGRATIONTIMESTAMP_FIELD_NUMBER: builtins.int
     mediaVisibility: Global___MediaVisibility.ValueType
-    showIndividualNotificationsPreview: _builtins.bool
-    showGroupNotificationsPreview: _builtins.bool
-    disappearingModeDuration: _builtins.int
-    disappearingModeTimestamp: _builtins.int
-    fontSize: _builtins.int
-    securityNotifications: _builtins.bool
-    autoUnarchiveChats: _builtins.bool
-    videoQualityMode: _builtins.int
-    photoQualityMode: _builtins.int
-    chatDbLidMigrationTimestamp: _builtins.int
-    @_builtins.property
+    showIndividualNotificationsPreview: builtins.bool
+    showGroupNotificationsPreview: builtins.bool
+    disappearingModeDuration: builtins.int
+    disappearingModeTimestamp: builtins.int
+    fontSize: builtins.int
+    securityNotifications: builtins.bool
+    autoUnarchiveChats: builtins.bool
+    videoQualityMode: builtins.int
+    photoQualityMode: builtins.int
+    chatDbLidMigrationTimestamp: builtins.int
+    @property
     def lightThemeWallpaper(self) -> Global___WallpaperSettings: ...
-    @_builtins.property
+    @property
     def darkThemeWallpaper(self) -> Global___WallpaperSettings: ...
-    @_builtins.property
+    @property
     def autoDownloadWiFi(self) -> Global___AutoDownloadSettings: ...
-    @_builtins.property
+    @property
     def autoDownloadCellular(self) -> Global___AutoDownloadSettings: ...
-    @_builtins.property
+    @property
     def autoDownloadRoaming(self) -> Global___AutoDownloadSettings: ...
-    @_builtins.property
+    @property
     def avatarUserSettings(self) -> Global___AvatarUserSettings: ...
-    @_builtins.property
+    @property
     def individualNotificationSettings(self) -> Global___NotificationSettings: ...
-    @_builtins.property
+    @property
     def groupNotificationSettings(self) -> Global___NotificationSettings: ...
-    @_builtins.property
-    def chatLockSettings(self) -> _WAWebProtobufsChatLockSettings_pb2.ChatLockSettings: ...
+    @property
+    def chatLockSettings(self) -> waChatLockSettings.WAWebProtobufsChatLockSettings_pb2.ChatLockSettings: ...
     def __init__(
         self,
         *,
@@ -618,184 +600,172 @@ class GlobalSettings(_message.Message):
         autoDownloadWiFi: Global___AutoDownloadSettings | None = ...,
         autoDownloadCellular: Global___AutoDownloadSettings | None = ...,
         autoDownloadRoaming: Global___AutoDownloadSettings | None = ...,
-        showIndividualNotificationsPreview: _builtins.bool | None = ...,
-        showGroupNotificationsPreview: _builtins.bool | None = ...,
-        disappearingModeDuration: _builtins.int | None = ...,
-        disappearingModeTimestamp: _builtins.int | None = ...,
+        showIndividualNotificationsPreview: builtins.bool | None = ...,
+        showGroupNotificationsPreview: builtins.bool | None = ...,
+        disappearingModeDuration: builtins.int | None = ...,
+        disappearingModeTimestamp: builtins.int | None = ...,
         avatarUserSettings: Global___AvatarUserSettings | None = ...,
-        fontSize: _builtins.int | None = ...,
-        securityNotifications: _builtins.bool | None = ...,
-        autoUnarchiveChats: _builtins.bool | None = ...,
-        videoQualityMode: _builtins.int | None = ...,
-        photoQualityMode: _builtins.int | None = ...,
+        fontSize: builtins.int | None = ...,
+        securityNotifications: builtins.bool | None = ...,
+        autoUnarchiveChats: builtins.bool | None = ...,
+        videoQualityMode: builtins.int | None = ...,
+        photoQualityMode: builtins.int | None = ...,
         individualNotificationSettings: Global___NotificationSettings | None = ...,
         groupNotificationSettings: Global___NotificationSettings | None = ...,
-        chatLockSettings: _WAWebProtobufsChatLockSettings_pb2.ChatLockSettings | None = ...,
-        chatDbLidMigrationTimestamp: _builtins.int | None = ...,
+        chatLockSettings: waChatLockSettings.WAWebProtobufsChatLockSettings_pb2.ChatLockSettings | None = ...,
+        chatDbLidMigrationTimestamp: builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["autoDownloadCellular", b"autoDownloadCellular", "autoDownloadRoaming", b"autoDownloadRoaming", "autoDownloadWiFi", b"autoDownloadWiFi", "autoUnarchiveChats", b"autoUnarchiveChats", "avatarUserSettings", b"avatarUserSettings", "chatDbLidMigrationTimestamp", b"chatDbLidMigrationTimestamp", "chatLockSettings", b"chatLockSettings", "darkThemeWallpaper", b"darkThemeWallpaper", "disappearingModeDuration", b"disappearingModeDuration", "disappearingModeTimestamp", b"disappearingModeTimestamp", "fontSize", b"fontSize", "groupNotificationSettings", b"groupNotificationSettings", "individualNotificationSettings", b"individualNotificationSettings", "lightThemeWallpaper", b"lightThemeWallpaper", "mediaVisibility", b"mediaVisibility", "photoQualityMode", b"photoQualityMode", "securityNotifications", b"securityNotifications", "showGroupNotificationsPreview", b"showGroupNotificationsPreview", "showIndividualNotificationsPreview", b"showIndividualNotificationsPreview", "videoQualityMode", b"videoQualityMode"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["autoDownloadCellular", b"autoDownloadCellular", "autoDownloadRoaming", b"autoDownloadRoaming", "autoDownloadWiFi", b"autoDownloadWiFi", "autoUnarchiveChats", b"autoUnarchiveChats", "avatarUserSettings", b"avatarUserSettings", "chatDbLidMigrationTimestamp", b"chatDbLidMigrationTimestamp", "chatLockSettings", b"chatLockSettings", "darkThemeWallpaper", b"darkThemeWallpaper", "disappearingModeDuration", b"disappearingModeDuration", "disappearingModeTimestamp", b"disappearingModeTimestamp", "fontSize", b"fontSize", "groupNotificationSettings", b"groupNotificationSettings", "individualNotificationSettings", b"individualNotificationSettings", "lightThemeWallpaper", b"lightThemeWallpaper", "mediaVisibility", b"mediaVisibility", "photoQualityMode", b"photoQualityMode", "securityNotifications", b"securityNotifications", "showGroupNotificationsPreview", b"showGroupNotificationsPreview", "showIndividualNotificationsPreview", b"showIndividualNotificationsPreview", "videoQualityMode", b"videoQualityMode"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["autoDownloadCellular", b"autoDownloadCellular", "autoDownloadRoaming", b"autoDownloadRoaming", "autoDownloadWiFi", b"autoDownloadWiFi", "autoUnarchiveChats", b"autoUnarchiveChats", "avatarUserSettings", b"avatarUserSettings", "chatDbLidMigrationTimestamp", b"chatDbLidMigrationTimestamp", "chatLockSettings", b"chatLockSettings", "darkThemeWallpaper", b"darkThemeWallpaper", "disappearingModeDuration", b"disappearingModeDuration", "disappearingModeTimestamp", b"disappearingModeTimestamp", "fontSize", b"fontSize", "groupNotificationSettings", b"groupNotificationSettings", "individualNotificationSettings", b"individualNotificationSettings", "lightThemeWallpaper", b"lightThemeWallpaper", "mediaVisibility", b"mediaVisibility", "photoQualityMode", b"photoQualityMode", "securityNotifications", b"securityNotifications", "showGroupNotificationsPreview", b"showGroupNotificationsPreview", "showIndividualNotificationsPreview", b"showIndividualNotificationsPreview", "videoQualityMode", b"videoQualityMode"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["autoDownloadCellular", b"autoDownloadCellular", "autoDownloadRoaming", b"autoDownloadRoaming", "autoDownloadWiFi", b"autoDownloadWiFi", "autoUnarchiveChats", b"autoUnarchiveChats", "avatarUserSettings", b"avatarUserSettings", "chatDbLidMigrationTimestamp", b"chatDbLidMigrationTimestamp", "chatLockSettings", b"chatLockSettings", "darkThemeWallpaper", b"darkThemeWallpaper", "disappearingModeDuration", b"disappearingModeDuration", "disappearingModeTimestamp", b"disappearingModeTimestamp", "fontSize", b"fontSize", "groupNotificationSettings", b"groupNotificationSettings", "individualNotificationSettings", b"individualNotificationSettings", "lightThemeWallpaper", b"lightThemeWallpaper", "mediaVisibility", b"mediaVisibility", "photoQualityMode", b"photoQualityMode", "securityNotifications", b"securityNotifications", "showGroupNotificationsPreview", b"showGroupNotificationsPreview", "showIndividualNotificationsPreview", b"showIndividualNotificationsPreview", "videoQualityMode", b"videoQualityMode"]) -> None: ...
 
-Global___GlobalSettings: _TypeAlias = GlobalSettings  # noqa: Y015
+Global___GlobalSettings: typing_extensions.TypeAlias = GlobalSettings
 
-@_typing.final
-class AutoDownloadSettings(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class AutoDownloadSettings(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    DOWNLOADIMAGES_FIELD_NUMBER: _builtins.int
-    DOWNLOADAUDIO_FIELD_NUMBER: _builtins.int
-    DOWNLOADVIDEO_FIELD_NUMBER: _builtins.int
-    DOWNLOADDOCUMENTS_FIELD_NUMBER: _builtins.int
-    downloadImages: _builtins.bool
-    downloadAudio: _builtins.bool
-    downloadVideo: _builtins.bool
-    downloadDocuments: _builtins.bool
+    DOWNLOADIMAGES_FIELD_NUMBER: builtins.int
+    DOWNLOADAUDIO_FIELD_NUMBER: builtins.int
+    DOWNLOADVIDEO_FIELD_NUMBER: builtins.int
+    DOWNLOADDOCUMENTS_FIELD_NUMBER: builtins.int
+    downloadImages: builtins.bool
+    downloadAudio: builtins.bool
+    downloadVideo: builtins.bool
+    downloadDocuments: builtins.bool
     def __init__(
         self,
         *,
-        downloadImages: _builtins.bool | None = ...,
-        downloadAudio: _builtins.bool | None = ...,
-        downloadVideo: _builtins.bool | None = ...,
-        downloadDocuments: _builtins.bool | None = ...,
+        downloadImages: builtins.bool | None = ...,
+        downloadAudio: builtins.bool | None = ...,
+        downloadVideo: builtins.bool | None = ...,
+        downloadDocuments: builtins.bool | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["downloadAudio", b"downloadAudio", "downloadDocuments", b"downloadDocuments", "downloadImages", b"downloadImages", "downloadVideo", b"downloadVideo"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["downloadAudio", b"downloadAudio", "downloadDocuments", b"downloadDocuments", "downloadImages", b"downloadImages", "downloadVideo", b"downloadVideo"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["downloadAudio", b"downloadAudio", "downloadDocuments", b"downloadDocuments", "downloadImages", b"downloadImages", "downloadVideo", b"downloadVideo"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["downloadAudio", b"downloadAudio", "downloadDocuments", b"downloadDocuments", "downloadImages", b"downloadImages", "downloadVideo", b"downloadVideo"]) -> None: ...
 
-Global___AutoDownloadSettings: _TypeAlias = AutoDownloadSettings  # noqa: Y015
+Global___AutoDownloadSettings: typing_extensions.TypeAlias = AutoDownloadSettings
 
-@_typing.final
-class StickerMetadata(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class StickerMetadata(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    URL_FIELD_NUMBER: _builtins.int
-    FILESHA256_FIELD_NUMBER: _builtins.int
-    FILEENCSHA256_FIELD_NUMBER: _builtins.int
-    MEDIAKEY_FIELD_NUMBER: _builtins.int
-    MIMETYPE_FIELD_NUMBER: _builtins.int
-    HEIGHT_FIELD_NUMBER: _builtins.int
-    WIDTH_FIELD_NUMBER: _builtins.int
-    DIRECTPATH_FIELD_NUMBER: _builtins.int
-    FILELENGTH_FIELD_NUMBER: _builtins.int
-    WEIGHT_FIELD_NUMBER: _builtins.int
-    LASTSTICKERSENTTS_FIELD_NUMBER: _builtins.int
-    ISLOTTIE_FIELD_NUMBER: _builtins.int
-    IMAGEHASH_FIELD_NUMBER: _builtins.int
-    ISAVATARSTICKER_FIELD_NUMBER: _builtins.int
-    URL: _builtins.str
-    fileSHA256: _builtins.bytes
-    fileEncSHA256: _builtins.bytes
-    mediaKey: _builtins.bytes
-    mimetype: _builtins.str
-    height: _builtins.int
-    width: _builtins.int
-    directPath: _builtins.str
-    fileLength: _builtins.int
-    weight: _builtins.float
-    lastStickerSentTS: _builtins.int
-    isLottie: _builtins.bool
-    imageHash: _builtins.str
-    isAvatarSticker: _builtins.bool
+    URL_FIELD_NUMBER: builtins.int
+    FILESHA256_FIELD_NUMBER: builtins.int
+    FILEENCSHA256_FIELD_NUMBER: builtins.int
+    MEDIAKEY_FIELD_NUMBER: builtins.int
+    MIMETYPE_FIELD_NUMBER: builtins.int
+    HEIGHT_FIELD_NUMBER: builtins.int
+    WIDTH_FIELD_NUMBER: builtins.int
+    DIRECTPATH_FIELD_NUMBER: builtins.int
+    FILELENGTH_FIELD_NUMBER: builtins.int
+    WEIGHT_FIELD_NUMBER: builtins.int
+    LASTSTICKERSENTTS_FIELD_NUMBER: builtins.int
+    ISLOTTIE_FIELD_NUMBER: builtins.int
+    IMAGEHASH_FIELD_NUMBER: builtins.int
+    ISAVATARSTICKER_FIELD_NUMBER: builtins.int
+    URL: builtins.str
+    fileSHA256: builtins.bytes
+    fileEncSHA256: builtins.bytes
+    mediaKey: builtins.bytes
+    mimetype: builtins.str
+    height: builtins.int
+    width: builtins.int
+    directPath: builtins.str
+    fileLength: builtins.int
+    weight: builtins.float
+    lastStickerSentTS: builtins.int
+    isLottie: builtins.bool
+    imageHash: builtins.str
+    isAvatarSticker: builtins.bool
     def __init__(
         self,
         *,
-        URL: _builtins.str | None = ...,
-        fileSHA256: _builtins.bytes | None = ...,
-        fileEncSHA256: _builtins.bytes | None = ...,
-        mediaKey: _builtins.bytes | None = ...,
-        mimetype: _builtins.str | None = ...,
-        height: _builtins.int | None = ...,
-        width: _builtins.int | None = ...,
-        directPath: _builtins.str | None = ...,
-        fileLength: _builtins.int | None = ...,
-        weight: _builtins.float | None = ...,
-        lastStickerSentTS: _builtins.int | None = ...,
-        isLottie: _builtins.bool | None = ...,
-        imageHash: _builtins.str | None = ...,
-        isAvatarSticker: _builtins.bool | None = ...,
+        URL: builtins.str | None = ...,
+        fileSHA256: builtins.bytes | None = ...,
+        fileEncSHA256: builtins.bytes | None = ...,
+        mediaKey: builtins.bytes | None = ...,
+        mimetype: builtins.str | None = ...,
+        height: builtins.int | None = ...,
+        width: builtins.int | None = ...,
+        directPath: builtins.str | None = ...,
+        fileLength: builtins.int | None = ...,
+        weight: builtins.float | None = ...,
+        lastStickerSentTS: builtins.int | None = ...,
+        isLottie: builtins.bool | None = ...,
+        imageHash: builtins.str | None = ...,
+        isAvatarSticker: builtins.bool | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["URL", b"URL", "directPath", b"directPath", "fileEncSHA256", b"fileEncSHA256", "fileLength", b"fileLength", "fileSHA256", b"fileSHA256", "height", b"height", "imageHash", b"imageHash", "isAvatarSticker", b"isAvatarSticker", "isLottie", b"isLottie", "lastStickerSentTS", b"lastStickerSentTS", "mediaKey", b"mediaKey", "mimetype", b"mimetype", "weight", b"weight", "width", b"width"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["URL", b"URL", "directPath", b"directPath", "fileEncSHA256", b"fileEncSHA256", "fileLength", b"fileLength", "fileSHA256", b"fileSHA256", "height", b"height", "imageHash", b"imageHash", "isAvatarSticker", b"isAvatarSticker", "isLottie", b"isLottie", "lastStickerSentTS", b"lastStickerSentTS", "mediaKey", b"mediaKey", "mimetype", b"mimetype", "weight", b"weight", "width", b"width"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["URL", b"URL", "directPath", b"directPath", "fileEncSHA256", b"fileEncSHA256", "fileLength", b"fileLength", "fileSHA256", b"fileSHA256", "height", b"height", "imageHash", b"imageHash", "isAvatarSticker", b"isAvatarSticker", "isLottie", b"isLottie", "lastStickerSentTS", b"lastStickerSentTS", "mediaKey", b"mediaKey", "mimetype", b"mimetype", "weight", b"weight", "width", b"width"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["URL", b"URL", "directPath", b"directPath", "fileEncSHA256", b"fileEncSHA256", "fileLength", b"fileLength", "fileSHA256", b"fileSHA256", "height", b"height", "imageHash", b"imageHash", "isAvatarSticker", b"isAvatarSticker", "isLottie", b"isLottie", "lastStickerSentTS", b"lastStickerSentTS", "mediaKey", b"mediaKey", "mimetype", b"mimetype", "weight", b"weight", "width", b"width"]) -> None: ...
 
-Global___StickerMetadata: _TypeAlias = StickerMetadata  # noqa: Y015
+Global___StickerMetadata: typing_extensions.TypeAlias = StickerMetadata
 
-@_typing.final
-class PastParticipants(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class PastParticipants(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    GROUPJID_FIELD_NUMBER: _builtins.int
-    PASTPARTICIPANTS_FIELD_NUMBER: _builtins.int
-    groupJID: _builtins.str
-    @_builtins.property
-    def pastParticipants(self) -> _containers.RepeatedCompositeFieldContainer[Global___PastParticipant]: ...
+    GROUPJID_FIELD_NUMBER: builtins.int
+    PASTPARTICIPANTS_FIELD_NUMBER: builtins.int
+    groupJID: builtins.str
+    @property
+    def pastParticipants(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___PastParticipant]: ...
     def __init__(
         self,
         *,
-        groupJID: _builtins.str | None = ...,
-        pastParticipants: _abc.Iterable[Global___PastParticipant] | None = ...,
+        groupJID: builtins.str | None = ...,
+        pastParticipants: collections.abc.Iterable[Global___PastParticipant] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["groupJID", b"groupJID"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["groupJID", b"groupJID", "pastParticipants", b"pastParticipants"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["groupJID", b"groupJID"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["groupJID", b"groupJID", "pastParticipants", b"pastParticipants"]) -> None: ...
 
-Global___PastParticipants: _TypeAlias = PastParticipants  # noqa: Y015
+Global___PastParticipants: typing_extensions.TypeAlias = PastParticipants
 
-@_typing.final
-class AvatarUserSettings(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class AvatarUserSettings(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    FBID_FIELD_NUMBER: _builtins.int
-    PASSWORD_FIELD_NUMBER: _builtins.int
-    FBID: _builtins.str
-    password: _builtins.str
+    FBID_FIELD_NUMBER: builtins.int
+    PASSWORD_FIELD_NUMBER: builtins.int
+    FBID: builtins.str
+    password: builtins.str
     def __init__(
         self,
         *,
-        FBID: _builtins.str | None = ...,
-        password: _builtins.str | None = ...,
+        FBID: builtins.str | None = ...,
+        password: builtins.str | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["FBID", b"FBID", "password", b"password"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["FBID", b"FBID", "password", b"password"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["FBID", b"FBID", "password", b"password"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["FBID", b"FBID", "password", b"password"]) -> None: ...
 
-Global___AvatarUserSettings: _TypeAlias = AvatarUserSettings  # noqa: Y015
+Global___AvatarUserSettings: typing_extensions.TypeAlias = AvatarUserSettings
 
-@_typing.final
-class NotificationSettings(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class NotificationSettings(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    MESSAGEVIBRATE_FIELD_NUMBER: _builtins.int
-    MESSAGEPOPUP_FIELD_NUMBER: _builtins.int
-    MESSAGELIGHT_FIELD_NUMBER: _builtins.int
-    LOWPRIORITYNOTIFICATIONS_FIELD_NUMBER: _builtins.int
-    REACTIONSMUTED_FIELD_NUMBER: _builtins.int
-    CALLVIBRATE_FIELD_NUMBER: _builtins.int
-    messageVibrate: _builtins.str
-    messagePopup: _builtins.str
-    messageLight: _builtins.str
-    lowPriorityNotifications: _builtins.bool
-    reactionsMuted: _builtins.bool
-    callVibrate: _builtins.str
+    MESSAGEVIBRATE_FIELD_NUMBER: builtins.int
+    MESSAGEPOPUP_FIELD_NUMBER: builtins.int
+    MESSAGELIGHT_FIELD_NUMBER: builtins.int
+    LOWPRIORITYNOTIFICATIONS_FIELD_NUMBER: builtins.int
+    REACTIONSMUTED_FIELD_NUMBER: builtins.int
+    CALLVIBRATE_FIELD_NUMBER: builtins.int
+    messageVibrate: builtins.str
+    messagePopup: builtins.str
+    messageLight: builtins.str
+    lowPriorityNotifications: builtins.bool
+    reactionsMuted: builtins.bool
+    callVibrate: builtins.str
     def __init__(
         self,
         *,
-        messageVibrate: _builtins.str | None = ...,
-        messagePopup: _builtins.str | None = ...,
-        messageLight: _builtins.str | None = ...,
-        lowPriorityNotifications: _builtins.bool | None = ...,
-        reactionsMuted: _builtins.bool | None = ...,
-        callVibrate: _builtins.str | None = ...,
+        messageVibrate: builtins.str | None = ...,
+        messagePopup: builtins.str | None = ...,
+        messageLight: builtins.str | None = ...,
+        lowPriorityNotifications: builtins.bool | None = ...,
+        reactionsMuted: builtins.bool | None = ...,
+        callVibrate: builtins.str | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["callVibrate", b"callVibrate", "lowPriorityNotifications", b"lowPriorityNotifications", "messageLight", b"messageLight", "messagePopup", b"messagePopup", "messageVibrate", b"messageVibrate", "reactionsMuted", b"reactionsMuted"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["callVibrate", b"callVibrate", "lowPriorityNotifications", b"lowPriorityNotifications", "messageLight", b"messageLight", "messagePopup", b"messagePopup", "messageVibrate", b"messageVibrate", "reactionsMuted", b"reactionsMuted"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["callVibrate", b"callVibrate", "lowPriorityNotifications", b"lowPriorityNotifications", "messageLight", b"messageLight", "messagePopup", b"messagePopup", "messageVibrate", b"messageVibrate", "reactionsMuted", b"reactionsMuted"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["callVibrate", b"callVibrate", "lowPriorityNotifications", b"lowPriorityNotifications", "messageLight", b"messageLight", "messagePopup", b"messagePopup", "messageVibrate", b"messageVibrate", "reactionsMuted", b"reactionsMuted"]) -> None: ...
 
-Global___NotificationSettings: _TypeAlias = NotificationSettings  # noqa: Y015
+Global___NotificationSettings: typing_extensions.TypeAlias = NotificationSettings
