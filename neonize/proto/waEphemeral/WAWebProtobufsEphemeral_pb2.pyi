@@ -3,36 +3,34 @@
 isort:skip_file
 """
 
-from google.protobuf import descriptor as _descriptor
-from google.protobuf import message as _message
-import builtins as _builtins
+import builtins
+import google.protobuf.descriptor
+import google.protobuf.message
 import sys
-import typing as _typing
+import typing
 
 if sys.version_info >= (3, 10):
-    from typing import TypeAlias as _TypeAlias
+    import typing as typing_extensions
 else:
-    from typing_extensions import TypeAlias as _TypeAlias
+    import typing_extensions
 
-DESCRIPTOR: _descriptor.FileDescriptor
+DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
-@_typing.final
-class EphemeralSetting(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class EphemeralSetting(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    DURATION_FIELD_NUMBER: _builtins.int
-    TIMESTAMP_FIELD_NUMBER: _builtins.int
-    duration: _builtins.int
-    timestamp: _builtins.int
+    DURATION_FIELD_NUMBER: builtins.int
+    TIMESTAMP_FIELD_NUMBER: builtins.int
+    duration: builtins.int
+    timestamp: builtins.int
     def __init__(
         self,
         *,
-        duration: _builtins.int | None = ...,
-        timestamp: _builtins.int | None = ...,
+        duration: builtins.int | None = ...,
+        timestamp: builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["duration", b"duration", "timestamp", b"timestamp"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["duration", b"duration", "timestamp", b"timestamp"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["duration", b"duration", "timestamp", b"timestamp"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["duration", b"duration", "timestamp", b"timestamp"]) -> None: ...
 
-Global___EphemeralSetting: _TypeAlias = EphemeralSetting  # noqa: Y015
+Global___EphemeralSetting: typing_extensions.TypeAlias = EphemeralSetting

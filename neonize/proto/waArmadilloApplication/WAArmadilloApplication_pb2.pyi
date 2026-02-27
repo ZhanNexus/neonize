@@ -3,51 +3,51 @@
 isort:skip_file
 """
 
-from collections import abc as _abc
-from google.protobuf import descriptor as _descriptor
-from google.protobuf import message as _message
-from google.protobuf.internal import containers as _containers
-from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
-from waArmadilloXMA import WAArmadilloXMA_pb2 as _WAArmadilloXMA_pb2
-from waCommon import WACommon_pb2 as _WACommon_pb2
-import builtins as _builtins
+import builtins
+import collections.abc
+import google.protobuf.descriptor
+import google.protobuf.internal.containers
+import google.protobuf.internal.enum_type_wrapper
+import google.protobuf.message
 import sys
-import typing as _typing
+import typing
+import waArmadilloXMA.WAArmadilloXMA_pb2
+import waCommon.WACommon_pb2
 
 if sys.version_info >= (3, 10):
-    from typing import TypeAlias as _TypeAlias
+    import typing as typing_extensions
 else:
-    from typing_extensions import TypeAlias as _TypeAlias
+    import typing_extensions
 
-DESCRIPTOR: _descriptor.FileDescriptor
+DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
-@_typing.final
-class Armadillo(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class Armadillo(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    @_typing.final
-    class Metadata(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+    @typing.final
+    class Metadata(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
         def __init__(
             self,
         ) -> None: ...
 
-    @_typing.final
-    class Payload(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+    @typing.final
+    class Payload(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-        CONTENT_FIELD_NUMBER: _builtins.int
-        APPLICATIONDATA_FIELD_NUMBER: _builtins.int
-        SIGNAL_FIELD_NUMBER: _builtins.int
-        SUBPROTOCOL_FIELD_NUMBER: _builtins.int
-        @_builtins.property
+        CONTENT_FIELD_NUMBER: builtins.int
+        APPLICATIONDATA_FIELD_NUMBER: builtins.int
+        SIGNAL_FIELD_NUMBER: builtins.int
+        SUBPROTOCOL_FIELD_NUMBER: builtins.int
+        @property
         def content(self) -> Global___Armadillo.Content: ...
-        @_builtins.property
+        @property
         def applicationData(self) -> Global___Armadillo.ApplicationData: ...
-        @_builtins.property
+        @property
         def signal(self) -> Global___Armadillo.Signal: ...
-        @_builtins.property
+        @property
         def subProtocol(self) -> Global___Armadillo.SubProtocolPayload: ...
         def __init__(
             self,
@@ -57,48 +57,42 @@ class Armadillo(_message.Message):
             signal: Global___Armadillo.Signal | None = ...,
             subProtocol: Global___Armadillo.SubProtocolPayload | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _TypeAlias = _typing.Literal["applicationData", b"applicationData", "content", b"content", "payload", b"payload", "signal", b"signal", "subProtocol", b"subProtocol"]  # noqa: Y015
-        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _TypeAlias = _typing.Literal["applicationData", b"applicationData", "content", b"content", "payload", b"payload", "signal", b"signal", "subProtocol", b"subProtocol"]  # noqa: Y015
-        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-        _WhichOneofReturnType_payload: _TypeAlias = _typing.Literal["content", "applicationData", "signal", "subProtocol"]  # noqa: Y015
-        _WhichOneofArgType_payload: _TypeAlias = _typing.Literal["payload", b"payload"]  # noqa: Y015
-        def WhichOneof(self, oneof_group: _WhichOneofArgType_payload) -> _WhichOneofReturnType_payload | None: ...
+        def HasField(self, field_name: typing.Literal["applicationData", b"applicationData", "content", b"content", "payload", b"payload", "signal", b"signal", "subProtocol", b"subProtocol"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["applicationData", b"applicationData", "content", b"content", "payload", b"payload", "signal", b"signal", "subProtocol", b"subProtocol"]) -> None: ...
+        def WhichOneof(self, oneof_group: typing.Literal["payload", b"payload"]) -> typing.Literal["content", "applicationData", "signal", "subProtocol"] | None: ...
 
-    @_typing.final
-    class SubProtocolPayload(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+    @typing.final
+    class SubProtocolPayload(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-        FUTUREPROOF_FIELD_NUMBER: _builtins.int
-        futureProof: _WACommon_pb2.FutureProofBehavior.ValueType
+        FUTUREPROOF_FIELD_NUMBER: builtins.int
+        futureProof: waCommon.WACommon_pb2.FutureProofBehavior.ValueType
         def __init__(
             self,
             *,
-            futureProof: _WACommon_pb2.FutureProofBehavior.ValueType | None = ...,
+            futureProof: waCommon.WACommon_pb2.FutureProofBehavior.ValueType | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _TypeAlias = _typing.Literal["futureProof", b"futureProof"]  # noqa: Y015
-        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _TypeAlias = _typing.Literal["futureProof", b"futureProof"]  # noqa: Y015
-        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+        def HasField(self, field_name: typing.Literal["futureProof", b"futureProof"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["futureProof", b"futureProof"]) -> None: ...
 
-    @_typing.final
-    class Signal(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+    @typing.final
+    class Signal(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-        @_typing.final
-        class EncryptedBackupsSecrets(_message.Message):
-            DESCRIPTOR: _descriptor.Descriptor
+        @typing.final
+        class EncryptedBackupsSecrets(google.protobuf.message.Message):
+            DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-            @_typing.final
-            class Epoch(_message.Message):
-                DESCRIPTOR: _descriptor.Descriptor
+            @typing.final
+            class Epoch(google.protobuf.message.Message):
+                DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
                 class _EpochStatus:
-                    ValueType = _typing.NewType("ValueType", _builtins.int)
-                    V: _TypeAlias = ValueType  # noqa: Y015
+                    ValueType = typing.NewType("ValueType", builtins.int)
+                    V: typing_extensions.TypeAlias = ValueType
 
-                class _EpochStatusEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[Armadillo.Signal.EncryptedBackupsSecrets.Epoch._EpochStatus.ValueType], _builtins.type):
-                    DESCRIPTOR: _descriptor.EnumDescriptor
+                class _EpochStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[Armadillo.Signal.EncryptedBackupsSecrets.Epoch._EpochStatus.ValueType], builtins.type):
+                    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
                     ES_OPEN: Armadillo.Signal.EncryptedBackupsSecrets.Epoch._EpochStatus.ValueType  # 1
                     ES_CLOSE: Armadillo.Signal.EncryptedBackupsSecrets.Epoch._EpochStatus.ValueType  # 2
 
@@ -106,128 +100,116 @@ class Armadillo(_message.Message):
                 ES_OPEN: Armadillo.Signal.EncryptedBackupsSecrets.Epoch.EpochStatus.ValueType  # 1
                 ES_CLOSE: Armadillo.Signal.EncryptedBackupsSecrets.Epoch.EpochStatus.ValueType  # 2
 
-                ID_FIELD_NUMBER: _builtins.int
-                ANONID_FIELD_NUMBER: _builtins.int
-                ROOTKEY_FIELD_NUMBER: _builtins.int
-                STATUS_FIELD_NUMBER: _builtins.int
-                ID: _builtins.int
-                anonID: _builtins.bytes
-                rootKey: _builtins.bytes
+                ID_FIELD_NUMBER: builtins.int
+                ANONID_FIELD_NUMBER: builtins.int
+                ROOTKEY_FIELD_NUMBER: builtins.int
+                STATUS_FIELD_NUMBER: builtins.int
+                ID: builtins.int
+                anonID: builtins.bytes
+                rootKey: builtins.bytes
                 status: Global___Armadillo.Signal.EncryptedBackupsSecrets.Epoch.EpochStatus.ValueType
                 def __init__(
                     self,
                     *,
-                    ID: _builtins.int | None = ...,
-                    anonID: _builtins.bytes | None = ...,
-                    rootKey: _builtins.bytes | None = ...,
+                    ID: builtins.int | None = ...,
+                    anonID: builtins.bytes | None = ...,
+                    rootKey: builtins.bytes | None = ...,
                     status: Global___Armadillo.Signal.EncryptedBackupsSecrets.Epoch.EpochStatus.ValueType | None = ...,
                 ) -> None: ...
-                _HasFieldArgType: _TypeAlias = _typing.Literal["ID", b"ID", "anonID", b"anonID", "rootKey", b"rootKey", "status", b"status"]  # noqa: Y015
-                def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-                _ClearFieldArgType: _TypeAlias = _typing.Literal["ID", b"ID", "anonID", b"anonID", "rootKey", b"rootKey", "status", b"status"]  # noqa: Y015
-                def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+                def HasField(self, field_name: typing.Literal["ID", b"ID", "anonID", b"anonID", "rootKey", b"rootKey", "status", b"status"]) -> builtins.bool: ...
+                def ClearField(self, field_name: typing.Literal["ID", b"ID", "anonID", b"anonID", "rootKey", b"rootKey", "status", b"status"]) -> None: ...
 
-            BACKUPID_FIELD_NUMBER: _builtins.int
-            SERVERDATAID_FIELD_NUMBER: _builtins.int
-            EPOCH_FIELD_NUMBER: _builtins.int
-            TEMPOCMFCLIENTSTATE_FIELD_NUMBER: _builtins.int
-            MAILBOXROOTKEY_FIELD_NUMBER: _builtins.int
-            OBLIVIOUSVALIDATIONTOKEN_FIELD_NUMBER: _builtins.int
-            backupID: _builtins.int
-            serverDataID: _builtins.int
-            tempOcmfClientState: _builtins.bytes
-            mailboxRootKey: _builtins.bytes
-            obliviousValidationToken: _builtins.bytes
-            @_builtins.property
-            def epoch(self) -> _containers.RepeatedCompositeFieldContainer[Global___Armadillo.Signal.EncryptedBackupsSecrets.Epoch]: ...
+            BACKUPID_FIELD_NUMBER: builtins.int
+            SERVERDATAID_FIELD_NUMBER: builtins.int
+            EPOCH_FIELD_NUMBER: builtins.int
+            TEMPOCMFCLIENTSTATE_FIELD_NUMBER: builtins.int
+            MAILBOXROOTKEY_FIELD_NUMBER: builtins.int
+            OBLIVIOUSVALIDATIONTOKEN_FIELD_NUMBER: builtins.int
+            backupID: builtins.int
+            serverDataID: builtins.int
+            tempOcmfClientState: builtins.bytes
+            mailboxRootKey: builtins.bytes
+            obliviousValidationToken: builtins.bytes
+            @property
+            def epoch(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___Armadillo.Signal.EncryptedBackupsSecrets.Epoch]: ...
             def __init__(
                 self,
                 *,
-                backupID: _builtins.int | None = ...,
-                serverDataID: _builtins.int | None = ...,
-                epoch: _abc.Iterable[Global___Armadillo.Signal.EncryptedBackupsSecrets.Epoch] | None = ...,
-                tempOcmfClientState: _builtins.bytes | None = ...,
-                mailboxRootKey: _builtins.bytes | None = ...,
-                obliviousValidationToken: _builtins.bytes | None = ...,
+                backupID: builtins.int | None = ...,
+                serverDataID: builtins.int | None = ...,
+                epoch: collections.abc.Iterable[Global___Armadillo.Signal.EncryptedBackupsSecrets.Epoch] | None = ...,
+                tempOcmfClientState: builtins.bytes | None = ...,
+                mailboxRootKey: builtins.bytes | None = ...,
+                obliviousValidationToken: builtins.bytes | None = ...,
             ) -> None: ...
-            _HasFieldArgType: _TypeAlias = _typing.Literal["backupID", b"backupID", "mailboxRootKey", b"mailboxRootKey", "obliviousValidationToken", b"obliviousValidationToken", "serverDataID", b"serverDataID", "tempOcmfClientState", b"tempOcmfClientState"]  # noqa: Y015
-            def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-            _ClearFieldArgType: _TypeAlias = _typing.Literal["backupID", b"backupID", "epoch", b"epoch", "mailboxRootKey", b"mailboxRootKey", "obliviousValidationToken", b"obliviousValidationToken", "serverDataID", b"serverDataID", "tempOcmfClientState", b"tempOcmfClientState"]  # noqa: Y015
-            def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+            def HasField(self, field_name: typing.Literal["backupID", b"backupID", "mailboxRootKey", b"mailboxRootKey", "obliviousValidationToken", b"obliviousValidationToken", "serverDataID", b"serverDataID", "tempOcmfClientState", b"tempOcmfClientState"]) -> builtins.bool: ...
+            def ClearField(self, field_name: typing.Literal["backupID", b"backupID", "epoch", b"epoch", "mailboxRootKey", b"mailboxRootKey", "obliviousValidationToken", b"obliviousValidationToken", "serverDataID", b"serverDataID", "tempOcmfClientState", b"tempOcmfClientState"]) -> None: ...
 
-        ENCRYPTEDBACKUPSSECRETS_FIELD_NUMBER: _builtins.int
-        @_builtins.property
+        ENCRYPTEDBACKUPSSECRETS_FIELD_NUMBER: builtins.int
+        @property
         def encryptedBackupsSecrets(self) -> Global___Armadillo.Signal.EncryptedBackupsSecrets: ...
         def __init__(
             self,
             *,
             encryptedBackupsSecrets: Global___Armadillo.Signal.EncryptedBackupsSecrets | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _TypeAlias = _typing.Literal["encryptedBackupsSecrets", b"encryptedBackupsSecrets", "signal", b"signal"]  # noqa: Y015
-        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _TypeAlias = _typing.Literal["encryptedBackupsSecrets", b"encryptedBackupsSecrets", "signal", b"signal"]  # noqa: Y015
-        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-        _WhichOneofReturnType_signal: _TypeAlias = _typing.Literal["encryptedBackupsSecrets"]  # noqa: Y015
-        _WhichOneofArgType_signal: _TypeAlias = _typing.Literal["signal", b"signal"]  # noqa: Y015
-        def WhichOneof(self, oneof_group: _WhichOneofArgType_signal) -> _WhichOneofReturnType_signal | None: ...
+        def HasField(self, field_name: typing.Literal["encryptedBackupsSecrets", b"encryptedBackupsSecrets", "signal", b"signal"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["encryptedBackupsSecrets", b"encryptedBackupsSecrets", "signal", b"signal"]) -> None: ...
+        def WhichOneof(self, oneof_group: typing.Literal["signal", b"signal"]) -> typing.Literal["encryptedBackupsSecrets"] | None: ...
 
-    @_typing.final
-    class ApplicationData(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+    @typing.final
+    class ApplicationData(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-        @_typing.final
-        class MessageHistoryDocumentMessage(_message.Message):
-            DESCRIPTOR: _descriptor.Descriptor
+        @typing.final
+        class MessageHistoryDocumentMessage(google.protobuf.message.Message):
+            DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-            DOCUMENT_FIELD_NUMBER: _builtins.int
-            @_builtins.property
-            def document(self) -> _WACommon_pb2.SubProtocol: ...
+            DOCUMENT_FIELD_NUMBER: builtins.int
+            @property
+            def document(self) -> waCommon.WACommon_pb2.SubProtocol: ...
             def __init__(
                 self,
                 *,
-                document: _WACommon_pb2.SubProtocol | None = ...,
+                document: waCommon.WACommon_pb2.SubProtocol | None = ...,
             ) -> None: ...
-            _HasFieldArgType: _TypeAlias = _typing.Literal["document", b"document"]  # noqa: Y015
-            def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-            _ClearFieldArgType: _TypeAlias = _typing.Literal["document", b"document"]  # noqa: Y015
-            def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+            def HasField(self, field_name: typing.Literal["document", b"document"]) -> builtins.bool: ...
+            def ClearField(self, field_name: typing.Literal["document", b"document"]) -> None: ...
 
-        @_typing.final
-        class AIBotResponseMessage(_message.Message):
-            DESCRIPTOR: _descriptor.Descriptor
+        @typing.final
+        class AIBotResponseMessage(google.protobuf.message.Message):
+            DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-            SUMMONTOKEN_FIELD_NUMBER: _builtins.int
-            MESSAGETEXT_FIELD_NUMBER: _builtins.int
-            SERIALIZEDEXTRAS_FIELD_NUMBER: _builtins.int
-            summonToken: _builtins.str
-            messageText: _builtins.str
-            serializedExtras: _builtins.str
+            SUMMONTOKEN_FIELD_NUMBER: builtins.int
+            MESSAGETEXT_FIELD_NUMBER: builtins.int
+            SERIALIZEDEXTRAS_FIELD_NUMBER: builtins.int
+            summonToken: builtins.str
+            messageText: builtins.str
+            serializedExtras: builtins.str
             def __init__(
                 self,
                 *,
-                summonToken: _builtins.str | None = ...,
-                messageText: _builtins.str | None = ...,
-                serializedExtras: _builtins.str | None = ...,
+                summonToken: builtins.str | None = ...,
+                messageText: builtins.str | None = ...,
+                serializedExtras: builtins.str | None = ...,
             ) -> None: ...
-            _HasFieldArgType: _TypeAlias = _typing.Literal["messageText", b"messageText", "serializedExtras", b"serializedExtras", "summonToken", b"summonToken"]  # noqa: Y015
-            def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-            _ClearFieldArgType: _TypeAlias = _typing.Literal["messageText", b"messageText", "serializedExtras", b"serializedExtras", "summonToken", b"summonToken"]  # noqa: Y015
-            def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+            def HasField(self, field_name: typing.Literal["messageText", b"messageText", "serializedExtras", b"serializedExtras", "summonToken", b"summonToken"]) -> builtins.bool: ...
+            def ClearField(self, field_name: typing.Literal["messageText", b"messageText", "serializedExtras", b"serializedExtras", "summonToken", b"summonToken"]) -> None: ...
 
-        @_typing.final
-        class MetadataSyncAction(_message.Message):
-            DESCRIPTOR: _descriptor.Descriptor
+        @typing.final
+        class MetadataSyncAction(google.protobuf.message.Message):
+            DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-            @_typing.final
-            class SyncAttachmentInterventionAction(_message.Message):
-                DESCRIPTOR: _descriptor.Descriptor
+            @typing.final
+            class SyncAttachmentInterventionAction(google.protobuf.message.Message):
+                DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
                 class _InterventionType:
-                    ValueType = _typing.NewType("ValueType", _builtins.int)
-                    V: _TypeAlias = ValueType  # noqa: Y015
+                    ValueType = typing.NewType("ValueType", builtins.int)
+                    V: typing_extensions.TypeAlias = ValueType
 
-                class _InterventionTypeEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[Armadillo.ApplicationData.MetadataSyncAction.SyncAttachmentInterventionAction._InterventionType.ValueType], _builtins.type):
-                    DESCRIPTOR: _descriptor.EnumDescriptor
+                class _InterventionTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[Armadillo.ApplicationData.MetadataSyncAction.SyncAttachmentInterventionAction._InterventionType.ValueType], builtins.type):
+                    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
                     UNKNOWN: Armadillo.ApplicationData.MetadataSyncAction.SyncAttachmentInterventionAction._InterventionType.ValueType  # 0
                     NUDE: Armadillo.ApplicationData.MetadataSyncAction.SyncAttachmentInterventionAction._InterventionType.ValueType  # 1
                     NOT_NUDE: Armadillo.ApplicationData.MetadataSyncAction.SyncAttachmentInterventionAction._InterventionType.ValueType  # 2
@@ -237,32 +219,30 @@ class Armadillo(_message.Message):
                 NUDE: Armadillo.ApplicationData.MetadataSyncAction.SyncAttachmentInterventionAction.InterventionType.ValueType  # 1
                 NOT_NUDE: Armadillo.ApplicationData.MetadataSyncAction.SyncAttachmentInterventionAction.InterventionType.ValueType  # 2
 
-                MESSAGEKEY_FIELD_NUMBER: _builtins.int
-                INTERVENTIONTYPE_FIELD_NUMBER: _builtins.int
+                MESSAGEKEY_FIELD_NUMBER: builtins.int
+                INTERVENTIONTYPE_FIELD_NUMBER: builtins.int
                 interventionType: Global___Armadillo.ApplicationData.MetadataSyncAction.SyncAttachmentInterventionAction.InterventionType.ValueType
-                @_builtins.property
-                def messageKey(self) -> _WACommon_pb2.MessageKey: ...
+                @property
+                def messageKey(self) -> waCommon.WACommon_pb2.MessageKey: ...
                 def __init__(
                     self,
                     *,
-                    messageKey: _WACommon_pb2.MessageKey | None = ...,
+                    messageKey: waCommon.WACommon_pb2.MessageKey | None = ...,
                     interventionType: Global___Armadillo.ApplicationData.MetadataSyncAction.SyncAttachmentInterventionAction.InterventionType.ValueType | None = ...,
                 ) -> None: ...
-                _HasFieldArgType: _TypeAlias = _typing.Literal["interventionType", b"interventionType", "messageKey", b"messageKey"]  # noqa: Y015
-                def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-                _ClearFieldArgType: _TypeAlias = _typing.Literal["interventionType", b"interventionType", "messageKey", b"messageKey"]  # noqa: Y015
-                def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+                def HasField(self, field_name: typing.Literal["interventionType", b"interventionType", "messageKey", b"messageKey"]) -> builtins.bool: ...
+                def ClearField(self, field_name: typing.Literal["interventionType", b"interventionType", "messageKey", b"messageKey"]) -> None: ...
 
-            @_typing.final
-            class SyncSpectraAction(_message.Message):
-                DESCRIPTOR: _descriptor.Descriptor
+            @typing.final
+            class SyncSpectraAction(google.protobuf.message.Message):
+                DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
                 class _SpectraActionType:
-                    ValueType = _typing.NewType("ValueType", _builtins.int)
-                    V: _TypeAlias = ValueType  # noqa: Y015
+                    ValueType = typing.NewType("ValueType", builtins.int)
+                    V: typing_extensions.TypeAlias = ValueType
 
-                class _SpectraActionTypeEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[Armadillo.ApplicationData.MetadataSyncAction.SyncSpectraAction._SpectraActionType.ValueType], _builtins.type):
-                    DESCRIPTOR: _descriptor.EnumDescriptor
+                class _SpectraActionTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[Armadillo.ApplicationData.MetadataSyncAction.SyncSpectraAction._SpectraActionType.ValueType], builtins.type):
+                    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
                     TAKEDOWN: Armadillo.ApplicationData.MetadataSyncAction.SyncSpectraAction._SpectraActionType.ValueType  # 0
                     RESTORE: Armadillo.ApplicationData.MetadataSyncAction.SyncSpectraAction._SpectraActionType.ValueType  # 1
 
@@ -270,131 +250,119 @@ class Armadillo(_message.Message):
                 TAKEDOWN: Armadillo.ApplicationData.MetadataSyncAction.SyncSpectraAction.SpectraActionType.ValueType  # 0
                 RESTORE: Armadillo.ApplicationData.MetadataSyncAction.SyncSpectraAction.SpectraActionType.ValueType  # 1
 
-                KEY_FIELD_NUMBER: _builtins.int
-                ACTIONTYPE_FIELD_NUMBER: _builtins.int
-                TAKEDOWNACTIONID_FIELD_NUMBER: _builtins.int
-                CONFIG_FIELD_NUMBER: _builtins.int
+                KEY_FIELD_NUMBER: builtins.int
+                ACTIONTYPE_FIELD_NUMBER: builtins.int
+                TAKEDOWNACTIONID_FIELD_NUMBER: builtins.int
+                CONFIG_FIELD_NUMBER: builtins.int
                 actionType: Global___Armadillo.ApplicationData.MetadataSyncAction.SyncSpectraAction.SpectraActionType.ValueType
-                takedownActionID: _builtins.int
-                config: _builtins.str
-                @_builtins.property
-                def key(self) -> _WACommon_pb2.MessageKey: ...
+                takedownActionID: builtins.int
+                config: builtins.str
+                @property
+                def key(self) -> waCommon.WACommon_pb2.MessageKey: ...
                 def __init__(
                     self,
                     *,
-                    key: _WACommon_pb2.MessageKey | None = ...,
+                    key: waCommon.WACommon_pb2.MessageKey | None = ...,
                     actionType: Global___Armadillo.ApplicationData.MetadataSyncAction.SyncSpectraAction.SpectraActionType.ValueType | None = ...,
-                    takedownActionID: _builtins.int | None = ...,
-                    config: _builtins.str | None = ...,
+                    takedownActionID: builtins.int | None = ...,
+                    config: builtins.str | None = ...,
                 ) -> None: ...
-                _HasFieldArgType: _TypeAlias = _typing.Literal["actionType", b"actionType", "config", b"config", "key", b"key", "takedownActionID", b"takedownActionID"]  # noqa: Y015
-                def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-                _ClearFieldArgType: _TypeAlias = _typing.Literal["actionType", b"actionType", "config", b"config", "key", b"key", "takedownActionID", b"takedownActionID"]  # noqa: Y015
-                def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+                def HasField(self, field_name: typing.Literal["actionType", b"actionType", "config", b"config", "key", b"key", "takedownActionID", b"takedownActionID"]) -> builtins.bool: ...
+                def ClearField(self, field_name: typing.Literal["actionType", b"actionType", "config", b"config", "key", b"key", "takedownActionID", b"takedownActionID"]) -> None: ...
 
-            @_typing.final
-            class SyncMessageAction(_message.Message):
-                DESCRIPTOR: _descriptor.Descriptor
+            @typing.final
+            class SyncMessageAction(google.protobuf.message.Message):
+                DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-                @_typing.final
-                class ActionMessageDelete(_message.Message):
-                    DESCRIPTOR: _descriptor.Descriptor
+                @typing.final
+                class ActionMessageDelete(google.protobuf.message.Message):
+                    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
                     def __init__(
                         self,
                     ) -> None: ...
 
-                MESSAGEDELETE_FIELD_NUMBER: _builtins.int
-                KEY_FIELD_NUMBER: _builtins.int
-                @_builtins.property
+                MESSAGEDELETE_FIELD_NUMBER: builtins.int
+                KEY_FIELD_NUMBER: builtins.int
+                @property
                 def messageDelete(self) -> Global___Armadillo.ApplicationData.MetadataSyncAction.SyncMessageAction.ActionMessageDelete: ...
-                @_builtins.property
-                def key(self) -> _WACommon_pb2.MessageKey: ...
+                @property
+                def key(self) -> waCommon.WACommon_pb2.MessageKey: ...
                 def __init__(
                     self,
                     *,
                     messageDelete: Global___Armadillo.ApplicationData.MetadataSyncAction.SyncMessageAction.ActionMessageDelete | None = ...,
-                    key: _WACommon_pb2.MessageKey | None = ...,
+                    key: waCommon.WACommon_pb2.MessageKey | None = ...,
                 ) -> None: ...
-                _HasFieldArgType: _TypeAlias = _typing.Literal["action", b"action", "key", b"key", "messageDelete", b"messageDelete"]  # noqa: Y015
-                def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-                _ClearFieldArgType: _TypeAlias = _typing.Literal["action", b"action", "key", b"key", "messageDelete", b"messageDelete"]  # noqa: Y015
-                def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-                _WhichOneofReturnType_action: _TypeAlias = _typing.Literal["messageDelete"]  # noqa: Y015
-                _WhichOneofArgType_action: _TypeAlias = _typing.Literal["action", b"action"]  # noqa: Y015
-                def WhichOneof(self, oneof_group: _WhichOneofArgType_action) -> _WhichOneofReturnType_action | None: ...
+                def HasField(self, field_name: typing.Literal["action", b"action", "key", b"key", "messageDelete", b"messageDelete"]) -> builtins.bool: ...
+                def ClearField(self, field_name: typing.Literal["action", b"action", "key", b"key", "messageDelete", b"messageDelete"]) -> None: ...
+                def WhichOneof(self, oneof_group: typing.Literal["action", b"action"]) -> typing.Literal["messageDelete"] | None: ...
 
-            @_typing.final
-            class SyncChatAction(_message.Message):
-                DESCRIPTOR: _descriptor.Descriptor
+            @typing.final
+            class SyncChatAction(google.protobuf.message.Message):
+                DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-                @_typing.final
-                class ActionChatRead(_message.Message):
-                    DESCRIPTOR: _descriptor.Descriptor
+                @typing.final
+                class ActionChatRead(google.protobuf.message.Message):
+                    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-                    MESSAGERANGE_FIELD_NUMBER: _builtins.int
-                    READ_FIELD_NUMBER: _builtins.int
-                    read: _builtins.bool
-                    @_builtins.property
+                    MESSAGERANGE_FIELD_NUMBER: builtins.int
+                    READ_FIELD_NUMBER: builtins.int
+                    read: builtins.bool
+                    @property
                     def messageRange(self) -> Global___Armadillo.ApplicationData.MetadataSyncAction.SyncActionMessageRange: ...
                     def __init__(
                         self,
                         *,
                         messageRange: Global___Armadillo.ApplicationData.MetadataSyncAction.SyncActionMessageRange | None = ...,
-                        read: _builtins.bool | None = ...,
+                        read: builtins.bool | None = ...,
                     ) -> None: ...
-                    _HasFieldArgType: _TypeAlias = _typing.Literal["messageRange", b"messageRange", "read", b"read"]  # noqa: Y015
-                    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-                    _ClearFieldArgType: _TypeAlias = _typing.Literal["messageRange", b"messageRange", "read", b"read"]  # noqa: Y015
-                    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+                    def HasField(self, field_name: typing.Literal["messageRange", b"messageRange", "read", b"read"]) -> builtins.bool: ...
+                    def ClearField(self, field_name: typing.Literal["messageRange", b"messageRange", "read", b"read"]) -> None: ...
 
-                @_typing.final
-                class ActionChatDelete(_message.Message):
-                    DESCRIPTOR: _descriptor.Descriptor
+                @typing.final
+                class ActionChatDelete(google.protobuf.message.Message):
+                    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-                    MESSAGERANGE_FIELD_NUMBER: _builtins.int
-                    @_builtins.property
+                    MESSAGERANGE_FIELD_NUMBER: builtins.int
+                    @property
                     def messageRange(self) -> Global___Armadillo.ApplicationData.MetadataSyncAction.SyncActionMessageRange: ...
                     def __init__(
                         self,
                         *,
                         messageRange: Global___Armadillo.ApplicationData.MetadataSyncAction.SyncActionMessageRange | None = ...,
                     ) -> None: ...
-                    _HasFieldArgType: _TypeAlias = _typing.Literal["messageRange", b"messageRange"]  # noqa: Y015
-                    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-                    _ClearFieldArgType: _TypeAlias = _typing.Literal["messageRange", b"messageRange"]  # noqa: Y015
-                    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+                    def HasField(self, field_name: typing.Literal["messageRange", b"messageRange"]) -> builtins.bool: ...
+                    def ClearField(self, field_name: typing.Literal["messageRange", b"messageRange"]) -> None: ...
 
-                @_typing.final
-                class ActionChatArchive(_message.Message):
-                    DESCRIPTOR: _descriptor.Descriptor
+                @typing.final
+                class ActionChatArchive(google.protobuf.message.Message):
+                    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-                    MESSAGERANGE_FIELD_NUMBER: _builtins.int
-                    ARCHIVED_FIELD_NUMBER: _builtins.int
-                    archived: _builtins.bool
-                    @_builtins.property
+                    MESSAGERANGE_FIELD_NUMBER: builtins.int
+                    ARCHIVED_FIELD_NUMBER: builtins.int
+                    archived: builtins.bool
+                    @property
                     def messageRange(self) -> Global___Armadillo.ApplicationData.MetadataSyncAction.SyncActionMessageRange: ...
                     def __init__(
                         self,
                         *,
                         messageRange: Global___Armadillo.ApplicationData.MetadataSyncAction.SyncActionMessageRange | None = ...,
-                        archived: _builtins.bool | None = ...,
+                        archived: builtins.bool | None = ...,
                     ) -> None: ...
-                    _HasFieldArgType: _TypeAlias = _typing.Literal["archived", b"archived", "messageRange", b"messageRange"]  # noqa: Y015
-                    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-                    _ClearFieldArgType: _TypeAlias = _typing.Literal["archived", b"archived", "messageRange", b"messageRange"]  # noqa: Y015
-                    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+                    def HasField(self, field_name: typing.Literal["archived", b"archived", "messageRange", b"messageRange"]) -> builtins.bool: ...
+                    def ClearField(self, field_name: typing.Literal["archived", b"archived", "messageRange", b"messageRange"]) -> None: ...
 
-                CHATARCHIVE_FIELD_NUMBER: _builtins.int
-                CHATDELETE_FIELD_NUMBER: _builtins.int
-                CHATREAD_FIELD_NUMBER: _builtins.int
-                CHATID_FIELD_NUMBER: _builtins.int
-                chatID: _builtins.str
-                @_builtins.property
+                CHATARCHIVE_FIELD_NUMBER: builtins.int
+                CHATDELETE_FIELD_NUMBER: builtins.int
+                CHATREAD_FIELD_NUMBER: builtins.int
+                CHATID_FIELD_NUMBER: builtins.int
+                chatID: builtins.str
+                @property
                 def chatArchive(self) -> Global___Armadillo.ApplicationData.MetadataSyncAction.SyncChatAction.ActionChatArchive: ...
-                @_builtins.property
+                @property
                 def chatDelete(self) -> Global___Armadillo.ApplicationData.MetadataSyncAction.SyncChatAction.ActionChatDelete: ...
-                @_builtins.property
+                @property
                 def chatRead(self) -> Global___Armadillo.ApplicationData.MetadataSyncAction.SyncChatAction.ActionChatRead: ...
                 def __init__(
                     self,
@@ -402,72 +370,64 @@ class Armadillo(_message.Message):
                     chatArchive: Global___Armadillo.ApplicationData.MetadataSyncAction.SyncChatAction.ActionChatArchive | None = ...,
                     chatDelete: Global___Armadillo.ApplicationData.MetadataSyncAction.SyncChatAction.ActionChatDelete | None = ...,
                     chatRead: Global___Armadillo.ApplicationData.MetadataSyncAction.SyncChatAction.ActionChatRead | None = ...,
-                    chatID: _builtins.str | None = ...,
+                    chatID: builtins.str | None = ...,
                 ) -> None: ...
-                _HasFieldArgType: _TypeAlias = _typing.Literal["action", b"action", "chatArchive", b"chatArchive", "chatDelete", b"chatDelete", "chatID", b"chatID", "chatRead", b"chatRead"]  # noqa: Y015
-                def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-                _ClearFieldArgType: _TypeAlias = _typing.Literal["action", b"action", "chatArchive", b"chatArchive", "chatDelete", b"chatDelete", "chatID", b"chatID", "chatRead", b"chatRead"]  # noqa: Y015
-                def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-                _WhichOneofReturnType_action: _TypeAlias = _typing.Literal["chatArchive", "chatDelete", "chatRead"]  # noqa: Y015
-                _WhichOneofArgType_action: _TypeAlias = _typing.Literal["action", b"action"]  # noqa: Y015
-                def WhichOneof(self, oneof_group: _WhichOneofArgType_action) -> _WhichOneofReturnType_action | None: ...
+                def HasField(self, field_name: typing.Literal["action", b"action", "chatArchive", b"chatArchive", "chatDelete", b"chatDelete", "chatID", b"chatID", "chatRead", b"chatRead"]) -> builtins.bool: ...
+                def ClearField(self, field_name: typing.Literal["action", b"action", "chatArchive", b"chatArchive", "chatDelete", b"chatDelete", "chatID", b"chatID", "chatRead", b"chatRead"]) -> None: ...
+                def WhichOneof(self, oneof_group: typing.Literal["action", b"action"]) -> typing.Literal["chatArchive", "chatDelete", "chatRead"] | None: ...
 
-            @_typing.final
-            class SyncActionMessage(_message.Message):
-                DESCRIPTOR: _descriptor.Descriptor
+            @typing.final
+            class SyncActionMessage(google.protobuf.message.Message):
+                DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-                KEY_FIELD_NUMBER: _builtins.int
-                TIMESTAMP_FIELD_NUMBER: _builtins.int
-                timestamp: _builtins.int
-                @_builtins.property
-                def key(self) -> _WACommon_pb2.MessageKey: ...
+                KEY_FIELD_NUMBER: builtins.int
+                TIMESTAMP_FIELD_NUMBER: builtins.int
+                timestamp: builtins.int
+                @property
+                def key(self) -> waCommon.WACommon_pb2.MessageKey: ...
                 def __init__(
                     self,
                     *,
-                    key: _WACommon_pb2.MessageKey | None = ...,
-                    timestamp: _builtins.int | None = ...,
+                    key: waCommon.WACommon_pb2.MessageKey | None = ...,
+                    timestamp: builtins.int | None = ...,
                 ) -> None: ...
-                _HasFieldArgType: _TypeAlias = _typing.Literal["key", b"key", "timestamp", b"timestamp"]  # noqa: Y015
-                def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-                _ClearFieldArgType: _TypeAlias = _typing.Literal["key", b"key", "timestamp", b"timestamp"]  # noqa: Y015
-                def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+                def HasField(self, field_name: typing.Literal["key", b"key", "timestamp", b"timestamp"]) -> builtins.bool: ...
+                def ClearField(self, field_name: typing.Literal["key", b"key", "timestamp", b"timestamp"]) -> None: ...
 
-            @_typing.final
-            class SyncActionMessageRange(_message.Message):
-                DESCRIPTOR: _descriptor.Descriptor
+            @typing.final
+            class SyncActionMessageRange(google.protobuf.message.Message):
+                DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-                LASTMESSAGETIMESTAMP_FIELD_NUMBER: _builtins.int
-                LASTSYSTEMMESSAGETIMESTAMP_FIELD_NUMBER: _builtins.int
-                MESSAGES_FIELD_NUMBER: _builtins.int
-                lastMessageTimestamp: _builtins.int
-                lastSystemMessageTimestamp: _builtins.int
-                @_builtins.property
-                def messages(self) -> _containers.RepeatedCompositeFieldContainer[Global___Armadillo.ApplicationData.MetadataSyncAction.SyncActionMessage]: ...
+                LASTMESSAGETIMESTAMP_FIELD_NUMBER: builtins.int
+                LASTSYSTEMMESSAGETIMESTAMP_FIELD_NUMBER: builtins.int
+                MESSAGES_FIELD_NUMBER: builtins.int
+                lastMessageTimestamp: builtins.int
+                lastSystemMessageTimestamp: builtins.int
+                @property
+                def messages(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___Armadillo.ApplicationData.MetadataSyncAction.SyncActionMessage]: ...
                 def __init__(
                     self,
                     *,
-                    lastMessageTimestamp: _builtins.int | None = ...,
-                    lastSystemMessageTimestamp: _builtins.int | None = ...,
-                    messages: _abc.Iterable[Global___Armadillo.ApplicationData.MetadataSyncAction.SyncActionMessage] | None = ...,
+                    lastMessageTimestamp: builtins.int | None = ...,
+                    lastSystemMessageTimestamp: builtins.int | None = ...,
+                    messages: collections.abc.Iterable[Global___Armadillo.ApplicationData.MetadataSyncAction.SyncActionMessage] | None = ...,
                 ) -> None: ...
-                _HasFieldArgType: _TypeAlias = _typing.Literal["lastMessageTimestamp", b"lastMessageTimestamp", "lastSystemMessageTimestamp", b"lastSystemMessageTimestamp"]  # noqa: Y015
-                def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-                _ClearFieldArgType: _TypeAlias = _typing.Literal["lastMessageTimestamp", b"lastMessageTimestamp", "lastSystemMessageTimestamp", b"lastSystemMessageTimestamp", "messages", b"messages"]  # noqa: Y015
-                def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+                def HasField(self, field_name: typing.Literal["lastMessageTimestamp", b"lastMessageTimestamp", "lastSystemMessageTimestamp", b"lastSystemMessageTimestamp"]) -> builtins.bool: ...
+                def ClearField(self, field_name: typing.Literal["lastMessageTimestamp", b"lastMessageTimestamp", "lastSystemMessageTimestamp", b"lastSystemMessageTimestamp", "messages", b"messages"]) -> None: ...
 
-            CHATACTION_FIELD_NUMBER: _builtins.int
-            MESSAGEACTION_FIELD_NUMBER: _builtins.int
-            SPECTRAACTION_FIELD_NUMBER: _builtins.int
-            ATTACHMENTINTERVENTIONACTION_FIELD_NUMBER: _builtins.int
-            ACTIONTIMESTAMP_FIELD_NUMBER: _builtins.int
-            actionTimestamp: _builtins.int
-            @_builtins.property
+            CHATACTION_FIELD_NUMBER: builtins.int
+            MESSAGEACTION_FIELD_NUMBER: builtins.int
+            SPECTRAACTION_FIELD_NUMBER: builtins.int
+            ATTACHMENTINTERVENTIONACTION_FIELD_NUMBER: builtins.int
+            ACTIONTIMESTAMP_FIELD_NUMBER: builtins.int
+            actionTimestamp: builtins.int
+            @property
             def chatAction(self) -> Global___Armadillo.ApplicationData.MetadataSyncAction.SyncChatAction: ...
-            @_builtins.property
+            @property
             def messageAction(self) -> Global___Armadillo.ApplicationData.MetadataSyncAction.SyncMessageAction: ...
-            @_builtins.property
+            @property
             def spectraAction(self) -> Global___Armadillo.ApplicationData.MetadataSyncAction.SyncSpectraAction: ...
-            @_builtins.property
+            @property
             def attachmentInterventionAction(self) -> Global___Armadillo.ApplicationData.MetadataSyncAction.SyncAttachmentInterventionAction: ...
             def __init__(
                 self,
@@ -476,39 +436,34 @@ class Armadillo(_message.Message):
                 messageAction: Global___Armadillo.ApplicationData.MetadataSyncAction.SyncMessageAction | None = ...,
                 spectraAction: Global___Armadillo.ApplicationData.MetadataSyncAction.SyncSpectraAction | None = ...,
                 attachmentInterventionAction: Global___Armadillo.ApplicationData.MetadataSyncAction.SyncAttachmentInterventionAction | None = ...,
-                actionTimestamp: _builtins.int | None = ...,
+                actionTimestamp: builtins.int | None = ...,
             ) -> None: ...
-            _HasFieldArgType: _TypeAlias = _typing.Literal["actionTimestamp", b"actionTimestamp", "actionType", b"actionType", "attachmentInterventionAction", b"attachmentInterventionAction", "chatAction", b"chatAction", "messageAction", b"messageAction", "spectraAction", b"spectraAction"]  # noqa: Y015
-            def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-            _ClearFieldArgType: _TypeAlias = _typing.Literal["actionTimestamp", b"actionTimestamp", "actionType", b"actionType", "attachmentInterventionAction", b"attachmentInterventionAction", "chatAction", b"chatAction", "messageAction", b"messageAction", "spectraAction", b"spectraAction"]  # noqa: Y015
-            def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-            _WhichOneofReturnType_actionType: _TypeAlias = _typing.Literal["chatAction", "messageAction", "spectraAction", "attachmentInterventionAction"]  # noqa: Y015
-            _WhichOneofArgType_actionType: _TypeAlias = _typing.Literal["actionType", b"actionType"]  # noqa: Y015
-            def WhichOneof(self, oneof_group: _WhichOneofArgType_actionType) -> _WhichOneofReturnType_actionType | None: ...
+            def HasField(self, field_name: typing.Literal["actionTimestamp", b"actionTimestamp", "actionType", b"actionType", "attachmentInterventionAction", b"attachmentInterventionAction", "chatAction", b"chatAction", "messageAction", b"messageAction", "spectraAction", b"spectraAction"]) -> builtins.bool: ...
+            def ClearField(self, field_name: typing.Literal["actionTimestamp", b"actionTimestamp", "actionType", b"actionType", "attachmentInterventionAction", b"attachmentInterventionAction", "chatAction", b"chatAction", "messageAction", b"messageAction", "spectraAction", b"spectraAction"]) -> None: ...
+            def WhichOneof(self, oneof_group: typing.Literal["actionType", b"actionType"]) -> typing.Literal["chatAction", "messageAction", "spectraAction", "attachmentInterventionAction"] | None: ...
 
-        @_typing.final
-        class MetadataSyncNotification(_message.Message):
-            DESCRIPTOR: _descriptor.Descriptor
+        @typing.final
+        class MetadataSyncNotification(google.protobuf.message.Message):
+            DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-            ACTIONS_FIELD_NUMBER: _builtins.int
-            @_builtins.property
-            def actions(self) -> _containers.RepeatedCompositeFieldContainer[Global___Armadillo.ApplicationData.MetadataSyncAction]: ...
+            ACTIONS_FIELD_NUMBER: builtins.int
+            @property
+            def actions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___Armadillo.ApplicationData.MetadataSyncAction]: ...
             def __init__(
                 self,
                 *,
-                actions: _abc.Iterable[Global___Armadillo.ApplicationData.MetadataSyncAction] | None = ...,
+                actions: collections.abc.Iterable[Global___Armadillo.ApplicationData.MetadataSyncAction] | None = ...,
             ) -> None: ...
-            _ClearFieldArgType: _TypeAlias = _typing.Literal["actions", b"actions"]  # noqa: Y015
-            def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+            def ClearField(self, field_name: typing.Literal["actions", b"actions"]) -> None: ...
 
-        METADATASYNC_FIELD_NUMBER: _builtins.int
-        AIBOTRESPONSE_FIELD_NUMBER: _builtins.int
-        MESSAGEHISTORYDOCUMENTMESSAGE_FIELD_NUMBER: _builtins.int
-        @_builtins.property
+        METADATASYNC_FIELD_NUMBER: builtins.int
+        AIBOTRESPONSE_FIELD_NUMBER: builtins.int
+        MESSAGEHISTORYDOCUMENTMESSAGE_FIELD_NUMBER: builtins.int
+        @property
         def metadataSync(self) -> Global___Armadillo.ApplicationData.MetadataSyncNotification: ...
-        @_builtins.property
+        @property
         def aiBotResponse(self) -> Global___Armadillo.ApplicationData.AIBotResponseMessage: ...
-        @_builtins.property
+        @property
         def messageHistoryDocumentMessage(self) -> Global___Armadillo.ApplicationData.MessageHistoryDocumentMessage: ...
         def __init__(
             self,
@@ -517,28 +472,24 @@ class Armadillo(_message.Message):
             aiBotResponse: Global___Armadillo.ApplicationData.AIBotResponseMessage | None = ...,
             messageHistoryDocumentMessage: Global___Armadillo.ApplicationData.MessageHistoryDocumentMessage | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _TypeAlias = _typing.Literal["aiBotResponse", b"aiBotResponse", "applicationData", b"applicationData", "messageHistoryDocumentMessage", b"messageHistoryDocumentMessage", "metadataSync", b"metadataSync"]  # noqa: Y015
-        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _TypeAlias = _typing.Literal["aiBotResponse", b"aiBotResponse", "applicationData", b"applicationData", "messageHistoryDocumentMessage", b"messageHistoryDocumentMessage", "metadataSync", b"metadataSync"]  # noqa: Y015
-        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-        _WhichOneofReturnType_applicationData: _TypeAlias = _typing.Literal["metadataSync", "aiBotResponse", "messageHistoryDocumentMessage"]  # noqa: Y015
-        _WhichOneofArgType_applicationData: _TypeAlias = _typing.Literal["applicationData", b"applicationData"]  # noqa: Y015
-        def WhichOneof(self, oneof_group: _WhichOneofArgType_applicationData) -> _WhichOneofReturnType_applicationData | None: ...
+        def HasField(self, field_name: typing.Literal["aiBotResponse", b"aiBotResponse", "applicationData", b"applicationData", "messageHistoryDocumentMessage", b"messageHistoryDocumentMessage", "metadataSync", b"metadataSync"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["aiBotResponse", b"aiBotResponse", "applicationData", b"applicationData", "messageHistoryDocumentMessage", b"messageHistoryDocumentMessage", "metadataSync", b"metadataSync"]) -> None: ...
+        def WhichOneof(self, oneof_group: typing.Literal["applicationData", b"applicationData"]) -> typing.Literal["metadataSync", "aiBotResponse", "messageHistoryDocumentMessage"] | None: ...
 
-    @_typing.final
-    class Content(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+    @typing.final
+    class Content(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-        @_typing.final
-        class PaymentsTransactionMessage(_message.Message):
-            DESCRIPTOR: _descriptor.Descriptor
+        @typing.final
+        class PaymentsTransactionMessage(google.protobuf.message.Message):
+            DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
             class _PaymentStatus:
-                ValueType = _typing.NewType("ValueType", _builtins.int)
-                V: _TypeAlias = ValueType  # noqa: Y015
+                ValueType = typing.NewType("ValueType", builtins.int)
+                V: typing_extensions.TypeAlias = ValueType
 
-            class _PaymentStatusEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[Armadillo.Content.PaymentsTransactionMessage._PaymentStatus.ValueType], _builtins.type):
-                DESCRIPTOR: _descriptor.EnumDescriptor
+            class _PaymentStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[Armadillo.Content.PaymentsTransactionMessage._PaymentStatus.ValueType], builtins.type):
+                DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
                 PAYMENT_UNKNOWN: Armadillo.Content.PaymentsTransactionMessage._PaymentStatus.ValueType  # 0
                 REQUEST_INITED: Armadillo.Content.PaymentsTransactionMessage._PaymentStatus.ValueType  # 4
                 REQUEST_DECLINED: Armadillo.Content.PaymentsTransactionMessage._PaymentStatus.ValueType  # 5
@@ -584,127 +535,116 @@ class Armadillo(_message.Message):
             TRANSFER_DECLINED: Armadillo.Content.PaymentsTransactionMessage.PaymentStatus.ValueType  # 22
             TRANSFER_UNAVAILABLE: Armadillo.Content.PaymentsTransactionMessage.PaymentStatus.ValueType  # 23
 
-            TRANSACTIONID_FIELD_NUMBER: _builtins.int
-            AMOUNT_FIELD_NUMBER: _builtins.int
-            CURRENCY_FIELD_NUMBER: _builtins.int
-            PAYMENTSTATUS_FIELD_NUMBER: _builtins.int
-            EXTENDEDCONTENTMESSAGE_FIELD_NUMBER: _builtins.int
-            transactionID: _builtins.int
-            amount: _builtins.str
-            currency: _builtins.str
+            TRANSACTIONID_FIELD_NUMBER: builtins.int
+            AMOUNT_FIELD_NUMBER: builtins.int
+            CURRENCY_FIELD_NUMBER: builtins.int
+            PAYMENTSTATUS_FIELD_NUMBER: builtins.int
+            EXTENDEDCONTENTMESSAGE_FIELD_NUMBER: builtins.int
+            transactionID: builtins.int
+            amount: builtins.str
+            currency: builtins.str
             paymentStatus: Global___Armadillo.Content.PaymentsTransactionMessage.PaymentStatus.ValueType
-            @_builtins.property
-            def extendedContentMessage(self) -> _WAArmadilloXMA_pb2.ExtendedContentMessage: ...
+            @property
+            def extendedContentMessage(self) -> waArmadilloXMA.WAArmadilloXMA_pb2.ExtendedContentMessage: ...
             def __init__(
                 self,
                 *,
-                transactionID: _builtins.int | None = ...,
-                amount: _builtins.str | None = ...,
-                currency: _builtins.str | None = ...,
+                transactionID: builtins.int | None = ...,
+                amount: builtins.str | None = ...,
+                currency: builtins.str | None = ...,
                 paymentStatus: Global___Armadillo.Content.PaymentsTransactionMessage.PaymentStatus.ValueType | None = ...,
-                extendedContentMessage: _WAArmadilloXMA_pb2.ExtendedContentMessage | None = ...,
+                extendedContentMessage: waArmadilloXMA.WAArmadilloXMA_pb2.ExtendedContentMessage | None = ...,
             ) -> None: ...
-            _HasFieldArgType: _TypeAlias = _typing.Literal["amount", b"amount", "currency", b"currency", "extendedContentMessage", b"extendedContentMessage", "paymentStatus", b"paymentStatus", "transactionID", b"transactionID"]  # noqa: Y015
-            def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-            _ClearFieldArgType: _TypeAlias = _typing.Literal["amount", b"amount", "currency", b"currency", "extendedContentMessage", b"extendedContentMessage", "paymentStatus", b"paymentStatus", "transactionID", b"transactionID"]  # noqa: Y015
-            def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+            def HasField(self, field_name: typing.Literal["amount", b"amount", "currency", b"currency", "extendedContentMessage", b"extendedContentMessage", "paymentStatus", b"paymentStatus", "transactionID", b"transactionID"]) -> builtins.bool: ...
+            def ClearField(self, field_name: typing.Literal["amount", b"amount", "currency", b"currency", "extendedContentMessage", b"extendedContentMessage", "paymentStatus", b"paymentStatus", "transactionID", b"transactionID"]) -> None: ...
 
-        @_typing.final
-        class NetworkVerificationMessage(_message.Message):
-            DESCRIPTOR: _descriptor.Descriptor
+        @typing.final
+        class NetworkVerificationMessage(google.protobuf.message.Message):
+            DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-            CODETEXT_FIELD_NUMBER: _builtins.int
-            codeText: _builtins.str
+            CODETEXT_FIELD_NUMBER: builtins.int
+            codeText: builtins.str
             def __init__(
                 self,
                 *,
-                codeText: _builtins.str | None = ...,
+                codeText: builtins.str | None = ...,
             ) -> None: ...
-            _HasFieldArgType: _TypeAlias = _typing.Literal["codeText", b"codeText"]  # noqa: Y015
-            def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-            _ClearFieldArgType: _TypeAlias = _typing.Literal["codeText", b"codeText"]  # noqa: Y015
-            def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+            def HasField(self, field_name: typing.Literal["codeText", b"codeText"]) -> builtins.bool: ...
+            def ClearField(self, field_name: typing.Literal["codeText", b"codeText"]) -> None: ...
 
-        @_typing.final
-        class NoteReplyMessage(_message.Message):
-            DESCRIPTOR: _descriptor.Descriptor
+        @typing.final
+        class NoteReplyMessage(google.protobuf.message.Message):
+            DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-            TEXTCONTENT_FIELD_NUMBER: _builtins.int
-            STICKERCONTENT_FIELD_NUMBER: _builtins.int
-            VIDEOCONTENT_FIELD_NUMBER: _builtins.int
-            NOTEID_FIELD_NUMBER: _builtins.int
-            NOTETEXT_FIELD_NUMBER: _builtins.int
-            NOTETIMESTAMPMS_FIELD_NUMBER: _builtins.int
-            noteID: _builtins.str
-            noteTimestampMS: _builtins.int
-            @_builtins.property
-            def textContent(self) -> _WACommon_pb2.MessageText: ...
-            @_builtins.property
-            def stickerContent(self) -> _WACommon_pb2.SubProtocol: ...
-            @_builtins.property
-            def videoContent(self) -> _WACommon_pb2.SubProtocol: ...
-            @_builtins.property
-            def noteText(self) -> _WACommon_pb2.MessageText: ...
+            TEXTCONTENT_FIELD_NUMBER: builtins.int
+            STICKERCONTENT_FIELD_NUMBER: builtins.int
+            VIDEOCONTENT_FIELD_NUMBER: builtins.int
+            NOTEID_FIELD_NUMBER: builtins.int
+            NOTETEXT_FIELD_NUMBER: builtins.int
+            NOTETIMESTAMPMS_FIELD_NUMBER: builtins.int
+            noteID: builtins.str
+            noteTimestampMS: builtins.int
+            @property
+            def textContent(self) -> waCommon.WACommon_pb2.MessageText: ...
+            @property
+            def stickerContent(self) -> waCommon.WACommon_pb2.SubProtocol: ...
+            @property
+            def videoContent(self) -> waCommon.WACommon_pb2.SubProtocol: ...
+            @property
+            def noteText(self) -> waCommon.WACommon_pb2.MessageText: ...
             def __init__(
                 self,
                 *,
-                textContent: _WACommon_pb2.MessageText | None = ...,
-                stickerContent: _WACommon_pb2.SubProtocol | None = ...,
-                videoContent: _WACommon_pb2.SubProtocol | None = ...,
-                noteID: _builtins.str | None = ...,
-                noteText: _WACommon_pb2.MessageText | None = ...,
-                noteTimestampMS: _builtins.int | None = ...,
+                textContent: waCommon.WACommon_pb2.MessageText | None = ...,
+                stickerContent: waCommon.WACommon_pb2.SubProtocol | None = ...,
+                videoContent: waCommon.WACommon_pb2.SubProtocol | None = ...,
+                noteID: builtins.str | None = ...,
+                noteText: waCommon.WACommon_pb2.MessageText | None = ...,
+                noteTimestampMS: builtins.int | None = ...,
             ) -> None: ...
-            _HasFieldArgType: _TypeAlias = _typing.Literal["noteID", b"noteID", "noteReplyContent", b"noteReplyContent", "noteText", b"noteText", "noteTimestampMS", b"noteTimestampMS", "stickerContent", b"stickerContent", "textContent", b"textContent", "videoContent", b"videoContent"]  # noqa: Y015
-            def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-            _ClearFieldArgType: _TypeAlias = _typing.Literal["noteID", b"noteID", "noteReplyContent", b"noteReplyContent", "noteText", b"noteText", "noteTimestampMS", b"noteTimestampMS", "stickerContent", b"stickerContent", "textContent", b"textContent", "videoContent", b"videoContent"]  # noqa: Y015
-            def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-            _WhichOneofReturnType_noteReplyContent: _TypeAlias = _typing.Literal["textContent", "stickerContent", "videoContent"]  # noqa: Y015
-            _WhichOneofArgType_noteReplyContent: _TypeAlias = _typing.Literal["noteReplyContent", b"noteReplyContent"]  # noqa: Y015
-            def WhichOneof(self, oneof_group: _WhichOneofArgType_noteReplyContent) -> _WhichOneofReturnType_noteReplyContent | None: ...
+            def HasField(self, field_name: typing.Literal["noteID", b"noteID", "noteReplyContent", b"noteReplyContent", "noteText", b"noteText", "noteTimestampMS", b"noteTimestampMS", "stickerContent", b"stickerContent", "textContent", b"textContent", "videoContent", b"videoContent"]) -> builtins.bool: ...
+            def ClearField(self, field_name: typing.Literal["noteID", b"noteID", "noteReplyContent", b"noteReplyContent", "noteText", b"noteText", "noteTimestampMS", b"noteTimestampMS", "stickerContent", b"stickerContent", "textContent", b"textContent", "videoContent", b"videoContent"]) -> None: ...
+            def WhichOneof(self, oneof_group: typing.Literal["noteReplyContent", b"noteReplyContent"]) -> typing.Literal["textContent", "stickerContent", "videoContent"] | None: ...
 
-        @_typing.final
-        class BumpExistingMessage(_message.Message):
-            DESCRIPTOR: _descriptor.Descriptor
+        @typing.final
+        class BumpExistingMessage(google.protobuf.message.Message):
+            DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-            KEY_FIELD_NUMBER: _builtins.int
-            @_builtins.property
-            def key(self) -> _WACommon_pb2.MessageKey: ...
+            KEY_FIELD_NUMBER: builtins.int
+            @property
+            def key(self) -> waCommon.WACommon_pb2.MessageKey: ...
             def __init__(
                 self,
                 *,
-                key: _WACommon_pb2.MessageKey | None = ...,
+                key: waCommon.WACommon_pb2.MessageKey | None = ...,
             ) -> None: ...
-            _HasFieldArgType: _TypeAlias = _typing.Literal["key", b"key"]  # noqa: Y015
-            def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-            _ClearFieldArgType: _TypeAlias = _typing.Literal["key", b"key"]  # noqa: Y015
-            def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+            def HasField(self, field_name: typing.Literal["key", b"key"]) -> builtins.bool: ...
+            def ClearField(self, field_name: typing.Literal["key", b"key"]) -> None: ...
 
-        @_typing.final
-        class ImageGalleryMessage(_message.Message):
-            DESCRIPTOR: _descriptor.Descriptor
+        @typing.final
+        class ImageGalleryMessage(google.protobuf.message.Message):
+            DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-            IMAGES_FIELD_NUMBER: _builtins.int
-            @_builtins.property
-            def images(self) -> _containers.RepeatedCompositeFieldContainer[_WACommon_pb2.SubProtocol]: ...
+            IMAGES_FIELD_NUMBER: builtins.int
+            @property
+            def images(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[waCommon.WACommon_pb2.SubProtocol]: ...
             def __init__(
                 self,
                 *,
-                images: _abc.Iterable[_WACommon_pb2.SubProtocol] | None = ...,
+                images: collections.abc.Iterable[waCommon.WACommon_pb2.SubProtocol] | None = ...,
             ) -> None: ...
-            _ClearFieldArgType: _TypeAlias = _typing.Literal["images", b"images"]  # noqa: Y015
-            def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+            def ClearField(self, field_name: typing.Literal["images", b"images"]) -> None: ...
 
-        @_typing.final
-        class ScreenshotAction(_message.Message):
-            DESCRIPTOR: _descriptor.Descriptor
+        @typing.final
+        class ScreenshotAction(google.protobuf.message.Message):
+            DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
             class _ScreenshotType:
-                ValueType = _typing.NewType("ValueType", _builtins.int)
-                V: _TypeAlias = ValueType  # noqa: Y015
+                ValueType = typing.NewType("ValueType", builtins.int)
+                V: typing_extensions.TypeAlias = ValueType
 
-            class _ScreenshotTypeEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[Armadillo.Content.ScreenshotAction._ScreenshotType.ValueType], _builtins.type):
-                DESCRIPTOR: _descriptor.EnumDescriptor
+            class _ScreenshotTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[Armadillo.Content.ScreenshotAction._ScreenshotType.ValueType], builtins.type):
+                DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
                 SCREENSHOT_IMAGE: Armadillo.Content.ScreenshotAction._ScreenshotType.ValueType  # 1
                 SCREEN_RECORDING: Armadillo.Content.ScreenshotAction._ScreenshotType.ValueType  # 2
 
@@ -712,57 +652,53 @@ class Armadillo(_message.Message):
             SCREENSHOT_IMAGE: Armadillo.Content.ScreenshotAction.ScreenshotType.ValueType  # 1
             SCREEN_RECORDING: Armadillo.Content.ScreenshotAction.ScreenshotType.ValueType  # 2
 
-            SCREENSHOTTYPE_FIELD_NUMBER: _builtins.int
+            SCREENSHOTTYPE_FIELD_NUMBER: builtins.int
             screenshotType: Global___Armadillo.Content.ScreenshotAction.ScreenshotType.ValueType
             def __init__(
                 self,
                 *,
                 screenshotType: Global___Armadillo.Content.ScreenshotAction.ScreenshotType.ValueType | None = ...,
             ) -> None: ...
-            _HasFieldArgType: _TypeAlias = _typing.Literal["screenshotType", b"screenshotType"]  # noqa: Y015
-            def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-            _ClearFieldArgType: _TypeAlias = _typing.Literal["screenshotType", b"screenshotType"]  # noqa: Y015
-            def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+            def HasField(self, field_name: typing.Literal["screenshotType", b"screenshotType"]) -> builtins.bool: ...
+            def ClearField(self, field_name: typing.Literal["screenshotType", b"screenshotType"]) -> None: ...
 
-        @_typing.final
-        class ExtendedContentMessageWithSear(_message.Message):
-            DESCRIPTOR: _descriptor.Descriptor
+        @typing.final
+        class ExtendedContentMessageWithSear(google.protobuf.message.Message):
+            DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-            SEARID_FIELD_NUMBER: _builtins.int
-            PAYLOAD_FIELD_NUMBER: _builtins.int
-            NATIVEURL_FIELD_NUMBER: _builtins.int
-            SEARASSOCIATEDMESSAGE_FIELD_NUMBER: _builtins.int
-            SEARSENTWITHMESSAGEID_FIELD_NUMBER: _builtins.int
-            searID: _builtins.str
-            payload: _builtins.bytes
-            nativeURL: _builtins.str
-            searSentWithMessageID: _builtins.str
-            @_builtins.property
-            def searAssociatedMessage(self) -> _WACommon_pb2.SubProtocol: ...
+            SEARID_FIELD_NUMBER: builtins.int
+            PAYLOAD_FIELD_NUMBER: builtins.int
+            NATIVEURL_FIELD_NUMBER: builtins.int
+            SEARASSOCIATEDMESSAGE_FIELD_NUMBER: builtins.int
+            SEARSENTWITHMESSAGEID_FIELD_NUMBER: builtins.int
+            searID: builtins.str
+            payload: builtins.bytes
+            nativeURL: builtins.str
+            searSentWithMessageID: builtins.str
+            @property
+            def searAssociatedMessage(self) -> waCommon.WACommon_pb2.SubProtocol: ...
             def __init__(
                 self,
                 *,
-                searID: _builtins.str | None = ...,
-                payload: _builtins.bytes | None = ...,
-                nativeURL: _builtins.str | None = ...,
-                searAssociatedMessage: _WACommon_pb2.SubProtocol | None = ...,
-                searSentWithMessageID: _builtins.str | None = ...,
+                searID: builtins.str | None = ...,
+                payload: builtins.bytes | None = ...,
+                nativeURL: builtins.str | None = ...,
+                searAssociatedMessage: waCommon.WACommon_pb2.SubProtocol | None = ...,
+                searSentWithMessageID: builtins.str | None = ...,
             ) -> None: ...
-            _HasFieldArgType: _TypeAlias = _typing.Literal["nativeURL", b"nativeURL", "payload", b"payload", "searAssociatedMessage", b"searAssociatedMessage", "searID", b"searID", "searSentWithMessageID", b"searSentWithMessageID"]  # noqa: Y015
-            def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-            _ClearFieldArgType: _TypeAlias = _typing.Literal["nativeURL", b"nativeURL", "payload", b"payload", "searAssociatedMessage", b"searAssociatedMessage", "searID", b"searID", "searSentWithMessageID", b"searSentWithMessageID"]  # noqa: Y015
-            def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+            def HasField(self, field_name: typing.Literal["nativeURL", b"nativeURL", "payload", b"payload", "searAssociatedMessage", b"searAssociatedMessage", "searID", b"searID", "searSentWithMessageID", b"searSentWithMessageID"]) -> builtins.bool: ...
+            def ClearField(self, field_name: typing.Literal["nativeURL", b"nativeURL", "payload", b"payload", "searAssociatedMessage", b"searAssociatedMessage", "searID", b"searID", "searSentWithMessageID", b"searSentWithMessageID"]) -> None: ...
 
-        @_typing.final
-        class RavenActionNotifMessage(_message.Message):
-            DESCRIPTOR: _descriptor.Descriptor
+        @typing.final
+        class RavenActionNotifMessage(google.protobuf.message.Message):
+            DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
             class _ActionType:
-                ValueType = _typing.NewType("ValueType", _builtins.int)
-                V: _TypeAlias = ValueType  # noqa: Y015
+                ValueType = typing.NewType("ValueType", builtins.int)
+                V: typing_extensions.TypeAlias = ValueType
 
-            class _ActionTypeEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[Armadillo.Content.RavenActionNotifMessage._ActionType.ValueType], _builtins.type):
-                DESCRIPTOR: _descriptor.EnumDescriptor
+            class _ActionTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[Armadillo.Content.RavenActionNotifMessage._ActionType.ValueType], builtins.type):
+                DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
                 PLAYED: Armadillo.Content.RavenActionNotifMessage._ActionType.ValueType  # 0
                 SCREENSHOT: Armadillo.Content.RavenActionNotifMessage._ActionType.ValueType  # 1
                 FORCE_DISABLE: Armadillo.Content.RavenActionNotifMessage._ActionType.ValueType  # 2
@@ -772,35 +708,33 @@ class Armadillo(_message.Message):
             SCREENSHOT: Armadillo.Content.RavenActionNotifMessage.ActionType.ValueType  # 1
             FORCE_DISABLE: Armadillo.Content.RavenActionNotifMessage.ActionType.ValueType  # 2
 
-            KEY_FIELD_NUMBER: _builtins.int
-            ACTIONTIMESTAMP_FIELD_NUMBER: _builtins.int
-            ACTIONTYPE_FIELD_NUMBER: _builtins.int
-            actionTimestamp: _builtins.int
+            KEY_FIELD_NUMBER: builtins.int
+            ACTIONTIMESTAMP_FIELD_NUMBER: builtins.int
+            ACTIONTYPE_FIELD_NUMBER: builtins.int
+            actionTimestamp: builtins.int
             actionType: Global___Armadillo.Content.RavenActionNotifMessage.ActionType.ValueType
-            @_builtins.property
-            def key(self) -> _WACommon_pb2.MessageKey: ...
+            @property
+            def key(self) -> waCommon.WACommon_pb2.MessageKey: ...
             def __init__(
                 self,
                 *,
-                key: _WACommon_pb2.MessageKey | None = ...,
-                actionTimestamp: _builtins.int | None = ...,
+                key: waCommon.WACommon_pb2.MessageKey | None = ...,
+                actionTimestamp: builtins.int | None = ...,
                 actionType: Global___Armadillo.Content.RavenActionNotifMessage.ActionType.ValueType | None = ...,
             ) -> None: ...
-            _HasFieldArgType: _TypeAlias = _typing.Literal["actionTimestamp", b"actionTimestamp", "actionType", b"actionType", "key", b"key"]  # noqa: Y015
-            def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-            _ClearFieldArgType: _TypeAlias = _typing.Literal["actionTimestamp", b"actionTimestamp", "actionType", b"actionType", "key", b"key"]  # noqa: Y015
-            def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+            def HasField(self, field_name: typing.Literal["actionTimestamp", b"actionTimestamp", "actionType", b"actionType", "key", b"key"]) -> builtins.bool: ...
+            def ClearField(self, field_name: typing.Literal["actionTimestamp", b"actionTimestamp", "actionType", b"actionType", "key", b"key"]) -> None: ...
 
-        @_typing.final
-        class RavenMessage(_message.Message):
-            DESCRIPTOR: _descriptor.Descriptor
+        @typing.final
+        class RavenMessage(google.protobuf.message.Message):
+            DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
             class _EphemeralType:
-                ValueType = _typing.NewType("ValueType", _builtins.int)
-                V: _TypeAlias = ValueType  # noqa: Y015
+                ValueType = typing.NewType("ValueType", builtins.int)
+                V: typing_extensions.TypeAlias = ValueType
 
-            class _EphemeralTypeEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[Armadillo.Content.RavenMessage._EphemeralType.ValueType], _builtins.type):
-                DESCRIPTOR: _descriptor.EnumDescriptor
+            class _EphemeralTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[Armadillo.Content.RavenMessage._EphemeralType.ValueType], builtins.type):
+                DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
                 VIEW_ONCE: Armadillo.Content.RavenMessage._EphemeralType.ValueType  # 0
                 ALLOW_REPLAY: Armadillo.Content.RavenMessage._EphemeralType.ValueType  # 1
                 KEEP_IN_CHAT: Armadillo.Content.RavenMessage._EphemeralType.ValueType  # 2
@@ -810,39 +744,35 @@ class Armadillo(_message.Message):
             ALLOW_REPLAY: Armadillo.Content.RavenMessage.EphemeralType.ValueType  # 1
             KEEP_IN_CHAT: Armadillo.Content.RavenMessage.EphemeralType.ValueType  # 2
 
-            IMAGEMESSAGE_FIELD_NUMBER: _builtins.int
-            VIDEOMESSAGE_FIELD_NUMBER: _builtins.int
-            EPHEMERALTYPE_FIELD_NUMBER: _builtins.int
+            IMAGEMESSAGE_FIELD_NUMBER: builtins.int
+            VIDEOMESSAGE_FIELD_NUMBER: builtins.int
+            EPHEMERALTYPE_FIELD_NUMBER: builtins.int
             ephemeralType: Global___Armadillo.Content.RavenMessage.EphemeralType.ValueType
-            @_builtins.property
-            def imageMessage(self) -> _WACommon_pb2.SubProtocol: ...
-            @_builtins.property
-            def videoMessage(self) -> _WACommon_pb2.SubProtocol: ...
+            @property
+            def imageMessage(self) -> waCommon.WACommon_pb2.SubProtocol: ...
+            @property
+            def videoMessage(self) -> waCommon.WACommon_pb2.SubProtocol: ...
             def __init__(
                 self,
                 *,
-                imageMessage: _WACommon_pb2.SubProtocol | None = ...,
-                videoMessage: _WACommon_pb2.SubProtocol | None = ...,
+                imageMessage: waCommon.WACommon_pb2.SubProtocol | None = ...,
+                videoMessage: waCommon.WACommon_pb2.SubProtocol | None = ...,
                 ephemeralType: Global___Armadillo.Content.RavenMessage.EphemeralType.ValueType | None = ...,
             ) -> None: ...
-            _HasFieldArgType: _TypeAlias = _typing.Literal["ephemeralType", b"ephemeralType", "imageMessage", b"imageMessage", "mediaContent", b"mediaContent", "videoMessage", b"videoMessage"]  # noqa: Y015
-            def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-            _ClearFieldArgType: _TypeAlias = _typing.Literal["ephemeralType", b"ephemeralType", "imageMessage", b"imageMessage", "mediaContent", b"mediaContent", "videoMessage", b"videoMessage"]  # noqa: Y015
-            def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-            _WhichOneofReturnType_mediaContent: _TypeAlias = _typing.Literal["imageMessage", "videoMessage"]  # noqa: Y015
-            _WhichOneofArgType_mediaContent: _TypeAlias = _typing.Literal["mediaContent", b"mediaContent"]  # noqa: Y015
-            def WhichOneof(self, oneof_group: _WhichOneofArgType_mediaContent) -> _WhichOneofReturnType_mediaContent | None: ...
+            def HasField(self, field_name: typing.Literal["ephemeralType", b"ephemeralType", "imageMessage", b"imageMessage", "mediaContent", b"mediaContent", "videoMessage", b"videoMessage"]) -> builtins.bool: ...
+            def ClearField(self, field_name: typing.Literal["ephemeralType", b"ephemeralType", "imageMessage", b"imageMessage", "mediaContent", b"mediaContent", "videoMessage", b"videoMessage"]) -> None: ...
+            def WhichOneof(self, oneof_group: typing.Literal["mediaContent", b"mediaContent"]) -> typing.Literal["imageMessage", "videoMessage"] | None: ...
 
-        @_typing.final
-        class CommonSticker(_message.Message):
-            DESCRIPTOR: _descriptor.Descriptor
+        @typing.final
+        class CommonSticker(google.protobuf.message.Message):
+            DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
             class _StickerType:
-                ValueType = _typing.NewType("ValueType", _builtins.int)
-                V: _TypeAlias = ValueType  # noqa: Y015
+                ValueType = typing.NewType("ValueType", builtins.int)
+                V: typing_extensions.TypeAlias = ValueType
 
-            class _StickerTypeEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[Armadillo.Content.CommonSticker._StickerType.ValueType], _builtins.type):
-                DESCRIPTOR: _descriptor.EnumDescriptor
+            class _StickerTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[Armadillo.Content.CommonSticker._StickerType.ValueType], builtins.type):
+                DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
                 SMALL_LIKE: Armadillo.Content.CommonSticker._StickerType.ValueType  # 1
                 MEDIUM_LIKE: Armadillo.Content.CommonSticker._StickerType.ValueType  # 2
                 LARGE_LIKE: Armadillo.Content.CommonSticker._StickerType.ValueType  # 3
@@ -852,60 +782,58 @@ class Armadillo(_message.Message):
             MEDIUM_LIKE: Armadillo.Content.CommonSticker.StickerType.ValueType  # 2
             LARGE_LIKE: Armadillo.Content.CommonSticker.StickerType.ValueType  # 3
 
-            STICKERTYPE_FIELD_NUMBER: _builtins.int
+            STICKERTYPE_FIELD_NUMBER: builtins.int
             stickerType: Global___Armadillo.Content.CommonSticker.StickerType.ValueType
             def __init__(
                 self,
                 *,
                 stickerType: Global___Armadillo.Content.CommonSticker.StickerType.ValueType | None = ...,
             ) -> None: ...
-            _HasFieldArgType: _TypeAlias = _typing.Literal["stickerType", b"stickerType"]  # noqa: Y015
-            def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-            _ClearFieldArgType: _TypeAlias = _typing.Literal["stickerType", b"stickerType"]  # noqa: Y015
-            def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+            def HasField(self, field_name: typing.Literal["stickerType", b"stickerType"]) -> builtins.bool: ...
+            def ClearField(self, field_name: typing.Literal["stickerType", b"stickerType"]) -> None: ...
 
-        COMMONSTICKER_FIELD_NUMBER: _builtins.int
-        SCREENSHOTACTION_FIELD_NUMBER: _builtins.int
-        EXTENDEDCONTENTMESSAGE_FIELD_NUMBER: _builtins.int
-        RAVENMESSAGE_FIELD_NUMBER: _builtins.int
-        RAVENACTIONNOTIFMESSAGE_FIELD_NUMBER: _builtins.int
-        EXTENDEDMESSAGECONTENTWITHSEAR_FIELD_NUMBER: _builtins.int
-        IMAGEGALLERYMESSAGE_FIELD_NUMBER: _builtins.int
-        PAYMENTSTRANSACTIONMESSAGE_FIELD_NUMBER: _builtins.int
-        BUMPEXISTINGMESSAGE_FIELD_NUMBER: _builtins.int
-        NOTEREPLYMESSAGE_FIELD_NUMBER: _builtins.int
-        RAVENMESSAGEMSGR_FIELD_NUMBER: _builtins.int
-        NETWORKVERIFICATIONMESSAGE_FIELD_NUMBER: _builtins.int
-        @_builtins.property
+        COMMONSTICKER_FIELD_NUMBER: builtins.int
+        SCREENSHOTACTION_FIELD_NUMBER: builtins.int
+        EXTENDEDCONTENTMESSAGE_FIELD_NUMBER: builtins.int
+        RAVENMESSAGE_FIELD_NUMBER: builtins.int
+        RAVENACTIONNOTIFMESSAGE_FIELD_NUMBER: builtins.int
+        EXTENDEDMESSAGECONTENTWITHSEAR_FIELD_NUMBER: builtins.int
+        IMAGEGALLERYMESSAGE_FIELD_NUMBER: builtins.int
+        PAYMENTSTRANSACTIONMESSAGE_FIELD_NUMBER: builtins.int
+        BUMPEXISTINGMESSAGE_FIELD_NUMBER: builtins.int
+        NOTEREPLYMESSAGE_FIELD_NUMBER: builtins.int
+        RAVENMESSAGEMSGR_FIELD_NUMBER: builtins.int
+        NETWORKVERIFICATIONMESSAGE_FIELD_NUMBER: builtins.int
+        @property
         def commonSticker(self) -> Global___Armadillo.Content.CommonSticker: ...
-        @_builtins.property
+        @property
         def screenshotAction(self) -> Global___Armadillo.Content.ScreenshotAction: ...
-        @_builtins.property
-        def extendedContentMessage(self) -> _WAArmadilloXMA_pb2.ExtendedContentMessage: ...
-        @_builtins.property
+        @property
+        def extendedContentMessage(self) -> waArmadilloXMA.WAArmadilloXMA_pb2.ExtendedContentMessage: ...
+        @property
         def ravenMessage(self) -> Global___Armadillo.Content.RavenMessage: ...
-        @_builtins.property
+        @property
         def ravenActionNotifMessage(self) -> Global___Armadillo.Content.RavenActionNotifMessage: ...
-        @_builtins.property
+        @property
         def extendedMessageContentWithSear(self) -> Global___Armadillo.Content.ExtendedContentMessageWithSear: ...
-        @_builtins.property
+        @property
         def imageGalleryMessage(self) -> Global___Armadillo.Content.ImageGalleryMessage: ...
-        @_builtins.property
+        @property
         def paymentsTransactionMessage(self) -> Global___Armadillo.Content.PaymentsTransactionMessage: ...
-        @_builtins.property
+        @property
         def bumpExistingMessage(self) -> Global___Armadillo.Content.BumpExistingMessage: ...
-        @_builtins.property
+        @property
         def noteReplyMessage(self) -> Global___Armadillo.Content.NoteReplyMessage: ...
-        @_builtins.property
+        @property
         def ravenMessageMsgr(self) -> Global___Armadillo.Content.RavenMessage: ...
-        @_builtins.property
+        @property
         def networkVerificationMessage(self) -> Global___Armadillo.Content.NetworkVerificationMessage: ...
         def __init__(
             self,
             *,
             commonSticker: Global___Armadillo.Content.CommonSticker | None = ...,
             screenshotAction: Global___Armadillo.Content.ScreenshotAction | None = ...,
-            extendedContentMessage: _WAArmadilloXMA_pb2.ExtendedContentMessage | None = ...,
+            extendedContentMessage: waArmadilloXMA.WAArmadilloXMA_pb2.ExtendedContentMessage | None = ...,
             ravenMessage: Global___Armadillo.Content.RavenMessage | None = ...,
             ravenActionNotifMessage: Global___Armadillo.Content.RavenActionNotifMessage | None = ...,
             extendedMessageContentWithSear: Global___Armadillo.Content.ExtendedContentMessageWithSear | None = ...,
@@ -916,19 +844,15 @@ class Armadillo(_message.Message):
             ravenMessageMsgr: Global___Armadillo.Content.RavenMessage | None = ...,
             networkVerificationMessage: Global___Armadillo.Content.NetworkVerificationMessage | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _TypeAlias = _typing.Literal["bumpExistingMessage", b"bumpExistingMessage", "commonSticker", b"commonSticker", "content", b"content", "extendedContentMessage", b"extendedContentMessage", "extendedMessageContentWithSear", b"extendedMessageContentWithSear", "imageGalleryMessage", b"imageGalleryMessage", "networkVerificationMessage", b"networkVerificationMessage", "noteReplyMessage", b"noteReplyMessage", "paymentsTransactionMessage", b"paymentsTransactionMessage", "ravenActionNotifMessage", b"ravenActionNotifMessage", "ravenMessage", b"ravenMessage", "ravenMessageMsgr", b"ravenMessageMsgr", "screenshotAction", b"screenshotAction"]  # noqa: Y015
-        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _TypeAlias = _typing.Literal["bumpExistingMessage", b"bumpExistingMessage", "commonSticker", b"commonSticker", "content", b"content", "extendedContentMessage", b"extendedContentMessage", "extendedMessageContentWithSear", b"extendedMessageContentWithSear", "imageGalleryMessage", b"imageGalleryMessage", "networkVerificationMessage", b"networkVerificationMessage", "noteReplyMessage", b"noteReplyMessage", "paymentsTransactionMessage", b"paymentsTransactionMessage", "ravenActionNotifMessage", b"ravenActionNotifMessage", "ravenMessage", b"ravenMessage", "ravenMessageMsgr", b"ravenMessageMsgr", "screenshotAction", b"screenshotAction"]  # noqa: Y015
-        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-        _WhichOneofReturnType_content: _TypeAlias = _typing.Literal["commonSticker", "screenshotAction", "extendedContentMessage", "ravenMessage", "ravenActionNotifMessage", "extendedMessageContentWithSear", "imageGalleryMessage", "paymentsTransactionMessage", "bumpExistingMessage", "noteReplyMessage", "ravenMessageMsgr", "networkVerificationMessage"]  # noqa: Y015
-        _WhichOneofArgType_content: _TypeAlias = _typing.Literal["content", b"content"]  # noqa: Y015
-        def WhichOneof(self, oneof_group: _WhichOneofArgType_content) -> _WhichOneofReturnType_content | None: ...
+        def HasField(self, field_name: typing.Literal["bumpExistingMessage", b"bumpExistingMessage", "commonSticker", b"commonSticker", "content", b"content", "extendedContentMessage", b"extendedContentMessage", "extendedMessageContentWithSear", b"extendedMessageContentWithSear", "imageGalleryMessage", b"imageGalleryMessage", "networkVerificationMessage", b"networkVerificationMessage", "noteReplyMessage", b"noteReplyMessage", "paymentsTransactionMessage", b"paymentsTransactionMessage", "ravenActionNotifMessage", b"ravenActionNotifMessage", "ravenMessage", b"ravenMessage", "ravenMessageMsgr", b"ravenMessageMsgr", "screenshotAction", b"screenshotAction"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["bumpExistingMessage", b"bumpExistingMessage", "commonSticker", b"commonSticker", "content", b"content", "extendedContentMessage", b"extendedContentMessage", "extendedMessageContentWithSear", b"extendedMessageContentWithSear", "imageGalleryMessage", b"imageGalleryMessage", "networkVerificationMessage", b"networkVerificationMessage", "noteReplyMessage", b"noteReplyMessage", "paymentsTransactionMessage", b"paymentsTransactionMessage", "ravenActionNotifMessage", b"ravenActionNotifMessage", "ravenMessage", b"ravenMessage", "ravenMessageMsgr", b"ravenMessageMsgr", "screenshotAction", b"screenshotAction"]) -> None: ...
+        def WhichOneof(self, oneof_group: typing.Literal["content", b"content"]) -> typing.Literal["commonSticker", "screenshotAction", "extendedContentMessage", "ravenMessage", "ravenActionNotifMessage", "extendedMessageContentWithSear", "imageGalleryMessage", "paymentsTransactionMessage", "bumpExistingMessage", "noteReplyMessage", "ravenMessageMsgr", "networkVerificationMessage"] | None: ...
 
-    PAYLOAD_FIELD_NUMBER: _builtins.int
-    METADATA_FIELD_NUMBER: _builtins.int
-    @_builtins.property
+    PAYLOAD_FIELD_NUMBER: builtins.int
+    METADATA_FIELD_NUMBER: builtins.int
+    @property
     def payload(self) -> Global___Armadillo.Payload: ...
-    @_builtins.property
+    @property
     def metadata(self) -> Global___Armadillo.Metadata: ...
     def __init__(
         self,
@@ -936,9 +860,7 @@ class Armadillo(_message.Message):
         payload: Global___Armadillo.Payload | None = ...,
         metadata: Global___Armadillo.Metadata | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["metadata", b"metadata", "payload", b"payload"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["metadata", b"metadata", "payload", b"payload"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["metadata", b"metadata", "payload", b"payload"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["metadata", b"metadata", "payload", b"payload"]) -> None: ...
 
-Global___Armadillo: _TypeAlias = Armadillo  # noqa: Y015
+Global___Armadillo: typing_extensions.TypeAlias = Armadillo

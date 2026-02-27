@@ -1217,36 +1217,6 @@ func DownloadMediaWithPath(id *C.char, directPath *C.char, encFileHash *C.uchar,
 	return ProtoReturnV3(&return_)
 }
 
-//export PairPhone
-func PairPhone(id *C.char, pairPhoneByte *C.uchar, pairPhoneSize C.int) *C.struct_BytesReturn {
-	return_ := defproto.PairPhoneReturnFunction{}
-
-	var pairPhoneParams defproto.PairPhoneParams
-	err_unmarshal := proto.Unmarshal(getByteByAddr(pairPhoneByte, pairPhoneSize), &pairPhoneParams)
-	if err_unmarshal != nil {
-		return_.Error = proto.String(err_unmarshal.Error())
-		return ProtoReturnV3(&return_)
-	}
-
-	client := clients[C.GoString(id)]
-	code, err := client.PairPhone(
-		context.Background(),
-		pairPhoneParams.GetPhone(),
-		pairPhoneParams.GetShowPushNotification(),
-		whatsmeow.PairClientType(int(pairPhoneParams.GetClientType())),
-		pairPhoneParams.GetClientDisplayName(),
-		pairPhoneParams.GetCodePair(),
-	)
-
-	if err != nil {
-		return_.Error = proto.String(err.Error())
-	} else {
-		return_.Code = proto.String(code)
-	}
-
-	return ProtoReturnV3(&return_)
-}
-
 //export IsOnWhatsApp
 func IsOnWhatsApp(id *C.char, numbers *C.char) *C.struct_BytesReturn {
 	onWhatsApp := []*defproto.IsOnWhatsAppResponse{}

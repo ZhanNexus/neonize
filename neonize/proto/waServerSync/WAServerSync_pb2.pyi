@@ -3,32 +3,32 @@
 isort:skip_file
 """
 
-from collections import abc as _abc
-from google.protobuf import descriptor as _descriptor
-from google.protobuf import message as _message
-from google.protobuf.internal import containers as _containers
-from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
-import builtins as _builtins
+import builtins
+import collections.abc
+import google.protobuf.descriptor
+import google.protobuf.internal.containers
+import google.protobuf.internal.enum_type_wrapper
+import google.protobuf.message
 import sys
-import typing as _typing
+import typing
 
 if sys.version_info >= (3, 10):
-    from typing import TypeAlias as _TypeAlias
+    import typing as typing_extensions
 else:
-    from typing_extensions import TypeAlias as _TypeAlias
+    import typing_extensions
 
-DESCRIPTOR: _descriptor.FileDescriptor
+DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
-@_typing.final
-class SyncdMutation(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class SyncdMutation(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     class _SyncdOperation:
-        ValueType = _typing.NewType("ValueType", _builtins.int)
-        V: _TypeAlias = ValueType  # noqa: Y015
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
 
-    class _SyncdOperationEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[SyncdMutation._SyncdOperation.ValueType], _builtins.type):
-        DESCRIPTOR: _descriptor.EnumDescriptor
+    class _SyncdOperationEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[SyncdMutation._SyncdOperation.ValueType], builtins.type):
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         SET: SyncdMutation._SyncdOperation.ValueType  # 0
         REMOVE: SyncdMutation._SyncdOperation.ValueType  # 1
 
@@ -36,10 +36,10 @@ class SyncdMutation(_message.Message):
     SET: SyncdMutation.SyncdOperation.ValueType  # 0
     REMOVE: SyncdMutation.SyncdOperation.ValueType  # 1
 
-    OPERATION_FIELD_NUMBER: _builtins.int
-    RECORD_FIELD_NUMBER: _builtins.int
+    OPERATION_FIELD_NUMBER: builtins.int
+    RECORD_FIELD_NUMBER: builtins.int
     operation: Global___SyncdMutation.SyncdOperation.ValueType
-    @_builtins.property
+    @property
     def record(self) -> Global___SyncdRecord: ...
     def __init__(
         self,
@@ -47,118 +47,106 @@ class SyncdMutation(_message.Message):
         operation: Global___SyncdMutation.SyncdOperation.ValueType | None = ...,
         record: Global___SyncdRecord | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["operation", b"operation", "record", b"record"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["operation", b"operation", "record", b"record"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["operation", b"operation", "record", b"record"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["operation", b"operation", "record", b"record"]) -> None: ...
 
-Global___SyncdMutation: _TypeAlias = SyncdMutation  # noqa: Y015
+Global___SyncdMutation: typing_extensions.TypeAlias = SyncdMutation
 
-@_typing.final
-class SyncdVersion(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class SyncdVersion(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    VERSION_FIELD_NUMBER: _builtins.int
-    version: _builtins.int
+    VERSION_FIELD_NUMBER: builtins.int
+    version: builtins.int
     def __init__(
         self,
         *,
-        version: _builtins.int | None = ...,
+        version: builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["version", b"version"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["version", b"version"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["version", b"version"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["version", b"version"]) -> None: ...
 
-Global___SyncdVersion: _TypeAlias = SyncdVersion  # noqa: Y015
+Global___SyncdVersion: typing_extensions.TypeAlias = SyncdVersion
 
-@_typing.final
-class ExitCode(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class ExitCode(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    CODE_FIELD_NUMBER: _builtins.int
-    TEXT_FIELD_NUMBER: _builtins.int
-    code: _builtins.int
-    text: _builtins.str
+    CODE_FIELD_NUMBER: builtins.int
+    TEXT_FIELD_NUMBER: builtins.int
+    code: builtins.int
+    text: builtins.str
     def __init__(
         self,
         *,
-        code: _builtins.int | None = ...,
-        text: _builtins.str | None = ...,
+        code: builtins.int | None = ...,
+        text: builtins.str | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["code", b"code", "text", b"text"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["code", b"code", "text", b"text"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["code", b"code", "text", b"text"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["code", b"code", "text", b"text"]) -> None: ...
 
-Global___ExitCode: _TypeAlias = ExitCode  # noqa: Y015
+Global___ExitCode: typing_extensions.TypeAlias = ExitCode
 
-@_typing.final
-class SyncdIndex(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class SyncdIndex(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    BLOB_FIELD_NUMBER: _builtins.int
-    blob: _builtins.bytes
+    BLOB_FIELD_NUMBER: builtins.int
+    blob: builtins.bytes
     def __init__(
         self,
         *,
-        blob: _builtins.bytes | None = ...,
+        blob: builtins.bytes | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["blob", b"blob"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["blob", b"blob"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["blob", b"blob"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["blob", b"blob"]) -> None: ...
 
-Global___SyncdIndex: _TypeAlias = SyncdIndex  # noqa: Y015
+Global___SyncdIndex: typing_extensions.TypeAlias = SyncdIndex
 
-@_typing.final
-class SyncdValue(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class SyncdValue(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    BLOB_FIELD_NUMBER: _builtins.int
-    blob: _builtins.bytes
+    BLOB_FIELD_NUMBER: builtins.int
+    blob: builtins.bytes
     def __init__(
         self,
         *,
-        blob: _builtins.bytes | None = ...,
+        blob: builtins.bytes | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["blob", b"blob"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["blob", b"blob"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["blob", b"blob"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["blob", b"blob"]) -> None: ...
 
-Global___SyncdValue: _TypeAlias = SyncdValue  # noqa: Y015
+Global___SyncdValue: typing_extensions.TypeAlias = SyncdValue
 
-@_typing.final
-class KeyId(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class KeyId(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    ID_FIELD_NUMBER: _builtins.int
-    ID: _builtins.bytes
+    ID_FIELD_NUMBER: builtins.int
+    ID: builtins.bytes
     def __init__(
         self,
         *,
-        ID: _builtins.bytes | None = ...,
+        ID: builtins.bytes | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["ID", b"ID"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["ID", b"ID"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["ID", b"ID"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["ID", b"ID"]) -> None: ...
 
-Global___KeyId: _TypeAlias = KeyId  # noqa: Y015
+Global___KeyId: typing_extensions.TypeAlias = KeyId
 
-@_typing.final
-class SyncdRecord(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class SyncdRecord(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    INDEX_FIELD_NUMBER: _builtins.int
-    VALUE_FIELD_NUMBER: _builtins.int
-    KEYID_FIELD_NUMBER: _builtins.int
-    @_builtins.property
+    INDEX_FIELD_NUMBER: builtins.int
+    VALUE_FIELD_NUMBER: builtins.int
+    KEYID_FIELD_NUMBER: builtins.int
+    @property
     def index(self) -> Global___SyncdIndex: ...
-    @_builtins.property
+    @property
     def value(self) -> Global___SyncdValue: ...
-    @_builtins.property
+    @property
     def keyID(self) -> Global___KeyId: ...
     def __init__(
         self,
@@ -167,136 +155,127 @@ class SyncdRecord(_message.Message):
         value: Global___SyncdValue | None = ...,
         keyID: Global___KeyId | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["index", b"index", "keyID", b"keyID", "value", b"value"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["index", b"index", "keyID", b"keyID", "value", b"value"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["index", b"index", "keyID", b"keyID", "value", b"value"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["index", b"index", "keyID", b"keyID", "value", b"value"]) -> None: ...
 
-Global___SyncdRecord: _TypeAlias = SyncdRecord  # noqa: Y015
+Global___SyncdRecord: typing_extensions.TypeAlias = SyncdRecord
 
-@_typing.final
-class ExternalBlobReference(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class ExternalBlobReference(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    MEDIAKEY_FIELD_NUMBER: _builtins.int
-    DIRECTPATH_FIELD_NUMBER: _builtins.int
-    HANDLE_FIELD_NUMBER: _builtins.int
-    FILESIZEBYTES_FIELD_NUMBER: _builtins.int
-    FILESHA256_FIELD_NUMBER: _builtins.int
-    FILEENCSHA256_FIELD_NUMBER: _builtins.int
-    mediaKey: _builtins.bytes
-    directPath: _builtins.str
-    handle: _builtins.str
-    fileSizeBytes: _builtins.int
-    fileSHA256: _builtins.bytes
-    fileEncSHA256: _builtins.bytes
+    MEDIAKEY_FIELD_NUMBER: builtins.int
+    DIRECTPATH_FIELD_NUMBER: builtins.int
+    HANDLE_FIELD_NUMBER: builtins.int
+    FILESIZEBYTES_FIELD_NUMBER: builtins.int
+    FILESHA256_FIELD_NUMBER: builtins.int
+    FILEENCSHA256_FIELD_NUMBER: builtins.int
+    mediaKey: builtins.bytes
+    directPath: builtins.str
+    handle: builtins.str
+    fileSizeBytes: builtins.int
+    fileSHA256: builtins.bytes
+    fileEncSHA256: builtins.bytes
     def __init__(
         self,
         *,
-        mediaKey: _builtins.bytes | None = ...,
-        directPath: _builtins.str | None = ...,
-        handle: _builtins.str | None = ...,
-        fileSizeBytes: _builtins.int | None = ...,
-        fileSHA256: _builtins.bytes | None = ...,
-        fileEncSHA256: _builtins.bytes | None = ...,
+        mediaKey: builtins.bytes | None = ...,
+        directPath: builtins.str | None = ...,
+        handle: builtins.str | None = ...,
+        fileSizeBytes: builtins.int | None = ...,
+        fileSHA256: builtins.bytes | None = ...,
+        fileEncSHA256: builtins.bytes | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["directPath", b"directPath", "fileEncSHA256", b"fileEncSHA256", "fileSHA256", b"fileSHA256", "fileSizeBytes", b"fileSizeBytes", "handle", b"handle", "mediaKey", b"mediaKey"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["directPath", b"directPath", "fileEncSHA256", b"fileEncSHA256", "fileSHA256", b"fileSHA256", "fileSizeBytes", b"fileSizeBytes", "handle", b"handle", "mediaKey", b"mediaKey"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["directPath", b"directPath", "fileEncSHA256", b"fileEncSHA256", "fileSHA256", b"fileSHA256", "fileSizeBytes", b"fileSizeBytes", "handle", b"handle", "mediaKey", b"mediaKey"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["directPath", b"directPath", "fileEncSHA256", b"fileEncSHA256", "fileSHA256", b"fileSHA256", "fileSizeBytes", b"fileSizeBytes", "handle", b"handle", "mediaKey", b"mediaKey"]) -> None: ...
 
-Global___ExternalBlobReference: _TypeAlias = ExternalBlobReference  # noqa: Y015
+Global___ExternalBlobReference: typing_extensions.TypeAlias = ExternalBlobReference
 
-@_typing.final
-class SyncdSnapshot(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class SyncdSnapshot(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    VERSION_FIELD_NUMBER: _builtins.int
-    RECORDS_FIELD_NUMBER: _builtins.int
-    MAC_FIELD_NUMBER: _builtins.int
-    KEYID_FIELD_NUMBER: _builtins.int
-    mac: _builtins.bytes
-    @_builtins.property
+    VERSION_FIELD_NUMBER: builtins.int
+    RECORDS_FIELD_NUMBER: builtins.int
+    MAC_FIELD_NUMBER: builtins.int
+    KEYID_FIELD_NUMBER: builtins.int
+    mac: builtins.bytes
+    @property
     def version(self) -> Global___SyncdVersion: ...
-    @_builtins.property
-    def records(self) -> _containers.RepeatedCompositeFieldContainer[Global___SyncdRecord]: ...
-    @_builtins.property
+    @property
+    def records(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___SyncdRecord]: ...
+    @property
     def keyID(self) -> Global___KeyId: ...
     def __init__(
         self,
         *,
         version: Global___SyncdVersion | None = ...,
-        records: _abc.Iterable[Global___SyncdRecord] | None = ...,
-        mac: _builtins.bytes | None = ...,
+        records: collections.abc.Iterable[Global___SyncdRecord] | None = ...,
+        mac: builtins.bytes | None = ...,
         keyID: Global___KeyId | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["keyID", b"keyID", "mac", b"mac", "version", b"version"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["keyID", b"keyID", "mac", b"mac", "records", b"records", "version", b"version"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["keyID", b"keyID", "mac", b"mac", "version", b"version"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["keyID", b"keyID", "mac", b"mac", "records", b"records", "version", b"version"]) -> None: ...
 
-Global___SyncdSnapshot: _TypeAlias = SyncdSnapshot  # noqa: Y015
+Global___SyncdSnapshot: typing_extensions.TypeAlias = SyncdSnapshot
 
-@_typing.final
-class SyncdMutations(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class SyncdMutations(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    MUTATIONS_FIELD_NUMBER: _builtins.int
-    @_builtins.property
-    def mutations(self) -> _containers.RepeatedCompositeFieldContainer[Global___SyncdMutation]: ...
+    MUTATIONS_FIELD_NUMBER: builtins.int
+    @property
+    def mutations(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___SyncdMutation]: ...
     def __init__(
         self,
         *,
-        mutations: _abc.Iterable[Global___SyncdMutation] | None = ...,
+        mutations: collections.abc.Iterable[Global___SyncdMutation] | None = ...,
     ) -> None: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["mutations", b"mutations"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def ClearField(self, field_name: typing.Literal["mutations", b"mutations"]) -> None: ...
 
-Global___SyncdMutations: _TypeAlias = SyncdMutations  # noqa: Y015
+Global___SyncdMutations: typing_extensions.TypeAlias = SyncdMutations
 
-@_typing.final
-class SyncdPatch(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class SyncdPatch(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    VERSION_FIELD_NUMBER: _builtins.int
-    MUTATIONS_FIELD_NUMBER: _builtins.int
-    EXTERNALMUTATIONS_FIELD_NUMBER: _builtins.int
-    SNAPSHOTMAC_FIELD_NUMBER: _builtins.int
-    PATCHMAC_FIELD_NUMBER: _builtins.int
-    KEYID_FIELD_NUMBER: _builtins.int
-    EXITCODE_FIELD_NUMBER: _builtins.int
-    DEVICEINDEX_FIELD_NUMBER: _builtins.int
-    CLIENTDEBUGDATA_FIELD_NUMBER: _builtins.int
-    snapshotMAC: _builtins.bytes
-    patchMAC: _builtins.bytes
-    deviceIndex: _builtins.int
-    clientDebugData: _builtins.bytes
-    @_builtins.property
+    VERSION_FIELD_NUMBER: builtins.int
+    MUTATIONS_FIELD_NUMBER: builtins.int
+    EXTERNALMUTATIONS_FIELD_NUMBER: builtins.int
+    SNAPSHOTMAC_FIELD_NUMBER: builtins.int
+    PATCHMAC_FIELD_NUMBER: builtins.int
+    KEYID_FIELD_NUMBER: builtins.int
+    EXITCODE_FIELD_NUMBER: builtins.int
+    DEVICEINDEX_FIELD_NUMBER: builtins.int
+    CLIENTDEBUGDATA_FIELD_NUMBER: builtins.int
+    snapshotMAC: builtins.bytes
+    patchMAC: builtins.bytes
+    deviceIndex: builtins.int
+    clientDebugData: builtins.bytes
+    @property
     def version(self) -> Global___SyncdVersion: ...
-    @_builtins.property
-    def mutations(self) -> _containers.RepeatedCompositeFieldContainer[Global___SyncdMutation]: ...
-    @_builtins.property
+    @property
+    def mutations(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___SyncdMutation]: ...
+    @property
     def externalMutations(self) -> Global___ExternalBlobReference: ...
-    @_builtins.property
+    @property
     def keyID(self) -> Global___KeyId: ...
-    @_builtins.property
+    @property
     def exitCode(self) -> Global___ExitCode: ...
     def __init__(
         self,
         *,
         version: Global___SyncdVersion | None = ...,
-        mutations: _abc.Iterable[Global___SyncdMutation] | None = ...,
+        mutations: collections.abc.Iterable[Global___SyncdMutation] | None = ...,
         externalMutations: Global___ExternalBlobReference | None = ...,
-        snapshotMAC: _builtins.bytes | None = ...,
-        patchMAC: _builtins.bytes | None = ...,
+        snapshotMAC: builtins.bytes | None = ...,
+        patchMAC: builtins.bytes | None = ...,
         keyID: Global___KeyId | None = ...,
         exitCode: Global___ExitCode | None = ...,
-        deviceIndex: _builtins.int | None = ...,
-        clientDebugData: _builtins.bytes | None = ...,
+        deviceIndex: builtins.int | None = ...,
+        clientDebugData: builtins.bytes | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["clientDebugData", b"clientDebugData", "deviceIndex", b"deviceIndex", "exitCode", b"exitCode", "externalMutations", b"externalMutations", "keyID", b"keyID", "patchMAC", b"patchMAC", "snapshotMAC", b"snapshotMAC", "version", b"version"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["clientDebugData", b"clientDebugData", "deviceIndex", b"deviceIndex", "exitCode", b"exitCode", "externalMutations", b"externalMutations", "keyID", b"keyID", "mutations", b"mutations", "patchMAC", b"patchMAC", "snapshotMAC", b"snapshotMAC", "version", b"version"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["clientDebugData", b"clientDebugData", "deviceIndex", b"deviceIndex", "exitCode", b"exitCode", "externalMutations", b"externalMutations", "keyID", b"keyID", "patchMAC", b"patchMAC", "snapshotMAC", b"snapshotMAC", "version", b"version"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["clientDebugData", b"clientDebugData", "deviceIndex", b"deviceIndex", "exitCode", b"exitCode", "externalMutations", b"externalMutations", "keyID", b"keyID", "mutations", b"mutations", "patchMAC", b"patchMAC", "snapshotMAC", b"snapshotMAC", "version", b"version"]) -> None: ...
 
-Global___SyncdPatch: _TypeAlias = SyncdPatch  # noqa: Y015
+Global___SyncdPatch: typing_extensions.TypeAlias = SyncdPatch

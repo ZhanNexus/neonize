@@ -3,52 +3,50 @@
 isort:skip_file
 """
 
-from collections import abc as _abc
-from google.protobuf import descriptor as _descriptor
-from google.protobuf import message as _message
-from google.protobuf.internal import containers as _containers
-import builtins as _builtins
+import builtins
+import collections.abc
+import google.protobuf.descriptor
+import google.protobuf.internal.containers
+import google.protobuf.message
 import sys
-import typing as _typing
+import typing
 
 if sys.version_info >= (3, 10):
-    from typing import TypeAlias as _TypeAlias
+    import typing as typing_extensions
 else:
-    from typing_extensions import TypeAlias as _TypeAlias
+    import typing_extensions
 
-DESCRIPTOR: _descriptor.FileDescriptor
+DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
-@_typing.final
-class RoutingInfo(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class RoutingInfo(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    REGIONID_FIELD_NUMBER: _builtins.int
-    CLUSTERID_FIELD_NUMBER: _builtins.int
-    TASKID_FIELD_NUMBER: _builtins.int
-    DEBUG_FIELD_NUMBER: _builtins.int
-    TCPBBR_FIELD_NUMBER: _builtins.int
-    TCPKEEPALIVE_FIELD_NUMBER: _builtins.int
-    taskID: _builtins.int
-    debug: _builtins.bool
-    tcpBbr: _builtins.bool
-    tcpKeepalive: _builtins.bool
-    @_builtins.property
-    def regionID(self) -> _containers.RepeatedScalarFieldContainer[_builtins.int]: ...
-    @_builtins.property
-    def clusterID(self) -> _containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    REGIONID_FIELD_NUMBER: builtins.int
+    CLUSTERID_FIELD_NUMBER: builtins.int
+    TASKID_FIELD_NUMBER: builtins.int
+    DEBUG_FIELD_NUMBER: builtins.int
+    TCPBBR_FIELD_NUMBER: builtins.int
+    TCPKEEPALIVE_FIELD_NUMBER: builtins.int
+    taskID: builtins.int
+    debug: builtins.bool
+    tcpBbr: builtins.bool
+    tcpKeepalive: builtins.bool
+    @property
+    def regionID(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
+    @property
+    def clusterID(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
     def __init__(
         self,
         *,
-        regionID: _abc.Iterable[_builtins.int] | None = ...,
-        clusterID: _abc.Iterable[_builtins.int] | None = ...,
-        taskID: _builtins.int | None = ...,
-        debug: _builtins.bool | None = ...,
-        tcpBbr: _builtins.bool | None = ...,
-        tcpKeepalive: _builtins.bool | None = ...,
+        regionID: collections.abc.Iterable[builtins.int] | None = ...,
+        clusterID: collections.abc.Iterable[builtins.int] | None = ...,
+        taskID: builtins.int | None = ...,
+        debug: builtins.bool | None = ...,
+        tcpBbr: builtins.bool | None = ...,
+        tcpKeepalive: builtins.bool | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["debug", b"debug", "taskID", b"taskID", "tcpBbr", b"tcpBbr", "tcpKeepalive", b"tcpKeepalive"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["clusterID", b"clusterID", "debug", b"debug", "regionID", b"regionID", "taskID", b"taskID", "tcpBbr", b"tcpBbr", "tcpKeepalive", b"tcpKeepalive"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["debug", b"debug", "taskID", b"taskID", "tcpBbr", b"tcpBbr", "tcpKeepalive", b"tcpKeepalive"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["clusterID", b"clusterID", "debug", b"debug", "regionID", b"regionID", "taskID", b"taskID", "tcpBbr", b"tcpBbr", "tcpKeepalive", b"tcpKeepalive"]) -> None: ...
 
-Global___RoutingInfo: _TypeAlias = RoutingInfo  # noqa: Y015
+Global___RoutingInfo: typing_extensions.TypeAlias = RoutingInfo

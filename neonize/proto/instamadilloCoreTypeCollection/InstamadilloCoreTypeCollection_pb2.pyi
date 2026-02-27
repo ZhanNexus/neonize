@@ -3,40 +3,38 @@
 isort:skip_file
 """
 
-from collections import abc as _abc
-from google.protobuf import descriptor as _descriptor
-from google.protobuf import message as _message
-from google.protobuf.internal import containers as _containers
-from instamadilloCoreTypeMedia import InstamadilloCoreTypeMedia_pb2 as _InstamadilloCoreTypeMedia_pb2
-import builtins as _builtins
+import builtins
+import collections.abc
+import google.protobuf.descriptor
+import google.protobuf.internal.containers
+import google.protobuf.message
+import instamadilloCoreTypeMedia.InstamadilloCoreTypeMedia_pb2
 import sys
-import typing as _typing
+import typing
 
 if sys.version_info >= (3, 10):
-    from typing import TypeAlias as _TypeAlias
+    import typing as typing_extensions
 else:
-    from typing_extensions import TypeAlias as _TypeAlias
+    import typing_extensions
 
-DESCRIPTOR: _descriptor.FileDescriptor
+DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
-@_typing.final
-class Collection(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class Collection(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    NAME_FIELD_NUMBER: _builtins.int
-    MEDIA_FIELD_NUMBER: _builtins.int
-    name: _builtins.str
-    @_builtins.property
-    def media(self) -> _containers.RepeatedCompositeFieldContainer[_InstamadilloCoreTypeMedia_pb2.Media]: ...
+    NAME_FIELD_NUMBER: builtins.int
+    MEDIA_FIELD_NUMBER: builtins.int
+    name: builtins.str
+    @property
+    def media(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[instamadilloCoreTypeMedia.InstamadilloCoreTypeMedia_pb2.Media]: ...
     def __init__(
         self,
         *,
-        name: _builtins.str | None = ...,
-        media: _abc.Iterable[_InstamadilloCoreTypeMedia_pb2.Media] | None = ...,
+        name: builtins.str | None = ...,
+        media: collections.abc.Iterable[instamadilloCoreTypeMedia.InstamadilloCoreTypeMedia_pb2.Media] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["name", b"name"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["media", b"media", "name", b"name"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["name", b"name"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["media", b"media", "name", b"name"]) -> None: ...
 
-Global___Collection: _TypeAlias = Collection  # noqa: Y015
+Global___Collection: typing_extensions.TypeAlias = Collection

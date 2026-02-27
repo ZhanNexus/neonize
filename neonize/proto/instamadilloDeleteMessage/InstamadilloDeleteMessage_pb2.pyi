@@ -3,33 +3,31 @@
 isort:skip_file
 """
 
-from google.protobuf import descriptor as _descriptor
-from google.protobuf import message as _message
-import builtins as _builtins
+import builtins
+import google.protobuf.descriptor
+import google.protobuf.message
 import sys
-import typing as _typing
+import typing
 
 if sys.version_info >= (3, 10):
-    from typing import TypeAlias as _TypeAlias
+    import typing as typing_extensions
 else:
-    from typing_extensions import TypeAlias as _TypeAlias
+    import typing_extensions
 
-DESCRIPTOR: _descriptor.FileDescriptor
+DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
-@_typing.final
-class DeleteMessagePayload(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class DeleteMessagePayload(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    MESSAGEOTID_FIELD_NUMBER: _builtins.int
-    messageOtid: _builtins.str
+    MESSAGEOTID_FIELD_NUMBER: builtins.int
+    messageOtid: builtins.str
     def __init__(
         self,
         *,
-        messageOtid: _builtins.str | None = ...,
+        messageOtid: builtins.str | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["messageOtid", b"messageOtid"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["messageOtid", b"messageOtid"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["messageOtid", b"messageOtid"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["messageOtid", b"messageOtid"]) -> None: ...
 
-Global___DeleteMessagePayload: _TypeAlias = DeleteMessagePayload  # noqa: Y015
+Global___DeleteMessagePayload: typing_extensions.TypeAlias = DeleteMessagePayload

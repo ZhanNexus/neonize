@@ -516,8 +516,6 @@ if not os.environ.get("SPHINX"):
         ctypes.c_int
     ]
     gocode.ClearChat.restype = ctypes.c_char_p
-    gocode.PairPhone.argtypes = [ctypes.c_char_p, ctypes.c_char_p, ctypes.c_int]
-    gocode.PairPhone.restype = ctypes.POINTER(Bytes)
 
 else:
     gocode: Any = object()

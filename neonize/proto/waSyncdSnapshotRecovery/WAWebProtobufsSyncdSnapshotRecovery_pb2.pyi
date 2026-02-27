@@ -3,90 +3,84 @@
 isort:skip_file
 """
 
-from collections import abc as _abc
-from google.protobuf import descriptor as _descriptor
-from google.protobuf import message as _message
-from google.protobuf.internal import containers as _containers
-from waSyncAction import WAWebProtobufSyncAction_pb2 as _WAWebProtobufSyncAction_pb2
-import builtins as _builtins
+import builtins
+import collections.abc
+import google.protobuf.descriptor
+import google.protobuf.internal.containers
+import google.protobuf.message
 import sys
-import typing as _typing
+import typing
+import waSyncAction.WAWebProtobufSyncAction_pb2
 
 if sys.version_info >= (3, 10):
-    from typing import TypeAlias as _TypeAlias
+    import typing as typing_extensions
 else:
-    from typing_extensions import TypeAlias as _TypeAlias
+    import typing_extensions
 
-DESCRIPTOR: _descriptor.FileDescriptor
+DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
-@_typing.final
-class SyncdSnapshotRecovery(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class SyncdSnapshotRecovery(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    VERSION_FIELD_NUMBER: _builtins.int
-    COLLECTIONNAME_FIELD_NUMBER: _builtins.int
-    MUTATIONRECORDS_FIELD_NUMBER: _builtins.int
-    COLLECTIONLTHASH_FIELD_NUMBER: _builtins.int
-    collectionName: _builtins.str
-    collectionLthash: _builtins.bytes
-    @_builtins.property
+    VERSION_FIELD_NUMBER: builtins.int
+    COLLECTIONNAME_FIELD_NUMBER: builtins.int
+    MUTATIONRECORDS_FIELD_NUMBER: builtins.int
+    COLLECTIONLTHASH_FIELD_NUMBER: builtins.int
+    collectionName: builtins.str
+    collectionLthash: builtins.bytes
+    @property
     def version(self) -> Global___SyncdVersion: ...
-    @_builtins.property
-    def mutationRecords(self) -> _containers.RepeatedCompositeFieldContainer[Global___SyncdPlainTextRecord]: ...
+    @property
+    def mutationRecords(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___SyncdPlainTextRecord]: ...
     def __init__(
         self,
         *,
         version: Global___SyncdVersion | None = ...,
-        collectionName: _builtins.str | None = ...,
-        mutationRecords: _abc.Iterable[Global___SyncdPlainTextRecord] | None = ...,
-        collectionLthash: _builtins.bytes | None = ...,
+        collectionName: builtins.str | None = ...,
+        mutationRecords: collections.abc.Iterable[Global___SyncdPlainTextRecord] | None = ...,
+        collectionLthash: builtins.bytes | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["collectionLthash", b"collectionLthash", "collectionName", b"collectionName", "version", b"version"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["collectionLthash", b"collectionLthash", "collectionName", b"collectionName", "mutationRecords", b"mutationRecords", "version", b"version"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["collectionLthash", b"collectionLthash", "collectionName", b"collectionName", "version", b"version"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["collectionLthash", b"collectionLthash", "collectionName", b"collectionName", "mutationRecords", b"mutationRecords", "version", b"version"]) -> None: ...
 
-Global___SyncdSnapshotRecovery: _TypeAlias = SyncdSnapshotRecovery  # noqa: Y015
+Global___SyncdSnapshotRecovery: typing_extensions.TypeAlias = SyncdSnapshotRecovery
 
-@_typing.final
-class SyncdPlainTextRecord(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class SyncdPlainTextRecord(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    VALUE_FIELD_NUMBER: _builtins.int
-    KEYID_FIELD_NUMBER: _builtins.int
-    MAC_FIELD_NUMBER: _builtins.int
-    keyID: _builtins.bytes
-    mac: _builtins.bytes
-    @_builtins.property
-    def value(self) -> _WAWebProtobufSyncAction_pb2.SyncActionData: ...
+    VALUE_FIELD_NUMBER: builtins.int
+    KEYID_FIELD_NUMBER: builtins.int
+    MAC_FIELD_NUMBER: builtins.int
+    keyID: builtins.bytes
+    mac: builtins.bytes
+    @property
+    def value(self) -> waSyncAction.WAWebProtobufSyncAction_pb2.SyncActionData: ...
     def __init__(
         self,
         *,
-        value: _WAWebProtobufSyncAction_pb2.SyncActionData | None = ...,
-        keyID: _builtins.bytes | None = ...,
-        mac: _builtins.bytes | None = ...,
+        value: waSyncAction.WAWebProtobufSyncAction_pb2.SyncActionData | None = ...,
+        keyID: builtins.bytes | None = ...,
+        mac: builtins.bytes | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["keyID", b"keyID", "mac", b"mac", "value", b"value"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["keyID", b"keyID", "mac", b"mac", "value", b"value"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["keyID", b"keyID", "mac", b"mac", "value", b"value"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["keyID", b"keyID", "mac", b"mac", "value", b"value"]) -> None: ...
 
-Global___SyncdPlainTextRecord: _TypeAlias = SyncdPlainTextRecord  # noqa: Y015
+Global___SyncdPlainTextRecord: typing_extensions.TypeAlias = SyncdPlainTextRecord
 
-@_typing.final
-class SyncdVersion(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class SyncdVersion(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    VERSION_FIELD_NUMBER: _builtins.int
-    version: _builtins.int
+    VERSION_FIELD_NUMBER: builtins.int
+    version: builtins.int
     def __init__(
         self,
         *,
-        version: _builtins.int | None = ...,
+        version: builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["version", b"version"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["version", b"version"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["version", b"version"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["version", b"version"]) -> None: ...
 
-Global___SyncdVersion: _TypeAlias = SyncdVersion  # noqa: Y015
+Global___SyncdVersion: typing_extensions.TypeAlias = SyncdVersion

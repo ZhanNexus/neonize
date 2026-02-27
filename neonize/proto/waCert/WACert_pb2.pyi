@@ -3,124 +3,116 @@
 isort:skip_file
 """
 
-from google.protobuf import descriptor as _descriptor
-from google.protobuf import message as _message
-import builtins as _builtins
+import builtins
+import google.protobuf.descriptor
+import google.protobuf.message
 import sys
-import typing as _typing
+import typing
 
 if sys.version_info >= (3, 10):
-    from typing import TypeAlias as _TypeAlias
+    import typing as typing_extensions
 else:
-    from typing_extensions import TypeAlias as _TypeAlias
+    import typing_extensions
 
-DESCRIPTOR: _descriptor.FileDescriptor
+DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
-@_typing.final
-class NoiseCertificate(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class NoiseCertificate(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    @_typing.final
-    class Details(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+    @typing.final
+    class Details(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-        SERIAL_FIELD_NUMBER: _builtins.int
-        ISSUER_FIELD_NUMBER: _builtins.int
-        EXPIRES_FIELD_NUMBER: _builtins.int
-        SUBJECT_FIELD_NUMBER: _builtins.int
-        KEY_FIELD_NUMBER: _builtins.int
-        serial: _builtins.int
-        issuer: _builtins.str
-        expires: _builtins.int
-        subject: _builtins.str
-        key: _builtins.bytes
+        SERIAL_FIELD_NUMBER: builtins.int
+        ISSUER_FIELD_NUMBER: builtins.int
+        EXPIRES_FIELD_NUMBER: builtins.int
+        SUBJECT_FIELD_NUMBER: builtins.int
+        KEY_FIELD_NUMBER: builtins.int
+        serial: builtins.int
+        issuer: builtins.str
+        expires: builtins.int
+        subject: builtins.str
+        key: builtins.bytes
         def __init__(
             self,
             *,
-            serial: _builtins.int | None = ...,
-            issuer: _builtins.str | None = ...,
-            expires: _builtins.int | None = ...,
-            subject: _builtins.str | None = ...,
-            key: _builtins.bytes | None = ...,
+            serial: builtins.int | None = ...,
+            issuer: builtins.str | None = ...,
+            expires: builtins.int | None = ...,
+            subject: builtins.str | None = ...,
+            key: builtins.bytes | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _TypeAlias = _typing.Literal["expires", b"expires", "issuer", b"issuer", "key", b"key", "serial", b"serial", "subject", b"subject"]  # noqa: Y015
-        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _TypeAlias = _typing.Literal["expires", b"expires", "issuer", b"issuer", "key", b"key", "serial", b"serial", "subject", b"subject"]  # noqa: Y015
-        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+        def HasField(self, field_name: typing.Literal["expires", b"expires", "issuer", b"issuer", "key", b"key", "serial", b"serial", "subject", b"subject"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["expires", b"expires", "issuer", b"issuer", "key", b"key", "serial", b"serial", "subject", b"subject"]) -> None: ...
 
-    DETAILS_FIELD_NUMBER: _builtins.int
-    SIGNATURE_FIELD_NUMBER: _builtins.int
-    details: _builtins.bytes
-    signature: _builtins.bytes
+    DETAILS_FIELD_NUMBER: builtins.int
+    SIGNATURE_FIELD_NUMBER: builtins.int
+    details: builtins.bytes
+    signature: builtins.bytes
     def __init__(
         self,
         *,
-        details: _builtins.bytes | None = ...,
-        signature: _builtins.bytes | None = ...,
+        details: builtins.bytes | None = ...,
+        signature: builtins.bytes | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["details", b"details", "signature", b"signature"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["details", b"details", "signature", b"signature"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["details", b"details", "signature", b"signature"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["details", b"details", "signature", b"signature"]) -> None: ...
 
-Global___NoiseCertificate: _TypeAlias = NoiseCertificate  # noqa: Y015
+Global___NoiseCertificate: typing_extensions.TypeAlias = NoiseCertificate
 
-@_typing.final
-class CertChain(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class CertChain(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    @_typing.final
-    class NoiseCertificate(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+    @typing.final
+    class NoiseCertificate(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-        @_typing.final
-        class Details(_message.Message):
-            DESCRIPTOR: _descriptor.Descriptor
+        @typing.final
+        class Details(google.protobuf.message.Message):
+            DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-            SERIAL_FIELD_NUMBER: _builtins.int
-            ISSUERSERIAL_FIELD_NUMBER: _builtins.int
-            KEY_FIELD_NUMBER: _builtins.int
-            NOTBEFORE_FIELD_NUMBER: _builtins.int
-            NOTAFTER_FIELD_NUMBER: _builtins.int
-            serial: _builtins.int
-            issuerSerial: _builtins.int
-            key: _builtins.bytes
-            notBefore: _builtins.int
-            notAfter: _builtins.int
+            SERIAL_FIELD_NUMBER: builtins.int
+            ISSUERSERIAL_FIELD_NUMBER: builtins.int
+            KEY_FIELD_NUMBER: builtins.int
+            NOTBEFORE_FIELD_NUMBER: builtins.int
+            NOTAFTER_FIELD_NUMBER: builtins.int
+            serial: builtins.int
+            issuerSerial: builtins.int
+            key: builtins.bytes
+            notBefore: builtins.int
+            notAfter: builtins.int
             def __init__(
                 self,
                 *,
-                serial: _builtins.int | None = ...,
-                issuerSerial: _builtins.int | None = ...,
-                key: _builtins.bytes | None = ...,
-                notBefore: _builtins.int | None = ...,
-                notAfter: _builtins.int | None = ...,
+                serial: builtins.int | None = ...,
+                issuerSerial: builtins.int | None = ...,
+                key: builtins.bytes | None = ...,
+                notBefore: builtins.int | None = ...,
+                notAfter: builtins.int | None = ...,
             ) -> None: ...
-            _HasFieldArgType: _TypeAlias = _typing.Literal["issuerSerial", b"issuerSerial", "key", b"key", "notAfter", b"notAfter", "notBefore", b"notBefore", "serial", b"serial"]  # noqa: Y015
-            def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-            _ClearFieldArgType: _TypeAlias = _typing.Literal["issuerSerial", b"issuerSerial", "key", b"key", "notAfter", b"notAfter", "notBefore", b"notBefore", "serial", b"serial"]  # noqa: Y015
-            def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+            def HasField(self, field_name: typing.Literal["issuerSerial", b"issuerSerial", "key", b"key", "notAfter", b"notAfter", "notBefore", b"notBefore", "serial", b"serial"]) -> builtins.bool: ...
+            def ClearField(self, field_name: typing.Literal["issuerSerial", b"issuerSerial", "key", b"key", "notAfter", b"notAfter", "notBefore", b"notBefore", "serial", b"serial"]) -> None: ...
 
-        DETAILS_FIELD_NUMBER: _builtins.int
-        SIGNATURE_FIELD_NUMBER: _builtins.int
-        details: _builtins.bytes
-        signature: _builtins.bytes
+        DETAILS_FIELD_NUMBER: builtins.int
+        SIGNATURE_FIELD_NUMBER: builtins.int
+        details: builtins.bytes
+        signature: builtins.bytes
         def __init__(
             self,
             *,
-            details: _builtins.bytes | None = ...,
-            signature: _builtins.bytes | None = ...,
+            details: builtins.bytes | None = ...,
+            signature: builtins.bytes | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _TypeAlias = _typing.Literal["details", b"details", "signature", b"signature"]  # noqa: Y015
-        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _TypeAlias = _typing.Literal["details", b"details", "signature", b"signature"]  # noqa: Y015
-        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+        def HasField(self, field_name: typing.Literal["details", b"details", "signature", b"signature"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["details", b"details", "signature", b"signature"]) -> None: ...
 
-    LEAF_FIELD_NUMBER: _builtins.int
-    INTERMEDIATE_FIELD_NUMBER: _builtins.int
-    @_builtins.property
+    LEAF_FIELD_NUMBER: builtins.int
+    INTERMEDIATE_FIELD_NUMBER: builtins.int
+    @property
     def leaf(self) -> Global___CertChain.NoiseCertificate: ...
-    @_builtins.property
+    @property
     def intermediate(self) -> Global___CertChain.NoiseCertificate: ...
     def __init__(
         self,
@@ -128,9 +120,7 @@ class CertChain(_message.Message):
         leaf: Global___CertChain.NoiseCertificate | None = ...,
         intermediate: Global___CertChain.NoiseCertificate | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["intermediate", b"intermediate", "leaf", b"leaf"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["intermediate", b"intermediate", "leaf", b"leaf"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def HasField(self, field_name: typing.Literal["intermediate", b"intermediate", "leaf", b"leaf"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["intermediate", b"intermediate", "leaf", b"leaf"]) -> None: ...
 
-Global___CertChain: _TypeAlias = CertChain  # noqa: Y015
+Global___CertChain: typing_extensions.TypeAlias = CertChain
