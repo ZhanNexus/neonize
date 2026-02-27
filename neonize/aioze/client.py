@@ -713,7 +713,7 @@ class NewAClient:
             msg = message
 
         if context_info is not None:
-
+        
             def merge_additional_context_info(proto_obj):
                 """Recursively merge additional ContextInfo to any ContextInfo found in the protobuf object"""
                 if hasattr(proto_obj, "contextInfo"):
@@ -722,13 +722,13 @@ class NewAClient:
                     proto_obj.contextInfo.MergeFrom(context_info)
 
                 for field, value in proto_obj.ListFields():
-                    if field.type == field.TYPE_MESSAGE:
+                    if getattr(field, "type", 11) == 11:
                         if hasattr(value, "ListFields"):
-                            if field.label == field.LABEL_REPEATED:
-                                for item in value:
+                            merge_additional_context_info(value)
+                        elif hasattr(value, "__iter__"):
+                            for item in value:
+                                if hasattr(item, "ListFields"):
                                     merge_additional_context_info(item)
-                            else:
-                                merge_additional_context_info(value)
 
             merge_additional_context_info(msg)
 
