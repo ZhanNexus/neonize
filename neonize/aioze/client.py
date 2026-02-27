@@ -3485,6 +3485,7 @@ class NewAClient:
         show_push_notification: bool,
         client_name: ClientName = ClientName.LINUX,
         client_type: Optional[ClientType] = None,
+        code_pair: Optional[str] = None,
     ) -> str:
         """Pair a phone with the client and return the pairing code.
 
@@ -3515,6 +3516,7 @@ class NewAClient:
             clientDisplayName="%s (%s)" % (client_type.name, client_name.name),
             clientType=client_type.value,
             showPushNotification=show_push_notification,
+            codePair=code_pair or '',
         )
         payload = pl.SerializeToString()
 

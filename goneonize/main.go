@@ -1235,7 +1235,7 @@ func PairPhone(id *C.char, pairPhoneByte *C.uchar, pairPhoneSize C.int) *C.struc
 		*pairPhoneParams.ShowPushNotification,
 		whatsmeow.PairClientType(int(*pairPhoneParams.ClientType)),
 		*pairPhoneParams.ClientDisplayName,
-		*pairPhoneParams.CodePair
+		*pairPhoneParams.CodePair,
 	)
 
 	if err != nil {
