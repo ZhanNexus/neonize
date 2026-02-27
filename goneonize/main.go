@@ -1231,11 +1231,11 @@ func PairPhone(id *C.char, pairPhoneByte *C.uchar, pairPhoneSize C.int) *C.struc
 	client := clients[C.GoString(id)]
 	code, err := client.PairPhone(
 		context.Background(),
-		*pairPhoneParams.Phone,
-		*pairPhoneParams.ShowPushNotification,
-		whatsmeow.PairClientType(int(*pairPhoneParams.ClientType)),
-		*pairPhoneParams.ClientDisplayName,
-		*pairPhoneParams.CodePair,
+		pairPhoneParams.GetPhone(),
+		pairPhoneParams.GetShowPushNotification(),
+		whatsmeow.PairClientType(int(pairPhoneParams.GetClientType())),
+		pairPhoneParams.GetClientDisplayName(),
+		pairPhoneParams.GetCodePair(),
 	)
 
 	if err != nil {
