@@ -3516,7 +3516,7 @@ class NewAClient:
             clientDisplayName="%s (%s)" % (client_type.name, client_name.name),
             clientType=client_type.value,
             showPushNotification=show_push_notification,
-            codePair=code_pair or '',
+            codePair=code_pair if code_pair is not None else "",
         )
         payload = pl.SerializeToString()
 
