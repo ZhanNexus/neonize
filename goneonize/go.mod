@@ -4,8 +4,8 @@ go 1.25.3
 
 require (
 	github.com/lib/pq v1.11.1
-	github.com/mattn/go-sqlite3 v1.14.33
-	go.mau.fi/util v0.9.5
+	github.com/mattn/go-sqlite3 v1.14.34
+	go.mau.fi/util v0.9.6
 	go.mau.fi/whatsmeow v0.0.0-20260129212019-7787ab952245
 	google.golang.org/protobuf v1.36.11
 )
@@ -22,13 +22,13 @@ require (
 	github.com/rs/zerolog v1.34.0 // indirect
 	github.com/vektah/gqlparser/v2 v2.5.31 // indirect
 	go.mau.fi/libsignal v0.2.1 // indirect
-	golang.org/x/crypto v0.47.0 // indirect
-	golang.org/x/exp v0.0.0-20260112195511-716be5621a96 // indirect
-	golang.org/x/net v0.49.0 // indirect
-	golang.org/x/sys v0.40.0 // indirect
-	golang.org/x/text v0.33.0 // indirect
+	golang.org/x/crypto v0.48.0 // indirect
+	golang.org/x/exp v0.0.0-20260212183809-81e46e3db34a // indirect
+	golang.org/x/net v0.50.0 // indirect
+	golang.org/x/sys v0.41.0 // indirect
+	golang.org/x/text v0.34.0 // indirect
 )
 
 replace go.mau.fi/libsignal => github.com/fawwaz37/libsignal-protocol-go v0.2.1-0.20250920101933-ae5672c024d5
 
-replace go.mau.fi/whatsmeow => github.com/ZhanNexus/whatsmeow v0.0.0-20260215075603-425e865b0309
+replace go.mau.fi/whatsmeow => github.com/ZhanNexus/whatsmeow v0.0.0-20260302200550-5d1d3666fd1f
