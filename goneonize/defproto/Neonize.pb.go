@@ -1475,8 +1475,8 @@ type UploadResponse struct {
 	Url           *string                `protobuf:"bytes,1,req,name=url" json:"url,omitempty"`
 	DirectPath    *string                `protobuf:"bytes,2,req,name=DirectPath" json:"DirectPath,omitempty"`
 	Handle        *string                `protobuf:"bytes,3,req,name=Handle" json:"Handle,omitempty"`
-	MediaKey      []byte                 `protobuf:"bytes,4,req,name=MediaKey" json:"MediaKey,omitempty"`
-	FileEncSHA256 []byte                 `protobuf:"bytes,5,req,name=FileEncSHA256" json:"FileEncSHA256,omitempty"`
+	MediaKey      []byte                 `protobuf:"bytes,4,opt,name=MediaKey" json:"MediaKey,omitempty"`
+	FileEncSHA256 []byte                 `protobuf:"bytes,5,opt,name=FileEncSHA256" json:"FileEncSHA256,omitempty"`
 	FileSHA256    []byte                 `protobuf:"bytes,6,req,name=FileSHA256" json:"FileSHA256,omitempty"`
 	FileLength    *uint32                `protobuf:"varint,7,req,name=FileLength" json:"FileLength,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -9946,8 +9946,8 @@ const file_Neonize_proto_rawDesc = "" +
 	"DirectPath\x18\x02 \x02(\tR\n" +
 	"DirectPath\x12\x16\n" +
 	"\x06Handle\x18\x03 \x02(\tR\x06Handle\x12\x1a\n" +
-	"\bMediaKey\x18\x04 \x02(\fR\bMediaKey\x12$\n" +
-	"\rFileEncSHA256\x18\x05 \x02(\fR\rFileEncSHA256\x12\x1e\n" +
+	"\bMediaKey\x18\x04 \x01(\fR\bMediaKey\x12$\n" +
+	"\rFileEncSHA256\x18\x05 \x01(\fR\rFileEncSHA256\x12\x1e\n" +
 	"\n" +
 	"FileSHA256\x18\x06 \x02(\fR\n" +
 	"FileSHA256\x12\x1e\n" +
