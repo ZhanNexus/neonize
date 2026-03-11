@@ -84,6 +84,12 @@ if not os.environ.get("SPHINX"):
         ctypes.c_int,
     ]
     gocode.PinMessage.restype = ctypes.POINTER(Bytes)
+    gocode.UploadNewsletter.argtypes = [
+        ctypes.c_char_p,
+        ctypes.c_char_p,
+        ctypes.c_int,
+        ctypes.c_int,
+    ]
     gocode.Upload.argtypes = [
         ctypes.c_char_p,
         ctypes.c_char_p,
@@ -93,6 +99,7 @@ if not os.environ.get("SPHINX"):
     gocode.TestStruct.argtypes = []
     gocode.TestStruct.restype = ctypes.POINTER(Bytes)
     gocode.Upload.restype = ctypes.POINTER(Bytes)
+    gocode.UploadNewsletter.restype = ctypes.POINTER(Bytes)
     gocode.DownloadAny.argtypes = [ctypes.c_char_p, ctypes.c_char_p, ctypes.c_int]
     gocode.DownloadAny.restype = ctypes.POINTER(Bytes)
     gocode.DownloadMediaWithPath.argtypes = [
