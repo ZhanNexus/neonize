@@ -976,6 +976,7 @@ class NewClient:
         enforce_not_broken: bool = False,
         animated_gif: bool = False,
         passthrough: bool = False,
+        is_newsletter: bool = False,
     ) -> Message:
         """
         This function builds a sticker message from a given image or video file.
@@ -998,6 +999,8 @@ class NewClient:
         :type animated_gif: bool, optional
         :param passthrough: Don't process sticker, send as is, defaults to False.
         :type passthrough: bool, optional
+        :param is_newsletter: Whether the message is for a newsletter, affects upload method, defaults to False
+        :type is_newsletter: bool, optional
         :return: The constructed sticker message
         :rtype: Message
         """
@@ -1043,15 +1046,18 @@ class NewClient:
                 save_all=True,
                 loop=0,
             )
-        upload = self.upload(io_save.getvalue())
+        upload = (
+            self.upload(io_save.getvalue()) if not is_newsletter
+            else self.upload_newsletter(io_save.getvalue())
+        )
         message = Message(
             stickerMessage=StickerMessage(
                 URL=upload.url,
                 directPath=upload.DirectPath,
-                fileEncSHA256=upload.FileEncSHA256,
+                fileEncSHA256=None if is_newsletter else upload.FileEncSHA256,
                 fileLength=upload.FileLength,
                 fileSHA256=upload.FileSHA256,
-                mediaKey=upload.MediaKey,
+                mediaKey=None if is_newsletter else upload.MediaKey,
                 mimetype=magic.from_buffer(io_save.getvalue(), mime=True),
                 isAnimated=animated,
             )
@@ -1113,6 +1119,7 @@ class NewClient:
                 enforce_not_broken,
                 animated_gif,
                 passthrough,
+                is_newsletter=to.Server == "newsletter" or to.endswith("newsletter"),
             ),
             add_msg_secret=add_msg_secret,
             context_info=context_info,
@@ -1124,6 +1131,7 @@ class NewClient:
         pack_name: str,
         publisher: str = "",
         quoted: Optional[neonize_proto.Message] = None,
+        is_newsletter: bool = False,
     ) -> Message:
         """
         Helper function to process a single sticker pack chunk
@@ -1133,7 +1141,7 @@ class NewClient:
         # Upload all stickers concurrently
         with ThreadPoolExecutor(max_workers=50) as executor:
             futures = [
-                executor.submit(self._upload_sticker, sticker, animated, zip_dict)
+                executor.submit(self._upload_sticker, sticker, animated, zip_dict, is_newsletter)
                 for sticker, animated in stickers
             ]
             sticker_metadata = [future.result() for future in futures]
@@ -1159,11 +1167,17 @@ class NewClient:
 
         # Create zip archive
         sticker_pack = prepare_zip_file_content(zip_dict)
-        thumbnail = self.upload(cover)
+        thumbnail = (
+            self.upload(cover) if not is_newsletter
+            else self.upload_newsletter(cover, MediaType.MediaImage)
+        )
         img_hash = (
             base64.b64encode(thumbnail.FileSHA256).decode("utf-8").replace("/", "-")
         )
-        upload = self.upload(sticker_pack, MediaType.MediaStickerPack)
+        upload = (
+            self.upload(sticker_pack, MediaType.MediaStickerPack) if not is_newsletter
+            else self.upload_newsletter(sticker_pack, MediaType.MediaStickerPack)
+        )
 
         message = Message(
             stickerPackMessage=StickerPackMessage(
@@ -1174,8 +1188,8 @@ class NewClient:
                 # fileLength=upload.FileLength,
                 fileLength=upload.FileLength,
                 fileSHA256=upload.FileSHA256,
-                fileEncSHA256=upload.FileEncSHA256,
-                mediaKey=upload.MediaKey,
+                fileEncSHA256=None if is_newsletter else upload.FileEncSHA256,
+                mediaKey=None if is_newsletter else upload.MediaKey,
                 directPath=upload.DirectPath,
                 mediaKeyTimestamp=int(time.time()),
                 trayIconFileName=tray_icon,
@@ -1197,9 +1211,12 @@ class NewClient:
         return message
 
     def _upload_sticker(
-        self, sticker: bytes, animated: bool, zip_dict: dict
+        self, sticker: bytes, animated: bool, zip_dict: dict, is_newsletter: bool = False
     ) -> StickerPackMessage.Sticker:
-        upload = self.upload(sticker)
+        upload = (
+            self.upload(sticker) if not is_newsletter
+            else self.upload_newsletter(sticker, MediaType.MediaImage)
+        )
         b64 = base64.b64encode(upload.FileSHA256)
         file_name = b64.decode("ascii").replace("/", "-") + ".webp"
         # b64 = base64.urlsafe_b64encode(upload.FileSHA256)
@@ -1223,7 +1240,30 @@ class NewClient:
         crop: bool = False,
         animated_gif: bool = False,
         passthrough: bool = False,
+        is_newsletter: bool = False,
     ) -> List[Message]:
+        """
+        Builds a sticker pack message from a list of files.
+
+        :param files: A list of file paths or bytes representing the stickers.
+        :type files: list
+        :param quoted: A message that the sticker pack message is a reply to, defaults to None
+        :type quoted: Optional[neonize_proto.Message], optional
+        :param packname: The name of the sticker pack, defaults to "Sticker pack"
+        :type packname: str, optional
+        :param publisher: The publisher of the sticker pack, defaults to ""
+        :type publisher: str, optional
+        :param crop: Whether to crop the stickers, defaults to False
+        :type crop: bool, optional
+        :param animated_gif: Whether the stickers are animated gifs, defaults to False
+        :type animated_gif: bool, optional
+        :param passthrough: Whether to send the stickers as is without processing, defaults to False
+        :type passthrough: bool, optional
+        :param is_newsletter: Whether the message is for a newsletter, affects upload method, defaults to False
+        :type is_newsletter: bool, optional
+        :return: A list of sticker pack messages.
+        :rtype: List[Message]
+        """
         p_func = partial(
             convert_to_webp,
             name=packname,
@@ -1259,6 +1299,7 @@ class NewClient:
                         pack_name=full_name,
                         publisher=publisher,
                         quoted=quoted,
+                        is_newsletter=is_newsletter,
                     )
                 )
             return [future.result() for future in futures]
@@ -1298,7 +1339,8 @@ class NewClient:
         """
         responses = []
         msgs = self.build_stickerpack_message(
-            files, quoted, packname, publisher, crop, animated_gif, passthrough
+            files, quoted, packname, publisher, crop, animated_gif, passthrough,
+            is_newsletter=to.Server == "newsletter" or to.endswith("newsletter")
         )
         for msg in msgs:
             response = self.send_message(
@@ -1320,6 +1362,7 @@ class NewClient:
         is_gif: bool = False,
         ghost_mentions: Optional[str] = None,
         mentions_are_lids: bool = False,
+        is_newsletter: bool = False,
     ) -> Message:
         """
         This function is used to build a video message. It uploads a video file, extracts necessary information,
@@ -1337,11 +1380,13 @@ class NewClient:
         :type gifplayback: bool, optional
         :param is_gif: Optional. Whether the video to be sent is a gif. Defaults to False.
         :type is_gif: bool, optional
-        :return: A video message with the given parameters.
         :param ghost_mentions: List of users to tag silently (Takes precedence over auto detected mentions)
         :type ghost_mentions: str, optional
         :param mentions_are_lids: whether mentions contained in message or ghost_mentions are lids, defaults to False.
         :type mentions_are_lids: bool, optional
+        :param is_newsletter: Whether the message is for a newsletter, affects upload method, defaults to False
+        :type is_newsletter: bool, optional
+        :return: A video message with the given parameters.
         :rtype: Message
         """
         io = BytesIO(get_bytes_from_name_or_url(file))
@@ -1353,7 +1398,10 @@ class NewClient:
         with FFmpeg(file) as ffmpeg:
             duration = int(ffmpeg.extract_info().format.duration)
             thumbnail = ffmpeg.extract_thumbnail()
-        upload = self.upload(buff)
+        upload = (
+            self.upload(buff) if not is_newsletter
+            else self.upload_newsletter(buff, MediaType.MediaVideo)
+        )
         message = Message(
             videoMessage=VideoMessage(
                 URL=upload.url,
@@ -1361,10 +1409,10 @@ class NewClient:
                 gifPlayback=gifplayback,
                 seconds=duration,
                 directPath=upload.DirectPath,
-                fileEncSHA256=upload.FileEncSHA256,
+                fileEncSHA256=None if is_newsletter else upload.FileEncSHA256,
                 fileLength=upload.FileLength,
                 fileSHA256=upload.FileSHA256,
-                mediaKey=upload.MediaKey,
+                mediaKey=None if is_newsletter else upload.MediaKey,
                 mimetype=magic.from_buffer(buff, mime=True),
                 JPEGThumbnail=thumbnail,
                 thumbnailDirectPath=upload.DirectPath,
@@ -1472,6 +1520,7 @@ class NewClient:
                 is_gif,
                 ghost_mentions,
                 mentions_are_lids,
+                is_newsletter=to.Server == "newsletter" or to.endswith("newsletter"),
             ),
             add_msg_secret=add_msg_secret,
             context_info=context_info,
@@ -1485,6 +1534,7 @@ class NewClient:
         viewonce: bool = False,
         ghost_mentions: Optional[str] = None,
         mentions_are_lids: bool = False,
+        is_newsletter: bool = False,
     ) -> Message:
         """
         This function builds an image message. It takes a file (either a string or bytes),
@@ -1505,6 +1555,8 @@ class NewClient:
         :type ghost_mentions: str, optional
         :param mentions_are_lids: whether mentions contained in message or ghost_mentions are lids, defaults to False.
         :type mentions_are_lids: bool, optional
+        :param is_newsletter: Whether the message is for a newsletter, affects upload method, defaults to False
+        :type is_newsletter: bool, optional
         :return: The constructed image message.
         :rtype: Message
         """
@@ -1514,16 +1566,19 @@ class NewClient:
         thumbnail = BytesIO()
         img_saveable = img if img.mode == "RGB" else img.convert("RGB")
         img_saveable.save(thumbnail, format="jpeg")
-        upload = self.upload(n_file)
+        upload = (
+            self.upload(n_file) if not is_newsletter
+            else self.upload_newsletter(n_file, MediaType.MediaImage)
+        )
         message = Message(
             imageMessage=ImageMessage(
                 URL=upload.url,
                 caption=caption,
                 directPath=upload.DirectPath,
-                fileEncSHA256=upload.FileEncSHA256,
+                fileEncSHA256=None if is_newsletter else upload.FileEncSHA256,
                 fileLength=upload.FileLength,
                 fileSHA256=upload.FileSHA256,
-                mediaKey=upload.MediaKey,
+                mediaKey=None if is_newsletter else upload.MediaKey,
                 mimetype=magic.from_buffer(n_file, mime=True),
                 JPEGThumbnail=thumbnail.getvalue(),
                 thumbnailDirectPath=upload.DirectPath,
@@ -1588,6 +1643,7 @@ class NewClient:
                 viewonce=viewonce,
                 ghost_mentions=ghost_mentions,
                 mentions_are_lids=mentions_are_lids,
+                is_newsletter=to.Server == "newsletter" or to.endswith("newsletter"),
             ),
             add_msg_secret=add_msg_secret,
             context_info=context_info,
@@ -1598,14 +1654,30 @@ class NewClient:
         file: str | bytes,
         media_type: str,
         msg_association: MessageAssociation,
+        is_newsletter: bool = False,
         **kwargs,
     ) -> Message:
+        """
+        Builds an album content message (image or video) with message association.
+
+        :param file: The file to be uploaded, either as a string URL or bytes.
+        :type file: str | bytes
+        :param media_type: The type of media, either "image" or "video".
+        :type media_type: str
+        :param msg_association: The message association for the album.
+        :type msg_association: MessageAssociation
+        :param is_newsletter: Whether the message is for a newsletter, affects upload method, defaults to False
+        :type is_newsletter: bool, optional
+        :param kwargs: Additional keyword arguments to pass to the build method.
+        :return: The constructed album content message.
+        :rtype: Message
+        """
         build_message = (
             self.build_image_message
             if media_type == "image"
             else self.build_video_message
         )
-        msg = build_message(file, **kwargs)
+        msg = build_message(file, is_newsletter=is_newsletter, **kwargs)
         msg.messageContextInfo.MergeFrom(
             msg.messageContextInfo.__class__(messageAssociation=msg_association)
         )
@@ -1694,6 +1766,7 @@ class NewClient:
                     quoted=quoted,
                     ghost_mentions=ghost_mentions,
                     mentions_are_lids=mentions_are_lids,
+                    is_newsletter=to.Server == "newsletter" or to.endswith("newsletter"),
                 )
                 for file, media_type in medias[:1]
             ]
@@ -1705,6 +1778,7 @@ class NewClient:
                         media_type,
                         msg_association,
                         quoted=quoted,
+                        is_newsletter=to.Server == "newsletter" or to.endswith("newsletter"),
                     )
                     for file, media_type in medias[1:]
                 ]
@@ -1723,6 +1797,7 @@ class NewClient:
         file: str | bytes,
         ptt: bool = False,
         quoted: Optional[neonize_proto.Message] = None,
+        is_newsletter: bool = False,
     ) -> Message:
         """
         This method builds an audio message from a given file or bytes.
@@ -1733,6 +1808,8 @@ class NewClient:
         :type ptt: bool, optional
         :param quoted: A message that the audio message may be replying to, defaults to None
         :type quoted: Optional[neonize_proto.Message], optional
+        :param is_newsletter: Whether the message is for a newsletter, affects upload method, defaults to False
+        :type is_newsletter: bool, optional
         :return: The audio message built from the given parameters
         :rtype: Message
         """
@@ -1743,9 +1820,12 @@ class NewClient:
         if ptt:
             with FFmpeg(buff) as ffmpeg:
                 buff = ffmpeg.to_ptt()
-                waveform = ffmpeg.get_audio_waveform(buff) 
+                waveform = ffmpeg.get_audio_waveform(buff)
 
-        upload = self.upload(buff)
+        upload = (
+            self.upload(buff) if not is_newsletter
+            else self.upload_newsletter(buff, MediaType.MediaAudio)
+        )
 
         with FFmpeg(buff) as ffmpeg:
             duration = int((ffmpeg.extract_info()).format.duration)
@@ -1755,10 +1835,10 @@ class NewClient:
                 URL=upload.url,
                 seconds=duration,
                 directPath=upload.DirectPath,
-                fileEncSHA256=upload.FileEncSHA256,
+                fileEncSHA256=None if is_newsletter else upload.FileEncSHA256,
                 fileLength=upload.FileLength,
                 fileSHA256=upload.FileSHA256,
-                mediaKey=upload.MediaKey,
+                mediaKey=None if is_newsletter else upload.MediaKey,
                 mimetype=(
                     "audio/ogg; codecs=opus"
                     if ptt
@@ -1803,7 +1883,7 @@ class NewClient:
 
         return self.send_message(
             to,
-            self.build_audio_message(file, ptt, quoted),
+            self.build_audio_message(file, ptt, quoted, is_newsletter=to.Server == "newsletter" or to.endswith("newsletter")),
             add_msg_secret=add_msg_secret,
             context_info=context_info,
         )
@@ -1818,7 +1898,29 @@ class NewClient:
         quoted: Optional[neonize_proto.Message] = None,
         ghost_mentions: Optional[str] = None,
         mentions_are_lids: bool = False,
-    ):
+    ) -> Message:
+        """
+        This method builds a document message from a given file or bytes.
+
+        :param file: The document file in string or bytes format to be sent.
+        :type file: str | bytes
+        :param caption: Optional caption for the document, defaults to None
+        :type caption: Optional[str], optional
+        :param title: Optional title for the document, defaults to None
+        :type title: Optional[str], optional
+        :param filename: Optional filename for the document, defaults to None
+        :type filename: Optional[str], optional
+        :param mimetype: Optional mimetype for the document, defaults to None
+        :type mimetype: Optional[str], optional
+        :param quoted: A message that the document message may be replying to, defaults to None
+        :type quoted: Optional[neonize_proto.Message], optional
+        :param ghost_mentions: List of users to tag silently, defaults to None
+        :type ghost_mentions: Optional[str], optional
+        :param mentions_are_lids: Whether mentions are lids, defaults to False
+        :type mentions_are_lids: bool, optional
+        :return: The document message built from the given parameters
+        :rtype: Message
+        """
         io = BytesIO(get_bytes_from_name_or_url(file))
         io.seek(0)
         buff = io.read()
