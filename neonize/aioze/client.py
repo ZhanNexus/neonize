@@ -1175,7 +1175,7 @@ class NewAClient:
                 enforce_not_broken,
                 animated_gif,
                 passthrough,
-                is_newsletter=to.Server == "newsletter" or to.endswith("newsletter"),
+                is_newsletter=to.endswith("newsletter") if isinstance(to, str) else to.Server == "newsletter",
             ),
             context_info=context_info,
             add_msg_secret=add_msg_secret,
@@ -1346,7 +1346,7 @@ class NewAClient:
                 pack_name=packname + pack_suffix,
                 publisher=publisher,
                 quoted=quoted,
-                is_newsletter=is_newsletter,
+                is_newsletter=to.endswith("newsletter") if isinstance(to, str) else to.Server == "newsletter",
             )
             tasks.append(task)
 
@@ -1388,7 +1388,7 @@ class NewAClient:
         responses = []
         msgs = await self.build_stickerpack_message(
             files, quoted, packname, publisher, crop, animated_gif, passthrough,
-            is_newsletter=to.Server == "newsletter" or to.endswith("newsletter")
+            is_newsletter=to.endswith("newsletter") if isinstance(to, str) else to.Server == "newsletter",
         )
         for msg in msgs:
             response = await self.send_message(
@@ -1546,7 +1546,7 @@ class NewAClient:
                 spoiler,
                 ghost_mentions,
                 mentions_are_lids,
-                is_newsletter=to.Server == newsletter,
+                is_newsletter=to.endswith("newsletter") if isinstance(to, str) else to.Server == "newsletter",
             ),
             add_msg_secret=add_msg_secret,
             context_info=context_info,
@@ -1715,7 +1715,7 @@ class NewAClient:
                 ghost_mentions=ghost_mentions,
                 spoiler=spoiler,
                 mentions_are_lids=mentions_are_lids,
-                is_newsletter=to.Server == "newsletter" or to.endswith("newsletter"),
+                is_newsletter=to.endswith("newsletter") if isinstance(to, str) else to.Server == "newsletter",
             ),
             add_msg_secret=add_msg_secret,
             context_info=context_info,
@@ -1842,7 +1842,7 @@ class NewAClient:
                 spoiler=spoiler,
                 ghost_mentions=ghost_mentions,
                 mentions_are_lids=mentions_are_lids,
-                is_newsletter=to.Server == "newsletter" or to.endswith("newsletter"),
+                is_newsletter=to.endswith("newsletter") if isinstance(to, str) else to.Server == "newsletter",
             )
             for file, media_type in medias[:1]
         ]
@@ -1854,7 +1854,7 @@ class NewAClient:
                     msg_association,
                     quoted=quoted,
                     spoiler=spoiler,
-                    is_newsletter=to.Server == "newsletter" or to.endswith("newsletter"),
+                    is_newsletter=to.endswith("newsletter") if isinstance(to, str) else to.Server == "newsletter",
                 )
                 for file, media_type in medias[1:]
             ]
@@ -1957,7 +1957,7 @@ class NewAClient:
 
         return await self.send_message(
             to,
-            await self.build_audio_message(file, ptt, quoted, is_newsletter=to.Server == "newsletter" or to.endswith("newsletter")),
+            await self.build_audio_message(file, ptt, quoted, is_newsletter=to.endswith("newsletter") if isinstance(to, str) else to.Server == "newsletter",),
             add_msg_secret=add_msg_secret,
             context_info=context_info,
         )

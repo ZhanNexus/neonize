@@ -1119,7 +1119,7 @@ class NewClient:
                 enforce_not_broken,
                 animated_gif,
                 passthrough,
-                is_newsletter=to.Server == "newsletter" or to.endswith("newsletter"),
+                is_newsletter=to.endswith("newsletter") if isinstance(to, str) else to.Server == "newsletter",
             ),
             add_msg_secret=add_msg_secret,
             context_info=context_info,
@@ -1340,7 +1340,7 @@ class NewClient:
         responses = []
         msgs = self.build_stickerpack_message(
             files, quoted, packname, publisher, crop, animated_gif, passthrough,
-            is_newsletter=to.Server == "newsletter" or to.endswith("newsletter")
+            is_newsletter=to.endswith("newsletter") if isinstance(to, str) else to.Server == "newsletter",
         )
         for msg in msgs:
             response = self.send_message(
@@ -1520,7 +1520,7 @@ class NewClient:
                 is_gif,
                 ghost_mentions,
                 mentions_are_lids,
-                is_newsletter=to.Server == "newsletter" or to.endswith("newsletter"),
+                is_newsletter=to.endswith("newsletter") if isinstance(to, str) else to.Server == "newsletter",
             ),
             add_msg_secret=add_msg_secret,
             context_info=context_info,
@@ -1643,7 +1643,7 @@ class NewClient:
                 viewonce=viewonce,
                 ghost_mentions=ghost_mentions,
                 mentions_are_lids=mentions_are_lids,
-                is_newsletter=to.Server == "newsletter" or to.endswith("newsletter"),
+                is_newsletter=to.endswith("newsletter") if isinstance(to, str) else to.Server == "newsletter",
             ),
             add_msg_secret=add_msg_secret,
             context_info=context_info,
@@ -1766,7 +1766,7 @@ class NewClient:
                     quoted=quoted,
                     ghost_mentions=ghost_mentions,
                     mentions_are_lids=mentions_are_lids,
-                    is_newsletter=to.Server == "newsletter" or to.endswith("newsletter"),
+                    is_newsletter=to.endswith("newsletter") if isinstance(to, str) else to.Server == "newsletter",
                 )
                 for file, media_type in medias[:1]
             ]
@@ -1778,7 +1778,7 @@ class NewClient:
                         media_type,
                         msg_association,
                         quoted=quoted,
-                        is_newsletter=to.Server == "newsletter" or to.endswith("newsletter"),
+                        is_newsletter=to.endswith("newsletter") if isinstance(to, str) else to.Server == "newsletter",
                     )
                     for file, media_type in medias[1:]
                 ]
@@ -1883,7 +1883,7 @@ class NewClient:
 
         return self.send_message(
             to,
-            self.build_audio_message(file, ptt, quoted, is_newsletter=to.Server == "newsletter" or to.endswith("newsletter")),
+            self.build_audio_message(file, ptt, quoted, is_newsletter=to.endswith("newsletter") if isinstance(to, str) else to.Server == "newsletter",),
             add_msg_secret=add_msg_secret,
             context_info=context_info,
         )
