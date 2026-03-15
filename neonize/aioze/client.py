@@ -1457,7 +1457,7 @@ class NewAClient:
             thumbnail = thumbnail.getvalue()
         upload = (
             await self.upload(buff) if not is_newsletter
-            else self.upload_newsletter(buff, MediaType.MediaVideo)
+            else await self.upload_newsletter(buff, MediaType.MediaVideo)
         )
         message = Message(
             videoMessage=VideoMessage(
