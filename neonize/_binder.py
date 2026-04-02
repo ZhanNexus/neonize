@@ -10,16 +10,12 @@ from .utils.platform import generated_name
 
 func_string = ctypes.CFUNCTYPE(None, ctypes.c_void_p, ctypes.c_void_p)  # qr
 func = ctypes.CFUNCTYPE(None, ctypes.c_void_p, ctypes.c_bool)  # blocking
-func_bytes = ctypes.CFUNCTYPE(
-    None, ctypes.c_void_p, ctypes.c_void_p, ctypes.c_int
-)  # status
+func_bytes = ctypes.CFUNCTYPE(None, ctypes.c_void_p, ctypes.c_void_p, ctypes.c_int)  # status
 func_callback_bytes = ctypes.CFUNCTYPE(
     None, ctypes.c_char_p, ctypes.c_void_p, ctypes.c_int, ctypes.c_int
 )  # callback_bytes
 
-func_callback_bytes2 = ctypes.CFUNCTYPE(
-    None, ctypes.c_void_p, ctypes.c_int
-)  # callback_bytes
+func_callback_bytes2 = ctypes.CFUNCTYPE(None, ctypes.c_void_p, ctypes.c_int)  # callback_bytes
 
 
 def load_goneonize():
@@ -517,11 +513,7 @@ if not os.environ.get("SPHINX"):
     gocode.FreeBytesStruct.restype = None
     gocode.SetPushName.argtypes = [ctypes.c_char_p, ctypes.c_char_p]
     gocode.SetPushName.restype = ctypes.c_char_p
-    gocode.ClearChat.argtypes = [
-        ctypes.c_char_p,
-        ctypes.c_char_p,
-        ctypes.c_int
-    ]
+    gocode.ClearChat.argtypes = [ctypes.c_char_p, ctypes.c_char_p, ctypes.c_int]
     gocode.ClearChat.restype = ctypes.c_char_p
 
 else:
