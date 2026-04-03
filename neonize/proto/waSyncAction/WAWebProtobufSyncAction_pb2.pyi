@@ -961,12 +961,12 @@ class StatusPrivacyAction(_message.Message):
     class CustomList(_message.Message):
         DESCRIPTOR: _descriptor.Descriptor
 
-        ID_FIELD_NUMBER: _builtins.int
+        LISTID_FIELD_NUMBER: _builtins.int
         NAME_FIELD_NUMBER: _builtins.int
         EMOJI_FIELD_NUMBER: _builtins.int
         ISSELECTED_FIELD_NUMBER: _builtins.int
         USERJID_FIELD_NUMBER: _builtins.int
-        ID: _builtins.int
+        listID: _builtins.str
         name: _builtins.str
         emoji: _builtins.str
         isSelected: _builtins.bool
@@ -975,15 +975,15 @@ class StatusPrivacyAction(_message.Message):
         def __init__(
             self,
             *,
-            ID: _builtins.int | None = ...,
+            listID: _builtins.str | None = ...,
             name: _builtins.str | None = ...,
             emoji: _builtins.str | None = ...,
             isSelected: _builtins.bool | None = ...,
             userJID: _abc.Iterable[_builtins.str] | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _TypeAlias = _typing.Literal["ID", b"ID", "emoji", b"emoji", "isSelected", b"isSelected", "name", b"name"]  # noqa: Y015
+        _HasFieldArgType: _TypeAlias = _typing.Literal["emoji", b"emoji", "isSelected", b"isSelected", "listID", b"listID", "name", b"name"]  # noqa: Y015
         def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _TypeAlias = _typing.Literal["ID", b"ID", "emoji", b"emoji", "isSelected", b"isSelected", "name", b"name", "userJID", b"userJID"]  # noqa: Y015
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["emoji", b"emoji", "isSelected", b"isSelected", "listID", b"listID", "name", b"name", "userJID", b"userJID"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
     MODE_FIELD_NUMBER: _builtins.int
