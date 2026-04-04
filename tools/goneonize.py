@@ -14,7 +14,7 @@ cwd = (Path(__file__).parent.parent / "goneonize/").__str__()
 #     "protoc --python_out=../neonize/proto --mypy_out=../neonize/proto def.proto Neonize.proto",
 #     "protoc --go_out=. --go-grpc_out=. -I . Neonize.proto def.proto",
 # ]
-shell =[
+shell = [
     "protoc --go_out=. --go_opt=paths=source_relative Neonize.proto",
     "protoc --python_out=../../neonize/proto --mypy_out=../../neonize/proto Neonize.proto",
     *[
@@ -75,10 +75,10 @@ def __build():
 
 def generate_init_files(proto_dir: str):
     for root, dirs, files in os.walk(proto_dir):
-        pb2_files =[f for f in files if f.endswith("_pb2.py")]
+        pb2_files = [f for f in files if f.endswith("_pb2.py")]
         if pb2_files:
             init_path = Path(root) / "__init__.py"
-            
+
             existing_content = ""
             if init_path.exists():
                 with open(init_path, "r") as f:
@@ -90,7 +90,8 @@ def generate_init_files(proto_dir: str):
                 else:
                     f.write("import sys\n")
                     f.write("from pathlib import Path\n")
-                    f.write("sys.path.insert(0, Path(__file__).parent.__str__())\n\n")
+                    f.write(
+                        "sys.path.insert(0, Path(__file__).parent.__str__())\n\n")
 
                 for pb2 in pb2_files:
                     module_name = pb2[:-3]
@@ -105,7 +106,7 @@ def build_proto():
             wf.write(file.read())
     for sh in shell:
         subprocess.call(shlex.split(sh), cwd=cwd + "/defproto")
-    
+
     python_proto_out = Path(cwd).parent / "neonize" / "proto"
     if python_proto_out.exists():
         generate_init_files(str(python_proto_out))
