@@ -31,4 +31,4 @@ require (
 
 replace go.mau.fi/libsignal => github.com/fawwaz37/libsignal-protocol-go v0.2.1-0.20250920101933-ae5672c024d5
 
-replace go.mau.fi/whatsmeow => github.com/ZhanNexus/whatsmeow v0.0.0-20260329134833-1b8ceaf5eb3a
+replace go.mau.fi/whatsmeow => github.com/ZhanNexus/whatsmeow v0.0.0-20260410110503-8711a6967e12
