@@ -14,7 +14,7 @@ cwd = (Path(__file__).parent.parent / "goneonize/").__str__()
 #     "protoc --python_out=../neonize/proto --mypy_out=../neonize/proto def.proto Neonize.proto",
 #     "protoc --go_out=. --go-grpc_out=. -I . Neonize.proto def.proto",
 # ]
-shell =[
+shell = [
     "protoc --go_out=. --go_opt=paths=source_relative Neonize.proto",
     "protoc --python_out=../../neonize/proto --mypy_out=../../neonize/proto Neonize.proto",
     *[
@@ -58,13 +58,10 @@ def __build():
     if (Path(cwd) / "defproto").exists():
         shutil.rmtree(f"{cwd}/defproto")
     os.mkdir(f"{cwd}/defproto")
-    os.rename(
-        f"{cwd}/github.com/krypton-byte/neonize/defproto/",
-        f"{cwd}/defproto")
+    os.rename(f"{cwd}/github.com/krypton-byte/neonize/defproto/", f"{cwd}/defproto")
     shutil.rmtree(f"{cwd}/github.com")
     subprocess.call(
-        shlex.split(
-            f"go build -buildmode=c-shared -ldflags=-s -o {filename} main.go"),
+        shlex.split(f"go build -buildmode=c-shared -ldflags=-s -o {filename} main.go"),
         cwd=cwd,
         env=os.environ.update({"CGO_ENABLED": "1"}),
     )
@@ -75,10 +72,10 @@ def __build():
 
 def generate_init_files(proto_dir: str):
     for root, dirs, files in os.walk(proto_dir):
-        pb2_files =[f for f in files if f.endswith("_pb2.py")]
+        pb2_files = [f for f in files if f.endswith("_pb2.py")]
         if pb2_files:
             init_path = Path(root) / "__init__.py"
-            
+
             existing_content = ""
             if init_path.exists():
                 with open(init_path, "r") as f:
@@ -105,7 +102,7 @@ def build_proto():
             wf.write(file.read())
     for sh in shell:
         subprocess.call(shlex.split(sh), cwd=cwd + "/defproto")
-    
+
     python_proto_out = Path(cwd).parent / "neonize" / "proto"
     if python_proto_out.exists():
         generate_init_files(str(python_proto_out))
@@ -124,18 +121,13 @@ def build_neonize():
     filename = generated_name(os_name, arch_name)
     print(filename)
     subprocess.call(
-        shlex.split(
-            f"go build -buildmode=c-shared -ldflags=-s -o {filename} "),
+        shlex.split(f"go build -buildmode=c-shared -ldflags=-s -o {filename} "),
         cwd=cwd,
         env=os.environ.update({"CGO_ENABLED": "1"}),
     )
     if (Path(cwd).parent / f"neonize/{filename}").exists():
         os.remove(os.path.dirname(cwd) + "/neonize/" + filename)
-    os.rename(
-        f"{cwd}/{filename}",
-        os.path.dirname(cwd) +
-        "/neonize/" +
-        filename)
+    os.rename(f"{cwd}/{filename}", os.path.dirname(cwd) + "/neonize/" + filename)
 
 
 def build():
@@ -163,9 +155,7 @@ def build_android():
     if (Path(cwd) / "defproto").exists():
         shutil.rmtree(f"{cwd}/defproto")
     os.mkdir(f"{cwd}/defproto")
-    os.rename(
-        f"{cwd}/github.com/krypton-byte/neonize/defproto/",
-        f"{cwd}/defproto")
+    os.rename(f"{cwd}/github.com/krypton-byte/neonize/defproto/", f"{cwd}/defproto")
     shutil.rmtree(f"{cwd}/github.com")
     os.environ.update(
         {
@@ -175,8 +165,7 @@ def build_android():
         }
     )
     subprocess.call(
-        shlex.split(
-            f"go build -buildmode=c-shared -ldflags=-s -o {filename} main.go"),
+        shlex.split(f"go build -buildmode=c-shared -ldflags=-s -o {filename} main.go"),
         cwd=cwd,
         env=os.environ,
     )
