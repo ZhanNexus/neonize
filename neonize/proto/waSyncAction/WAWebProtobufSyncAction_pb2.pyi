@@ -458,6 +458,8 @@ class SettingsSyncAction(_message.Message):
         IS_STATUS_NOTIFICATION_ENABLED: SettingsSyncAction._SettingKey.ValueType  # 29
         STATUS_NOTIFICATION_TONE_ID: SettingsSyncAction._SettingKey.ValueType  # 30
         SHOULD_PLAY_SOUND_FOR_CALL_NOTIFICATION: SettingsSyncAction._SettingKey.ValueType  # 31
+        CHAT_THEME_ID: SettingsSyncAction._SettingKey.ValueType  # 32
+        COLOR_SCHEME_ID: SettingsSyncAction._SettingKey.ValueType  # 33
 
     class SettingKey(_SettingKey, metaclass=_SettingKeyEnumTypeWrapper): ...
     SETTING_KEY_UNKNOWN: SettingsSyncAction.SettingKey.ValueType  # 0
@@ -492,6 +494,8 @@ class SettingsSyncAction(_message.Message):
     IS_STATUS_NOTIFICATION_ENABLED: SettingsSyncAction.SettingKey.ValueType  # 29
     STATUS_NOTIFICATION_TONE_ID: SettingsSyncAction.SettingKey.ValueType  # 30
     SHOULD_PLAY_SOUND_FOR_CALL_NOTIFICATION: SettingsSyncAction.SettingKey.ValueType  # 31
+    CHAT_THEME_ID: SettingsSyncAction.SettingKey.ValueType  # 32
+    COLOR_SCHEME_ID: SettingsSyncAction.SettingKey.ValueType  # 33
 
     class _SettingPlatform:
         ValueType = _typing.NewType("ValueType", _builtins.int)
@@ -543,6 +547,8 @@ class SettingsSyncAction(_message.Message):
     ISSTATUSNOTIFICATIONENABLED_FIELD_NUMBER: _builtins.int
     STATUSNOTIFICATIONTONEID_FIELD_NUMBER: _builtins.int
     SHOULDPLAYSOUNDFORCALLNOTIFICATION_FIELD_NUMBER: _builtins.int
+    CHATTHEMEID_FIELD_NUMBER: _builtins.int
+    COLORSCHEMEID_FIELD_NUMBER: _builtins.int
     startAtLogin: _builtins.bool
     minimizeToTray: _builtins.bool
     language: _builtins.str
@@ -574,6 +580,8 @@ class SettingsSyncAction(_message.Message):
     isStatusNotificationEnabled: _builtins.bool
     statusNotificationToneID: _builtins.int
     shouldPlaySoundForCallNotification: _builtins.bool
+    chatThemeID: _builtins.str
+    colorSchemeID: _builtins.str
     def __init__(
         self,
         *,
@@ -608,10 +616,12 @@ class SettingsSyncAction(_message.Message):
         isStatusNotificationEnabled: _builtins.bool | None = ...,
         statusNotificationToneID: _builtins.int | None = ...,
         shouldPlaySoundForCallNotification: _builtins.bool | None = ...,
+        chatThemeID: _builtins.str | None = ...,
+        colorSchemeID: _builtins.str | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["appTheme", b"appTheme", "bannerNotificationDisplayMode", b"bannerNotificationDisplayMode", "defaultNotificationToneID", b"defaultNotificationToneID", "disableLinkPreviews", b"disableLinkPreviews", "fontSize", b"fontSize", "groupDefaultNotificationToneID", b"groupDefaultNotificationToneID", "isAudiosAutodownloadEnabled", b"isAudiosAutodownloadEnabled", "isCallsNotificationEnabled", b"isCallsNotificationEnabled", "isDocumentsAutodownloadEnabled", b"isDocumentsAutodownloadEnabled", "isDoodleWallpaperEnabled", b"isDoodleWallpaperEnabled", "isEnterToSendEnabled", b"isEnterToSendEnabled", "isGroupMessageNotificationEnabled", b"isGroupMessageNotificationEnabled", "isGroupReactionsNotificationEnabled", b"isGroupReactionsNotificationEnabled", "isMessagesNotificationEnabled", b"isMessagesNotificationEnabled", "isPhotosAutodownloadEnabled", b"isPhotosAutodownloadEnabled", "isReactionsNotificationEnabled", b"isReactionsNotificationEnabled", "isSpellCheckEnabled", b"isSpellCheckEnabled", "isStatusNotificationEnabled", b"isStatusNotificationEnabled", "isStatusReactionsNotificationEnabled", b"isStatusReactionsNotificationEnabled", "isTextPreviewForNotificationEnabled", b"isTextPreviewForNotificationEnabled", "isVideosAutodownloadEnabled", b"isVideosAutodownloadEnabled", "language", b"language", "mediaUploadQuality", b"mediaUploadQuality", "minimizeToTray", b"minimizeToTray", "notificationToneID", b"notificationToneID", "replaceTextWithEmoji", b"replaceTextWithEmoji", "shouldPlaySoundForCallNotification", b"shouldPlaySoundForCallNotification", "startAtLogin", b"startAtLogin", "statusNotificationToneID", b"statusNotificationToneID", "unreadCounterBadgeDisplayMode", b"unreadCounterBadgeDisplayMode", "wallpaperID", b"wallpaperID"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["appTheme", b"appTheme", "bannerNotificationDisplayMode", b"bannerNotificationDisplayMode", "chatThemeID", b"chatThemeID", "colorSchemeID", b"colorSchemeID", "defaultNotificationToneID", b"defaultNotificationToneID", "disableLinkPreviews", b"disableLinkPreviews", "fontSize", b"fontSize", "groupDefaultNotificationToneID", b"groupDefaultNotificationToneID", "isAudiosAutodownloadEnabled", b"isAudiosAutodownloadEnabled", "isCallsNotificationEnabled", b"isCallsNotificationEnabled", "isDocumentsAutodownloadEnabled", b"isDocumentsAutodownloadEnabled", "isDoodleWallpaperEnabled", b"isDoodleWallpaperEnabled", "isEnterToSendEnabled", b"isEnterToSendEnabled", "isGroupMessageNotificationEnabled", b"isGroupMessageNotificationEnabled", "isGroupReactionsNotificationEnabled", b"isGroupReactionsNotificationEnabled", "isMessagesNotificationEnabled", b"isMessagesNotificationEnabled", "isPhotosAutodownloadEnabled", b"isPhotosAutodownloadEnabled", "isReactionsNotificationEnabled", b"isReactionsNotificationEnabled", "isSpellCheckEnabled", b"isSpellCheckEnabled", "isStatusNotificationEnabled", b"isStatusNotificationEnabled", "isStatusReactionsNotificationEnabled", b"isStatusReactionsNotificationEnabled", "isTextPreviewForNotificationEnabled", b"isTextPreviewForNotificationEnabled", "isVideosAutodownloadEnabled", b"isVideosAutodownloadEnabled", "language", b"language", "mediaUploadQuality", b"mediaUploadQuality", "minimizeToTray", b"minimizeToTray", "notificationToneID", b"notificationToneID", "replaceTextWithEmoji", b"replaceTextWithEmoji", "shouldPlaySoundForCallNotification", b"shouldPlaySoundForCallNotification", "startAtLogin", b"startAtLogin", "statusNotificationToneID", b"statusNotificationToneID", "unreadCounterBadgeDisplayMode", b"unreadCounterBadgeDisplayMode", "wallpaperID", b"wallpaperID"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["appTheme", b"appTheme", "bannerNotificationDisplayMode", b"bannerNotificationDisplayMode", "defaultNotificationToneID", b"defaultNotificationToneID", "disableLinkPreviews", b"disableLinkPreviews", "fontSize", b"fontSize", "groupDefaultNotificationToneID", b"groupDefaultNotificationToneID", "isAudiosAutodownloadEnabled", b"isAudiosAutodownloadEnabled", "isCallsNotificationEnabled", b"isCallsNotificationEnabled", "isDocumentsAutodownloadEnabled", b"isDocumentsAutodownloadEnabled", "isDoodleWallpaperEnabled", b"isDoodleWallpaperEnabled", "isEnterToSendEnabled", b"isEnterToSendEnabled", "isGroupMessageNotificationEnabled", b"isGroupMessageNotificationEnabled", "isGroupReactionsNotificationEnabled", b"isGroupReactionsNotificationEnabled", "isMessagesNotificationEnabled", b"isMessagesNotificationEnabled", "isPhotosAutodownloadEnabled", b"isPhotosAutodownloadEnabled", "isReactionsNotificationEnabled", b"isReactionsNotificationEnabled", "isSpellCheckEnabled", b"isSpellCheckEnabled", "isStatusNotificationEnabled", b"isStatusNotificationEnabled", "isStatusReactionsNotificationEnabled", b"isStatusReactionsNotificationEnabled", "isTextPreviewForNotificationEnabled", b"isTextPreviewForNotificationEnabled", "isVideosAutodownloadEnabled", b"isVideosAutodownloadEnabled", "language", b"language", "mediaUploadQuality", b"mediaUploadQuality", "minimizeToTray", b"minimizeToTray", "notificationToneID", b"notificationToneID", "replaceTextWithEmoji", b"replaceTextWithEmoji", "shouldPlaySoundForCallNotification", b"shouldPlaySoundForCallNotification", "startAtLogin", b"startAtLogin", "statusNotificationToneID", b"statusNotificationToneID", "unreadCounterBadgeDisplayMode", b"unreadCounterBadgeDisplayMode", "wallpaperID", b"wallpaperID"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["appTheme", b"appTheme", "bannerNotificationDisplayMode", b"bannerNotificationDisplayMode", "chatThemeID", b"chatThemeID", "colorSchemeID", b"colorSchemeID", "defaultNotificationToneID", b"defaultNotificationToneID", "disableLinkPreviews", b"disableLinkPreviews", "fontSize", b"fontSize", "groupDefaultNotificationToneID", b"groupDefaultNotificationToneID", "isAudiosAutodownloadEnabled", b"isAudiosAutodownloadEnabled", "isCallsNotificationEnabled", b"isCallsNotificationEnabled", "isDocumentsAutodownloadEnabled", b"isDocumentsAutodownloadEnabled", "isDoodleWallpaperEnabled", b"isDoodleWallpaperEnabled", "isEnterToSendEnabled", b"isEnterToSendEnabled", "isGroupMessageNotificationEnabled", b"isGroupMessageNotificationEnabled", "isGroupReactionsNotificationEnabled", b"isGroupReactionsNotificationEnabled", "isMessagesNotificationEnabled", b"isMessagesNotificationEnabled", "isPhotosAutodownloadEnabled", b"isPhotosAutodownloadEnabled", "isReactionsNotificationEnabled", b"isReactionsNotificationEnabled", "isSpellCheckEnabled", b"isSpellCheckEnabled", "isStatusNotificationEnabled", b"isStatusNotificationEnabled", "isStatusReactionsNotificationEnabled", b"isStatusReactionsNotificationEnabled", "isTextPreviewForNotificationEnabled", b"isTextPreviewForNotificationEnabled", "isVideosAutodownloadEnabled", b"isVideosAutodownloadEnabled", "language", b"language", "mediaUploadQuality", b"mediaUploadQuality", "minimizeToTray", b"minimizeToTray", "notificationToneID", b"notificationToneID", "replaceTextWithEmoji", b"replaceTextWithEmoji", "shouldPlaySoundForCallNotification", b"shouldPlaySoundForCallNotification", "startAtLogin", b"startAtLogin", "statusNotificationToneID", b"statusNotificationToneID", "unreadCounterBadgeDisplayMode", b"unreadCounterBadgeDisplayMode", "wallpaperID", b"wallpaperID"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
 Global___SettingsSyncAction: _TypeAlias = SettingsSyncAction  # noqa: Y015
@@ -1113,6 +1123,7 @@ class LabelEditAction(_message.Message):
         DRAFTED: LabelEditAction._ListType.ValueType  # 8
         AI_HANDOFF: LabelEditAction._ListType.ValueType  # 9
         CHANNELS: LabelEditAction._ListType.ValueType  # 10
+        AI_RESPONDING: LabelEditAction._ListType.ValueType  # 11
 
     class ListType(_ListType, metaclass=_ListTypeEnumTypeWrapper): ...
     NONE: LabelEditAction.ListType.ValueType  # 0
@@ -1126,6 +1137,7 @@ class LabelEditAction(_message.Message):
     DRAFTED: LabelEditAction.ListType.ValueType  # 8
     AI_HANDOFF: LabelEditAction.ListType.ValueType  # 9
     CHANNELS: LabelEditAction.ListType.ValueType  # 10
+    AI_RESPONDING: LabelEditAction.ListType.ValueType  # 11
 
     NAME_FIELD_NUMBER: _builtins.int
     COLOR_FIELD_NUMBER: _builtins.int

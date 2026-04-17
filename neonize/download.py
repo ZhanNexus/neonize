@@ -1,7 +1,9 @@
 import os
 from pathlib import Path
+
 import requests
 from tqdm import tqdm
+
 from .utils.platform import generated_name
 
 __GONEONIZE_VERSION__ = "0.3.17"
@@ -21,7 +23,11 @@ def __download(url: str, fname: str, chunk_size=1024):
     with (
         open(fname, "wb") as file,
         tqdm(
-            desc=Path(fname).name, total=total, unit="iB", unit_scale=True, unit_divisor=1024
+            desc=Path(fname).name,
+            total=total,
+            unit="iB",
+            unit_scale=True,
+            unit_divisor=1024,
         ) as bar,
     ):
         for data in resp.iter_content(chunk_size=chunk_size):
