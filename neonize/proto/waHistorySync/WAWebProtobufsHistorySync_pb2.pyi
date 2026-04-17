@@ -116,6 +116,8 @@ class HistorySync(_message.Message):
     SHAREABLECHATIDENTIFIERENCRYPTIONKEY_FIELD_NUMBER: _builtins.int
     ACCOUNTS_FIELD_NUMBER: _builtins.int
     NCTSALT_FIELD_NUMBER: _builtins.int
+    INLINECONTACTS_FIELD_NUMBER: _builtins.int
+    INLINECONTACTSPROVIDED_FIELD_NUMBER: _builtins.int
     syncType: Global___HistorySync.HistorySyncType.ValueType
     chunkOrder: _builtins.int
     progress: _builtins.int
@@ -125,6 +127,7 @@ class HistorySync(_message.Message):
     companionMetaNonce: _builtins.str
     shareableChatIdentifierEncryptionKey: _builtins.bytes
     nctSalt: _builtins.bytes
+    inlineContactsProvided: _builtins.bool
     @_builtins.property
     def conversations(self) -> _containers.RepeatedCompositeFieldContainer[Global___Conversation]: ...
     @_builtins.property
@@ -143,6 +146,8 @@ class HistorySync(_message.Message):
     def phoneNumberToLidMappings(self) -> _containers.RepeatedCompositeFieldContainer[Global___PhoneNumberToLIDMapping]: ...
     @_builtins.property
     def accounts(self) -> _containers.RepeatedCompositeFieldContainer[Global___Account]: ...
+    @_builtins.property
+    def inlineContacts(self) -> _containers.RepeatedCompositeFieldContainer[Global___InlineContact]: ...
     def __init__(
         self,
         *,
@@ -164,10 +169,12 @@ class HistorySync(_message.Message):
         shareableChatIdentifierEncryptionKey: _builtins.bytes | None = ...,
         accounts: _abc.Iterable[Global___Account] | None = ...,
         nctSalt: _builtins.bytes | None = ...,
+        inlineContacts: _abc.Iterable[Global___InlineContact] | None = ...,
+        inlineContactsProvided: _builtins.bool | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["aiWaitListState", b"aiWaitListState", "chunkOrder", b"chunkOrder", "companionMetaNonce", b"companionMetaNonce", "globalSettings", b"globalSettings", "nctSalt", b"nctSalt", "progress", b"progress", "shareableChatIdentifierEncryptionKey", b"shareableChatIdentifierEncryptionKey", "syncType", b"syncType", "threadDsTimeframeOffset", b"threadDsTimeframeOffset", "threadIDUserSecret", b"threadIDUserSecret"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["aiWaitListState", b"aiWaitListState", "chunkOrder", b"chunkOrder", "companionMetaNonce", b"companionMetaNonce", "globalSettings", b"globalSettings", "inlineContactsProvided", b"inlineContactsProvided", "nctSalt", b"nctSalt", "progress", b"progress", "shareableChatIdentifierEncryptionKey", b"shareableChatIdentifierEncryptionKey", "syncType", b"syncType", "threadDsTimeframeOffset", b"threadDsTimeframeOffset", "threadIDUserSecret", b"threadIDUserSecret"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["accounts", b"accounts", "aiWaitListState", b"aiWaitListState", "callLogRecords", b"callLogRecords", "chunkOrder", b"chunkOrder", "companionMetaNonce", b"companionMetaNonce", "conversations", b"conversations", "globalSettings", b"globalSettings", "nctSalt", b"nctSalt", "pastParticipants", b"pastParticipants", "phoneNumberToLidMappings", b"phoneNumberToLidMappings", "progress", b"progress", "pushnames", b"pushnames", "recentStickers", b"recentStickers", "shareableChatIdentifierEncryptionKey", b"shareableChatIdentifierEncryptionKey", "statusV3Messages", b"statusV3Messages", "syncType", b"syncType", "threadDsTimeframeOffset", b"threadDsTimeframeOffset", "threadIDUserSecret", b"threadIDUserSecret"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["accounts", b"accounts", "aiWaitListState", b"aiWaitListState", "callLogRecords", b"callLogRecords", "chunkOrder", b"chunkOrder", "companionMetaNonce", b"companionMetaNonce", "conversations", b"conversations", "globalSettings", b"globalSettings", "inlineContacts", b"inlineContacts", "inlineContactsProvided", b"inlineContactsProvided", "nctSalt", b"nctSalt", "pastParticipants", b"pastParticipants", "phoneNumberToLidMappings", b"phoneNumberToLidMappings", "progress", b"progress", "pushnames", b"pushnames", "recentStickers", b"recentStickers", "shareableChatIdentifierEncryptionKey", b"shareableChatIdentifierEncryptionKey", "statusV3Messages", b"statusV3Messages", "syncType", b"syncType", "threadDsTimeframeOffset", b"threadDsTimeframeOffset", "threadIDUserSecret", b"threadIDUserSecret"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
 Global___HistorySync: _TypeAlias = HistorySync  # noqa: Y015
@@ -476,6 +483,36 @@ class PhoneNumberToLIDMapping(_message.Message):
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
 Global___PhoneNumberToLIDMapping: _TypeAlias = PhoneNumberToLIDMapping  # noqa: Y015
+
+@_typing.final
+class InlineContact(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
+
+    PNJID_FIELD_NUMBER: _builtins.int
+    LIDJID_FIELD_NUMBER: _builtins.int
+    FULLNAME_FIELD_NUMBER: _builtins.int
+    FIRSTNAME_FIELD_NUMBER: _builtins.int
+    USERNAME_FIELD_NUMBER: _builtins.int
+    pnJID: _builtins.str
+    lidJID: _builtins.str
+    fullName: _builtins.str
+    firstName: _builtins.str
+    username: _builtins.str
+    def __init__(
+        self,
+        *,
+        pnJID: _builtins.str | None = ...,
+        lidJID: _builtins.str | None = ...,
+        fullName: _builtins.str | None = ...,
+        firstName: _builtins.str | None = ...,
+        username: _builtins.str | None = ...,
+    ) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["firstName", b"firstName", "fullName", b"fullName", "lidJID", b"lidJID", "pnJID", b"pnJID", "username", b"username"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["firstName", b"firstName", "fullName", b"fullName", "lidJID", b"lidJID", "pnJID", b"pnJID", "username", b"username"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+
+Global___InlineContact: _TypeAlias = InlineContact  # noqa: Y015
 
 @_typing.final
 class Account(_message.Message):

@@ -17,14 +17,14 @@ import (
 
 // Function
 func EncodeUploadResponse(response whatsmeow.UploadResponse) *defproto.UploadResponse {
-    mediaKey := response.MediaKey
-    if mediaKey == nil {
-        mediaKey = []byte{}
-    }
-    fileEncSha := response.FileEncSHA256
-    if fileEncSha == nil {
-        fileEncSha = []byte{}
-    }
+	mediaKey := response.MediaKey
+	if mediaKey == nil {
+		mediaKey = []byte{}
+	}
+	fileEncSha := response.FileEncSHA256
+	if fileEncSha == nil {
+		fileEncSha = []byte{}
+	}
 	return &defproto.UploadResponse{
 		Url:           &response.URL,
 		DirectPath:    &response.DirectPath,
@@ -328,7 +328,7 @@ func EncodeEventTypesMessage(message *events.Message) *defproto.Message {
 	if message.SourceWebMsg != nil {
 		model.SourceWebMsg = message.SourceWebMsg
 	}
-		if message.Message != nil {
+	if message.Message != nil {
 		model.Message = message.Message
 	}
 	if len(message.AdditionalNodes) > 0 {
