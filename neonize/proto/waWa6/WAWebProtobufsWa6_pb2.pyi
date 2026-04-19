@@ -87,11 +87,13 @@ class HandshakeMessage(_message.Message):
         PAYLOAD_FIELD_NUMBER: _builtins.int
         EXTENDEDSTATIC_FIELD_NUMBER: _builtins.int
         PADDINGBYTES_FIELD_NUMBER: _builtins.int
+        EXTENDEDCIPHERTEXT_FIELD_NUMBER: _builtins.int
         ephemeral: _builtins.bytes
         static: _builtins.bytes
         payload: _builtins.bytes
         extendedStatic: _builtins.bytes
         paddingBytes: _builtins.bytes
+        extendedCiphertext: _builtins.bytes
         def __init__(
             self,
             *,
@@ -100,10 +102,11 @@ class HandshakeMessage(_message.Message):
             payload: _builtins.bytes | None = ...,
             extendedStatic: _builtins.bytes | None = ...,
             paddingBytes: _builtins.bytes | None = ...,
+            extendedCiphertext: _builtins.bytes | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _TypeAlias = _typing.Literal["ephemeral", b"ephemeral", "extendedStatic", b"extendedStatic", "paddingBytes", b"paddingBytes", "payload", b"payload", "static", b"static"]  # noqa: Y015
+        _HasFieldArgType: _TypeAlias = _typing.Literal["ephemeral", b"ephemeral", "extendedCiphertext", b"extendedCiphertext", "extendedStatic", b"extendedStatic", "paddingBytes", b"paddingBytes", "payload", b"payload", "static", b"static"]  # noqa: Y015
         def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _TypeAlias = _typing.Literal["ephemeral", b"ephemeral", "extendedStatic", b"extendedStatic", "paddingBytes", b"paddingBytes", "payload", b"payload", "static", b"static"]  # noqa: Y015
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["ephemeral", b"ephemeral", "extendedCiphertext", b"extendedCiphertext", "extendedStatic", b"extendedStatic", "paddingBytes", b"paddingBytes", "payload", b"payload", "static", b"static"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
     @_typing.final
@@ -119,6 +122,7 @@ class HandshakeMessage(_message.Message):
         SENDSERVERHELLOPADDEDBYTES_FIELD_NUMBER: _builtins.int
         SIMULATEXXKEMFS_FIELD_NUMBER: _builtins.int
         PQMODE_FIELD_NUMBER: _builtins.int
+        EXTENDEDEPHEMERAL_FIELD_NUMBER: _builtins.int
         ephemeral: _builtins.bytes
         static: _builtins.bytes
         payload: _builtins.bytes
@@ -128,6 +132,7 @@ class HandshakeMessage(_message.Message):
         sendServerHelloPaddedBytes: _builtins.bool
         simulateXxkemFs: _builtins.bool
         pqMode: Global___HandshakeMessage.HandshakePqMode.ValueType
+        extendedEphemeral: _builtins.bytes
         def __init__(
             self,
             *,
@@ -140,10 +145,11 @@ class HandshakeMessage(_message.Message):
             sendServerHelloPaddedBytes: _builtins.bool | None = ...,
             simulateXxkemFs: _builtins.bool | None = ...,
             pqMode: Global___HandshakeMessage.HandshakePqMode.ValueType | None = ...,
+            extendedEphemeral: _builtins.bytes | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _TypeAlias = _typing.Literal["ephemeral", b"ephemeral", "extendedCiphertext", b"extendedCiphertext", "paddedBytes", b"paddedBytes", "payload", b"payload", "pqMode", b"pqMode", "sendServerHelloPaddedBytes", b"sendServerHelloPaddedBytes", "simulateXxkemFs", b"simulateXxkemFs", "static", b"static", "useExtended", b"useExtended"]  # noqa: Y015
+        _HasFieldArgType: _TypeAlias = _typing.Literal["ephemeral", b"ephemeral", "extendedCiphertext", b"extendedCiphertext", "extendedEphemeral", b"extendedEphemeral", "paddedBytes", b"paddedBytes", "payload", b"payload", "pqMode", b"pqMode", "sendServerHelloPaddedBytes", b"sendServerHelloPaddedBytes", "simulateXxkemFs", b"simulateXxkemFs", "static", b"static", "useExtended", b"useExtended"]  # noqa: Y015
         def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _TypeAlias = _typing.Literal["ephemeral", b"ephemeral", "extendedCiphertext", b"extendedCiphertext", "paddedBytes", b"paddedBytes", "payload", b"payload", "pqMode", b"pqMode", "sendServerHelloPaddedBytes", b"sendServerHelloPaddedBytes", "simulateXxkemFs", b"simulateXxkemFs", "static", b"static", "useExtended", b"useExtended"]  # noqa: Y015
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["ephemeral", b"ephemeral", "extendedCiphertext", b"extendedCiphertext", "extendedEphemeral", b"extendedEphemeral", "paddedBytes", b"paddedBytes", "payload", b"payload", "pqMode", b"pqMode", "sendServerHelloPaddedBytes", b"sendServerHelloPaddedBytes", "simulateXxkemFs", b"simulateXxkemFs", "static", b"static", "useExtended", b"useExtended"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
     CLIENTHELLO_FIELD_NUMBER: _builtins.int
