@@ -3067,19 +3067,48 @@ class RecentEmojiWeightsAction(_message.Message):
 Global___RecentEmojiWeightsAction: _TypeAlias = RecentEmojiWeightsAction  # noqa: Y015
 
 @_typing.final
+class ModelMetadata(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
+
+    MODELNAME_FIELD_NUMBER: _builtins.int
+    ISLATESTMODEL_FIELD_NUMBER: _builtins.int
+    ISDETECTED_FIELD_NUMBER: _builtins.int
+    modelName: _builtins.str
+    isLatestModel: _builtins.bool
+    isDetected: _builtins.bool
+    def __init__(
+        self,
+        *,
+        modelName: _builtins.str | None = ...,
+        isLatestModel: _builtins.bool | None = ...,
+        isDetected: _builtins.bool | None = ...,
+    ) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["isDetected", b"isDetected", "isLatestModel", b"isLatestModel", "modelName", b"modelName"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["isDetected", b"isDetected", "isLatestModel", b"isLatestModel", "modelName", b"modelName"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
+
+Global___ModelMetadata: _TypeAlias = ModelMetadata  # noqa: Y015
+
+@_typing.final
 class LabelAssociationAction(_message.Message):
     DESCRIPTOR: _descriptor.Descriptor
 
     LABELED_FIELD_NUMBER: _builtins.int
+    MODELMETADATA_FIELD_NUMBER: _builtins.int
     labeled: _builtins.bool
+    @_builtins.property
+    def modelMetaData(self) -> _containers.RepeatedCompositeFieldContainer[Global___ModelMetadata]: ...
     def __init__(
         self,
         *,
         labeled: _builtins.bool | None = ...,
+        modelMetaData: _abc.Iterable[Global___ModelMetadata] | None = ...,
     ) -> None: ...
     _HasFieldArgType: _TypeAlias = _typing.Literal["labeled", b"labeled"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["labeled", b"labeled"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["labeled", b"labeled", "modelMetaData", b"modelMetaData"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
     def WhichOneof(self, oneof_group: _Never) -> None: ...
 
@@ -3094,12 +3123,15 @@ class QuickReplyAction(_message.Message):
     KEYWORDS_FIELD_NUMBER: _builtins.int
     COUNT_FIELD_NUMBER: _builtins.int
     DELETED_FIELD_NUMBER: _builtins.int
+    ASSOCIATEDLABELIDS_FIELD_NUMBER: _builtins.int
     shortcut: _builtins.str
     message: _builtins.str
     count: _builtins.int
     deleted: _builtins.bool
     @_builtins.property
     def keywords(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def associatedLabelIDs(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]: ...
     def __init__(
         self,
         *,
@@ -3108,10 +3140,11 @@ class QuickReplyAction(_message.Message):
         keywords: _abc.Iterable[_builtins.str] | None = ...,
         count: _builtins.int | None = ...,
         deleted: _builtins.bool | None = ...,
+        associatedLabelIDs: _abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
     _HasFieldArgType: _TypeAlias = _typing.Literal["count", b"count", "deleted", b"deleted", "message", b"message", "shortcut", b"shortcut"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["count", b"count", "deleted", b"deleted", "keywords", b"keywords", "message", b"message", "shortcut", b"shortcut"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["associatedLabelIDs", b"associatedLabelIDs", "count", b"count", "deleted", b"deleted", "keywords", b"keywords", "message", b"message", "shortcut", b"shortcut"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
     def WhichOneof(self, oneof_group: _Never) -> None: ...
 
