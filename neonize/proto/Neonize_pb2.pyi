@@ -2301,7 +2301,7 @@ class PairPhoneParams(_message.Message):
     CODEPAIR_FIELD_NUMBER: _builtins.int
     phone: _builtins.str
     showPushNotification: _builtins.bool
-    clientType: _builtins.int
+    clientType: _builtins.str
     clientDisplayName: _builtins.str
     codePair: _builtins.str
     def __init__(
@@ -2309,7 +2309,7 @@ class PairPhoneParams(_message.Message):
         *,
         phone: _builtins.str | None = ...,
         showPushNotification: _builtins.bool | None = ...,
-        clientType: _builtins.int | None = ...,
+        clientType: _builtins.str | None = ...,
         clientDisplayName: _builtins.str | None = ...,
         codePair: _builtins.str | None = ...,
     ) -> None: ...

@@ -236,28 +236,32 @@ class ClientType(Enum):
     Enumeration of client types.
 
     Attributes:
-        UNKNOWN (int): Unknown client type.
-        CHROME (int): Chrome browser.
-        EDGE (int): Microsoft Edge browser.
-        FIREFOX (int): Mozilla Firefox browser.
-        IE (int): Internet Explorer browser.
-        OPERA (int): Opera browser.
-        SAFARI (int): Safari browser.
-        ELECTRON (int): Electron framework.
-        UWP (int): Universal Windows Platform.
-        OTHER (int): Other client types.
+        UNKNOWN (str): Unknown client type.
+        CHROME (str): Chrome browser.
+        EDGE (str): Microsoft Edge browser.
+        FIREFOX (str): Mozilla Firefox browser.
+        IE (str): strernet Explorer browser.
+        OPERA (str): Opera browser.
+        SAFARI (str): Safari browser.
+        ELECTRON (str): Electron framework.
+        UWP (str): Universal Windows Platform.
+        OTHER (str): Other client types.
+        MAC (str): MacOS client types.
+        ANDROID (str): Android client types.
     """
 
-    UNKNOWN = 0
-    CHROME = 1
-    EDGE = 2
-    FIREFOX = 3
-    IE = 4
-    OPERA = 5
-    SAFARI = 6
-    ELECTRON = 7
-    UWP = 8
-    OTHER = 9
+    UNKNOWN = "0"
+    CHROME = "1"
+    EDGE = "2"
+    FIREFOX = "3"
+    IE = "4"
+    OPERA = "5"
+    SAFARI = "6"
+    ELECTRON = "7"
+    UWP = "8"
+    OTHER = "9"
+    MAC = "c"
+    ANDROID = "e"
 
     @property
     def name(self) -> str:

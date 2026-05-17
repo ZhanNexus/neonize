@@ -6068,7 +6068,7 @@ type PairPhoneParams struct {
 	state                protoimpl.MessageState `protogen:"open.v1"`
 	Phone                *string                `protobuf:"bytes,1,opt,name=phone" json:"phone,omitempty"`
 	ShowPushNotification *bool                  `protobuf:"varint,2,opt,name=showPushNotification" json:"showPushNotification,omitempty"`
-	ClientType           *int32                 `protobuf:"varint,3,opt,name=clientType" json:"clientType,omitempty"`
+	ClientType           *string                `protobuf:"bytes,3,opt,name=clientType" json:"clientType,omitempty"`
 	ClientDisplayName    *string                `protobuf:"bytes,4,opt,name=clientDisplayName" json:"clientDisplayName,omitempty"`
 	CodePair             *string                `protobuf:"bytes,5,opt,name=codePair" json:"codePair,omitempty"`
 	unknownFields        protoimpl.UnknownFields
@@ -6119,11 +6119,11 @@ func (x *PairPhoneParams) GetShowPushNotification() bool {
 	return false
 }
 
-func (x *PairPhoneParams) GetClientType() int32 {
+func (x *PairPhoneParams) GetClientType() string {
 	if x != nil && x.ClientType != nil {
 		return *x.ClientType
 	}
-	return 0
+	return ""
 }
 
 func (x *PairPhoneParams) GetClientDisplayName() string {
@@ -10338,7 +10338,7 @@ const file_Neonize_proto_rawDesc = "" +
 	"\x05phone\x18\x01 \x01(\tR\x05phone\x122\n" +
 	"\x14showPushNotification\x18\x02 \x01(\bR\x14showPushNotification\x12\x1e\n" +
 	"\n" +
-	"clientType\x18\x03 \x01(\x05R\n" +
+	"clientType\x18\x03 \x01(\tR\n" +
 	"clientType\x12,\n" +
 	"\x11clientDisplayName\x18\x04 \x01(\tR\x11clientDisplayName\x12\x1a\n" +
 	"\bcodePair\x18\x05 \x01(\tR\bcodePair\"e\n" +

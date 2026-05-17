@@ -1127,7 +1127,7 @@ func Neonize(db *C.char, id *C.char, JIDByte *C.uchar, JIDSize C.int, logLevel *
 			clientType := *PairPhone.ClientType
 			codePair := *PairPhone.CodePair
 			client.Connect()
-			code_, code_err := client.PairPhone(context.Background(), phone, notif, whatsmeow.PairClientType(int(clientType)), displayname, codePair)
+			code_, code_err := client.PairPhone(context.Background(), phone, notif, whatsmeow.PairClientType(clientType), displayname, codePair)
 			if code_err != nil {
 				panic(code_err)
 			}
