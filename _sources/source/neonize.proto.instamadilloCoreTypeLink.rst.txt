@@ -1,0 +1,21 @@
+neonize.proto.instamadilloCoreTypeLink package
+==============================================
+
+Submodules
+----------
+
+neonize.proto.instamadilloCoreTypeLink.InstamadilloCoreTypeLink\_pb2 module
+---------------------------------------------------------------------------
+
+.. automodule:: neonize.proto.instamadilloCoreTypeLink.InstamadilloCoreTypeLink_pb2
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: neonize.proto.instamadilloCoreTypeLink
+   :members:
+   :show-inheritance:
+   :undoc-members:

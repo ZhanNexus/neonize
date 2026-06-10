@@ -1,0 +1,21 @@
+neonize.proto.waRoutingInfo package
+===================================
+
+Submodules
+----------
+
+neonize.proto.waRoutingInfo.WAWebProtobufsRoutingInfo\_pb2 module
+-----------------------------------------------------------------
+
+.. automodule:: neonize.proto.waRoutingInfo.WAWebProtobufsRoutingInfo_pb2
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: neonize.proto.waRoutingInfo
+   :members:
+   :show-inheritance:
+   :undoc-members:

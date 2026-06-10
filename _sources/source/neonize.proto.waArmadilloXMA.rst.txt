@@ -1,0 +1,21 @@
+neonize.proto.waArmadilloXMA package
+====================================
+
+Submodules
+----------
+
+neonize.proto.waArmadilloXMA.WAArmadilloXMA\_pb2 module
+-------------------------------------------------------
+
+.. automodule:: neonize.proto.waArmadilloXMA.WAArmadilloXMA_pb2
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: neonize.proto.waArmadilloXMA
+   :members:
+   :show-inheritance:
+   :undoc-members:

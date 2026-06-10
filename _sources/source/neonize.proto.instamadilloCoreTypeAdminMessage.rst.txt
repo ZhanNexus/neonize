@@ -1,0 +1,21 @@
+neonize.proto.instamadilloCoreTypeAdminMessage package
+======================================================
+
+Submodules
+----------
+
+neonize.proto.instamadilloCoreTypeAdminMessage.InstamadilloCoreTypeAdminMessage\_pb2 module
+-------------------------------------------------------------------------------------------
+
+.. automodule:: neonize.proto.instamadilloCoreTypeAdminMessage.InstamadilloCoreTypeAdminMessage_pb2
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: neonize.proto.instamadilloCoreTypeAdminMessage
+   :members:
+   :show-inheritance:
+   :undoc-members:

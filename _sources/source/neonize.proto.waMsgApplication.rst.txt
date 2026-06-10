@@ -1,0 +1,21 @@
+neonize.proto.waMsgApplication package
+======================================
+
+Submodules
+----------
+
+neonize.proto.waMsgApplication.WAMsgApplication\_pb2 module
+-----------------------------------------------------------
+
+.. automodule:: neonize.proto.waMsgApplication.WAMsgApplication_pb2
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: neonize.proto.waMsgApplication
+   :members:
+   :show-inheritance:
+   :undoc-members:

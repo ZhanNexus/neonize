@@ -1,0 +1,21 @@
+neonize.proto.waArmadilloBackupCommon package
+=============================================
+
+Submodules
+----------
+
+neonize.proto.waArmadilloBackupCommon.WAArmadilloBackupCommon\_pb2 module
+-------------------------------------------------------------------------
+
+.. automodule:: neonize.proto.waArmadilloBackupCommon.WAArmadilloBackupCommon_pb2
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: neonize.proto.waArmadilloBackupCommon
+   :members:
+   :show-inheritance:
+   :undoc-members:

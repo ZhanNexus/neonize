@@ -1,0 +1,21 @@
+neonize.proto.instamadilloCoreTypeMedia package
+===============================================
+
+Submodules
+----------
+
+neonize.proto.instamadilloCoreTypeMedia.InstamadilloCoreTypeMedia\_pb2 module
+-----------------------------------------------------------------------------
+
+.. automodule:: neonize.proto.instamadilloCoreTypeMedia.InstamadilloCoreTypeMedia_pb2
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: neonize.proto.instamadilloCoreTypeMedia
+   :members:
+   :show-inheritance:
+   :undoc-members:

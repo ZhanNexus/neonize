@@ -1,0 +1,21 @@
+neonize.proto.instamadilloDeleteMessage package
+===============================================
+
+Submodules
+----------
+
+neonize.proto.instamadilloDeleteMessage.InstamadilloDeleteMessage\_pb2 module
+-----------------------------------------------------------------------------
+
+.. automodule:: neonize.proto.instamadilloDeleteMessage.InstamadilloDeleteMessage_pb2
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: neonize.proto.instamadilloDeleteMessage
+   :members:
+   :show-inheritance:
+   :undoc-members:

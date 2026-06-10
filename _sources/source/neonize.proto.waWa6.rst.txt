@@ -1,0 +1,21 @@
+neonize.proto.waWa6 package
+===========================
+
+Submodules
+----------
+
+neonize.proto.waWa6.WAWebProtobufsWa6\_pb2 module
+-------------------------------------------------
+
+.. automodule:: neonize.proto.waWa6.WAWebProtobufsWa6_pb2
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: neonize.proto.waWa6
+   :members:
+   :show-inheritance:
+   :undoc-members:

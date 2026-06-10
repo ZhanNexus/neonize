@@ -1,0 +1,21 @@
+neonize.proto.waArmadilloBackupMessage package
+==============================================
+
+Submodules
+----------
+
+neonize.proto.waArmadilloBackupMessage.WAArmadilloBackupMessage\_pb2 module
+---------------------------------------------------------------------------
+
+.. automodule:: neonize.proto.waArmadilloBackupMessage.WAArmadilloBackupMessage_pb2
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: neonize.proto.waArmadilloBackupMessage
+   :members:
+   :show-inheritance:
+   :undoc-members:

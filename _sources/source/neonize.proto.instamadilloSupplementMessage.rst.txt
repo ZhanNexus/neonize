@@ -1,0 +1,21 @@
+neonize.proto.instamadilloSupplementMessage package
+===================================================
+
+Submodules
+----------
+
+neonize.proto.instamadilloSupplementMessage.InstamadilloSupplementMessage\_pb2 module
+-------------------------------------------------------------------------------------
+
+.. automodule:: neonize.proto.instamadilloSupplementMessage.InstamadilloSupplementMessage_pb2
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: neonize.proto.instamadilloSupplementMessage
+   :members:
+   :show-inheritance:
+   :undoc-members:

@@ -1,0 +1,21 @@
+neonize.proto.waWinUIApi package
+================================
+
+Submodules
+----------
+
+neonize.proto.waWinUIApi.WAWinUIApi\_pb2 module
+-----------------------------------------------
+
+.. automodule:: neonize.proto.waWinUIApi.WAWinUIApi_pb2
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: neonize.proto.waWinUIApi
+   :members:
+   :show-inheritance:
+   :undoc-members:

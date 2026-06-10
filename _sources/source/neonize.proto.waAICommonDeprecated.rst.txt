@@ -1,0 +1,29 @@
+neonize.proto.waAICommonDeprecated package
+==========================================
+
+Submodules
+----------
+
+neonize.proto.waAICommonDeprecated.WAAICommonDeprecated\_pb2 module
+-------------------------------------------------------------------
+
+.. automodule:: neonize.proto.waAICommonDeprecated.WAAICommonDeprecated_pb2
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+neonize.proto.waAICommonDeprecated.WAWebProtobufsAICommonDeprecated\_pb2 module
+-------------------------------------------------------------------------------
+
+.. automodule:: neonize.proto.waAICommonDeprecated.WAWebProtobufsAICommonDeprecated_pb2
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: neonize.proto.waAICommonDeprecated
+   :members:
+   :show-inheritance:
+   :undoc-members:

@@ -1,0 +1,21 @@
+neonize.proto.waMediaEntryData package
+======================================
+
+Submodules
+----------
+
+neonize.proto.waMediaEntryData.WAMediaEntryData\_pb2 module
+-----------------------------------------------------------
+
+.. automodule:: neonize.proto.waMediaEntryData.WAMediaEntryData_pb2
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: neonize.proto.waMediaEntryData
+   :members:
+   :show-inheritance:
+   :undoc-members:

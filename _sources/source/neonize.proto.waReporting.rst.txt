@@ -1,0 +1,21 @@
+neonize.proto.waReporting package
+=================================
+
+Submodules
+----------
+
+neonize.proto.waReporting.WAWebProtobufsReporting\_pb2 module
+-------------------------------------------------------------
+
+.. automodule:: neonize.proto.waReporting.WAWebProtobufsReporting_pb2
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: neonize.proto.waReporting
+   :members:
+   :show-inheritance:
+   :undoc-members:

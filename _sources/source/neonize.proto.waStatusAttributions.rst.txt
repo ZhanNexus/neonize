@@ -1,0 +1,29 @@
+neonize.proto.waStatusAttributions package
+==========================================
+
+Submodules
+----------
+
+neonize.proto.waStatusAttributions.WAStatusAttributions\_pb2 module
+-------------------------------------------------------------------
+
+.. automodule:: neonize.proto.waStatusAttributions.WAStatusAttributions_pb2
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+neonize.proto.waStatusAttributions.WAWebProtobufsStatusAttributions\_pb2 module
+-------------------------------------------------------------------------------
+
+.. automodule:: neonize.proto.waStatusAttributions.WAWebProtobufsStatusAttributions_pb2
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: neonize.proto.waStatusAttributions
+   :members:
+   :show-inheritance:
+   :undoc-members:

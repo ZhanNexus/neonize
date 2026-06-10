@@ -1,0 +1,21 @@
+neonize.proto.instamadilloCoreTypeActionLog package
+===================================================
+
+Submodules
+----------
+
+neonize.proto.instamadilloCoreTypeActionLog.InstamadilloCoreTypeActionLog\_pb2 module
+-------------------------------------------------------------------------------------
+
+.. automodule:: neonize.proto.instamadilloCoreTypeActionLog.InstamadilloCoreTypeActionLog_pb2
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: neonize.proto.instamadilloCoreTypeActionLog
+   :members:
+   :show-inheritance:
+   :undoc-members:

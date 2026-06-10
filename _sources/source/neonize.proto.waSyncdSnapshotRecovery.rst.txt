@@ -1,0 +1,21 @@
+neonize.proto.waSyncdSnapshotRecovery package
+=============================================
+
+Submodules
+----------
+
+neonize.proto.waSyncdSnapshotRecovery.WAWebProtobufsSyncdSnapshotRecovery\_pb2 module
+-------------------------------------------------------------------------------------
+
+.. automodule:: neonize.proto.waSyncdSnapshotRecovery.WAWebProtobufsSyncdSnapshotRecovery_pb2
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: neonize.proto.waSyncdSnapshotRecovery
+   :members:
+   :show-inheritance:
+   :undoc-members:

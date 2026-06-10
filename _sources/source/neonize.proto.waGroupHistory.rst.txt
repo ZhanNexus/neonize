@@ -1,0 +1,21 @@
+neonize.proto.waGroupHistory package
+====================================
+
+Submodules
+----------
+
+neonize.proto.waGroupHistory.WAWebProtobufsGroupHistory\_pb2 module
+-------------------------------------------------------------------
+
+.. automodule:: neonize.proto.waGroupHistory.WAWebProtobufsGroupHistory_pb2
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: neonize.proto.waGroupHistory
+   :members:
+   :show-inheritance:
+   :undoc-members:

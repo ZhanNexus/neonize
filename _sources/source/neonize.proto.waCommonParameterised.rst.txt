@@ -1,0 +1,21 @@
+neonize.proto.waCommonParameterised package
+===========================================
+
+Submodules
+----------
+
+neonize.proto.waCommonParameterised.WACommonParameterised\_pb2 module
+---------------------------------------------------------------------
+
+.. automodule:: neonize.proto.waCommonParameterised.WACommonParameterised_pb2
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: neonize.proto.waCommonParameterised
+   :members:
+   :show-inheritance:
+   :undoc-members:

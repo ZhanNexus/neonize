@@ -1,0 +1,21 @@
+neonize.proto.waEphemeral package
+=================================
+
+Submodules
+----------
+
+neonize.proto.waEphemeral.WAWebProtobufsEphemeral\_pb2 module
+-------------------------------------------------------------
+
+.. automodule:: neonize.proto.waEphemeral.WAWebProtobufsEphemeral_pb2
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: neonize.proto.waEphemeral
+   :members:
+   :show-inheritance:
+   :undoc-members:

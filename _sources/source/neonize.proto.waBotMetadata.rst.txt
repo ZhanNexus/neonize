@@ -1,0 +1,29 @@
+neonize.proto.waBotMetadata package
+===================================
+
+Submodules
+----------
+
+neonize.proto.waBotMetadata.WABotMetadata\_pb2 module
+-----------------------------------------------------
+
+.. automodule:: neonize.proto.waBotMetadata.WABotMetadata_pb2
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+neonize.proto.waBotMetadata.WAWebProtobufsBotMetadata\_pb2 module
+-----------------------------------------------------------------
+
+.. automodule:: neonize.proto.waBotMetadata.WAWebProtobufsBotMetadata_pb2
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: neonize.proto.waBotMetadata
+   :members:
+   :show-inheritance:
+   :undoc-members:

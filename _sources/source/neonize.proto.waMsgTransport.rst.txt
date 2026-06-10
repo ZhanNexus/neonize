@@ -1,0 +1,21 @@
+neonize.proto.waMsgTransport package
+====================================
+
+Submodules
+----------
+
+neonize.proto.waMsgTransport.WAMsgTransport\_pb2 module
+-------------------------------------------------------
+
+.. automodule:: neonize.proto.waMsgTransport.WAMsgTransport_pb2
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: neonize.proto.waMsgTransport
+   :members:
+   :show-inheritance:
+   :undoc-members:

@@ -1,0 +1,694 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="neonize package" href="neonize.html"><link rel="prev" title="Getting Started with Neonize" href="../getstarted.html">
+
+    <!-- Generated with Sphinx 9.0.4 and Furo 2025.12.19 -->
+        <title>neonize - neonize 0.3.18 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">neonize 0.3.18 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  <span class="sidebar-brand-text">neonize 0.3.18 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getstarted.html">Getting Started with Neonize</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">neonize</a><input aria-label="Toggle navigation of neonize" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="neonize.html">neonize package</a><input aria-label="Toggle navigation of neonize package" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="neonize.proto.html">neonize.proto package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.utils.html">neonize.utils package</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/krypton-byte/neonize">GitHub Repository</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/krypton-byte/neonize/issues">Issue Tracker</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../_sources/source/modules.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="neonize">
+<h1>neonize<a class="headerlink" href="#neonize" title="Link to this heading">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="neonize.html">neonize package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="neonize.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="neonize.proto.html">neonize.proto package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="neonize.proto.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.proto.html#module-neonize.proto.Neonize_pb2">neonize.proto.Neonize_pb2 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.proto.html#module-neonize.proto">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.utils.html">neonize.utils package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="neonize.utils.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.utils.html#module-neonize.utils.calc">neonize.utils.calc module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.utils.html#module-neonize.utils.enum">neonize.utils.enum module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.utils.html#module-neonize.utils.ffmpeg">neonize.utils.ffmpeg module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.utils.html#module-neonize.utils.iofile">neonize.utils.iofile module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.utils.html#module-neonize.utils.jid">neonize.utils.jid module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.utils.html#module-neonize.utils.log">neonize.utils.log module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.utils.html#module-neonize.utils.message">neonize.utils.message module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.utils.html#module-neonize.utils.platform">neonize.utils.platform module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.utils.html#module-neonize.utils.thumbnail">neonize.utils.thumbnail module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.utils.html#module-neonize.utils">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="neonize.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="neonize.html#module-neonize.builder">neonize.builder module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.builder.build_edit"><code class="docutils literal notranslate"><span class="pre">build_edit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.builder.build_history_sync_request"><code class="docutils literal notranslate"><span class="pre">build_history_sync_request()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.builder.build_revoke"><code class="docutils literal notranslate"><span class="pre">build_revoke()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="neonize.html#module-neonize.client">neonize.client module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.client.ChatSettingsStore"><code class="docutils literal notranslate"><span class="pre">ChatSettingsStore</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.ChatSettingsStore.clear_chat"><code class="docutils literal notranslate"><span class="pre">ChatSettingsStore.clear_chat()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.ChatSettingsStore.get_chat_settings"><code class="docutils literal notranslate"><span class="pre">ChatSettingsStore.get_chat_settings()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.ChatSettingsStore.put_archived"><code class="docutils literal notranslate"><span class="pre">ChatSettingsStore.put_archived()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.ChatSettingsStore.put_muted_until"><code class="docutils literal notranslate"><span class="pre">ChatSettingsStore.put_muted_until()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.ChatSettingsStore.put_pinned"><code class="docutils literal notranslate"><span class="pre">ChatSettingsStore.put_pinned()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.client.ClientFactory"><code class="docutils literal notranslate"><span class="pre">ClientFactory</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.ClientFactory.get_all_devices"><code class="docutils literal notranslate"><span class="pre">ClientFactory.get_all_devices()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.ClientFactory.get_all_devices_from_db"><code class="docutils literal notranslate"><span class="pre">ClientFactory.get_all_devices_from_db()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.ClientFactory.new_client"><code class="docutils literal notranslate"><span class="pre">ClientFactory.new_client()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.ClientFactory.run"><code class="docutils literal notranslate"><span class="pre">ClientFactory.run()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.client.ContactStore"><code class="docutils literal notranslate"><span class="pre">ContactStore</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.ContactStore.get_all_contacts"><code class="docutils literal notranslate"><span class="pre">ContactStore.get_all_contacts()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.ContactStore.get_contact"><code class="docutils literal notranslate"><span class="pre">ContactStore.get_contact()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.ContactStore.put_all_contact_name"><code class="docutils literal notranslate"><span class="pre">ContactStore.put_all_contact_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.ContactStore.put_contact_name"><code class="docutils literal notranslate"><span class="pre">ContactStore.put_contact_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.ContactStore.put_pushname"><code class="docutils literal notranslate"><span class="pre">ContactStore.put_pushname()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.client.NewClient"><code class="docutils literal notranslate"><span class="pre">NewClient</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.PairPhone"><code class="docutils literal notranslate"><span class="pre">NewClient.PairPhone()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.build_album_content"><code class="docutils literal notranslate"><span class="pre">NewClient.build_album_content()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.build_audio_message"><code class="docutils literal notranslate"><span class="pre">NewClient.build_audio_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.build_document_message"><code class="docutils literal notranslate"><span class="pre">NewClient.build_document_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.build_image_message"><code class="docutils literal notranslate"><span class="pre">NewClient.build_image_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.build_poll_vote"><code class="docutils literal notranslate"><span class="pre">NewClient.build_poll_vote()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.build_poll_vote_creation"><code class="docutils literal notranslate"><span class="pre">NewClient.build_poll_vote_creation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.build_reaction"><code class="docutils literal notranslate"><span class="pre">NewClient.build_reaction()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.build_reply_message"><code class="docutils literal notranslate"><span class="pre">NewClient.build_reply_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.build_revoke"><code class="docutils literal notranslate"><span class="pre">NewClient.build_revoke()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.build_sticker_message"><code class="docutils literal notranslate"><span class="pre">NewClient.build_sticker_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.build_stickerpack_message"><code class="docutils literal notranslate"><span class="pre">NewClient.build_stickerpack_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.build_video_message"><code class="docutils literal notranslate"><span class="pre">NewClient.build_video_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.connect"><code class="docutils literal notranslate"><span class="pre">NewClient.connect()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.connect_with_proxy"><code class="docutils literal notranslate"><span class="pre">NewClient.connect_with_proxy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.create_group"><code class="docutils literal notranslate"><span class="pre">NewClient.create_group()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.create_newsletter"><code class="docutils literal notranslate"><span class="pre">NewClient.create_newsletter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.decrypt_poll_vote"><code class="docutils literal notranslate"><span class="pre">NewClient.decrypt_poll_vote()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.disconnect"><code class="docutils literal notranslate"><span class="pre">NewClient.disconnect()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.download_any"><code class="docutils literal notranslate"><span class="pre">NewClient.download_any()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.download_media_with_path"><code class="docutils literal notranslate"><span class="pre">NewClient.download_media_with_path()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.edit_message"><code class="docutils literal notranslate"><span class="pre">NewClient.edit_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.follow_newsletter"><code class="docutils literal notranslate"><span class="pre">NewClient.follow_newsletter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.generate_message_id"><code class="docutils literal notranslate"><span class="pre">NewClient.generate_message_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.get_blocklist"><code class="docutils literal notranslate"><span class="pre">NewClient.get_blocklist()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.get_contact_qr_link"><code class="docutils literal notranslate"><span class="pre">NewClient.get_contact_qr_link()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.get_group_info"><code class="docutils literal notranslate"><span class="pre">NewClient.get_group_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.get_group_info_from_invite"><code class="docutils literal notranslate"><span class="pre">NewClient.get_group_info_from_invite()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.get_group_info_from_link"><code class="docutils literal notranslate"><span class="pre">NewClient.get_group_info_from_link()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.get_group_invite_link"><code class="docutils literal notranslate"><span class="pre">NewClient.get_group_invite_link()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.get_group_request_participants"><code class="docutils literal notranslate"><span class="pre">NewClient.get_group_request_participants()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.get_joined_groups"><code class="docutils literal notranslate"><span class="pre">NewClient.get_joined_groups()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.get_lid_from_pn"><code class="docutils literal notranslate"><span class="pre">NewClient.get_lid_from_pn()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.get_linked_group_participants"><code class="docutils literal notranslate"><span class="pre">NewClient.get_linked_group_participants()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.get_me"><code class="docutils literal notranslate"><span class="pre">NewClient.get_me()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.get_message_for_retry"><code class="docutils literal notranslate"><span class="pre">NewClient.get_message_for_retry()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.get_newsletter_info"><code class="docutils literal notranslate"><span class="pre">NewClient.get_newsletter_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.get_newsletter_info_with_invite"><code class="docutils literal notranslate"><span class="pre">NewClient.get_newsletter_info_with_invite()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.get_newsletter_message_update"><code class="docutils literal notranslate"><span class="pre">NewClient.get_newsletter_message_update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.get_newsletter_messages"><code class="docutils literal notranslate"><span class="pre">NewClient.get_newsletter_messages()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.get_pn_from_lid"><code class="docutils literal notranslate"><span class="pre">NewClient.get_pn_from_lid()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.get_privacy_settings"><code class="docutils literal notranslate"><span class="pre">NewClient.get_privacy_settings()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.get_profile_picture"><code class="docutils literal notranslate"><span class="pre">NewClient.get_profile_picture()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.get_status_privacy"><code class="docutils literal notranslate"><span class="pre">NewClient.get_status_privacy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.get_sub_groups"><code class="docutils literal notranslate"><span class="pre">NewClient.get_sub_groups()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.get_subscribed_newletters"><code class="docutils literal notranslate"><span class="pre">NewClient.get_subscribed_newletters()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.get_user_devices"><code class="docutils literal notranslate"><span class="pre">NewClient.get_user_devices()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.get_user_info"><code class="docutils literal notranslate"><span class="pre">NewClient.get_user_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.is_connected"><code class="docutils literal notranslate"><span class="pre">NewClient.is_connected</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.is_logged_in"><code class="docutils literal notranslate"><span class="pre">NewClient.is_logged_in</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.is_on_whatsapp"><code class="docutils literal notranslate"><span class="pre">NewClient.is_on_whatsapp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.join_group_with_invite"><code class="docutils literal notranslate"><span class="pre">NewClient.join_group_with_invite()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.join_group_with_link"><code class="docutils literal notranslate"><span class="pre">NewClient.join_group_with_link()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.leave_group"><code class="docutils literal notranslate"><span class="pre">NewClient.leave_group()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.link_group"><code class="docutils literal notranslate"><span class="pre">NewClient.link_group()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.logout"><code class="docutils literal notranslate"><span class="pre">NewClient.logout()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.mark_read"><code class="docutils literal notranslate"><span class="pre">NewClient.mark_read()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.newsletter_mark_viewed"><code class="docutils literal notranslate"><span class="pre">NewClient.newsletter_mark_viewed()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.newsletter_send_reaction"><code class="docutils literal notranslate"><span class="pre">NewClient.newsletter_send_reaction()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.newsletter_subscribe_live_updates"><code class="docutils literal notranslate"><span class="pre">NewClient.newsletter_subscribe_live_updates()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.newsletter_toggle_mute"><code class="docutils literal notranslate"><span class="pre">NewClient.newsletter_toggle_mute()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.pin_message"><code class="docutils literal notranslate"><span class="pre">NewClient.pin_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.reply_message"><code class="docutils literal notranslate"><span class="pre">NewClient.reply_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.resolve_business_message_link"><code class="docutils literal notranslate"><span class="pre">NewClient.resolve_business_message_link()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.resolve_contact_qr_link"><code class="docutils literal notranslate"><span class="pre">NewClient.resolve_contact_qr_link()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.revoke_message"><code class="docutils literal notranslate"><span class="pre">NewClient.revoke_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.send_album"><code class="docutils literal notranslate"><span class="pre">NewClient.send_album()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.send_app_state"><code class="docutils literal notranslate"><span class="pre">NewClient.send_app_state()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.send_audio"><code class="docutils literal notranslate"><span class="pre">NewClient.send_audio()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.send_carousel_message"><code class="docutils literal notranslate"><span class="pre">NewClient.send_carousel_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.send_chat_presence"><code class="docutils literal notranslate"><span class="pre">NewClient.send_chat_presence()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.send_contact"><code class="docutils literal notranslate"><span class="pre">NewClient.send_contact()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.send_document"><code class="docutils literal notranslate"><span class="pre">NewClient.send_document()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.send_fb_message"><code class="docutils literal notranslate"><span class="pre">NewClient.send_fb_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.send_image"><code class="docutils literal notranslate"><span class="pre">NewClient.send_image()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.send_interactive_message"><code class="docutils literal notranslate"><span class="pre">NewClient.send_interactive_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.send_message"><code class="docutils literal notranslate"><span class="pre">NewClient.send_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.send_presence"><code class="docutils literal notranslate"><span class="pre">NewClient.send_presence()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.send_sticker"><code class="docutils literal notranslate"><span class="pre">NewClient.send_sticker()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.send_stickerpack"><code class="docutils literal notranslate"><span class="pre">NewClient.send_stickerpack()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.send_video"><code class="docutils literal notranslate"><span class="pre">NewClient.send_video()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.set_default_disappearing_timer"><code class="docutils literal notranslate"><span class="pre">NewClient.set_default_disappearing_timer()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.set_disappearing_timer"><code class="docutils literal notranslate"><span class="pre">NewClient.set_disappearing_timer()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.set_force_activate_delivery_receipts"><code class="docutils literal notranslate"><span class="pre">NewClient.set_force_activate_delivery_receipts()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.set_group_announce"><code class="docutils literal notranslate"><span class="pre">NewClient.set_group_announce()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.set_group_locked"><code class="docutils literal notranslate"><span class="pre">NewClient.set_group_locked()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.set_group_name"><code class="docutils literal notranslate"><span class="pre">NewClient.set_group_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.set_group_photo"><code class="docutils literal notranslate"><span class="pre">NewClient.set_group_photo()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.set_group_topic"><code class="docutils literal notranslate"><span class="pre">NewClient.set_group_topic()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.set_passive"><code class="docutils literal notranslate"><span class="pre">NewClient.set_passive()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.set_privacy_setting"><code class="docutils literal notranslate"><span class="pre">NewClient.set_privacy_setting()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.set_profile_name"><code class="docutils literal notranslate"><span class="pre">NewClient.set_profile_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.set_profile_photo"><code class="docutils literal notranslate"><span class="pre">NewClient.set_profile_photo()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.set_proxy_address"><code class="docutils literal notranslate"><span class="pre">NewClient.set_proxy_address()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.set_status_message"><code class="docutils literal notranslate"><span class="pre">NewClient.set_status_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.stop"><code class="docutils literal notranslate"><span class="pre">NewClient.stop()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.subscribe_presence"><code class="docutils literal notranslate"><span class="pre">NewClient.subscribe_presence()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.unfollow_newsletter"><code class="docutils literal notranslate"><span class="pre">NewClient.unfollow_newsletter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.unlink_group"><code class="docutils literal notranslate"><span class="pre">NewClient.unlink_group()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.update_blocklist"><code class="docutils literal notranslate"><span class="pre">NewClient.update_blocklist()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.update_group_participants"><code class="docutils literal notranslate"><span class="pre">NewClient.update_group_participants()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.upload"><code class="docutils literal notranslate"><span class="pre">NewClient.upload()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.client.NewClient.upload_newsletter"><code class="docutils literal notranslate"><span class="pre">NewClient.upload_newsletter()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="neonize.html#module-neonize.const">neonize.const module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="neonize.html#module-neonize.download">neonize.download module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.download.UnsupportedPlatform"><code class="docutils literal notranslate"><span class="pre">UnsupportedPlatform</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.download.download"><code class="docutils literal notranslate"><span class="pre">download()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="neonize.html#module-neonize.events">neonize.events module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.events.Event"><code class="docutils literal notranslate"><span class="pre">Event</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.events.Event.default_paircode_cb"><code class="docutils literal notranslate"><span class="pre">Event.default_paircode_cb()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.events.Event.execute"><code class="docutils literal notranslate"><span class="pre">Event.execute()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.events.Event.paircode"><code class="docutils literal notranslate"><span class="pre">Event.paircode</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.events.Event.qr"><code class="docutils literal notranslate"><span class="pre">Event.qr()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.events.EventsManager"><code class="docutils literal notranslate"><span class="pre">EventsManager</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="neonize.html#module-neonize.exc">neonize.exc module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.BuildPollVoteCreationError"><code class="docutils literal notranslate"><span class="pre">BuildPollVoteCreationError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.BuildPollVoteError"><code class="docutils literal notranslate"><span class="pre">BuildPollVoteError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.ContactStoreError"><code class="docutils literal notranslate"><span class="pre">ContactStoreError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.ConvertStickerError"><code class="docutils literal notranslate"><span class="pre">ConvertStickerError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.CreateGroupError"><code class="docutils literal notranslate"><span class="pre">CreateGroupError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.CreateNewsletterError"><code class="docutils literal notranslate"><span class="pre">CreateNewsletterError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.DecryptPollVoteError"><code class="docutils literal notranslate"><span class="pre">DecryptPollVoteError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.DownloadError"><code class="docutils literal notranslate"><span class="pre">DownloadError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.FFProbeError"><code class="docutils literal notranslate"><span class="pre">FFProbeError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.FollowNewsletterError"><code class="docutils literal notranslate"><span class="pre">FollowNewsletterError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.GetBlocklistError"><code class="docutils literal notranslate"><span class="pre">GetBlocklistError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.GetChatSettingsError"><code class="docutils literal notranslate"><span class="pre">GetChatSettingsError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.GetContactQrLinkError"><code class="docutils literal notranslate"><span class="pre">GetContactQrLinkError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.GetGroupInfoError"><code class="docutils literal notranslate"><span class="pre">GetGroupInfoError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.GetGroupInviteLinkError"><code class="docutils literal notranslate"><span class="pre">GetGroupInviteLinkError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.GetGroupRequestParticipantsError"><code class="docutils literal notranslate"><span class="pre">GetGroupRequestParticipantsError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.GetJIDFromStoreError"><code class="docutils literal notranslate"><span class="pre">GetJIDFromStoreError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.GetJoinedGroupsError"><code class="docutils literal notranslate"><span class="pre">GetJoinedGroupsError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.GetLinkedGroupParticipantsError"><code class="docutils literal notranslate"><span class="pre">GetLinkedGroupParticipantsError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.GetNewsletterInfoError"><code class="docutils literal notranslate"><span class="pre">GetNewsletterInfoError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.GetNewsletterInfoWithInviteError"><code class="docutils literal notranslate"><span class="pre">GetNewsletterInfoWithInviteError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.GetNewsletterMessageUpdateError"><code class="docutils literal notranslate"><span class="pre">GetNewsletterMessageUpdateError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.GetNewsletterMessagesError"><code class="docutils literal notranslate"><span class="pre">GetNewsletterMessagesError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.GetProfilePictureError"><code class="docutils literal notranslate"><span class="pre">GetProfilePictureError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.GetStatusPrivacyError"><code class="docutils literal notranslate"><span class="pre">GetStatusPrivacyError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.GetSubGroupsError"><code class="docutils literal notranslate"><span class="pre">GetSubGroupsError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.GetSubscribedNewslettersError"><code class="docutils literal notranslate"><span class="pre">GetSubscribedNewslettersError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.GetUserDevicesError"><code class="docutils literal notranslate"><span class="pre">GetUserDevicesError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.GetUserInfoError"><code class="docutils literal notranslate"><span class="pre">GetUserInfoError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.InviteLinkError"><code class="docutils literal notranslate"><span class="pre">InviteLinkError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.IsOnWhatsAppError"><code class="docutils literal notranslate"><span class="pre">IsOnWhatsAppError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.JoinGroupWithInviteError"><code class="docutils literal notranslate"><span class="pre">JoinGroupWithInviteError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.LinkGroupError"><code class="docutils literal notranslate"><span class="pre">LinkGroupError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.LogoutError"><code class="docutils literal notranslate"><span class="pre">LogoutError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.MarkReadError"><code class="docutils literal notranslate"><span class="pre">MarkReadError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.NeonizeError"><code class="docutils literal notranslate"><span class="pre">NeonizeError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.NewsletterMarkViewedError"><code class="docutils literal notranslate"><span class="pre">NewsletterMarkViewedError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.NewsletterSendReactionError"><code class="docutils literal notranslate"><span class="pre">NewsletterSendReactionError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.NewsletterSubscribeLiveUpdatesError"><code class="docutils literal notranslate"><span class="pre">NewsletterSubscribeLiveUpdatesError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.NewsletterToggleMuteError"><code class="docutils literal notranslate"><span class="pre">NewsletterToggleMuteError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.PairPhoneError"><code class="docutils literal notranslate"><span class="pre">PairPhoneError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.PutArchivedError"><code class="docutils literal notranslate"><span class="pre">PutArchivedError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.PutMutedUntilError"><code class="docutils literal notranslate"><span class="pre">PutMutedUntilError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.PutPinnedError"><code class="docutils literal notranslate"><span class="pre">PutPinnedError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.ResolveBusinessMessageLinkError"><code class="docutils literal notranslate"><span class="pre">ResolveBusinessMessageLinkError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.ResolveContactQRLinkError"><code class="docutils literal notranslate"><span class="pre">ResolveContactQRLinkError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.SendAppStateError"><code class="docutils literal notranslate"><span class="pre">SendAppStateError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.SendMessageError"><code class="docutils literal notranslate"><span class="pre">SendMessageError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.SendPresenceError"><code class="docutils literal notranslate"><span class="pre">SendPresenceError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.SetDefaultDisappearingTimerError"><code class="docutils literal notranslate"><span class="pre">SetDefaultDisappearingTimerError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.SetDisappearingTimerError"><code class="docutils literal notranslate"><span class="pre">SetDisappearingTimerError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.SetGroupAnnounceError"><code class="docutils literal notranslate"><span class="pre">SetGroupAnnounceError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.SetGroupLockedError"><code class="docutils literal notranslate"><span class="pre">SetGroupLockedError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.SetGroupPhotoError"><code class="docutils literal notranslate"><span class="pre">SetGroupPhotoError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.SetGroupTopicError"><code class="docutils literal notranslate"><span class="pre">SetGroupTopicError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.SetPassiveError"><code class="docutils literal notranslate"><span class="pre">SetPassiveError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.SetPrivacySettingError"><code class="docutils literal notranslate"><span class="pre">SetPrivacySettingError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.SetProxyAddressError"><code class="docutils literal notranslate"><span class="pre">SetProxyAddressError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.SetStatusMessageError"><code class="docutils literal notranslate"><span class="pre">SetStatusMessageError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.SubscribePresenceError"><code class="docutils literal notranslate"><span class="pre">SubscribePresenceError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.UnfollowNewsletterError"><code class="docutils literal notranslate"><span class="pre">UnfollowNewsletterError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.UnlinkGroupError"><code class="docutils literal notranslate"><span class="pre">UnlinkGroupError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.UnsupportedEvent"><code class="docutils literal notranslate"><span class="pre">UnsupportedEvent</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.UpdateBlocklistError"><code class="docutils literal notranslate"><span class="pre">UpdateBlocklistError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.UpdateGroupParticipantsError"><code class="docutils literal notranslate"><span class="pre">UpdateGroupParticipantsError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.exc.UploadError"><code class="docutils literal notranslate"><span class="pre">UploadError</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="neonize.html#neonize-neonize-linux-amd64-module">neonize.neonize-linux-amd64 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="neonize.html#module-neonize.types">neonize.types module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="neonize.html#module-neonize">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.Event"><code class="docutils literal notranslate"><span class="pre">Event</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.Event.default_paircode_cb"><code class="docutils literal notranslate"><span class="pre">Event.default_paircode_cb()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.Event.execute"><code class="docutils literal notranslate"><span class="pre">Event.execute()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.Event.paircode"><code class="docutils literal notranslate"><span class="pre">Event.paircode</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.Event.qr"><code class="docutils literal notranslate"><span class="pre">Event.qr()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.FFmpeg"><code class="docutils literal notranslate"><span class="pre">FFmpeg</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.FFmpeg.call"><code class="docutils literal notranslate"><span class="pre">FFmpeg.call()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.FFmpeg.cv_to_webp"><code class="docutils literal notranslate"><span class="pre">FFmpeg.cv_to_webp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.FFmpeg.extract_info"><code class="docutils literal notranslate"><span class="pre">FFmpeg.extract_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.FFmpeg.extract_thumbnail"><code class="docutils literal notranslate"><span class="pre">FFmpeg.extract_thumbnail()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.FFmpeg.filepath"><code class="docutils literal notranslate"><span class="pre">FFmpeg.filepath</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.FFmpeg.get_audio_waveform"><code class="docutils literal notranslate"><span class="pre">FFmpeg.get_audio_waveform()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.FFmpeg.gif_to_mp4"><code class="docutils literal notranslate"><span class="pre">FFmpeg.gif_to_mp4()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.FFmpeg.to_mp3"><code class="docutils literal notranslate"><span class="pre">FFmpeg.to_mp3()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.FFmpeg.to_ptt"><code class="docutils literal notranslate"><span class="pre">FFmpeg.to_ptt()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.NewClient"><code class="docutils literal notranslate"><span class="pre">NewClient</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.PairPhone"><code class="docutils literal notranslate"><span class="pre">NewClient.PairPhone()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.build_album_content"><code class="docutils literal notranslate"><span class="pre">NewClient.build_album_content()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.build_audio_message"><code class="docutils literal notranslate"><span class="pre">NewClient.build_audio_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.build_document_message"><code class="docutils literal notranslate"><span class="pre">NewClient.build_document_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.build_image_message"><code class="docutils literal notranslate"><span class="pre">NewClient.build_image_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.build_poll_vote"><code class="docutils literal notranslate"><span class="pre">NewClient.build_poll_vote()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.build_poll_vote_creation"><code class="docutils literal notranslate"><span class="pre">NewClient.build_poll_vote_creation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.build_reaction"><code class="docutils literal notranslate"><span class="pre">NewClient.build_reaction()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.build_reply_message"><code class="docutils literal notranslate"><span class="pre">NewClient.build_reply_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.build_revoke"><code class="docutils literal notranslate"><span class="pre">NewClient.build_revoke()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.build_sticker_message"><code class="docutils literal notranslate"><span class="pre">NewClient.build_sticker_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.build_stickerpack_message"><code class="docutils literal notranslate"><span class="pre">NewClient.build_stickerpack_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.build_video_message"><code class="docutils literal notranslate"><span class="pre">NewClient.build_video_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.connect"><code class="docutils literal notranslate"><span class="pre">NewClient.connect()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.connect_with_proxy"><code class="docutils literal notranslate"><span class="pre">NewClient.connect_with_proxy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.create_group"><code class="docutils literal notranslate"><span class="pre">NewClient.create_group()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.create_newsletter"><code class="docutils literal notranslate"><span class="pre">NewClient.create_newsletter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.decrypt_poll_vote"><code class="docutils literal notranslate"><span class="pre">NewClient.decrypt_poll_vote()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.disconnect"><code class="docutils literal notranslate"><span class="pre">NewClient.disconnect()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.download_any"><code class="docutils literal notranslate"><span class="pre">NewClient.download_any()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.download_media_with_path"><code class="docutils literal notranslate"><span class="pre">NewClient.download_media_with_path()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.edit_message"><code class="docutils literal notranslate"><span class="pre">NewClient.edit_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.follow_newsletter"><code class="docutils literal notranslate"><span class="pre">NewClient.follow_newsletter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.generate_message_id"><code class="docutils literal notranslate"><span class="pre">NewClient.generate_message_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.get_blocklist"><code class="docutils literal notranslate"><span class="pre">NewClient.get_blocklist()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.get_contact_qr_link"><code class="docutils literal notranslate"><span class="pre">NewClient.get_contact_qr_link()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.get_group_info"><code class="docutils literal notranslate"><span class="pre">NewClient.get_group_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.get_group_info_from_invite"><code class="docutils literal notranslate"><span class="pre">NewClient.get_group_info_from_invite()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.get_group_info_from_link"><code class="docutils literal notranslate"><span class="pre">NewClient.get_group_info_from_link()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.get_group_invite_link"><code class="docutils literal notranslate"><span class="pre">NewClient.get_group_invite_link()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.get_group_request_participants"><code class="docutils literal notranslate"><span class="pre">NewClient.get_group_request_participants()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.get_joined_groups"><code class="docutils literal notranslate"><span class="pre">NewClient.get_joined_groups()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.get_lid_from_pn"><code class="docutils literal notranslate"><span class="pre">NewClient.get_lid_from_pn()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.get_linked_group_participants"><code class="docutils literal notranslate"><span class="pre">NewClient.get_linked_group_participants()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.get_me"><code class="docutils literal notranslate"><span class="pre">NewClient.get_me()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.get_message_for_retry"><code class="docutils literal notranslate"><span class="pre">NewClient.get_message_for_retry()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.get_newsletter_info"><code class="docutils literal notranslate"><span class="pre">NewClient.get_newsletter_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.get_newsletter_info_with_invite"><code class="docutils literal notranslate"><span class="pre">NewClient.get_newsletter_info_with_invite()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.get_newsletter_message_update"><code class="docutils literal notranslate"><span class="pre">NewClient.get_newsletter_message_update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.get_newsletter_messages"><code class="docutils literal notranslate"><span class="pre">NewClient.get_newsletter_messages()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.get_pn_from_lid"><code class="docutils literal notranslate"><span class="pre">NewClient.get_pn_from_lid()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.get_privacy_settings"><code class="docutils literal notranslate"><span class="pre">NewClient.get_privacy_settings()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.get_profile_picture"><code class="docutils literal notranslate"><span class="pre">NewClient.get_profile_picture()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.get_status_privacy"><code class="docutils literal notranslate"><span class="pre">NewClient.get_status_privacy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.get_sub_groups"><code class="docutils literal notranslate"><span class="pre">NewClient.get_sub_groups()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.get_subscribed_newletters"><code class="docutils literal notranslate"><span class="pre">NewClient.get_subscribed_newletters()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.get_user_devices"><code class="docutils literal notranslate"><span class="pre">NewClient.get_user_devices()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.get_user_info"><code class="docutils literal notranslate"><span class="pre">NewClient.get_user_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.is_connected"><code class="docutils literal notranslate"><span class="pre">NewClient.is_connected</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.is_logged_in"><code class="docutils literal notranslate"><span class="pre">NewClient.is_logged_in</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.is_on_whatsapp"><code class="docutils literal notranslate"><span class="pre">NewClient.is_on_whatsapp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.join_group_with_invite"><code class="docutils literal notranslate"><span class="pre">NewClient.join_group_with_invite()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.join_group_with_link"><code class="docutils literal notranslate"><span class="pre">NewClient.join_group_with_link()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.leave_group"><code class="docutils literal notranslate"><span class="pre">NewClient.leave_group()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.link_group"><code class="docutils literal notranslate"><span class="pre">NewClient.link_group()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.logout"><code class="docutils literal notranslate"><span class="pre">NewClient.logout()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.mark_read"><code class="docutils literal notranslate"><span class="pre">NewClient.mark_read()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.newsletter_mark_viewed"><code class="docutils literal notranslate"><span class="pre">NewClient.newsletter_mark_viewed()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.newsletter_send_reaction"><code class="docutils literal notranslate"><span class="pre">NewClient.newsletter_send_reaction()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.newsletter_subscribe_live_updates"><code class="docutils literal notranslate"><span class="pre">NewClient.newsletter_subscribe_live_updates()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.newsletter_toggle_mute"><code class="docutils literal notranslate"><span class="pre">NewClient.newsletter_toggle_mute()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.pin_message"><code class="docutils literal notranslate"><span class="pre">NewClient.pin_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.reply_message"><code class="docutils literal notranslate"><span class="pre">NewClient.reply_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.resolve_business_message_link"><code class="docutils literal notranslate"><span class="pre">NewClient.resolve_business_message_link()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.resolve_contact_qr_link"><code class="docutils literal notranslate"><span class="pre">NewClient.resolve_contact_qr_link()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.revoke_message"><code class="docutils literal notranslate"><span class="pre">NewClient.revoke_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.send_album"><code class="docutils literal notranslate"><span class="pre">NewClient.send_album()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.send_app_state"><code class="docutils literal notranslate"><span class="pre">NewClient.send_app_state()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.send_audio"><code class="docutils literal notranslate"><span class="pre">NewClient.send_audio()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.send_carousel_message"><code class="docutils literal notranslate"><span class="pre">NewClient.send_carousel_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.send_chat_presence"><code class="docutils literal notranslate"><span class="pre">NewClient.send_chat_presence()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.send_contact"><code class="docutils literal notranslate"><span class="pre">NewClient.send_contact()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.send_document"><code class="docutils literal notranslate"><span class="pre">NewClient.send_document()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.send_fb_message"><code class="docutils literal notranslate"><span class="pre">NewClient.send_fb_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.send_image"><code class="docutils literal notranslate"><span class="pre">NewClient.send_image()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.send_interactive_message"><code class="docutils literal notranslate"><span class="pre">NewClient.send_interactive_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.send_message"><code class="docutils literal notranslate"><span class="pre">NewClient.send_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.send_presence"><code class="docutils literal notranslate"><span class="pre">NewClient.send_presence()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.send_sticker"><code class="docutils literal notranslate"><span class="pre">NewClient.send_sticker()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.send_stickerpack"><code class="docutils literal notranslate"><span class="pre">NewClient.send_stickerpack()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.send_video"><code class="docutils literal notranslate"><span class="pre">NewClient.send_video()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.set_default_disappearing_timer"><code class="docutils literal notranslate"><span class="pre">NewClient.set_default_disappearing_timer()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.set_disappearing_timer"><code class="docutils literal notranslate"><span class="pre">NewClient.set_disappearing_timer()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.set_force_activate_delivery_receipts"><code class="docutils literal notranslate"><span class="pre">NewClient.set_force_activate_delivery_receipts()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.set_group_announce"><code class="docutils literal notranslate"><span class="pre">NewClient.set_group_announce()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.set_group_locked"><code class="docutils literal notranslate"><span class="pre">NewClient.set_group_locked()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.set_group_name"><code class="docutils literal notranslate"><span class="pre">NewClient.set_group_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.set_group_photo"><code class="docutils literal notranslate"><span class="pre">NewClient.set_group_photo()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.set_group_topic"><code class="docutils literal notranslate"><span class="pre">NewClient.set_group_topic()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.set_passive"><code class="docutils literal notranslate"><span class="pre">NewClient.set_passive()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.set_privacy_setting"><code class="docutils literal notranslate"><span class="pre">NewClient.set_privacy_setting()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.set_profile_name"><code class="docutils literal notranslate"><span class="pre">NewClient.set_profile_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.set_profile_photo"><code class="docutils literal notranslate"><span class="pre">NewClient.set_profile_photo()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.set_proxy_address"><code class="docutils literal notranslate"><span class="pre">NewClient.set_proxy_address()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.set_status_message"><code class="docutils literal notranslate"><span class="pre">NewClient.set_status_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.stop"><code class="docutils literal notranslate"><span class="pre">NewClient.stop()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.subscribe_presence"><code class="docutils literal notranslate"><span class="pre">NewClient.subscribe_presence()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.unfollow_newsletter"><code class="docutils literal notranslate"><span class="pre">NewClient.unfollow_newsletter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.unlink_group"><code class="docutils literal notranslate"><span class="pre">NewClient.unlink_group()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.update_blocklist"><code class="docutils literal notranslate"><span class="pre">NewClient.update_blocklist()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.update_group_participants"><code class="docutils literal notranslate"><span class="pre">NewClient.update_group_participants()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.upload"><code class="docutils literal notranslate"><span class="pre">NewClient.upload()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="neonize.html#neonize.NewClient.upload_newsletter"><code class="docutils literal notranslate"><span class="pre">NewClient.upload_newsletter()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="neonize.html#neonize.TemporaryFile"><code class="docutils literal notranslate"><span class="pre">TemporaryFile</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="neonize.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">neonize package</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../getstarted.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Getting Started with Neonize</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, krypton-byte
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=bce5950b"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/scripts/furo.js?v=46bd48cc"></script>
+    </body>
+</html>

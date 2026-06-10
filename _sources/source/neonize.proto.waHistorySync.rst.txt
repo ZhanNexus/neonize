@@ -1,0 +1,21 @@
+neonize.proto.waHistorySync package
+===================================
+
+Submodules
+----------
+
+neonize.proto.waHistorySync.WAWebProtobufsHistorySync\_pb2 module
+-----------------------------------------------------------------
+
+.. automodule:: neonize.proto.waHistorySync.WAWebProtobufsHistorySync_pb2
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: neonize.proto.waHistorySync
+   :members:
+   :show-inheritance:
+   :undoc-members:

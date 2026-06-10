@@ -1,0 +1,21 @@
+neonize.proto.instamadilloCoreTypeCollection package
+====================================================
+
+Submodules
+----------
+
+neonize.proto.instamadilloCoreTypeCollection.InstamadilloCoreTypeCollection\_pb2 module
+---------------------------------------------------------------------------------------
+
+.. automodule:: neonize.proto.instamadilloCoreTypeCollection.InstamadilloCoreTypeCollection_pb2
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: neonize.proto.instamadilloCoreTypeCollection
+   :members:
+   :show-inheritance:
+   :undoc-members:

@@ -1,0 +1,21 @@
+neonize.proto.waConsumerApplication package
+===========================================
+
+Submodules
+----------
+
+neonize.proto.waConsumerApplication.WAConsumerApplication\_pb2 module
+---------------------------------------------------------------------
+
+.. automodule:: neonize.proto.waConsumerApplication.WAConsumerApplication_pb2
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: neonize.proto.waConsumerApplication
+   :members:
+   :show-inheritance:
+   :undoc-members:

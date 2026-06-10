@@ -1,0 +1,29 @@
+neonize.aioze package
+=====================
+
+Submodules
+----------
+
+neonize.aioze.client module
+---------------------------
+
+.. automodule:: neonize.aioze.client
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+neonize.aioze.events module
+---------------------------
+
+.. automodule:: neonize.aioze.events
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: neonize.aioze
+   :members:
+   :show-inheritance:
+   :undoc-members:

@@ -1,0 +1,21 @@
+neonize.proto.waMultiDevice package
+===================================
+
+Submodules
+----------
+
+neonize.proto.waMultiDevice.WAMultiDevice\_pb2 module
+-----------------------------------------------------
+
+.. automodule:: neonize.proto.waMultiDevice.WAMultiDevice_pb2
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: neonize.proto.waMultiDevice
+   :members:
+   :show-inheritance:
+   :undoc-members:

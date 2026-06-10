@@ -1,0 +1,29 @@
+neonize.proto.waCompanionReg package
+====================================
+
+Submodules
+----------
+
+neonize.proto.waCompanionReg.WACompanionReg\_pb2 module
+-------------------------------------------------------
+
+.. automodule:: neonize.proto.waCompanionReg.WACompanionReg_pb2
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+neonize.proto.waCompanionReg.WAWebProtobufsCompanionReg\_pb2 module
+-------------------------------------------------------------------
+
+.. automodule:: neonize.proto.waCompanionReg.WAWebProtobufsCompanionReg_pb2
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: neonize.proto.waCompanionReg
+   :members:
+   :show-inheritance:
+   :undoc-members:

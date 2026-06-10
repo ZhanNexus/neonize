@@ -1,0 +1,21 @@
+neonize.proto.waArmadilloICDC package
+=====================================
+
+Submodules
+----------
+
+neonize.proto.waArmadilloICDC.WAArmadilloICDC\_pb2 module
+---------------------------------------------------------
+
+.. automodule:: neonize.proto.waArmadilloICDC.WAArmadilloICDC_pb2
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: neonize.proto.waArmadilloICDC
+   :members:
+   :show-inheritance:
+   :undoc-members:

@@ -1,0 +1,29 @@
+neonize.proto.waDeviceCapabilities package
+==========================================
+
+Submodules
+----------
+
+neonize.proto.waDeviceCapabilities.WAProtobufsDeviceCapabilities\_pb2 module
+----------------------------------------------------------------------------
+
+.. automodule:: neonize.proto.waDeviceCapabilities.WAProtobufsDeviceCapabilities_pb2
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+neonize.proto.waDeviceCapabilities.WAWebProtobufsDeviceCapabilities\_pb2 module
+-------------------------------------------------------------------------------
+
+.. automodule:: neonize.proto.waDeviceCapabilities.WAWebProtobufsDeviceCapabilities_pb2
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: neonize.proto.waDeviceCapabilities
+   :members:
+   :show-inheritance:
+   :undoc-members:

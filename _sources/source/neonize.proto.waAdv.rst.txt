@@ -1,0 +1,21 @@
+neonize.proto.waAdv package
+===========================
+
+Submodules
+----------
+
+neonize.proto.waAdv.WAAdv\_pb2 module
+-------------------------------------
+
+.. automodule:: neonize.proto.waAdv.WAAdv_pb2
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: neonize.proto.waAdv
+   :members:
+   :show-inheritance:
+   :undoc-members:

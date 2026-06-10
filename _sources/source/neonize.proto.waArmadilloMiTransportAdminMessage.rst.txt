@@ -1,0 +1,21 @@
+neonize.proto.waArmadilloMiTransportAdminMessage package
+========================================================
+
+Submodules
+----------
+
+neonize.proto.waArmadilloMiTransportAdminMessage.WAArmadilloMiTransportAdminMessage\_pb2 module
+-----------------------------------------------------------------------------------------------
+
+.. automodule:: neonize.proto.waArmadilloMiTransportAdminMessage.WAArmadilloMiTransportAdminMessage_pb2
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: neonize.proto.waArmadilloMiTransportAdminMessage
+   :members:
+   :show-inheritance:
+   :undoc-members:

@@ -1,0 +1,21 @@
+neonize.proto.waArmadilloTransportEvent package
+===============================================
+
+Submodules
+----------
+
+neonize.proto.waArmadilloTransportEvent.WAArmadilloTransportEvent\_pb2 module
+-----------------------------------------------------------------------------
+
+.. automodule:: neonize.proto.waArmadilloTransportEvent.WAArmadilloTransportEvent_pb2
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: neonize.proto.waArmadilloTransportEvent
+   :members:
+   :show-inheritance:
+   :undoc-members:

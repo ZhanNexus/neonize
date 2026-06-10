@@ -1,0 +1,21 @@
+neonize.proto.instamadilloCoreTypeText package
+==============================================
+
+Submodules
+----------
+
+neonize.proto.instamadilloCoreTypeText.InstamadilloCoreTypeText\_pb2 module
+---------------------------------------------------------------------------
+
+.. automodule:: neonize.proto.instamadilloCoreTypeText.InstamadilloCoreTypeText_pb2
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: neonize.proto.instamadilloCoreTypeText
+   :members:
+   :show-inheritance:
+   :undoc-members:
