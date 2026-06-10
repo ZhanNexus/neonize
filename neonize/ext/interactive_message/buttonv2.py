@@ -24,9 +24,9 @@ Example::
 from __future__ import annotations
 
 import uuid as _uuid
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from io import BytesIO
-from typing import TYPE_CHECKING, Any, Dict, List, Optional, Self, Union
+from typing import TYPE_CHECKING, List, Optional, Self, Union
 
 from ...proto.waE2E.WAWebProtobufsE2E_pb2 import (
     ButtonsMessage,

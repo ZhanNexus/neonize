@@ -904,7 +904,6 @@ class NewClient:
     def build_reaction(
         self, chat: JID | str, sender: JID | str, message_id: str, reaction: str
     ) -> Message:
-
         """
         This function builds a reaction message in a chat. It takes the chat and sender IDs,
         the message ID to which the reaction is being made, and the reaction itself as input.
@@ -1802,7 +1801,6 @@ class NewClient:
             )
 
             messages = [fut.result() for fut in futures]
-
 
         with ThreadPoolExecutor(max_workers=25) as executor:
             send_futures = [

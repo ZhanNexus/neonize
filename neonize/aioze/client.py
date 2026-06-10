@@ -706,7 +706,6 @@ class NewAClient:
                     mentionedJID=mentioned_jid,
                     groupMentions=mentioned_groups,
                 ),
-
             )
             if link_preview:
                 preview = await self._generate_link_preview(message)
@@ -1195,7 +1194,6 @@ class NewAClient:
         funcs = [
             self._upload_sticker(sticker, animated, zip_dict, is_newsletter)
             for sticker, animated in stickers
-
         ]
         sticker_metadata = await asyncio.gather(*funcs)
 
@@ -1859,7 +1857,6 @@ class NewAClient:
                     if isinstance(to, str)
                     else to.Server == "newsletter",
                 )
-
                 for file, media_type in medias[1:]
             ]
         )
@@ -2413,7 +2410,6 @@ class NewAClient:
         ).decode()
 
     async def set_group_photo(self, jid: JID | str, file_or_bytes: typing.Union[str, bytes]) -> str:
-
         """Sets the photo of a group.
 
         :param jid: The JID (Jabber Identifier) of the group.
@@ -2906,7 +2902,6 @@ class NewAClient:
             raise SetGroupLockedError(err)
 
     async def set_group_topic(self, jid: JID | str, previous_id: str, new_id: str, topic: str):
-
         """
         Set the topic of a group in a chat application.
 
@@ -3408,7 +3403,6 @@ class NewAClient:
         return model.Newsletter
 
     async def get_user_devices(self, *jids: JID | str) -> RepeatedCompositeFieldContainer[JID]:
-
         """
         Retrieve devices associated with specified user JIDs.
 
@@ -3792,6 +3786,7 @@ class NewAClient:
 
         self.connect_task = self.loop.create_task(_connect_and_check())
         return self.connect_task
+
     async def disconnect(self) -> None:
         """
         Disconnect the client

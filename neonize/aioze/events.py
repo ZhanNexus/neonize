@@ -144,9 +144,7 @@ class Event:
             self.client.connected = True
         handler = self.list_func.get(code)
         if handler is not None:
-            asyncio.run_coroutine_threadsafe(
-                handler(self.client, message), event_global_loop
-            )
+            asyncio.run_coroutine_threadsafe(handler(self.client, message), event_global_loop)
 
     async def __onqr(self, _: NewAClient, data_qr: bytes):
         """

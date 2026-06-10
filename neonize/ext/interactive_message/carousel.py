@@ -37,7 +37,7 @@ Example::
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, List, Optional, Self, Sequence, Union
+from typing import TYPE_CHECKING, List, Self, Sequence, Union
 
 from ...proto.waE2E.WAWebProtobufsE2E_pb2 import (
     ContextInfo,

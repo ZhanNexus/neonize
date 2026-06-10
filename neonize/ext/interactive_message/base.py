@@ -11,7 +11,7 @@ protobuf and relay them transparently.
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from typing import TYPE_CHECKING, Any, Optional
+from typing import TYPE_CHECKING, Optional
 
 from ...proto.waE2E.WAWebProtobufsE2E_pb2 import (
     ContextInfo,

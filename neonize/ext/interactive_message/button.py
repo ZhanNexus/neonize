@@ -32,8 +32,6 @@ Example::
 from __future__ import annotations
 
 import json
-import uuid as _uuid
-from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from typing import TYPE_CHECKING, Any, Dict, List, Optional, Self, Union
 
