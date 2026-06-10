@@ -199,7 +199,9 @@ class AFFmpeg:
     async def __aenter__(self):
         if isinstance(self.__file_data, str):
             if URL_MATCH.match(self.__file_data):
-                self.filename = TemporaryFile(prefix=self.prefix, touch=False).__enter__()
+                self.filename = TemporaryFile(
+                    prefix=self.prefix, touch=False
+                ).__enter__()
                 with open(self.filename.path, "wb") as file:
                     file.write(await get_bytes_from_name_or_url_async(self.__file_data))
             else:
@@ -421,7 +423,9 @@ class AFFmpeg:
                     num_channels = wav_file.getnchannels()
 
                     if sample_width == 1:
-                        samples = [s - 128 for s in struct.unpack(f"{len(frames)}B", frames)]
+                        samples = [
+                            s - 128 for s in struct.unpack(f"{len(frames)}B", frames)
+                        ]
                     elif sample_width == 2:
                         samples = struct.unpack(f"{len(frames) // 2}h", frames)
                     elif sample_width == 4:
@@ -457,7 +461,9 @@ class AFFmpeg:
                 )
                 stdout, stderr = await ff.communicate(input=audio_bytes)
                 if ff.returncode != 0:
-                    raise RuntimeError(f"ffmpeg failed: {stderr.decode(errors='ignore')}")
+                    raise RuntimeError(
+                        f"ffmpeg failed: {stderr.decode(errors='ignore')}"
+                    )
                 samples = struct.unpack(f"{len(stdout) // 2}h", stdout)
 
             if not samples:
@@ -477,7 +483,9 @@ class AFFmpeg:
 
             max_val = max(waveform_data) if waveform_data else 1
             if max_val > 0:
-                normalized_data = [min(1.0, (val / max_val) ** 0.7) for val in waveform_data]
+                normalized_data = [
+                    min(1.0, (val / max_val) ** 0.7) for val in waveform_data
+                ]
             else:
                 normalized_data = [0] * len(waveform_data)
 
@@ -512,7 +520,8 @@ class AFFmpeg:
                     extra.extend(
                         [
                             "-vf",
-                            "scale='if(gt(iw,ih),%i,-1)':'if(gt(iw,ih),-1,%i)'" % (size, size),
+                            "scale='if(gt(iw,ih),%i,-1)':'if(gt(iw,ih),-1,%i)'"
+                            % (size, size),
                         ]
                     )
         elif isinstance(size, Tuple):
@@ -560,7 +569,10 @@ class AFFmpeg:
         format: dict = data["format"]
         return FFProbeInfo(
             format=Format(
-                **{i: format.get(i, None) for i, _ in Format.__dataclass_fields__.items()}
+                **{
+                    i: format.get(i, None)
+                    for i, _ in Format.__dataclass_fields__.items()
+                }
             ),
             streams=[
                 Stream(
@@ -805,7 +817,9 @@ class FFmpeg:
                     num_channels = wav_file.getnchannels()
 
                     if sample_width == 1:
-                        samples = [s - 128 for s in struct.unpack(f"{len(frames)}B", frames)]
+                        samples = [
+                            s - 128 for s in struct.unpack(f"{len(frames)}B", frames)
+                        ]
                     elif sample_width == 2:
                         samples = struct.unpack(f"{len(frames) // 2}h", frames)
                     elif sample_width == 4:
@@ -835,7 +849,9 @@ class FFmpeg:
                     "error",
                     "pipe:1",
                 ]
-                proc = subprocess.run(cmd, input=audio_bytes, capture_output=True, check=True)
+                proc = subprocess.run(
+                    cmd, input=audio_bytes, capture_output=True, check=True
+                )
                 stdout = proc.stdout
                 samples = struct.unpack(f"{len(stdout) // 2}h", stdout)
 
@@ -856,7 +872,9 @@ class FFmpeg:
 
             max_val = max(waveform_data) if waveform_data else 1
             if max_val > 0:
-                normalized_data = [min(1.0, (val / max_val) ** 0.7) for val in waveform_data]
+                normalized_data = [
+                    min(1.0, (val / max_val) ** 0.7) for val in waveform_data
+                ]
             else:
                 normalized_data = [0] * len(waveform_data)
 
@@ -891,7 +909,8 @@ class FFmpeg:
                     extra.extend(
                         [
                             "-vf",
-                            "scale='if(gt(iw,ih),%i,-1)':'if(gt(iw,ih),-1,%i)'" % (size, size),
+                            "scale='if(gt(iw,ih),%i,-1)':'if(gt(iw,ih),-1,%i)'"
+                            % (size, size),
                         ]
                     )
         elif isinstance(size, Tuple):
@@ -939,7 +958,10 @@ class FFmpeg:
         format: dict = data["format"]
         return FFProbeInfo(
             format=Format(
-                **{i: format.get(i, None) for i, _ in Format.__dataclass_fields__.items()}
+                **{
+                    i: format.get(i, None)
+                    for i, _ in Format.__dataclass_fields__.items()
+                }
             ),
             streams=[
                 Stream(

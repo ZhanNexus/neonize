@@ -58,10 +58,13 @@ def __build():
     if (Path(cwd) / "defproto").exists():
         shutil.rmtree(f"{cwd}/defproto")
     os.mkdir(f"{cwd}/defproto")
-    os.rename(f"{cwd}/github.com/krypton-byte/neonize/defproto/", f"{cwd}/defproto")
+    os.rename(
+        f"{cwd}/github.com/krypton-byte/neonize/defproto/",
+        f"{cwd}/defproto")
     shutil.rmtree(f"{cwd}/github.com")
     subprocess.call(
-        shlex.split(f"go build -buildmode=c-shared -ldflags=-s -o {filename} main.go"),
+        shlex.split(
+            f"go build -buildmode=c-shared -ldflags=-s -o {filename} main.go"),
         cwd=cwd,
         env=os.environ.update({"CGO_ENABLED": "1"}),
     )
@@ -87,7 +90,8 @@ def generate_init_files(proto_dir: str):
                 else:
                     f.write("import sys\n")
                     f.write("from pathlib import Path\n")
-                    f.write("sys.path.insert(0, Path(__file__).parent.__str__())\n\n")
+                    f.write(
+                        "sys.path.insert(0, Path(__file__).parent.__str__())\n\n")
 
                 for pb2 in pb2_files:
                     module_name = pb2[:-3]
@@ -121,13 +125,18 @@ def build_neonize():
     filename = generated_name(os_name, arch_name)
     print(filename)
     subprocess.call(
-        shlex.split(f"go build -buildmode=c-shared -ldflags=-s -o {filename} "),
+        shlex.split(
+            f"go build -buildmode=c-shared -ldflags=-s -o {filename} "),
         cwd=cwd,
         env=os.environ.update({"CGO_ENABLED": "1"}),
     )
     if (Path(cwd).parent / f"neonize/{filename}").exists():
         os.remove(os.path.dirname(cwd) + "/neonize/" + filename)
-    os.rename(f"{cwd}/{filename}", os.path.dirname(cwd) + "/neonize/" + filename)
+    os.rename(
+        f"{cwd}/{filename}",
+        os.path.dirname(cwd) +
+        "/neonize/" +
+        filename)
 
 
 def build():
@@ -155,7 +164,9 @@ def build_android():
     if (Path(cwd) / "defproto").exists():
         shutil.rmtree(f"{cwd}/defproto")
     os.mkdir(f"{cwd}/defproto")
-    os.rename(f"{cwd}/github.com/krypton-byte/neonize/defproto/", f"{cwd}/defproto")
+    os.rename(
+        f"{cwd}/github.com/krypton-byte/neonize/defproto/",
+        f"{cwd}/defproto")
     shutil.rmtree(f"{cwd}/github.com")
     os.environ.update(
         {
@@ -165,7 +176,8 @@ def build_android():
         }
     )
     subprocess.call(
-        shlex.split(f"go build -buildmode=c-shared -ldflags=-s -o {filename} main.go"),
+        shlex.split(
+            f"go build -buildmode=c-shared -ldflags=-s -o {filename} main.go"),
         cwd=cwd,
         env=os.environ,
     )

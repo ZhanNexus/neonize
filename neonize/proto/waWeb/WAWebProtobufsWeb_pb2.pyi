@@ -1257,6 +1257,7 @@ class GroupHistoryBundleInfo(_message.Message):
         INJECTED_PARTIAL: GroupHistoryBundleInfo._ProcessState.ValueType  # 2
         INJECTION_FAILED: GroupHistoryBundleInfo._ProcessState.ValueType  # 3
         INJECTION_FAILED_NO_RETRY: GroupHistoryBundleInfo._ProcessState.ValueType  # 4
+        DEDUPED: GroupHistoryBundleInfo._ProcessState.ValueType  # 5
 
     class ProcessState(_ProcessState, metaclass=_ProcessStateEnumTypeWrapper): ...
     NOT_INJECTED: GroupHistoryBundleInfo.ProcessState.ValueType  # 0
@@ -1264,6 +1265,7 @@ class GroupHistoryBundleInfo(_message.Message):
     INJECTED_PARTIAL: GroupHistoryBundleInfo.ProcessState.ValueType  # 2
     INJECTION_FAILED: GroupHistoryBundleInfo.ProcessState.ValueType  # 3
     INJECTION_FAILED_NO_RETRY: GroupHistoryBundleInfo.ProcessState.ValueType  # 4
+    DEDUPED: GroupHistoryBundleInfo.ProcessState.ValueType  # 5
 
     DEPRECATEDMESSAGEHISTORYBUNDLE_FIELD_NUMBER: _builtins.int
     PROCESSSTATE_FIELD_NUMBER: _builtins.int
@@ -1528,6 +1530,7 @@ class PollUpdate(_message.Message):
     SENDERTIMESTAMPMS_FIELD_NUMBER: _builtins.int
     SERVERTIMESTAMPMS_FIELD_NUMBER: _builtins.int
     UNREAD_FIELD_NUMBER: _builtins.int
+    METADATA_FIELD_NUMBER: _builtins.int
     senderTimestampMS: _builtins.int
     serverTimestampMS: _builtins.int
     unread: _builtins.bool
@@ -1535,6 +1538,8 @@ class PollUpdate(_message.Message):
     def pollUpdateMessageKey(self) -> _WACommon_pb2.MessageKey: ...
     @_builtins.property
     def vote(self) -> _WAWebProtobufsE2E_pb2.PollVoteMessage: ...
+    @_builtins.property
+    def metadata(self) -> _WAWebProtobufsE2E_pb2.PollUpdateMessageMetadata: ...
     def __init__(
         self,
         *,
@@ -1543,10 +1548,11 @@ class PollUpdate(_message.Message):
         senderTimestampMS: _builtins.int | None = ...,
         serverTimestampMS: _builtins.int | None = ...,
         unread: _builtins.bool | None = ...,
+        metadata: _WAWebProtobufsE2E_pb2.PollUpdateMessageMetadata | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["pollUpdateMessageKey", b"pollUpdateMessageKey", "senderTimestampMS", b"senderTimestampMS", "serverTimestampMS", b"serverTimestampMS", "unread", b"unread", "vote", b"vote"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["metadata", b"metadata", "pollUpdateMessageKey", b"pollUpdateMessageKey", "senderTimestampMS", b"senderTimestampMS", "serverTimestampMS", b"serverTimestampMS", "unread", b"unread", "vote", b"vote"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["pollUpdateMessageKey", b"pollUpdateMessageKey", "senderTimestampMS", b"senderTimestampMS", "serverTimestampMS", b"serverTimestampMS", "unread", b"unread", "vote", b"vote"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["metadata", b"metadata", "pollUpdateMessageKey", b"pollUpdateMessageKey", "senderTimestampMS", b"senderTimestampMS", "serverTimestampMS", b"serverTimestampMS", "unread", b"unread", "vote", b"vote"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
     def WhichOneof(self, oneof_group: _Never) -> None: ...
 
@@ -1556,16 +1562,40 @@ Global___PollUpdate: _TypeAlias = PollUpdate  # noqa: Y015
 class PollAdditionalMetadata(_message.Message):
     DESCRIPTOR: _descriptor.Descriptor
 
+    @_typing.final
+    class PollNameHashHistoryEntry(_message.Message):
+        DESCRIPTOR: _descriptor.Descriptor
+
+        EDITSTANZAID_FIELD_NUMBER: _builtins.int
+        POLLNAMEHASH_FIELD_NUMBER: _builtins.int
+        editStanzaID: _builtins.str
+        pollNameHash: _builtins.bytes
+        def __init__(
+            self,
+            *,
+            editStanzaID: _builtins.str | None = ...,
+            pollNameHash: _builtins.bytes | None = ...,
+        ) -> None: ...
+        _HasFieldArgType: _TypeAlias = _typing.Literal["editStanzaID", b"editStanzaID", "pollNameHash", b"pollNameHash"]  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["editStanzaID", b"editStanzaID", "pollNameHash", b"pollNameHash"]  # noqa: Y015
+        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+        def WhichOneof(self, oneof_group: _Never) -> None: ...
+
     POLLINVALIDATED_FIELD_NUMBER: _builtins.int
+    POLLNAMEHASHHISTORY_FIELD_NUMBER: _builtins.int
     pollInvalidated: _builtins.bool
+    @_builtins.property
+    def pollNameHashHistory(self) -> _containers.RepeatedCompositeFieldContainer[Global___PollAdditionalMetadata.PollNameHashHistoryEntry]: ...
     def __init__(
         self,
         *,
         pollInvalidated: _builtins.bool | None = ...,
+        pollNameHashHistory: _abc.Iterable[Global___PollAdditionalMetadata.PollNameHashHistoryEntry] | None = ...,
     ) -> None: ...
     _HasFieldArgType: _TypeAlias = _typing.Literal["pollInvalidated", b"pollInvalidated"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["pollInvalidated", b"pollInvalidated"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["pollInvalidated", b"pollInvalidated", "pollNameHashHistory", b"pollNameHashHistory"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
     def WhichOneof(self, oneof_group: _Never) -> None: ...
 
