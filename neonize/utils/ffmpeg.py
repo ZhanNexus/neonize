@@ -164,7 +164,7 @@ class Format:
             try:
                 setattr(self, k, field.type(getattr(self, k)))
             except Exception as e:
-                log.warn(f"{k} field: {e}")
+                log.warning(f"{k} field: {e}")
 
 
 @dataclass

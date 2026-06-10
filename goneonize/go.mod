@@ -3,9 +3,9 @@ module github.com/krypton-byte/neonize
 go 1.25.3
 
 require (
-	github.com/lib/pq v1.11.1
-	github.com/mattn/go-sqlite3 v1.14.44
 	go.mau.fi/util v0.9.9
+	github.com/lib/pq v1.12.3
+	github.com/mattn/go-sqlite3 v1.14.44
 	go.mau.fi/whatsmeow v0.0.0-20260516102357-8d3700152a69
 	google.golang.org/protobuf v1.36.11
 )

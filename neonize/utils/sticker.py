@@ -77,8 +77,8 @@ async def aio_convert_to_sticker(
         return sticker, False
 
     exif_filename = TemporaryFile(prefix=None, touch=False).__enter__()
-    with open(exif_filename.path, "wb") as file:
-        file.write(add_exif(name=name, packname=packname))
+    with open(exif_filename.path, "wb") as f_file:
+        f_file.write(add_exif(name=name, packname=packname))
     temp = tempfile.gettempdir() + "/" + f"{uuid.uuid4()}" + ".webp"
     async with AFFmpeg(sticker) as ffmpeg:
         cmd = [
@@ -92,8 +92,8 @@ async def aio_convert_to_sticker(
         ]
         await ffmpeg.call(cmd)
     exif_filename.__exit__(None, None, None)
-    with open(temp, "rb") as file:
-        buf = file.read()
+    with open(temp, "rb") as f_file:
+        buf = f_file.read()
     os.remove(temp)
     return buf, True
 
@@ -117,8 +117,8 @@ def convert_to_sticker(
         return sticker, False
 
     exif_filename = TemporaryFile(prefix=None, touch=False).__enter__()
-    with open(exif_filename.path, "wb") as file:
-        file.write(add_exif(name=name, packname=packname))
+    with open(exif_filename.path, "wb") as f_file:
+        f_file.write(add_exif(name=name, packname=packname))
     temp = tempfile.gettempdir() + "/" + f"{uuid.uuid4()}" + ".webp"
     with FFmpeg(sticker) as ffmpeg:
         cmd = [
@@ -132,8 +132,8 @@ def convert_to_sticker(
         ]
         ffmpeg.call(cmd)
     exif_filename.__exit__(None, None, None)
-    with open(temp, "rb") as file:
-        buf = file.read()
+    with open(temp, "rb") as f_file:
+        buf = f_file.read()
     os.remove(temp)
     return buf, True
 
@@ -182,7 +182,7 @@ async def aio_convert_to_webp(
         else:
             stk = Image.open(BytesIO(sticker))
             io_save = BytesIO()
-    if not saved_exif:
+    if not saved_exif and stk:
         stk.save(
             io_save,
             format="webp",
@@ -235,7 +235,7 @@ def convert_to_webp(sticker, name, packname, crop=False, passthrough=True, trans
         else:
             stk = Image.open(BytesIO(sticker))
             io_save = BytesIO()
-    if not saved_exif:
+    if not saved_exif and stk:
         stk.save(
             io_save,
             format="webp",

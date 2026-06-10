@@ -72,9 +72,9 @@ def download_whatsmeow():
         bar.n = total
     bar.close()
     # unzip
-    with zipfile.ZipFile("whatsmeow.zip") as zfile:
+    with zipfile.ZipFile(WORKDIR / "whatsmeow.zip") as zfile:
         for name in filter(lambda x: x.startswith("whatsmeow-main/proto"), zfile.namelist()):
-            zfile.extract(name, ".dest")
+            zfile.extract(name, WORKDIR / ".dest")
     # remove != .proto
     value = FileValue()
     remove_not_proto(Path(__file__).parent.parent / ".dest", value)

@@ -24,12 +24,14 @@ from linkpreview import link_preview
 from linkpreview.exceptions import MaximumContentSizeError
 from PIL import Image, ImageSequence
 from requests.exceptions import HTTPError
+from .ext.interactive_message.base import CustomInteractiveMessage
 
 from ._binder import (
     free_bytes,
     func_callback_bytes,
     func_callback_bytes2,
     func_string,
+    ProxySettings,
     gocode,
 )
 from .builder import build_edit, build_revoke
@@ -69,6 +71,7 @@ from .exc import (
     LinkGroupError,
     LogoutError,
     MarkReadError,
+    NeonizeError,
     NewsletterMarkViewedError,
     NewsletterSendReactionError,
     NewsletterSubscribeLiveUpdatesError,
@@ -88,6 +91,7 @@ from .exc import (
     SetGroupTopicError,
     SetPassiveError,
     SetPrivacySettingError,
+    SetProxyAddressError,
     SetStatusMessageError,
     SubscribePresenceError,
     UnfollowNewsletterError,
@@ -578,6 +582,43 @@ class NewClient:
             ),
         )
 
+    def send_interactive_message(
+        self,
+        to: JID,
+        interactive_message: CustomInteractiveMessage,
+        link_preview: bool = False,
+        ghost_mentions: Optional[str] = None,
+        mentions_are_lids: bool = False,
+        add_msg_secret: bool = False,
+    ) -> SendResponse:
+        """Send an interactive message to the specified JID.
+
+        :param to: The JID to send the message to.
+        :type to: JID
+        :param interactive_message: The interactive message to send.
+        :type interactive_message: CustomInteractiveMessage
+        :param link_preview: Whether to send a link preview, defaults to False
+        :type link_preview: bool, optional
+        :param ghost_mentions: List of users to tag silently (Takes precedence over auto detected mentions)
+        :type ghost_mentions: str, optional
+        :param mentions_are_lids: whether mentions contained in message or ghost_mentions are lids, defaults to False.
+        :type mentions_are_lids: bool, optional
+        :param add_msg_secret: Whether to generate 32 random bytes for messageSecret inside MessageContextInfo before sending, defaults to False
+        :type add_msg_secret: bool, optional
+        :raises SendMessageError: If there was an error sending the message.
+        :return: The response from the server.
+        :rtype: SendResponse
+        """
+        built_message = interactive_message.prepare_send(self)
+        return self.send_message(
+            to,
+            built_message,
+            link_preview=link_preview,
+            ghost_mentions=ghost_mentions,
+            mentions_are_lids=mentions_are_lids,
+            add_msg_secret=add_msg_secret,
+        )
+
     def send_message(
         self,
         to: JID | str,
@@ -863,6 +904,7 @@ class NewClient:
     def build_reaction(
         self, chat: JID | str, sender: JID | str, message_id: str, reaction: str
     ) -> Message:
+
         """
         This function builds a reaction message in a chat. It takes the chat and sender IDs,
         the message ID to which the reaction is being made, and the reaction itself as input.
@@ -1761,10 +1803,14 @@ class NewClient:
 
             messages = [fut.result() for fut in futures]
 
-        responses = []
-        for message in messages:
-            resp = self.send_message(to, message, add_msg_secret=add_msg_secret)
-            responses.append(resp)
+
+        with ThreadPoolExecutor(max_workers=25) as executor:
+            send_futures = [
+                executor.submit(self.send_message, to, msg, add_msg_secret=add_msg_secret)
+                for msg in messages
+            ]
+            responses = [fut.result() for fut in send_futures]
+
         return [response, responses]
 
     def build_audio_message(
@@ -3443,7 +3489,7 @@ class NewClient:
         Stops the client by disconnecting it from the WhatsApp servers.
         """
         _log_.debug("Stopping client and disconnecting from WhatsApp servers.")
-        self.__client.stop()
+        self.__client.stop(self.uuid)
 
     def get_message_for_retry(
         self, requester: JID, to: JID, message_id: str
@@ -3512,6 +3558,38 @@ class NewClient:
         if response:
             raise SendPresenceError(response)
 
+    def set_proxy_address(
+        self,
+        proxy_address: str | None,
+        no_websocket: bool = False,
+        only_login: bool = False,
+        no_media: bool = False,
+    ) -> None:
+        """Configure proxy settings on an already-connected client.
+
+        :param proxy_address: Proxy URL (e.g. ``socks5://host:port``), or None to clear.
+        :type proxy_address: str | None
+        :param no_websocket: If True, don't proxy WebSocket traffic.
+        :type no_websocket: bool
+        :param only_login: If True, only use proxy during login.
+        :type only_login: bool
+        :param no_media: If True, don't proxy media downloads/uploads.
+        :type no_media: bool
+        :raises SetProxyAddressError: If the proxy configuration fails.
+        """
+        c_settings = ProxySettings(
+            proxy_address=proxy_address or "",
+            no_websocket=no_websocket,
+            only_login=only_login,
+            no_media=no_media,
+        )._to_c_struct()
+        response = self.__client.SetProxyAddress(
+            self.uuid,
+            ctypes.byref(c_settings),
+        )
+        if response:
+            raise SetProxyAddressError(response.decode())
+
     def decrypt_poll_vote(self, message: neonize_proto.Message) -> PollVoteMessage:
         """Decrypt PollMessage"""
         msg_buff = message.SerializeToString()
@@ -3523,8 +3601,22 @@ class NewClient:
             raise DecryptPollVoteError(model.Error)
         return model.PollVoteMessage
 
-    def connect(self):
-        """Establishes a connection to the WhatsApp servers."""
+    def connect(self, proxy_settings: ProxySettings | None = None):
+        """Establishes a connection to the WhatsApp servers.
+
+        :param proxy_settings: Optional proxy configuration. Pass ``None`` to connect without a proxy.
+        :type proxy_settings: ProxySettings | None
+        :raises NeonizeError: If connection setup fails.
+        """
+        return self.connect_with_proxy(proxy_settings)
+
+    def connect_with_proxy(self, proxy_settings: ProxySettings | None = None):
+        """Establishes a connection to the WhatsApp servers.
+
+        :param proxy_settings: Optional proxy configuration. Pass ``None`` to connect without a proxy.
+        :type proxy_settings: ProxySettings | None
+        :raises NeonizeError: If connection setup fails.
+        """
         # Convert the list of functions to a bytearray
         d = bytearray(list(self.event.list_func))
         _log_.debug("🔒 Attempting to connect to the WhatsApp servers.")
@@ -3541,8 +3633,14 @@ class NewClient:
             jidbuf = self.jid.SerializeToString()
             jidbuf_size = len(jidbuf)
 
+        # Convert dataclass → ctypes struct; None stays None (→ NULL in C)
+        proxy_ref = None
+        if proxy_settings is not None:
+            c_settings = proxy_settings._to_c_struct()
+            proxy_ref = ctypes.byref(c_settings)
+
         # Initiate connection to the server
-        self.__client.Neonize(
+        err = self.__client.Neonize(
             self.name.encode(),
             self.uuid,
             jidbuf,
@@ -3558,7 +3656,10 @@ class NewClient:
             len(deviceprops),
             b"",
             0,
+            proxy_ref,
         )
+        if err:
+            raise NeonizeError(err.decode())
 
     def disconnect(self) -> None:
         """

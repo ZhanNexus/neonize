@@ -1,5 +1,5 @@
 from .version import Version
-from goneonize import generated_name
+from neonize.utils.platform import generated_name
 from colorama import Fore, init
 import argparse
 from pathlib import Path

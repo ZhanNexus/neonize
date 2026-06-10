@@ -32,11 +32,14 @@ from linkpreview.exceptions import MaximumContentSizeError
 from PIL import Image, ImageFilter, ImageSequence
 from requests.exceptions import HTTPError
 
+from ..ext.interactive_message.base import CustomInteractiveMessage
+
 from .._binder import (
     free_bytes,
     func_callback_bytes,
     func_callback_bytes2,
     func_string,
+    ProxySettings,
     gocode,
 )
 from ..builder import build_edit, build_revoke
@@ -75,6 +78,7 @@ from ..exc import (
     LinkGroupError,
     LogoutError,
     MarkReadError,
+    NeonizeError,
     NewsletterMarkViewedError,
     NewsletterSendReactionError,
     NewsletterSubscribeLiveUpdatesError,
@@ -94,6 +98,7 @@ from ..exc import (
     SetGroupTopicError,
     SetPassiveError,
     SetPrivacySettingError,
+    SetProxyAddressError,
     SetStatusMessageError,
     SubscribePresenceError,
     UnfollowNewsletterError,
@@ -622,6 +627,43 @@ class NewAClient:
             ),
         )
 
+    async def send_interactive_message(
+        self,
+        to: JID,
+        interactive_message: CustomInteractiveMessage,
+        link_preview: bool = False,
+        ghost_mentions: Optional[str] = None,
+        mentions_are_lids: bool = False,
+        add_msg_secret: bool = False,
+    ) -> SendResponse:
+        """Send a custom interactive message to the specified JID.
+
+        :param to: The JID to send the message to.
+        :type to: JID
+        :param interactive_message: An instance of a class that implements the CustomInteractiveMessage protocol.
+        :type interactive_message: CustomInteractiveMessage
+        :param link_preview: Whether to send a link preview, defaults to False
+        :type link_preview: bool, optional
+        :param ghost_mentions: List of users to tag silently (Takes precedence over auto detected mentions)
+        :type ghost_mentions: str, optional
+        :param mentions_are_lids: whether mentions contained in message or ghost_mentions are lids, defaults to False.
+        :type mentions_are_lids: bool, optional
+        :param add_msg_secret: Whether to generate 32 random bytes for messageSecret inside MessageContextInfo before sending, defaults to False
+        :type add_msg_secret: bool, optional
+        :raises SendMessageError: If there was an error sending the message.
+        :return: The response from the server.
+        :rtype: SendResponse
+        """
+        msg = await interactive_message.prepare_asend(self)
+        return await self.send_message(
+            to,
+            msg,
+            link_preview=link_preview,
+            ghost_mentions=ghost_mentions,
+            mentions_are_lids=mentions_are_lids,
+            add_msg_secret=add_msg_secret,
+        )
+
     async def send_message(
         self,
         to: JID | str,
@@ -664,6 +706,7 @@ class NewAClient:
                     mentionedJID=mentioned_jid,
                     groupMentions=mentioned_groups,
                 ),
+
             )
             if link_preview:
                 preview = await self._generate_link_preview(message)
@@ -1152,6 +1195,7 @@ class NewAClient:
         funcs = [
             self._upload_sticker(sticker, animated, zip_dict, is_newsletter)
             for sticker, animated in stickers
+
         ]
         sticker_metadata = await asyncio.gather(*funcs)
 
@@ -1815,14 +1859,17 @@ class NewAClient:
                     if isinstance(to, str)
                     else to.Server == "newsletter",
                 )
+
                 for file, media_type in medias[1:]
             ]
         )
         messages = await asyncio.gather(*funcs)
-        responses = []
-        for message in messages:
-            resp = await self.send_message(to, message, add_msg_secret=add_msg_secret)
-            responses.append(resp)
+
+        funcs = [
+            self.send_message(to, message, add_msg_secret=add_msg_secret) for message in messages
+        ]
+        responses = await asyncio.gather(*funcs)
+
         return [response, responses]
 
     async def build_audio_message(
@@ -2366,6 +2413,7 @@ class NewAClient:
         ).decode()
 
     async def set_group_photo(self, jid: JID | str, file_or_bytes: typing.Union[str, bytes]) -> str:
+
         """Sets the photo of a group.
 
         :param jid: The JID (Jabber Identifier) of the group.
@@ -2858,6 +2906,7 @@ class NewAClient:
             raise SetGroupLockedError(err)
 
     async def set_group_topic(self, jid: JID | str, previous_id: str, new_id: str, topic: str):
+
         """
         Set the topic of a group in a chat application.
 
@@ -3359,6 +3408,7 @@ class NewAClient:
         return model.Newsletter
 
     async def get_user_devices(self, *jids: JID | str) -> RepeatedCompositeFieldContainer[JID]:
+
         """
         Retrieve devices associated with specified user JIDs.
 
@@ -3621,12 +3671,43 @@ class NewAClient:
         if response:
             raise SendPresenceError(response)
 
+    async def set_proxy_address(
+        self,
+        proxy_address: str | None,
+        no_websocket: bool = False,
+        only_login: bool = False,
+        no_media: bool = False,
+    ) -> None:
+        """Configure proxy settings on an already-connected client.
+
+        :param proxy_address: Proxy URL (e.g. ``socks5://host:port``), or None to clear.
+        :type proxy_address: str | None
+        :param no_websocket: If True, don't proxy WebSocket traffic.
+        :type no_websocket: bool
+        :param only_login: If True, only use proxy during login.
+        :type only_login: bool
+        :param no_media: If True, don't proxy media downloads/uploads.
+        :type no_media: bool
+        :raises SetProxyAddressError: If the proxy configuration fails.
+        """
+        c_settings = ProxySettings(
+            proxy_address=proxy_address or "",
+            no_websocket=no_websocket,
+            only_login=only_login,
+            no_media=no_media,
+        )._to_c_struct()
+        response = await self.__client.SetProxyAddress(
+            self.uuid,
+            ctypes.byref(c_settings),
+        )
+        if response:
+            raise SetProxyAddressError(response.decode())
+
     async def decrypt_poll_vote(self, message: neonize_proto.Message) -> PollVoteMessage:
         """Decrypt PollMessage"""
         msg_buff = message.SerializeToString()
-        bytes_ptr = await self.__client.DecryptPollVote(
-            self.uuid, msg_buff, len(msg_buff), len(msg_buff)
-        )
+        bytes_ptr = await self.__client.DecryptPollVote(self.uuid, msg_buff, len(msg_buff))
+
         protobytes = bytes_ptr.contents.get_bytes()
         free_bytes(bytes_ptr)
         model = ReturnFunctionWithError.FromString(protobytes)
@@ -3634,8 +3715,22 @@ class NewAClient:
             raise DecryptPollVoteError(model.Error)
         return model.PollVoteMessage
 
-    async def connect(self):
-        """Establishes a connection to the WhatsApp servers."""
+    async def connect(self, proxy_settings: ProxySettings | None = None):
+        """Establishes a connection to the WhatsApp servers.
+
+        :param proxy_settings: Optional proxy configuration. Pass ``None`` to connect without a proxy.
+        :type proxy_settings: ProxySettings | None
+        :raises NeonizeError: If connection setup fails.
+        """
+        return await self.connect_with_proxy(proxy_settings)
+
+    async def connect_with_proxy(self, proxy_settings: ProxySettings | None = None):
+        """Establishes a connection to the WhatsApp servers.
+
+        :param proxy_settings: Optional proxy configuration. Pass ``None`` to connect without a proxy.
+        :type proxy_settings: ProxySettings | None
+        :raises NeonizeError: If connection setup fails.
+        """
         self.loop = asyncio.get_running_loop()
         _events_module.set_event_loop(self.loop)
         # Convert the list of functions to a bytearray
@@ -3654,27 +3749,49 @@ class NewAClient:
             jidbuf = self.jid.SerializeToString()
             jidbuf_size = len(jidbuf)
 
-        # Initiate connection to the server
-        task = self.__client.Neonize(
-            self.name.encode(),
-            self.uuid,
-            jidbuf,
-            jidbuf_size,
-            LogLevel.from_logging(log.level).level,
-            func_string(self.__onQr),
-            func_string(self.__onLoginStatus),
-            func_callback_bytes(self.event.execute),
-            func_callback_bytes2(log_whatsmeow),
-            (ctypes.c_char * len(self.event.list_func)).from_buffer(d),
-            len(d),
-            deviceprops,
-            len(deviceprops),
-            b"",
-            0,
-        )
-        self.connect_task = connect_task = self.loop.create_task(task)
-        return connect_task
+        # Convert dataclass → ctypes struct; None stays None (→ NULL in C)
+        proxy_ref = None
+        if proxy_settings is not None:
+            c_settings = proxy_settings._to_c_struct()
+            proxy_ref = ctypes.byref(c_settings)
 
+        # Initiate connection to the server
+        async def _connect_and_check():
+            try:
+                err = await self.__client.Neonize(
+                    self.name.encode(),
+                    self.uuid,
+                    jidbuf,
+                    jidbuf_size,
+                    LogLevel.from_logging(log.level).level,
+                    func_string(self.__onQr),
+                    func_string(self.__onLoginStatus),
+                    func_callback_bytes(self.event.execute),
+                    func_callback_bytes2(log_whatsmeow),
+                    (ctypes.c_char * len(self.event.list_func)).from_buffer(d),
+                    len(d),
+                    deviceprops,
+                    len(deviceprops),
+                    b"",
+                    0,
+                    proxy_ref,
+                )
+            except asyncio.CancelledError:
+                # Neonize() is a blocking Go call dispatched to a non-daemon
+                # ThreadPoolExecutor thread via asyncio.to_thread; it only
+                # returns once the Go-side context is cancelled. Cancelling
+                # this task -- which is what asyncio.run() does on a
+                # KeyboardInterrupt -- unblocks this coroutine but cannot stop
+                # the worker thread. Without signalling Go, that thread runs
+                # forever and interpreter shutdown hangs joining it. Tell Go to
+                # stop so Neonize() returns and the worker thread can exit.
+                gocode.Stop(self.uuid)
+                raise
+            if err:
+                raise NeonizeError(err.decode())
+
+        self.connect_task = self.loop.create_task(_connect_and_check())
+        return self.connect_task
     async def disconnect(self) -> None:
         """
         Disconnect the client

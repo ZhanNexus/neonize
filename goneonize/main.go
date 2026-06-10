@@ -29,11 +29,11 @@ import (
 	_ "github.com/lib/pq"
 	_ "github.com/mattn/go-sqlite3"
 	"go.mau.fi/whatsmeow"
+	"go.mau.fi/whatsmeow/appstate"
 	waBinary "go.mau.fi/whatsmeow/binary"
 	"go.mau.fi/whatsmeow/proto/waCompanionReg"
 	"go.mau.fi/whatsmeow/proto/waConsumerApplication"
 	waE2E "go.mau.fi/whatsmeow/proto/waE2E"
-	"go.mau.fi/whatsmeow/appstate"
 	"go.mau.fi/whatsmeow/proto/waMsgApplication"
 	"go.mau.fi/whatsmeow/store"
 	"go.mau.fi/whatsmeow/store/sqlstore"
@@ -75,7 +75,28 @@ func getByteByAddr(addr *C.uchar, size C.int) []byte {
 	// return result
 }
 
-// Get button type 
+
+// applyProxySettings configures the proxy on the whatsmeow client.
+// It uses C.struct_ProxySettings (defined in header/cstruct.h) directly,
+// so the memory layout is guaranteed by the C compiler — no manual
+// Go-struct-to-C alignment required.
+//
+// When settings is nil (Python passes None), the proxy step is skipped.
+func applyProxySettings(client *whatsmeow.Client, settings *C.struct_ProxySettings) error {
+	if settings == nil {
+		return nil
+	}
+	proxyAddress := ""
+	if settings.proxyAddress != nil {
+		proxyAddress = C.GoString(settings.proxyAddress)
+	}
+	return client.SetProxyAddress(proxyAddress, whatsmeow.SetProxyOptions{
+		NoWebsocket: bool(settings.noWebsocket),
+		OnlyLogin:   bool(settings.onlyLogin),
+		NoMedia:     bool(settings.noMedia),
+	})
+}
+
 func getMessageTypeFromMessage(msg *waE2E.Message) string {
 	switch {
 	case msg.ViewOnceMessage != nil:
@@ -293,7 +314,8 @@ func SetPushName(id *C.char, name *C.char) *C.char {
 	if !exists {
 		return C.CString("client not found")
 	}
-	err := client.SendAppState(context.Background(),appstate.BuildSettingPushName(C.GoString(name)))
+	err := client.SendAppState(context.Background(), appstate.BuildSettingPushName(C.GoString(name)))
+
 	if err != nil {
 		return C.CString(err.Error())
 	}
@@ -613,14 +635,18 @@ func Stop(id *C.char) {
 		cancelFunc()
 		delete(StopSignal, C.GoString(id))
 	}
-	if eventChan, exists := eventChannel[C.GoString(id)]; exists {
-		close(eventChan)
-		delete(eventChannel, C.GoString(id))
-	}
+	// Drop the event channel reference without closing it. Closing it raced
+	// with CallbackFunction's select loop: once the channel is closed, its
+	// `case message := <-channel` branch fires immediately with a nil
+	// *MessageEvent, which then nil-dereferences in proto.Marshal and panics
+	// the process. CallbackFunction already returns cleanly via <-ctx.Done()
+	// (cancelled just above); once it does, the channel is unreferenced and
+	// garbage-collected.
+	delete(eventChannel, C.GoString(id))
 }
 
 //export Neonize
-func Neonize(db *C.char, id *C.char, JIDByte *C.uchar, JIDSize C.int, logLevel *C.char, qrCb C.ptr_to_python_function_string, logStatus C.ptr_to_python_function_string, event C.ptr_to_python_function_bytes, logCb C.ptr_to_python_function_callback_bytes2, subscribes *C.uchar, lenSubscriber C.int, devicePropsBuf *C.uchar, devicePropsSize C.int, pairphone *C.uchar, pairphoneSize C.int) { // ,
+func Neonize(db *C.char, id *C.char, JIDByte *C.uchar, JIDSize C.int, logLevel *C.char, qrCb C.ptr_to_python_function_string, logStatus C.ptr_to_python_function_string, event C.ptr_to_python_function_bytes, logCb C.ptr_to_python_function_callback_bytes2, subscribes *C.uchar, lenSubscriber C.int, devicePropsBuf *C.uchar, devicePropsSize C.int, pairphone *C.uchar, pairphoneSize C.int, proxySettingsRaw *C.struct_ProxySettings) *C.char {
 	subscribers := map[int]bool{}
 	var deviceProps waCompanionReg.DeviceProps
 	loginStateChan := make(chan bool)
@@ -628,7 +654,7 @@ func Neonize(db *C.char, id *C.char, JIDByte *C.uchar, JIDSize C.int, logLevel *
 	ctx, cancel := context.WithCancel(context.Background())
 	StopSignal[C.GoString(id)] = cancel
 	if err_proto != nil {
-		panic(err_proto)
+		return C.CString(err_proto.Error())
 	}
 	for _, s := range getByteByAddr(subscribes, lenSubscriber) {
 		subscribers[int(s)] = true
@@ -640,7 +666,7 @@ func Neonize(db *C.char, id *C.char, JIDByte *C.uchar, JIDSize C.int, logLevel *
 	eventChan := make(chan *MessageEvent, 100)
 	eventChannel[uuid] = eventChan
 	if err != nil {
-		panic(err)
+		return C.CString(err.Error())
 	}
 	// If you want multiple sessions, remember their JIDs and use .GetDevice(jid) or .GetAllDevices() instead.
 	var deviceStore *store.Device
@@ -649,19 +675,22 @@ func Neonize(db *C.char, id *C.char, JIDByte *C.uchar, JIDSize C.int, logLevel *
 	if int(JIDSize) > 0 {
 		jidbyte_err := proto.Unmarshal(getByteByAddr(JIDByte, JIDSize), &JID)
 		if jidbyte_err != nil {
-			panic(jidbyte_err)
+			return C.CString(jidbyte_err.Error())
 		}
 		deviceStore, err_device = container.GetDevice(context.TODO(), utils.DecodeJidProto(&JID))
 	} else {
 		deviceStore, err_device = container.GetFirstDevice(context.TODO())
 	}
 	if err_device != nil {
-		panic(err_device)
+		return C.CString(err_device.Error())
 	}
 	proto.Merge(store.DeviceProps, &deviceProps)
 	clientLog := utils.NewLogger("Client", C.GoString(logLevel), utils.Callback(logCb))
 	client := whatsmeow.NewClient(deviceStore, clientLog)
 	clients[uuid] = client
+	if err := applyProxySettings(client, proxySettingsRaw); err != nil {
+		return C.CString(err.Error())
+	}
 	eventHandler := func(evt interface{}) {
 		switch v := evt.(type) {
 		case *events.QR:
@@ -1119,7 +1148,7 @@ func Neonize(db *C.char, id *C.char, JIDByte *C.uchar, JIDSize C.int, logLevel *
 			var PairPhone defproto.PairPhoneParams
 			err_pairparams := proto.Unmarshal(phone_number, &PairPhone)
 			if err_pairparams != nil {
-				panic(err_pairparams)
+				return C.CString(err_pairparams.Error())
 			}
 			phone := *PairPhone.Phone
 			notif := *PairPhone.ShowPushNotification
@@ -1127,9 +1156,10 @@ func Neonize(db *C.char, id *C.char, JIDByte *C.uchar, JIDSize C.int, logLevel *
 			clientType := *PairPhone.ClientType
 			codePair := *PairPhone.CodePair
 			client.Connect()
-			code_, code_err := client.PairPhone(context.Background(), phone, notif, whatsmeow.PairClientType(clientType), displayname, codePair)
+	        code_, code_err := client.PairPhone(context.Background(), phone, notif, whatsmeow.PairClientType(clientType), displayname, codePair)
+
 			if code_err != nil {
-				panic(code_err)
+				return C.CString(code_err.Error())
 			}
 			fmt.Println("Pair Code: ", code_)
 			// for stat := range loginStateChan {
@@ -1142,7 +1172,7 @@ func Neonize(db *C.char, id *C.char, JIDByte *C.uchar, JIDSize C.int, logLevel *
 			qrChan, _ := client.GetQRChannel(context.Background())
 			err = client.Connect()
 			if err != nil {
-				panic(err)
+				return C.CString(err.Error())
 			}
 			for evt := range qrChan {
 				if evt.Event == "code" {
@@ -1161,7 +1191,7 @@ func Neonize(db *C.char, id *C.char, JIDByte *C.uchar, JIDSize C.int, logLevel *
 		// Already logged in, just connect
 		err = client.Connect()
 		if err != nil {
-			panic(err)
+			return C.CString(err.Error())
 		}
 	}
 
@@ -1175,7 +1205,10 @@ func Neonize(db *C.char, id *C.char, JIDByte *C.uchar, JIDSize C.int, logLevel *
 
 	// Listen to Ctrl+C (you can also do something else that prevents the program from exiting)
 	println("Press Ctrl+C to exit")
-	CallbackFunction(ctx, event, uuid)
+	if cbErr := CallbackFunction(ctx, event, uuid); cbErr != nil {
+		return C.CString(cbErr.Error())
+	}
+	return C.CString("")
 }
 
 //export Disconnect
@@ -1279,6 +1312,20 @@ func GetUserInfo(id *C.char, JIDSByte *C.uchar, JIDSSize C.int) *C.struct_BytesR
 	}
 	return_.UsersInfo = usersinfo
 	return ProtoReturnV3(&return_)
+}
+
+//export SetProxyAddress
+func SetProxyAddress(id *C.char, proxySettingsRaw *C.struct_ProxySettings) *C.char {
+	uuid := C.GoString(id)
+	client, exists := clients[uuid]
+	if !exists {
+		return C.CString("client not found")
+	}
+	err := applyProxySettings(client, proxySettingsRaw)
+	if err != nil {
+		return C.CString(err.Error())
+	}
+	return C.CString("")
 }
 
 // /GROUP
@@ -1822,6 +1869,35 @@ func ResolveContactQRLink(id *C.char, code *C.char) *C.struct_BytesReturn {
 	if err != nil {
 		return_.Error = proto.String(err.Error())
 	}
+	return ProtoReturnV3(&return_)
+}
+
+//export PairPhone
+func PairPhone(id *C.char, pairPhoneByte *C.uchar, pairPhoneSize C.int) *C.struct_BytesReturn {
+	return_ := defproto.PairPhoneReturnFunction{}
+
+	var pairPhoneParams defproto.PairPhoneParams
+	err_unmarshal := proto.Unmarshal(getByteByAddr(pairPhoneByte, pairPhoneSize), &pairPhoneParams)
+	if err_unmarshal != nil {
+		return_.Error = proto.String(err_unmarshal.Error())
+		return ProtoReturnV3(&return_)
+	}
+
+	client := clients[C.GoString(id)]
+	code, err := client.PairPhone(
+		context.Background(),
+		*pairPhoneParams.Phone,
+		*pairPhoneParams.ShowPushNotification,
+		pairClientTypeFromInt(*pairPhoneParams.ClientType),
+		*pairPhoneParams.ClientDisplayName,
+	)
+
+	if err != nil {
+		return_.Error = proto.String(err.Error())
+	} else {
+		return_.Code = proto.String(code)
+	}
+
 	return ProtoReturnV3(&return_)
 }
 
@@ -2467,23 +2543,23 @@ func FetchMe(id string) *defproto.Device {
 }
 
 // comment
-func CallbackFunction(ctx context.Context, callback C.ptr_to_python_function_bytes, id string) {
+func CallbackFunction(ctx context.Context, callback C.ptr_to_python_function_bytes, id string) error {
 	uuid := C.CString(id)
 	channel := eventChannel[id]
 	buff, err := proto.Marshal(FetchMe(id))
 	if err != nil {
-		panic(err)
+		return err
 	}
 	uchars, size := getBytesAndSize(buff)
 	C.call_c_func_callback_bytes(callback, uuid, uchars, size, C.int(0))
 	for {
 		select {
 		case <-ctx.Done():
-			return
+			return nil
 		case message := <-channel:
 			buff, err := proto.Marshal(message.message)
 			if err != nil {
-				panic(err)
+				return err
 			}
 			uchars, size := getBytesAndSize(buff)
 			C.call_c_func_callback_bytes(callback, uuid, uchars, size, C.int(message.eventType))
@@ -2496,4 +2572,17 @@ func CallbackFunction(ctx context.Context, callback C.ptr_to_python_function_byt
 func FreeBytesStruct(bytesReturn *C.struct_BytesReturn) {
 	C.free(unsafe.Pointer(bytesReturn.data))
 	C.free(unsafe.Pointer(bytesReturn))
+}
+
+// FreeString releases a C string returned to Python by a function whose
+// result is a *C.char (allocated by Go's C.CString). The Python side declares
+// such functions restype = c_void_p and calls this from a ctypes errcheck hook
+// once the string has been copied; without it the allocation is leaked, since
+// a c_char_p restype would discard the pointer.
+//
+//export FreeString
+func FreeString(str *C.char) {
+	if str != nil {
+		C.free(unsafe.Pointer(str))
+	}
 }

@@ -2,6 +2,10 @@
 #     pass
 
 
+class NeonizeError(Exception):
+    pass
+
+
 class UploadError(Exception):
     pass
 
@@ -187,6 +191,10 @@ class SetPassiveError(Exception):
 
 
 class SetStatusMessageError(Exception):
+    pass
+
+
+class SetProxyAddressError(Exception):
     pass
 
 
