@@ -788,6 +788,21 @@ Global___BizAISettingsNudgeAction: _TypeAlias = BizAISettingsNudgeAction  # noqa
 class MaibaAIFeaturesControlAction(_message.Message):
     DESCRIPTOR: _descriptor.Descriptor
 
+    class _MaibaAIReplyMode:
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _TypeAlias = ValueType  # noqa: Y015
+
+    class _MaibaAIReplyModeEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[MaibaAIFeaturesControlAction._MaibaAIReplyMode.ValueType], _builtins.type):
+        DESCRIPTOR: _descriptor.EnumDescriptor
+        MUTED: MaibaAIFeaturesControlAction._MaibaAIReplyMode.ValueType  # 0
+        AI_AGENT: MaibaAIFeaturesControlAction._MaibaAIReplyMode.ValueType  # 1
+        SUGGESTIONS: MaibaAIFeaturesControlAction._MaibaAIReplyMode.ValueType  # 2
+
+    class MaibaAIReplyMode(_MaibaAIReplyMode, metaclass=_MaibaAIReplyModeEnumTypeWrapper): ...
+    MUTED: MaibaAIFeaturesControlAction.MaibaAIReplyMode.ValueType  # 0
+    AI_AGENT: MaibaAIFeaturesControlAction.MaibaAIReplyMode.ValueType  # 1
+    SUGGESTIONS: MaibaAIFeaturesControlAction.MaibaAIReplyMode.ValueType  # 2
+
     class _MaibaAIFeatureStatus:
         ValueType = _typing.NewType("ValueType", _builtins.int)
         V: _TypeAlias = ValueType  # noqa: Y015
@@ -804,15 +819,18 @@ class MaibaAIFeaturesControlAction(_message.Message):
     DISABLED: MaibaAIFeaturesControlAction.MaibaAIFeatureStatus.ValueType  # 2
 
     AIFEATURESTATUS_FIELD_NUMBER: _builtins.int
+    AIREPLYMODE_FIELD_NUMBER: _builtins.int
     aiFeatureStatus: Global___MaibaAIFeaturesControlAction.MaibaAIFeatureStatus.ValueType
+    aiReplyMode: Global___MaibaAIFeaturesControlAction.MaibaAIReplyMode.ValueType
     def __init__(
         self,
         *,
         aiFeatureStatus: Global___MaibaAIFeaturesControlAction.MaibaAIFeatureStatus.ValueType | None = ...,
+        aiReplyMode: Global___MaibaAIFeaturesControlAction.MaibaAIReplyMode.ValueType | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["aiFeatureStatus", b"aiFeatureStatus"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["aiFeatureStatus", b"aiFeatureStatus", "aiReplyMode", b"aiReplyMode"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["aiFeatureStatus", b"aiFeatureStatus"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["aiFeatureStatus", b"aiFeatureStatus", "aiReplyMode", b"aiReplyMode"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
     def WhichOneof(self, oneof_group: _Never) -> None: ...
 
@@ -1194,6 +1212,10 @@ class LabelEditAction(_message.Message):
         AI_HANDOFF: LabelEditAction._ListType.ValueType  # 9
         CHANNELS: LabelEditAction._ListType.ValueType  # 10
         AI_RESPONDING: LabelEditAction._ListType.ValueType  # 11
+        ARCHIVED: LabelEditAction._ListType.ValueType  # 12
+        LOCKED: LabelEditAction._ListType.ValueType  # 13
+        INVITES: LabelEditAction._ListType.ValueType  # 14
+        THIRD_PARTY: LabelEditAction._ListType.ValueType  # 15
 
     class ListType(_ListType, metaclass=_ListTypeEnumTypeWrapper): ...
     NONE: LabelEditAction.ListType.ValueType  # 0
@@ -1208,6 +1230,10 @@ class LabelEditAction(_message.Message):
     AI_HANDOFF: LabelEditAction.ListType.ValueType  # 9
     CHANNELS: LabelEditAction.ListType.ValueType  # 10
     AI_RESPONDING: LabelEditAction.ListType.ValueType  # 11
+    ARCHIVED: LabelEditAction.ListType.ValueType  # 12
+    LOCKED: LabelEditAction.ListType.ValueType  # 13
+    INVITES: LabelEditAction.ListType.ValueType  # 14
+    THIRD_PARTY: LabelEditAction.ListType.ValueType  # 15
 
     NAME_FIELD_NUMBER: _builtins.int
     COLOR_FIELD_NUMBER: _builtins.int
@@ -3067,46 +3093,20 @@ class RecentEmojiWeightsAction(_message.Message):
 Global___RecentEmojiWeightsAction: _TypeAlias = RecentEmojiWeightsAction  # noqa: Y015
 
 @_typing.final
-class ModelMetadata(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
-
-    MODELNAME_FIELD_NUMBER: _builtins.int
-    ISLATESTMODEL_FIELD_NUMBER: _builtins.int
-    ISDETECTED_FIELD_NUMBER: _builtins.int
-    modelName: _builtins.str
-    isLatestModel: _builtins.bool
-    isDetected: _builtins.bool
-    def __init__(
-        self,
-        *,
-        modelName: _builtins.str | None = ...,
-        isLatestModel: _builtins.bool | None = ...,
-        isDetected: _builtins.bool | None = ...,
-    ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["isDetected", b"isDetected", "isLatestModel", b"isLatestModel", "modelName", b"modelName"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["isDetected", b"isDetected", "isLatestModel", b"isLatestModel", "modelName", b"modelName"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    def WhichOneof(self, oneof_group: _Never) -> None: ...
-
-Global___ModelMetadata: _TypeAlias = ModelMetadata  # noqa: Y015
-
-@_typing.final
 class LabelAssociationAction(_message.Message):
     DESCRIPTOR: _descriptor.Descriptor
 
     LABELED_FIELD_NUMBER: _builtins.int
     MODELMETADATA_FIELD_NUMBER: _builtins.int
     labeled: _builtins.bool
-    @_builtins.property
-    def modelMetaData(self) -> _containers.RepeatedCompositeFieldContainer[Global___ModelMetadata]: ...
+    modelMetaData: _builtins.str
     def __init__(
         self,
         *,
         labeled: _builtins.bool | None = ...,
-        modelMetaData: _abc.Iterable[Global___ModelMetadata] | None = ...,
+        modelMetaData: _builtins.str | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["labeled", b"labeled"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["labeled", b"labeled", "modelMetaData", b"modelMetaData"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
     _ClearFieldArgType: _TypeAlias = _typing.Literal["labeled", b"labeled", "modelMetaData", b"modelMetaData"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
