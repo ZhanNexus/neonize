@@ -1238,7 +1238,7 @@ func DownloadAny(id *C.char, messageProto *C.uchar, size C.int) *C.struct_BytesR
 
 //export DownloadMediaWithPath
 func DownloadMediaWithPath(id *C.char, directPath *C.char, encFileHash *C.uchar, encFileHashSize C.int, fileHash *C.uchar, fileHashSize C.int, mediakey *C.uchar, mediaKeySize C.int, fileLength C.int, mediaType C.int, mmsType *C.char) *C.struct_BytesReturn {
-	data_buff, err := clients[C.GoString(id)].DownloadMediaWithPath(context.Background(), C.GoString(directPath), getByteByAddr(encFileHash, encFileHashSize), getByteByAddr(fileHash, fileHashSize), getByteByAddr(mediakey, mediaKeySize), int(fileLength), utils.MediaType[mediaType], C.GoString(mmsType))
+	data_buff, err := clients[C.GoString(id)].DownloadMediaWithPath(context.Background(), C.GoString(directPath), getByteByAddr(encFileHash, encFileHashSize), getByteByAddr(fileHash, fileHashSize), getByteByAddr(mediakey, mediaKeySize), utils.MediaType[mediaType], C.GoString(mmsType), false)
 	return_ := defproto.DownloadReturnFunction{}
 	if err != nil {
 		return_.Error = proto.String(err.Error())
