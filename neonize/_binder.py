@@ -38,7 +38,7 @@ def load_goneonize():
 
 
 class Bytes(ctypes.Structure):
-    _fields_ = [("ptr", ctypes.c_char_p), ("size", ctypes.c_size_t)]
+    _fields_ = [("ptr", ctypes.c_void_p), ("size", ctypes.c_size_t)]
 
     def get_bytes(self):
         return ctypes.string_at(self.ptr, self.size)
