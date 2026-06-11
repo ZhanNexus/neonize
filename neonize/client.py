@@ -3480,6 +3480,7 @@ class NewClient:
             len(deviceprops),
             payload,
             len(payload),
+            None,
         )
 
     def stop(self):

@@ -3581,6 +3581,7 @@ class NewAClient:
             len(deviceprops),
             payload,
             len(payload),
+            None,
         )
         self.connect_task = connect_task = self.loop.create_task(task)
         return connect_task

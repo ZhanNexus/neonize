@@ -104,7 +104,7 @@ if not os.environ.get("SPHINX"):
     file_ext = "dll" if system() == "Windows" else "so"
     root_dir = os.path.abspath(os.path.dirname(__file__))
     gocode = load_goneonize()
-    
+
     def consume_cstring(result, func, arguments):
         """ctypes errcheck for FFI functions returning a Go-allocated ``*C.char``.
 
@@ -120,7 +120,6 @@ if not os.environ.get("SPHINX"):
             return ctypes.string_at(result)
         finally:
             gocode.FreeString(result)
-
 
     gocode.Neonize.argtypes = [
         ctypes.c_char_p,
