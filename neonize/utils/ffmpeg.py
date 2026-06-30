@@ -1,12 +1,10 @@
 import array
 import asyncio
-import io
 import json
 import logging
 import math
 import os
 import shlex
-import struct
 import subprocess
 import tempfile
 import uuid

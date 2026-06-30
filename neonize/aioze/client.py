@@ -1937,6 +1937,7 @@ class NewAClient:
         to: JID,
         file: str | bytes,
         ptt: bool = False,
+        wave: bool = False,
         quoted: Optional[neonize_proto.Message] = None,
         add_msg_secret: bool = False,
         context_info: Optional[ContextInfo] = None,
@@ -1968,6 +1969,7 @@ class NewAClient:
                 is_newsletter=to.endswith("newsletter")
                 if isinstance(to, str)
                 else to.Server == "newsletter",
+                wave=wave,
             ),
             add_msg_secret=add_msg_secret,
             context_info=context_info,

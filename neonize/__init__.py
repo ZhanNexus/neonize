@@ -3,5 +3,5 @@ from .events import Event
 from .utils.ffmpeg import FFmpeg
 from .utils.iofile import TemporaryFile
 
-__version__ = "0.3.18.post5"
+__version__ = "0.3.18.post6"
 __all__ = ("NewClient", "FFmpeg", "TemporaryFile", "Event")
