@@ -1875,6 +1875,7 @@ class NewAClient:
         ptt: bool = False,
         quoted: Optional[neonize_proto.Message] = None,
         is_newsletter: bool = False,
+        wave: bool = False,
     ) -> Message:
         """
         This method builds an audio message from a given file or bytes.
@@ -1894,9 +1895,14 @@ class NewAClient:
         io.seek(0)
         buff = io.read()
 
-        if ptt:
+        mime = magic.from_buffer(buff, mime=True)
+
+        if ptt and mime != "audio/ogg; codecs=opus":
             async with AFFmpeg(buff) as ffmpeg:
                 buff = await ffmpeg.to_ptt()
+            mime = "audio/ogg; codecs=opus"
+            if wave:
+                waveform = await ffmpeg.get_audio_waveform(buff)
 
         upload = (
             await self.upload(buff)
@@ -1904,9 +1910,9 @@ class NewAClient:
             else await self.upload_newsletter(buff, MediaType.MediaAudio)
         )
 
+        waveform = None
         async with AFFmpeg(buff) as ffmpeg:
             duration = int((await ffmpeg.extract_info()).format.duration)
-            waveform = await ffmpeg.get_audio_waveform(buff)
 
         message = Message(
             audioMessage=AudioMessage(
@@ -1917,7 +1923,7 @@ class NewAClient:
                 fileLength=upload.FileLength,
                 fileSHA256=upload.FileSHA256,
                 mediaKey=None if is_newsletter else upload.MediaKey,
-                mimetype=("audio/ogg; codecs=opus" if ptt else magic.from_buffer(buff, mime=True)),
+                mimetype=mime,
                 PTT=ptt,
                 waveform=waveform,
             )

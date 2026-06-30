@@ -388,7 +388,7 @@ class ChatSettingsStore:
             raise GetChatSettingsError(return_.Error)
         return return_.LocalChatSettings
 
-    async def clear_chat(self, jid: JID):
+    def clear_chat(self, jid: JID):
         """
         Clears the chat messages for the specified JID.
 
@@ -1817,6 +1817,7 @@ class NewClient:
         ptt: bool = False,
         quoted: Optional[neonize_proto.Message] = None,
         is_newsletter: bool = False,
+        wave: bool = False,
     ) -> Message:
         """
         This method builds an audio message from a given file or bytes.
@@ -1835,10 +1836,14 @@ class NewClient:
         io = BytesIO(get_bytes_from_name_or_url(file))
         io.seek(0)
         buff = io.read()
-        waveform = None
-        if ptt:
+
+        mime = magic.from_buffer(buff, mime=True)
+
+        if ptt and mime != "audio/ogg; codecs=opus":
             with FFmpeg(buff) as ffmpeg:
                 buff = ffmpeg.to_ptt()
+            mime = "audio/ogg; codecs=opus"
+            if wave:
                 waveform = ffmpeg.get_audio_waveform(buff)
 
         upload = (
@@ -1847,6 +1852,7 @@ class NewClient:
             else self.upload_newsletter(buff, MediaType.MediaAudio)
         )
 
+        waveform = None
         with FFmpeg(buff) as ffmpeg:
             duration = int((ffmpeg.extract_info()).format.duration)
 
@@ -1859,7 +1865,7 @@ class NewClient:
                 fileLength=upload.FileLength,
                 fileSHA256=upload.FileSHA256,
                 mediaKey=None if is_newsletter else upload.MediaKey,
-                mimetype=("audio/ogg; codecs=opus" if ptt else magic.from_buffer(buff, mime=True)),
+                mimetype=mime,
                 PTT=ptt,
                 waveform=waveform,
             )
@@ -2385,7 +2391,7 @@ class NewClient:
             raise SetGroupPhotoError(model.Error)
         return model.PictureID
 
-    async def set_profile_name(self, name: str) -> str:
+    def set_profile_name(self, name: str) -> str:
         """
         Set pushname on client side ( #source : https://github.com/tulir/whatsmeow/issues/374 )
         :param name: Name
