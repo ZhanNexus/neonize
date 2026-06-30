@@ -1896,7 +1896,8 @@ class NewAClient:
         buff = io.read()
 
         mime = magic.from_buffer(buff, mime=True)
-
+        waveform = None
+        
         if ptt and mime != "audio/ogg; codecs=opus":
             async with AFFmpeg(buff) as ffmpeg:
                 buff = await ffmpeg.to_ptt()
@@ -1910,7 +1911,6 @@ class NewAClient:
             else await self.upload_newsletter(buff, MediaType.MediaAudio)
         )
 
-        waveform = None
         async with AFFmpeg(buff) as ffmpeg:
             duration = int((await ffmpeg.extract_info()).format.duration)
 

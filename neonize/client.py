@@ -1838,7 +1838,8 @@ class NewClient:
         buff = io.read()
 
         mime = magic.from_buffer(buff, mime=True)
-
+        waveform = None
+        
         if ptt and mime != "audio/ogg; codecs=opus":
             with FFmpeg(buff) as ffmpeg:
                 buff = ffmpeg.to_ptt()
@@ -1852,7 +1853,6 @@ class NewClient:
             else self.upload_newsletter(buff, MediaType.MediaAudio)
         )
 
-        waveform = None
         with FFmpeg(buff) as ffmpeg:
             duration = int((ffmpeg.extract_info()).format.duration)
 
