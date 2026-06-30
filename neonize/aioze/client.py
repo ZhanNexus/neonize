@@ -1897,7 +1897,7 @@ class NewAClient:
 
         mime = magic.from_buffer(buff, mime=True)
         waveform = None
-        
+
         if ptt and mime != "audio/ogg; codecs=opus":
             async with AFFmpeg(buff) as ffmpeg:
                 buff = await ffmpeg.to_ptt()

@@ -1839,7 +1839,7 @@ class NewClient:
 
         mime = magic.from_buffer(buff, mime=True)
         waveform = None
-        
+
         if ptt and mime != "audio/ogg; codecs=opus":
             with FFmpeg(buff) as ffmpeg:
                 buff = ffmpeg.to_ptt()
