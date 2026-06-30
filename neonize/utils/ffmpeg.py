@@ -1,10 +1,10 @@
-import array
 import asyncio
+import io
 import json
 import logging
-import math
 import os
 import shlex
+import struct
 import subprocess
 import tempfile
 import uuid
@@ -408,120 +408,72 @@ class AFFmpeg:
         Generate a 64-byte waveform summary from the file referenced by self.filepath.
         """
         try:
-            if not os.path.exists(self.filepath):
+            with open(self.filepath, "rb") as f:
+                audio_bytes = f.read()
+
+            samples = None
+
+            try:
+                audio_stream = io.BytesIO(audio_bytes)
+                with wave.open(audio_stream, "rb") as wav_file:
+                    frames = wav_file.readframes(wav_file.getnframes())
+                    sample_width = wav_file.getsampwidth()
+                    num_channels = wav_file.getnchannels()
+
+                    if sample_width == 1:
+                        samples = [s - 128 for s in struct.unpack(f"{len(frames)}B", frames)]
+                    elif sample_width == 2:
+                        samples = struct.unpack(f"{len(frames) // 2}h", frames)
+                    elif sample_width == 4:
+                        samples = struct.unpack(f"{len(frames) // 4}i", frames)
+                    else:
+                        raise ValueError(f"Unsupported sample width: {sample_width}")
+
+                    if num_channels == 2:
+                        samples = samples[::2]
+
+            except wave.Error:
+                # fallback: use ffmpeg via asyncio to decode to s16le mono
+                # 22050
+                ff = await asyncio.create_subprocess_exec(
+                    "ffmpeg",
+                    "-i",
+                    "pipe:0",
+                    "-f",
+                    "s16le",
+                    "-acodec",
+                    "pcm_s16le",
+                    "-ac",
+                    "1",
+                    "-ar",
+                    "22050",
+                    "-hide_banner",
+                    "-loglevel",
+                    "error",
+                    "pipe:1",
+                    stdin=asyncio.subprocess.PIPE,
+                    stdout=asyncio.subprocess.PIPE,
+                    stderr=asyncio.subprocess.PIPE,
+                )
+                stdout, stderr = await ff.communicate(input=audio_bytes)
+                if ff.returncode != 0:
+                    raise RuntimeError(f"ffmpeg failed: {stderr.decode(errors='ignore')}")
+                samples = struct.unpack(f"{len(stdout) // 2}h", stdout)
+
+            if not samples:
                 return bytes([0] * 64)
 
-            def _read_wav_sync() -> Optional[List[float]]:
-                try:
-                    with wave.open(self.filepath, "rb") as wav_file:
-                        num_frames = wav_file.getnframes()
-                        sample_width = wav_file.getsampwidth()
-                        num_channels = wav_file.getnchannels()
-
-                        if sample_width not in (1, 2, 4) or num_frames == 0:
-                            return None
-
-                        samples_count = 64
-                        block_size_frames = num_frames // samples_count
-                        if block_size_frames == 0:
-                            block_size_frames = 1
-
-                        chunk_size = min(512, block_size_frames)
-                        waveform_data = []
-
-                        if sample_width == 1:
-                            type_char = "B"
-                        elif sample_width == 2:
-                            type_char = "h"
-                        elif sample_width == 4:
-                            type_char = "i"
-                        else:
-                            return None
-
-                        for i in range(samples_count):
-                            start_frame = i * block_size_frames
-                            if start_frame >= num_frames:
-                                waveform_data.append(0.0)
-                                continue
-
-                            wav_file.setpos(start_frame)
-                            frames = wav_file.readframes(chunk_size)
-                            if not frames:
-                                waveform_data.append(0.0)
-                                continue
-
-                            arr = array.array(type_char)
-                            arr.frombytes(frames)
-
-                            if num_channels > 1:
-                                arr = arr[::num_channels]
-
-                            if not arr:
-                                waveform_data.append(0.0)
-                                continue
-
-                            if sample_width == 1:
-                                sum_squares = sum((s - 128) ** 2 for s in arr)
-                            else:
-                                sum_squares = sum(s * s for s in arr)
-
-                            rms = math.sqrt(sum_squares / len(arr))
-                            waveform_data.append(rms)
-
-                        return waveform_data
-                except Exception:
-                    return None
-
-            waveform_data = await asyncio.to_thread(_read_wav_sync)
-
-            if waveform_data is None:
-                try:
-                    target_sample_rate = 2000
-                    ff = await asyncio.create_subprocess_exec(
-                        "ffmpeg",
-                        "-i",
-                        self.filepath,
-                        "-f",
-                        "s16le",
-                        "-acodec",
-                        "pcm_s16le",
-                        "-ac",
-                        "1",
-                        "-ar",
-                        str(target_sample_rate),
-                        "-hide_banner",
-                        "-loglevel",
-                        "error",
-                        "pipe:1",
-                        stdout=asyncio.subprocess.PIPE,
-                        stderr=asyncio.subprocess.PIPE,
-                    )
-                    stdout, stderr = await ff.communicate()
-
-                    if ff.returncode == 0:
-                        arr = array.array("h")
-                        arr.frombytes(stdout)
-
-                        if arr:
-                            samples_count = 64
-                            block_size = max(1, len(arr) // samples_count)
-                            waveform_data = []
-                            for i in range(samples_count):
-                                start_idx = i * block_size
-                                end_idx = min(start_idx + block_size, len(arr))
-                                block = arr[start_idx:end_idx]
-                                if not block:
-                                    waveform_data.append(0.0)
-                                    continue
-                                sum_squares = sum(s * s for s in block)
-                                rms = math.sqrt(sum_squares / len(block))
-                                waveform_data.append(rms)
-                except Exception as fe:
-                    if logger:
-                        logger.debug(f"FFmpeg fallback failed: {fe}")
-
-            if not waveform_data:
-                return bytes([0] * 64)
+            # compute 64-point waveform
+            samples_count = 64
+            block_size = max(1, len(samples) // samples_count)
+            waveform_data = []
+            for i in range(samples_count):
+                start_idx = i * block_size
+                end_idx = min(start_idx + block_size, len(samples))
+                block = samples[start_idx:end_idx]
+                sum_squares = sum((s * s) for s in block) if block else 0
+                rms = (sum_squares / len(block)) ** 0.5 if block else 0
+                waveform_data.append(rms)
 
             max_val = max(waveform_data) if waveform_data else 1
             if max_val > 0:
@@ -840,118 +792,67 @@ class FFmpeg:
         Generate a 64-byte waveform summary from the file referenced by self.filepath.
         """
         try:
-            if not os.path.exists(self.filepath):
-                return bytes([0] * 64)
+            with open(self.filepath, "rb") as f:
+                audio_bytes = f.read()
 
-            waveform_data = None
+            samples = None
 
             try:
-                with wave.open(self.filepath, "rb") as wav_file:
-                    num_frames = wav_file.getnframes()
+                audio_stream = io.BytesIO(audio_bytes)
+                with wave.open(audio_stream, "rb") as wav_file:
+                    frames = wav_file.readframes(wav_file.getnframes())
                     sample_width = wav_file.getsampwidth()
                     num_channels = wav_file.getnchannels()
 
-                    if sample_width in (1, 2, 4) and num_frames > 0:
-                        samples_count = 64
-                        block_size_frames = num_frames // samples_count
-                        if block_size_frames == 0:
-                            block_size_frames = 1
+                    if sample_width == 1:
+                        samples = [s - 128 for s in struct.unpack(f"{len(frames)}B", frames)]
+                    elif sample_width == 2:
+                        samples = struct.unpack(f"{len(frames) // 2}h", frames)
+                    elif sample_width == 4:
+                        samples = struct.unpack(f"{len(frames) // 4}i", frames)
+                    else:
+                        raise ValueError(f"Unsupported sample width: {sample_width}")
 
-                        chunk_size = min(512, block_size_frames)
-                        temp_waveform = []
+                    if num_channels == 2:
+                        samples = samples[::2]
 
-                        if sample_width == 1:
-                            type_char = "B"
-                        elif sample_width == 2:
-                            type_char = "h"
-                        elif sample_width == 4:
-                            type_char = "i"
-                        else:
-                            type_char = None
+            except wave.Error:
+                # fallback: run ffmpeg to convert to s16le mono 22050
+                cmd = [
+                    "ffmpeg",
+                    "-i",
+                    "pipe:0",
+                    "-f",
+                    "s16le",
+                    "-acodec",
+                    "pcm_s16le",
+                    "-ac",
+                    "1",
+                    "-ar",
+                    "22050",
+                    "-hide_banner",
+                    "-loglevel",
+                    "error",
+                    "pipe:1",
+                ]
+                proc = subprocess.run(cmd, input=audio_bytes, capture_output=True, check=True)
+                stdout = proc.stdout
+                samples = struct.unpack(f"{len(stdout) // 2}h", stdout)
 
-                        if type_char:
-                            for i in range(samples_count):
-                                start_frame = i * block_size_frames
-                                if start_frame >= num_frames:
-                                    temp_waveform.append(0.0)
-                                    continue
-
-                                wav_file.setpos(start_frame)
-                                frames = wav_file.readframes(chunk_size)
-                                if not frames:
-                                    temp_waveform.append(0.0)
-                                    continue
-
-                                arr = array.array(type_char)
-                                arr.frombytes(frames)
-
-                                if num_channels > 1:
-                                    arr = arr[::num_channels]
-
-                                if not arr:
-                                    temp_waveform.append(0.0)
-                                    continue
-
-                                if sample_width == 1:
-                                    sum_squares = sum((s - 128) ** 2 for s in arr)
-                                else:
-                                    sum_squares = sum(s * s for s in arr)
-
-                                rms = math.sqrt(sum_squares / len(arr))
-                                temp_waveform.append(rms)
-
-                            waveform_data = temp_waveform
-            except Exception:
-                waveform_data = None
-
-            if waveform_data is None:
-                try:
-                    target_sample_rate = 2000
-                    cmd = [
-                        "ffmpeg",
-                        "-i",
-                        self.filepath,
-                        "-f",
-                        "s16le",
-                        "-acodec",
-                        "pcm_s16le",
-                        "-ac",
-                        "1",
-                        "-ar",
-                        str(target_sample_rate),
-                        "-hide_banner",
-                        "-loglevel",
-                        "error",
-                        "pipe:1",
-                    ]
-                    proc = subprocess.run(cmd, capture_output=True, check=True)
-                    stdout = proc.stdout
-
-                    arr = array.array("h")
-                    arr.frombytes(stdout)
-
-                    if arr:
-                        samples_count = 64
-                        block_size = max(1, len(arr) // samples_count)
-                        temp_waveform = []
-                        for i in range(samples_count):
-                            start_idx = i * block_size
-                            end_idx = min(start_idx + block_size, len(arr))
-                            block = arr[start_idx:end_idx]
-                            if not block:
-                                temp_waveform.append(0.0)
-                                continue
-                            sum_squares = sum(s * s for s in block)
-                            rms = math.sqrt(sum_squares / len(block))
-                            temp_waveform.append(rms)
-
-                        waveform_data = temp_waveform
-                except Exception as fe:
-                    if logger:
-                        logger.debug(f"FFmpeg fallback failed: {fe}")
-
-            if not waveform_data:
+            if not samples:
                 return bytes([0] * 64)
+
+            # compute 64-point waveform
+            samples_count = 64
+            block_size = max(1, len(samples) // samples_count)
+            waveform_data = []
+            for i in range(samples_count):
+                start_idx = i * block_size
+                end_idx = min(start_idx + block_size, len(samples))
+                block = samples[start_idx:end_idx]
+                sum_squares = sum((s * s) for s in block) if block else 0
+                rms = (sum_squares / len(block)) ** 0.5 if block else 0
+                waveform_data.append(rms)
 
             max_val = max(waveform_data) if waveform_data else 1
             if max_val > 0:
