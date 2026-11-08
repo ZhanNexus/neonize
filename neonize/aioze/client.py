@@ -77,7 +77,6 @@ from ..exc import (
     NewsletterSendReactionError,
     NewsletterSubscribeLiveUpdatesError,
     NewsletterToggleMuteError,
-    PairPhoneError,
     PutArchivedError,
     PutMutedUntilError,
     PutPinnedError,
@@ -1086,6 +1085,7 @@ class NewAClient:
         quality: int = 75,
         compression_level: int = 4,
         passthrough: bool = False,
+        is_newsletter: bool = False,
     ) -> Message:
         """
         This function builds a sticker message from a given image or video file.
@@ -1112,6 +1112,8 @@ class NewAClient:
         :type compression_level: int, optional
         :param passthrough: Don't process sticker, send as is, defaults to False.
         :type passthrough: bool, optional
+        :param is_newsletter: Is newsletter or not?
+        :type is_newsletter: bool, optional
         :return: The constructed sticker message
         :rtype: Message
         """
@@ -1173,15 +1175,19 @@ class NewAClient:
                 save_all=True,
                 loop=0,
             )
-        upload = await self.upload(io_save.getvalue())
+        upload = (
+            await self.upload(io_save.getvalue())
+            if not is_newsletter
+            else await self.upload_newsletter(io_save.getvalue(), MediaType.MediaImage)
+        )
         message = Message(
             stickerMessage=StickerMessage(
                 URL=upload.url,
                 directPath=upload.DirectPath,
-                fileEncSHA256=upload.FileEncSHA256,
+                fileEncSHA256=None if is_newsletter else upload.FileEncSHA256,
                 fileLength=upload.FileLength,
                 fileSHA256=upload.FileSHA256,
-                mediaKey=upload.MediaKey,
+                mediaKey=None if is_newsletter else upload.MediaKey,
                 mimetype=magic.from_buffer(io_save.getvalue(), mime=True),
                 isAnimated=animated,
             )
@@ -1248,6 +1254,7 @@ class NewAClient:
                 quality,
                 compression_level,
                 passthrough,
+                is_newsletter=to.Server == "newsletter",
             ),
             add_msg_secret=add_msg_secret,
         )
@@ -1488,6 +1495,7 @@ class NewAClient:
         ghost_mentions: str | None = None,
         mentions_are_lids: bool = False,
         skip_sidecar: bool = False,
+        is_newsletter: bool = False,
     ) -> Message:
         """
         This function is used to build a video message. It uploads a video file, extracts necessary information,
@@ -1512,6 +1520,8 @@ class NewAClient:
         :type ghost_mentions: str, optional
         :param skip_sidecar: Optional. Whether to skip generation of sidecar, defaults to False
         :type skip_sidecar: bool, optional
+        :param is_newsletter: Is newsletter or not?
+        :type is_newsletter: bool, optional
         :rtype: Message
         """
         io = BytesIO(await get_bytes_from_name_or_url_async(file))
@@ -1544,7 +1554,11 @@ class NewAClient:
             thumbnail = BytesIO()
             img.save(thumbnail, format="jpeg")
             thumbnail = thumbnail.getvalue()
-        upload = await self.upload(buff)
+        upload = (
+            await self.upload(buff)
+            if not is_newsletter
+            else await self.upload_newsletter(buff, MediaType.MediaVideo)
+        )
         message = Message(
             videoMessage=VideoMessage(
                 URL=upload.url,
@@ -1552,10 +1566,10 @@ class NewAClient:
                 gifPlayback=gifplayback,
                 seconds=duration,
                 directPath=upload.DirectPath,
-                fileEncSHA256=upload.FileEncSHA256,
+                fileEncSHA256=None if is_newsletter else upload.FileEncSHA256,
                 fileLength=upload.FileLength,
                 fileSHA256=upload.FileSHA256,
-                mediaKey=upload.MediaKey,
+                mediaKey=None if is_newsletter else upload.MediaKey,
                 mimetype=magic.from_buffer(buff, mime=True),
                 JPEGThumbnail=thumbnail,
                 thumbnailDirectPath=upload.DirectPath,
@@ -1629,6 +1643,7 @@ class NewAClient:
                 ghost_mentions,
                 mentions_are_lids,
                 skip_sidecar,
+                is_newsletter=to.Server == "newsletter",
             ),
             add_msg_secret=add_msg_secret,
         )
@@ -1642,6 +1657,7 @@ class NewAClient:
         spoiler: bool = False,
         ghost_mentions: str | None = None,
         mentions_are_lids: bool = False,
+        is_newsletter: bool = False,
     ) -> Message:
         """
         This function builds an image message. It takes a file (either a string or bytes),
@@ -1664,6 +1680,8 @@ class NewAClient:
         :type ghost_mentions: str, optional
         :param mentions_are_lids: whether mentions contained in message or ghost_mentions are lids, defaults to False.
         :type mentions_are_lids: bool, optional
+        :param is_newsletter: Is newsletter or not?
+        :type is_newsletter: bool, optional
         :return: The constructed image message.
         :rtype: Message
         """
@@ -1677,16 +1695,20 @@ class NewAClient:
         thumbnail = BytesIO()
         img_saveable = img if img.mode == "RGB" else img.convert("RGB")
         img_saveable.save(thumbnail, format="jpeg")
-        upload = await self.upload(n_file)
+        upload = (
+            await self.upload(n_file)
+            if not is_newsletter
+            else await self.upload_newsletter(n_file, MediaType.MediaImage)
+        )
         message = Message(
             imageMessage=ImageMessage(
                 URL=upload.url,
                 caption=caption,
                 directPath=upload.DirectPath,
-                fileEncSHA256=upload.FileEncSHA256,
+                fileEncSHA256=None if is_newsletter else upload.FileEncSHA256,
                 fileLength=upload.FileLength,
                 fileSHA256=upload.FileSHA256,
-                mediaKey=upload.MediaKey,
+                mediaKey=None if is_newsletter else upload.MediaKey,
                 mimetype=magic.from_buffer(n_file, mime=True),
                 JPEGThumbnail=thumbnail.getvalue(),
                 thumbnailDirectPath=upload.DirectPath,
@@ -1737,6 +1759,8 @@ class NewAClient:
         :type mentions_are_lids: bool, optional
         :param add_msg_secret: Optional. Whether to generate 32 random bytes for messageSecret inside MessageContextInfo before sending, defaults to False
         :type add_msg_secret: bool, optional
+        :param is_newsletter: Is newsletter or not?
+        :type is_newsletter: bool, optional
         :return: A function for handling the result of the image sending process.
         :rtype: SendResponse
         """
@@ -1750,6 +1774,7 @@ class NewAClient:
                 ghost_mentions=ghost_mentions,
                 spoiler=spoiler,
                 mentions_are_lids=mentions_are_lids,
+                is_newsletter=to.Server == "newsletter",
             ),
             add_msg_secret=add_msg_secret,
         )
@@ -1759,6 +1784,7 @@ class NewAClient:
         file: str | bytes,
         media_type: str,
         msg_association: MessageAssociation,
+        is_newsletter: bool = False,
         **kwargs,
     ) -> Message:
         """Builds a single album entry (image or video) linked to an album.
@@ -1780,7 +1806,7 @@ class NewAClient:
         build_message = (
             self.build_image_message if media_type == "image" else self.build_video_message
         )
-        msg = await build_message(file, **kwargs)
+        msg = await build_message(file, is_newsletter=is_newsletter, **kwargs)
         msg.messageContextInfo.MergeFrom(
             msg.messageContextInfo.__class__(messageAssociation=msg_association)
         )
@@ -1869,13 +1895,19 @@ class NewAClient:
                 spoiler=spoiler,
                 ghost_mentions=ghost_mentions,
                 mentions_are_lids=mentions_are_lids,
+                is_newsletter=to.Server == "newsletter",
             )
             for file, media_type in medias[:1]
         ]
         funcs.extend(
             [
                 self.build_album_content(
-                    file, media_type, msg_association, quoted=quoted, spoiler=spoiler
+                    file,
+                    media_type,
+                    msg_association,
+                    quoted=quoted,
+                    spoiler=spoiler,
+                    is_newsletter=to.Server == "newsletter",
                 )
                 for file, media_type in medias[1:]
             ]
@@ -1892,6 +1924,7 @@ class NewAClient:
         file: str | bytes,
         ptt: bool = False,
         quoted: neonize_proto.Message | None = None,
+        is_newsletter: bool = False,
     ) -> Message:
         """
         This method builds an audio message from a given file or bytes.
@@ -1902,13 +1935,19 @@ class NewAClient:
         :type ptt: bool, optional
         :param quoted: A message that the audio message may be replying to, defaults to None
         :type quoted: Optional[neonize_proto.Message], optional
+        :param is_newsletter: Is newsletter or not?
+        :type is_newsletter: bool, optional
         :return: The audio message built from the given parameters
         :rtype: Message
         """
         io = BytesIO(await get_bytes_from_name_or_url_async(file))
         io.seek(0)
         buff = io.read()
-        upload = await self.upload(buff)
+        upload = (
+            await self.upload(buff)
+            if not is_newsletter
+            else await self.upload_newsletter(buff, MediaType.MediaAudio)
+        )
         async with AFFmpeg(io.getvalue()) as ffmpeg:
             duration = int((await ffmpeg.extract_info()).format.duration)
         message = Message(
@@ -1916,10 +1955,10 @@ class NewAClient:
                 URL=upload.url,
                 seconds=duration,
                 directPath=upload.DirectPath,
-                fileEncSHA256=upload.FileEncSHA256,
+                fileEncSHA256=None if is_newsletter else upload.FileEncSHA256,
                 fileLength=upload.FileLength,
                 fileSHA256=upload.FileSHA256,
-                mediaKey=upload.MediaKey,
+                mediaKey=None if is_newsletter else upload.MediaKey,
                 mimetype=magic.from_buffer(buff, mime=True),
                 PTT=ptt,
             )
@@ -1954,7 +1993,9 @@ class NewAClient:
 
         return await self.send_message(
             to,
-            await self.build_audio_message(file, ptt, quoted),
+            await self.build_audio_message(
+                file, ptt, quoted, is_newsletter=to.Server == "newsletter"
+            ),
             add_msg_secret=add_msg_secret,
         )
 
@@ -3737,11 +3778,13 @@ class NewAClient:
         """
         return await self.connect_with_proxy(proxy_settings=proxy_settings)
 
-    async def connect(self,payload: bytes | None = None, proxy_settings: ProxySettings | None = None):
+    async def connect(
+        self, payload: bytes | None = None, proxy_settings: ProxySettings | None = None
+    ):
         """Establishes a connection to the WhatsApp servers.
-        
+
         :param payload: Optional payload. Get from PairPhone() #cr: Pah-0/neonize
-        :type payload:bytes | None 
+        :type payload:bytes | None
         :param proxy_settings: Optional proxy configuration. Pass ``None`` to connect without a proxy.
         :type proxy_settings: ProxySettings | None
         :raises NeonizeError: If connection setup fails.
@@ -3749,8 +3792,8 @@ class NewAClient:
         from ..utils.ffmpeg import check_ffmpeg_available
 
         check_ffmpeg_available()
-        
-        payload = payload or b''
+
+        payload = payload or b""
         self.loop = asyncio.get_running_loop()
         _events_module.set_event_loop(self.loop)
         # Convert the list of functions to a bytearray

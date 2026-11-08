@@ -15,14 +15,17 @@ import (
 	"context"
 	cryptorand "crypto/rand"
 	"sync"
-	// "crypto/sha256"
-	// "encoding/hex"
+	"crypto/sha256"
+	"encoding/hex"
+	"encoding/binary"
+  "math/rand"
 	"fmt"
 	"os"
 	"strings"
 	"time"
 	"unsafe"
 
+    "go.mau.fi/util/random"
 	"github.com/krypton-byte/neonize/defproto"
 	"github.com/krypton-byte/neonize/utils"
 	_ "github.com/mattn/go-sqlite3"
@@ -662,31 +665,34 @@ func TestStruct() *C.struct_BytesReturn {
 }
 
 //export SendMessage
-func SendMessage(id *C.char, JIDByte *C.uchar, JIDSize C.int, messageByte *C.uchar, messageSize C.int, extraByte *C.uchar, extraSize C.int,) *C.struct_BytesReturn {
-	client := clientFor(C.GoString(id))
+func SendMessage(
+	id *C.char,
+	JIDByte *C.uchar, JIDSize C.int,
+	messageByte *C.uchar, messageSize C.int,
+	extraByte *C.uchar, extraSize C.int,
+) *C.struct_BytesReturn {
+
+	client := clients[C.GoString(id)]
 	return_ := defproto.SendMessageReturnFunction{}
-	
-	// decode JID
-	var neonize_jid defproto.JID
-	err := proto.Unmarshal(jid, &neonize_jid)
-	if err != nil {
-		fmt.Println("SendMessage: Error unmarshaling JID:", err.Error())
+
+	// ===== Decode JID =====
+	jidBytes := getByteByAddr(JIDByte, JIDSize)
+	var neonizeJID defproto.JID
+	if err := proto.Unmarshal(jidBytes, &neonizeJID); err != nil {
 		return_.Error = proto.String(err.Error())
 		return ProtoReturnV3(&return_)
 	}
-	jid := getByteByAddr(JIDByte, JIDSize)
-	
-	// decode message
-	message_bytes := getByteByAddr(messageByte, messageSize)
+	jid := utils.DecodeJidProto(&neonizeJID)
+
+	// ===== Decode Message =====
+	msgBytes := getByteByAddr(messageByte, messageSize)
 	var message waE2E.Message
-	err_message := proto.Unmarshal(message_bytes, &message)
-	if err_message != nil {
-		fmt.Println("SendMessage: Error unmarshaling message:", err_message.Error())
-		return_.Error = proto.String(err_message.Error())
+	if err := proto.Unmarshal(msgBytes, &message); err != nil {
+		return_.Error = proto.String(err.Error())
 		return ProtoReturnV3(&return_)
 	}
-	
-	// Extra Params
+
+	// ===== Extra Params =====
 	var protoExtra *whatsmeow.SendRequestExtra
 	if extraByte != nil && extraSize > 0 {
 		extraBytes := getByteByAddr(extraByte, extraSize)
@@ -700,6 +706,7 @@ func SendMessage(id *C.char, JIDByte *C.uchar, JIDSize C.int, messageByte *C.uch
 	// ===== bypass =====
 	bypassExtra := Bypass(client, jid, &message)
 
+	// ===== Merge bypass and extra params =====
 	finalExtra := bypassExtra 
 	if protoExtra != nil {
 		if protoExtra.ID != "" {
@@ -735,13 +742,19 @@ func SendMessage(id *C.char, JIDByte *C.uchar, JIDSize C.int, messageByte *C.uch
 		}
 	}
 
-	sendresponse, err := client.SendMessage(context.Background(), utils.DecodeJidProto(&neonize_jid), &message, finalExtra)
+	// ===== SendResponse =====
+	sendResponse, err := client.SendMessage(
+		context.Background(),
+		jid,
+		&message,
+		finalExtra,
+	)
 	if err != nil {
-		fmt.Println("SendMessage: Error sending message:", err.Error())
 		return_.Error = proto.String(err.Error())
 		return ProtoReturnV3(&return_)
 	}
-	return_.SendResponse = utils.EncodeSendResponse(sendresponse)
+
+	return_.SendResponse = utils.EncodeSendResponse(sendResponse)
 	return ProtoReturnV3(&return_)
 }
 
@@ -2502,7 +2515,7 @@ func UpdateBlocklist(id *C.char, jidByte *C.uchar, JIDSize C.int, action *C.char
 		return_.Error = proto.String(err_j.Error())
 		return ProtoReturnV3(&return_)
 	}
-	blocklist, err := clientFor(C.GoString(id)).UpdateBlocklist(context.Background(), utils.DecodeJidProto(&JID), events.BlocklistChangeAction(C.GoString(action)))
+	blocklist, err := clientFor(C.GoString(id)).UpdateBlocklist(context.Background(), utils.DecodeJidProto(&JID), events.BlocklistChangeAction(C.GoString(action)),"")
 	if err != nil {
 		return_.Error = proto.String(err.Error())
 		return ProtoReturnV3(&return_)
@@ -2711,7 +2724,7 @@ func GetUserDevices(id *C.char, JIDSByte *C.uchar, JIDSSize C.int) *C.struct_Byt
 
 //export GetBlocklist
 func GetBlocklist(id *C.char) *C.struct_BytesReturn {
-	blocklist, err := clientFor(C.GoString(id)).GetBlocklist(context.Background())
+	blocklist, err := clientFor(C.GoString(id)).GetBlocklist(context.Background(), "")
 	return_ := defproto.GetBlocklistReturnFunction{}
 	if err != nil {
 		return_.Error = proto.String(err.Error())
