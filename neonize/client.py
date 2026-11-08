@@ -3587,11 +3587,7 @@ class NewClient:
         )
         payload = pl.SerializeToString()
 
-        protobytes = self.__client.PairPhone(self.uuid, payload, len(payload))
-        model = neonize_proto.PairPhoneReturnFunction.FromString(protobytes)
-        if model.Error:
-            raise PairPhoneError(model.Error)
-        return model.Code
+        self.connect(payload=payload)
 
     def stop(self):
         """
@@ -3724,7 +3720,7 @@ class NewClient:
             raise DecryptPollVoteError(model.Error)
         return model.PollVoteMessage
 
-    def connect(self, proxy_settings: ProxySettings | None = None):
+    def connect_with_proxy(self, proxy_settings: ProxySettings | None = None):
         """Establishes a connection to the WhatsApp servers.
 
         :param proxy_settings: Optional proxy configuration. Pass ``None`` to connect without a proxy.
@@ -3733,15 +3729,18 @@ class NewClient:
         """
         return self.connect_with_proxy(proxy_settings)
 
-    def connect_with_proxy(self, proxy_settings: ProxySettings | None = None):
+    def def connect(self,payload: bytes | None = None, proxy_settings: ProxySettings | None = None):
         """Establishes a connection to the WhatsApp servers.
-
+        
+        :param payload: Optional payload. Get from PairPhone() #cr: Pah-0/neonize
+        :type payload:bytes | None 
         :param proxy_settings: Optional proxy configuration. Pass ``None`` to connect without a proxy.
         :type proxy_settings: ProxySettings | None
         :raises NeonizeError: If connection setup fails.
         """
         from .utils.ffmpeg import check_ffmpeg_available
-
+        
+        payload = payload or b''
         check_ffmpeg_available()
         # Convert the list of functions to a bytearray
         d = bytearray(list(self.event.list_func))
@@ -3812,8 +3811,8 @@ class NewClient:
                     len(d),
                     deviceprops,
                     len(deviceprops),
-                    b"",
-                    0,
+                    payload,
+                    len(payload),
                     proxy_ref,
                 )
             except BaseException as exc:  # noqa: BLE001 - surfaced on caller thread

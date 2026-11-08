@@ -3587,7 +3587,7 @@ class NewAClient:
         )
         payload = pl.SerializeToString()
 
-        await client.connect(payload=payload)
+        await self.connect(payload=payload)
 
     async def idle(self):
         """
