@@ -1773,23 +1773,53 @@ class NewsletterMetadata(_message.Message):
 Global___NewsletterMetadata: _TypeAlias = NewsletterMetadata  # noqa: Y015
 
 @_typing.final
-class Blocklist(_message.Message):
+class BlocklistItems(_message.Message):
     DESCRIPTOR: _descriptor.Descriptor
 
-    DHASH_FIELD_NUMBER: _builtins.int
-    JIDS_FIELD_NUMBER: _builtins.int
-    DHash: _builtins.str
+    LID_FIELD_NUMBER: _builtins.int
+    PN_FIELD_NUMBER: _builtins.int
+    ACTIVE_FIELD_NUMBER: _builtins.int
+    Active: _builtins.bool
     @_builtins.property
-    def JIDs(self) -> _containers.RepeatedCompositeFieldContainer[Global___JID]: ...
+    def LID(self) -> Global___JID: ...
+    @_builtins.property
+    def PN(self) -> Global___JID: ...
     def __init__(
         self,
         *,
-        DHash: _builtins.str | None = ...,
-        JIDs: _abc.Iterable[Global___JID] | None = ...,
+        LID: Global___JID | None = ...,
+        PN: Global___JID | None = ...,
+        Active: _builtins.bool | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["DHash", b"DHash"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["Active", b"Active", "LID", b"LID", "PN", b"PN"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["DHash", b"DHash", "JIDs", b"JIDs"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["Active", b"Active", "LID", b"LID", "PN", b"PN"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
+
+Global___BlocklistItems: _TypeAlias = BlocklistItems  # noqa: Y015
+
+@_typing.final
+class Blocklist(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
+
+    ADDRESSINGMODE_FIELD_NUMBER: _builtins.int
+    DHASH_FIELD_NUMBER: _builtins.int
+    ITEMS_FIELD_NUMBER: _builtins.int
+    AddressingMode: Global___AddressingMode.ValueType
+    DHash: _builtins.str
+    @_builtins.property
+    def Items(self) -> _containers.RepeatedCompositeFieldContainer[Global___BlocklistItems]: ...
+    def __init__(
+        self,
+        *,
+        AddressingMode: Global___AddressingMode.ValueType | None = ...,
+        DHash: _builtins.str | None = ...,
+        Items: _abc.Iterable[Global___BlocklistItems] | None = ...,
+    ) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["AddressingMode", b"AddressingMode", "DHash", b"DHash"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["AddressingMode", b"AddressingMode", "DHash", b"DHash", "Items", b"Items"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
     def WhichOneof(self, oneof_group: _Never) -> None: ...
 
@@ -4380,12 +4410,15 @@ class SendRequestExtra(_message.Message):
     PEER_FIELD_NUMBER: _builtins.int
     TIMEOUT_FIELD_NUMBER: _builtins.int
     MEDIAHANDLE_FIELD_NUMBER: _builtins.int
+    ADDITIONALNODES_FIELD_NUMBER: _builtins.int
     ID: _builtins.str
     Peer: _builtins.bool
     Timeout: _builtins.int
     MediaHandle: _builtins.str
     @_builtins.property
     def InlineBotJID(self) -> Global___JID: ...
+    @_builtins.property
+    def AdditionalNodes(self) -> _containers.RepeatedCompositeFieldContainer[Global___Node]: ...
     def __init__(
         self,
         *,
@@ -4394,10 +4427,11 @@ class SendRequestExtra(_message.Message):
         Peer: _builtins.bool | None = ...,
         Timeout: _builtins.int | None = ...,
         MediaHandle: _builtins.str | None = ...,
+        AdditionalNodes: _abc.Iterable[Global___Node] | None = ...,
     ) -> None: ...
     _HasFieldArgType: _TypeAlias = _typing.Literal["ID", b"ID", "InlineBotJID", b"InlineBotJID", "MediaHandle", b"MediaHandle", "Peer", b"Peer", "Timeout", b"Timeout"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["ID", b"ID", "InlineBotJID", b"InlineBotJID", "MediaHandle", b"MediaHandle", "Peer", b"Peer", "Timeout", b"Timeout"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["AdditionalNodes", b"AdditionalNodes", "ID", b"ID", "InlineBotJID", b"InlineBotJID", "MediaHandle", b"MediaHandle", "Peer", b"Peer", "Timeout", b"Timeout"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
     def WhichOneof(self, oneof_group: _Never) -> None: ...
 
