@@ -3587,11 +3587,7 @@ class NewAClient:
         )
         payload = pl.SerializeToString()
 
-        protobytes = await self.__client.PairPhone(self.uuid, payload, len(payload))
-        model = neonize_proto.PairPhoneReturnFunction.FromString(protobytes)
-        if model.Error:
-            raise PairPhoneError(model.Error)
-        return model.Code
+        await client.connect(payload=payload)
 
     async def idle(self):
         """
@@ -3732,15 +3728,6 @@ class NewAClient:
             raise DecryptPollVoteError(model.Error)
         return model.PollVoteMessage
 
-    async def connect(self, proxy_settings: ProxySettings | None = None):
-        """Establishes a connection to the WhatsApp servers.
-
-        :param proxy_settings: Optional proxy configuration. Pass ``None`` to connect without a proxy.
-        :type proxy_settings: ProxySettings | None
-        :raises NeonizeError: If connection setup fails.
-        """
-        return await self.connect_with_proxy(proxy_settings)
-
     async def connect_with_proxy(self, proxy_settings: ProxySettings | None = None):
         """Establishes a connection to the WhatsApp servers.
 
@@ -3748,9 +3735,22 @@ class NewAClient:
         :type proxy_settings: ProxySettings | None
         :raises NeonizeError: If connection setup fails.
         """
+        return await self.connect_with_proxy(proxy_settings=proxy_settings)
+
+    async def connect(self,payload: bytes | None = None, proxy_settings: ProxySettings | None = None):
+        """Establishes a connection to the WhatsApp servers.
+        
+        :param payload: Optional payload. Get from PairPhone() #cr: Pah-0/neonize
+        :type payload:bytes | None 
+        :param proxy_settings: Optional proxy configuration. Pass ``None`` to connect without a proxy.
+        :type proxy_settings: ProxySettings | None
+        :raises NeonizeError: If connection setup fails.
+        """
         from ..utils.ffmpeg import check_ffmpeg_available
 
         check_ffmpeg_available()
+        
+        payload = payload or b''
         self.loop = asyncio.get_running_loop()
         _events_module.set_event_loop(self.loop)
         # Convert the list of functions to a bytearray
@@ -3810,8 +3810,8 @@ class NewAClient:
                     len(d),
                     deviceprops,
                     len(deviceprops),
-                    b"",
-                    0,
+                    payload,
+                    len(payload),
                     proxy_ref,
                 )
             except asyncio.CancelledError:
