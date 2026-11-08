@@ -1437,6 +1437,7 @@ class Message(_message.Message):
     RETRYCOUNT_FIELD_NUMBER: _builtins.int
     NEWSLETTERMETA_FIELD_NUMBER: _builtins.int
     RAW_FIELD_NUMBER: _builtins.int
+    ADDITIONALNODES_FIELD_NUMBER: _builtins.int
     IsEphemeral: _builtins.bool
     IsViewOnce: _builtins.bool
     IsViewOnceV2: _builtins.bool
@@ -1456,6 +1457,8 @@ class Message(_message.Message):
     def NewsLetterMeta(self) -> Global___NewsLetterMessageMeta: ...
     @_builtins.property
     def Raw(self) -> _WAWebProtobufsE2E_pb2.Message: ...
+    @_builtins.property
+    def AdditionalNodes(self) -> _containers.RepeatedCompositeFieldContainer[Global___Node]: ...
     def __init__(
         self,
         *,
@@ -1473,10 +1476,11 @@ class Message(_message.Message):
         RetryCount: _builtins.int | None = ...,
         NewsLetterMeta: Global___NewsLetterMessageMeta | None = ...,
         Raw: _WAWebProtobufsE2E_pb2.Message | None = ...,
+        AdditionalNodes: _abc.Iterable[Global___Node] | None = ...,
     ) -> None: ...
     _HasFieldArgType: _TypeAlias = _typing.Literal["Info", b"Info", "IsDocumentWithCaption", b"IsDocumentWithCaption", "IsEdit", b"IsEdit", "IsEphemeral", b"IsEphemeral", "IsLottieSticker", b"IsLottieSticker", "IsViewOnce", b"IsViewOnce", "IsViewOnceV2", b"IsViewOnceV2", "IsViewOnceV2Extension", b"IsViewOnceV2Extension", "Message", b"Message", "NewsLetterMeta", b"NewsLetterMeta", "Raw", b"Raw", "RetryCount", b"RetryCount", "SourceWebMsg", b"SourceWebMsg", "UnavailableRequestID", b"UnavailableRequestID"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["Info", b"Info", "IsDocumentWithCaption", b"IsDocumentWithCaption", "IsEdit", b"IsEdit", "IsEphemeral", b"IsEphemeral", "IsLottieSticker", b"IsLottieSticker", "IsViewOnce", b"IsViewOnce", "IsViewOnceV2", b"IsViewOnceV2", "IsViewOnceV2Extension", b"IsViewOnceV2Extension", "Message", b"Message", "NewsLetterMeta", b"NewsLetterMeta", "Raw", b"Raw", "RetryCount", b"RetryCount", "SourceWebMsg", b"SourceWebMsg", "UnavailableRequestID", b"UnavailableRequestID"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["AdditionalNodes", b"AdditionalNodes", "Info", b"Info", "IsDocumentWithCaption", b"IsDocumentWithCaption", "IsEdit", b"IsEdit", "IsEphemeral", b"IsEphemeral", "IsLottieSticker", b"IsLottieSticker", "IsViewOnce", b"IsViewOnce", "IsViewOnceV2", b"IsViewOnceV2", "IsViewOnceV2Extension", b"IsViewOnceV2Extension", "Message", b"Message", "NewsLetterMeta", b"NewsLetterMeta", "Raw", b"Raw", "RetryCount", b"RetryCount", "SourceWebMsg", b"SourceWebMsg", "UnavailableRequestID", b"UnavailableRequestID"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
     def WhichOneof(self, oneof_group: _Never) -> None: ...
 

@@ -34,6 +34,7 @@ message HistorySync {
 		PUSH_NAME = 4;
 		NON_BLOCKING_DATA = 5;
 		ON_DEMAND = 6;
+		RECENT_CONVERSATIONS_ON_DEMAND = 9;
 	}
 
 	required HistorySyncType syncType = 1;
@@ -56,6 +57,9 @@ message HistorySync {
 	optional bytes nctSalt = 19;
 	repeated InlineContact inlineContacts = 20;
 	optional bool inlineContactsProvided = 21;
+	repeated StickerMetadata favoriteStickers = 22;
+	optional OmittedConversationMetadata omittedConversationMetadata = 25;
+	optional string omittedConversationMetadataSnapshotID = 26;
 }
 
 message Conversation {
@@ -137,6 +141,7 @@ message Conversation {
 	optional string authAgentObaPhoneNumber = 62;
 	optional IdentityVerificationState identityVerification = 63;
 	optional WACommon.ACP2Setting acp2Setting = 64;
+	optional bool acp2HistoryWithheld = 65;
 }
 
 message GroupParticipant {
@@ -160,6 +165,15 @@ message PastParticipant {
 	optional string userJID = 1;
 	optional LeaveReason leaveReason = 2;
 	optional uint64 leaveTS = 3;
+}
+
+message OmittedConversationMetadata {
+	optional string snapshotID = 1;
+	optional uint64 snapshotTimestampMS = 2;
+	optional uint32 batchIndex = 3;
+	optional uint32 batchCount = 4;
+	optional bool complete = 5;
+	repeated Conversation conversations = 6;
 }
 
 message IdentityVerificationState {
