@@ -333,8 +333,11 @@ func EncodeEventTypesMessage(message *events.Message) *defproto.Message {
 	if message.Message != nil {
 		model.Message = message.Message
 	}
-	if message.AdditionalNodes != nil {
-	    model.AdditionalNodes = message.AdditionalNodes
+	if len(message.AdditionalNodes) > 0 {
+		model.AdditionalNodes = make([]*defproto.Node, len(message.AdditionalNodes))
+		for i, n := range message.AdditionalNodes {
+			model.AdditionalNodes[i] = EncodeNode(&n)
+		}
 	}
 	return model
 }
@@ -494,15 +497,28 @@ func EncodeNewsLetterMessageMetadata(metadata types.NewsletterMetadata) *defprot
 }
 
 func EncodeBlocklist(blocklist *types.Blocklist) *defproto.Blocklist {
-	JIDs := []*defproto.JID{}
-	for _, jid := range blocklist.JIDs {
-		JIDs = append(JIDs, EncodeJidProto(jid))
+	if blocklist == nil {
+		return nil
 	}
+
+	items := []*defproto.BlocklistItems{}
+	for _, item := range blocklist.Items {
+		items = append(items, &defproto.BlocklistItems{
+			LID:    EncodeJidProto(item.LID),
+			PN:     EncodeJidProto(item.PN),
+			Active: &item.Active,
+		})
+	}
+
+	addressingMode := EncodeAddressingMode(blocklist.AddressingMode)
+
 	return &defproto.Blocklist{
-		DHash: &blocklist.DHash,
-		JIDs:  JIDs,
+		AddressingMode: addressingMode,
+		DHash:          &blocklist.DHash,
+		Items:          items,
 	}
 }
+
 
 func EncodeNewsletterMessage(message *types.NewsletterMessage) *defproto.NewsletterMessage {
 	if message == nil {

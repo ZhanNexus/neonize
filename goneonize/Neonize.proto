@@ -392,10 +392,18 @@ message NewsletterMetadata {
 
 }
 
-message Blocklist {
-    required string DHash = 1;
-    repeated JID JIDs = 2;
+message BlocklistItems {
+    optional JID LID = 1;
+    optional JID PN = 2;
+    optional bool Active = 3;
 }
+
+message Blocklist {
+    optional AddressingMode AddressingMode = 1;
+    optional string DHash = 2;
+    repeated BlocklistItems Items = 3;
+}
+
 message Reaction {
     required string type = 1;
     required int64 count = 2;
