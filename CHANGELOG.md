@@ -127,6 +127,14 @@ All notable changes to this project are documented in this file.
 
 <!-- version list -->
 
+## v0.6.2 (2026-11-10)
+
+### Bug Fixes
+
+- Triger release
+  ([`fef8433`](https://github.com/ZhanNexus/neonize/commit/fef8433707e6c284f33641300ee6075883623241))
+
+
 ## v0.10.0 (2026-11-03)
 
 
