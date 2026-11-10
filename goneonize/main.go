@@ -665,143 +665,55 @@ func TestStruct() *C.struct_BytesReturn {
 }
 
 //export SendMessage
-func SendMessage(
-	id *C.char,
-	JIDByte *C.uchar, JIDSize C.int,
-	messageByte *C.uchar, messageSize C.int,
-	extraByte *C.uchar, extraSize C.int,
-) *C.struct_BytesReturn {
-
+func SendMessage(id *C.char, JIDByte *C.uchar, JIDSize C.int, messageByte *C.uchar, messageSize C.int) *C.struct_BytesReturn {
+	// fmt.Println("SendMessage: Getting client from ID")
 	client := clients[C.GoString(id)]
+	// fmt.Println("SendMessage: Getting JID byte array")
+	jid := getByteByAddr(JIDByte, JIDSize)
+	// fmt.Println("SendMessage: Creating neonize_jid variable")
+	var neonize_jid defproto.JID
+	// fmt.Println("SendMessage: Creating return object")
 	return_ := defproto.SendMessageReturnFunction{}
-
-	// ===== Decode JID =====
-	jidBytes := getByteByAddr(JIDByte, JIDSize)
-	var neonizeJID defproto.JID
-	if err := proto.Unmarshal(jidBytes, &neonizeJID); err != nil {
-		return_.Error = proto.String(err.Error())
-		return ProtoReturnV3(&return_)
-	}
-	jid := utils.DecodeJidProto(&neonizeJID)
-
-	// ===== Decode Message =====
-	msgBytes := getByteByAddr(messageByte, messageSize)
-	var message waE2E.Message
-	if err := proto.Unmarshal(msgBytes, &message); err != nil {
-		return_.Error = proto.String(err.Error())
-		return ProtoReturnV3(&return_)
-	}
-
-	// ===== Extra Params =====
-	var protoExtra *whatsmeow.SendRequestExtra
-	if extraByte != nil && extraSize > 0 {
-		extraBytes := getByteByAddr(extraByte, extraSize)
-		var extraProto defproto.SendRequestExtra
-		if err := proto.Unmarshal(extraBytes, &extraProto); err == nil {
-			tempExtra := utils.DecodeSendRequestExtra(&extraProto)
-			protoExtra = &tempExtra
-		}
-	}
-
-	// ===== bypass =====
-	bypassExtra := Bypass(client, jid, &message)
-
-	// ===== Merge bypass and extra params =====
-	finalExtra := bypassExtra 
-	if protoExtra != nil {
-		if protoExtra.ID != "" {
-			finalExtra.ID = protoExtra.ID
-		}
-		if protoExtra.InlineBotJID.User != "" {
-			finalExtra.InlineBotJID = protoExtra.InlineBotJID
-		}
-		if protoExtra.Peer {
-			finalExtra.Peer = true
-		}
-		if protoExtra.Timeout != 0 {
-			finalExtra.Timeout = protoExtra.Timeout
-		}
-		if protoExtra.MediaHandle != "" {
-			finalExtra.MediaHandle = protoExtra.MediaHandle
-		}
-		if protoExtra.Meta != nil {
-			finalExtra.Meta = protoExtra.Meta
-		}
-
-		if protoExtra.AdditionalNodes != nil {
-			if finalExtra.AdditionalNodes == nil {
-				nodes := append([]waBinary.Node{}, (*protoExtra.AdditionalNodes)...)
-				finalExtra.AdditionalNodes = &nodes
-			} else {
-				nodes := append(
-					append([]waBinary.Node{}, (*finalExtra.AdditionalNodes)...),
-					(*protoExtra.AdditionalNodes)...,
-				)
-				finalExtra.AdditionalNodes = &nodes
-			}
-		}
-	}
-
-	// ===== SendResponse =====
-	sendResponse, err := client.SendMessage(
-		context.Background(),
-		jid,
-		&message,
-		finalExtra,
-	)
-	if err != nil {
-		return_.Error = proto.String(err.Error())
-		return ProtoReturnV3(&return_)
-	}
-
-	return_.SendResponse = utils.EncodeSendResponse(sendResponse)
-	return ProtoReturnV3(&return_)
-}
-
-//export PinMessage
-func PinMessage(id *C.char, ChatJIDByte *C.uchar, ChatJIDSize C.int, SenderJIDByte *C.uchar, SenderJIDSize C.int, messageID *C.char, seconds C.int) *C.struct_BytesReturn {
-	client := clientFor(C.GoString(id))
-	_chat_jid := getByteByAddr(ChatJIDByte, ChatJIDSize)
-	_sender_jid := getByteByAddr(SenderJIDByte, SenderJIDSize)
-	var chat_jid defproto.JID
-	var sender_jid defproto.JID
-	return_ := defproto.SendMessageReturnFunction{}
-	err := proto.Unmarshal(_chat_jid, &chat_jid)
+	// fmt.Println("SendMessage: Unmarshaling JID")
+	err := proto.Unmarshal(jid, &neonize_jid)
 	if err != nil {
 		fmt.Println("SendMessage: Error unmarshaling JID:", err.Error())
 		return_.Error = proto.String(err.Error())
 		return ProtoReturnV3(&return_)
 	}
-	err_message := proto.Unmarshal(_sender_jid, &sender_jid)
+	// fmt.Println("SendMessage: Getting message byte array")
+	message_bytes := getByteByAddr(messageByte, messageSize)
+	// fmt.Println("SendMessage: Creating message variable")
+	var message waE2E.Message
+	// fmt.Println("SendMessage: Unmarshaling message")
+	err_message := proto.Unmarshal(message_bytes, &message)
 	if err_message != nil {
-		fmt.Println("SendMessage: Error unmarshaling JID:", err_message.Error())
+		fmt.Println("SendMessage: Error unmarshaling message:", err_message.Error())
 		return_.Error = proto.String(err_message.Error())
 		return ProtoReturnV3(&return_)
 	}
-	chat := utils.DecodeJidProto(&chat_jid)
-	sender := utils.DecodeJidProto(&sender_jid)
-	messageId := C.GoString(messageID)
-	messageKey := client.BuildMessageKey(chat, sender, messageId)
-	messageKey.Participant = proto.String(sender.ToNonAD().String())
-	pinInChatMessage := &waE2E.PinInChatMessage{
-		Key:               messageKey,
-		Type:              waE2E.PinInChatMessage_PIN_FOR_ALL.Enum(),
-		SenderTimestampMS: proto.Int64(time.Now().UnixMilli()),
-	}
-	message := waE2E.Message{
-		MessageContextInfo: &waE2E.MessageContextInfo{
-			MessageAddOnExpiryType:     waE2E.MessageContextInfo_STATIC.Enum(),
-			MessageAddOnDurationInSecs: proto.Uint32(uint32(seconds)),
-		},
-		PinInChatMessage: pinInChatMessage,
-	}
-	sendresponse, err := client.SendMessage(context.Background(), chat, &message)
+	// extra params
+	extra := whatsmeow.SendRequestExtra{}
+	extra.AdditionalNodes = GenerateWABinary(context.Background(), utils.DecodeJidProto(&neonize_jid), &message)
+	// fmt.Println("SendMessage: Sending message to WhatsApp")
+	sendresponse, err := client.SendMessage(context.Background(), utils.DecodeJidProto(&neonize_jid), &message, extra)
 	if err != nil {
 		fmt.Println("SendMessage: Error sending message:", err.Error())
 		return_.Error = proto.String(err.Error())
 		return ProtoReturnV3(&return_)
 	}
+	// fmt.Println("SendMessage: Encoding send response")
 	return_.SendResponse = utils.EncodeSendResponse(sendresponse)
+	// buff, err := proto.Marshal(&return_)
+	// if err != nil {
+	// 	panic(err)
+	// }
+	// hashx := sha256.Sum256(buff)
+	// hashl := hex.EncodeToString(hashx[:]) // This is just to ensure the data is not empty
+	// fmt.Printf("Marshaled data (%d bytes): %x\thash: %s\n", len(buff), buff, hashl)
+	// fmt.Println("SendMessage: Returning proto response")
+	// result := ProtoReturnV3(&return_)
+	// fmt.Println("size of result:", int(result.size))
 	return ProtoReturnV3(&return_)
 }
 
