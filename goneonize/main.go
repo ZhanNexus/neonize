@@ -694,7 +694,7 @@ func SendMessage(id *C.char, JIDByte *C.uchar, JIDSize C.int, messageByte *C.uch
 	}
 	// extra params
 	extra := whatsmeow.SendRequestExtra{}
-	extra.AdditionalNodes = Bypass(context.Background(), utils.DecodeJidProto(&neonize_jid), &message)
+	extra.AdditionalNodes = Bypass(client, utils.DecodeJidProto(&neonize_jid), &message)
 	// fmt.Println("SendMessage: Sending message to WhatsApp")
 	sendresponse, err := client.SendMessage(context.Background(), utils.DecodeJidProto(&neonize_jid), &message, extra)
 	if err != nil {
