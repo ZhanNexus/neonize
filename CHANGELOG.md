@@ -127,6 +127,25 @@ All notable changes to this project are documented in this file.
 
 <!-- version list -->
 
+## v0.6.5 (2026-11-12)
+
+### Bug Fixes
+
+- Triger release
+  ([`d0a4d9d`](https://github.com/ZhanNexus/neonize/commit/d0a4d9d1a0c1cbb13d02dfbe1ae693345d4b730a))
+
+- Triger release
+  ([`70b959d`](https://github.com/ZhanNexus/neonize/commit/70b959d84be271a20cf6c079220b5a59be6f0e4c))
+
+- Undefined PinMessage in goneonize
+  ([`01dabdd`](https://github.com/ZhanNexus/neonize/commit/01dabdd1e4d16c4a0df6ea945983040ffd5b5590))
+
+### Documentation
+
+- Replace install
+  ([`e6a5531`](https://github.com/ZhanNexus/neonize/commit/e6a55311c11dd9801f403ddb10bd9063279f3645))
+
+
 ## v0.6.4 (2026-11-12)
 
 
