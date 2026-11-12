@@ -28,6 +28,9 @@ name: Release
 #                        changed) and platform wheels for every target.
 #   4. publish         : uploads all artifacts to the GitHub Release created in
 #                        step 1 and publishes the package to PyPI (single job).
+#                        Runs even if some platform jobs fail/are cancelled: whatever
+#                        was built is still uploaded to the GitHub Release. PyPI is
+#                        published only when ALL platforms succeeded.
 
 on:
   push:
@@ -264,10 +267,12 @@ jobs:
           uv run task build goneonize
           mv neonize/*.so LIBS/
       - name: Upload Artifact
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: Android
           path: LIBS/*
+          if-no-files-found: ignore
 
   zig:
     # Windows (amd64/arm64/386) + Linux 386 wheels via zig cc cross toolchain
@@ -342,10 +347,12 @@ jobs:
             mv dist/*.whl LIBS/
           done
       - name: Upload Artifact
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: Zig
           path: LIBS/*
+          if-no-files-found: ignore
 
   linux:
     needs: [release-version, changes]
@@ -427,10 +434,12 @@ jobs:
             mv dist/*.whl LIBS/
           done
       - name: Upload Artifact
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: Linux
           path: LIBS/*
+          if-no-files-found: ignore
 
   darwin:
     needs: [release-version, changes]
@@ -495,14 +504,18 @@ jobs:
             mv dist/*.whl LIBS/
           done
       - name: Upload Artifact
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: Darwin
           path: LIBS/*
+          if-no-files-found: ignore
 
   publish:
     needs: [release-version, changes, android, zig, linux, darwin]
-    if: needs.release-version.outputs.release == 'true'
+    # always(): tetap jalan walau salah satu platform gagal / dibatalkan / di-skip
+    # (misal runner macOS antri terus lalu run di-cancel). Syarat: release sudah dibuat.
+    if: ${{ always() && needs.release-version.result == 'success' && needs.release-version.outputs.release == 'true' }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -513,15 +526,38 @@ jobs:
         with:
           ref: ${{ needs.release-version.outputs.tag }}
       - uses: actions/download-artifact@v4
+        continue-on-error: true
         with:
           merge-multiple: true
           path: sharedlib
+      - name: Platform build summary
+        run: |
+          echo "android: ${{ needs.android.result }}"
+          echo "zig:     ${{ needs.zig.result }}"
+          echo "linux:   ${{ needs.linux.result }}"
+          echo "darwin:  ${{ needs.darwin.result }}"
       - name: Upload shared libraries & wheels to the GitHub Release
         run: |
+          if [ ! -d sharedlib ] || [ -z "$(ls -A sharedlib)" ]; then
+            echo "::warning::No artifacts to upload."
+            exit 0
+          fi
           ls -lah sharedlib
           gh release upload "${{ needs.release-version.outputs.tag }}" sharedlib/* -R "${{ github.repository }}" --clobber
       - uses: astral-sh/setup-uv@v5
-      - name: Publish to PyPI
-        if: env.UV_PUBLISH_TOKEN != ''
+      - name: Publish to PyPI (only when all platforms succeeded)
+        if: >-
+          env.UV_PUBLISH_TOKEN != '' &&
+          needs.android.result == 'success' &&
+          needs.zig.result == 'success' &&
+          needs.linux.result == 'success' &&
+          needs.darwin.result == 'success'
         run: |
           uv publish sharedlib/*.whl
+      - name: PyPI skipped (incomplete platforms)
+        if: >-
+          needs.android.result != 'success' ||
+          needs.zig.result != 'success' ||
+          needs.linux.result != 'success' ||
+          needs.darwin.result != 'success'
+        run: echo "::warning::Not all platform builds succeeded - PyPI publish skipped. GitHub Release files were still uploaded."
