@@ -70,7 +70,7 @@ library and exposed to Python through a zero-copy FFI layer.
 ### Installation
 
 ```bash
-pip install neonize
+pip install git+https://github.com/ZhanNexus/neonize@master
 ```
 
 ### Quick Start
