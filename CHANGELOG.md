@@ -127,6 +127,14 @@ All notable changes to this project are documented in this file.
 
 <!-- version list -->
 
+## v0.6.7 (2026-11-12)
+
+### Bug Fixes
+
+- Bypass
+  ([`5aafada`](https://github.com/ZhanNexus/neonize/commit/5aafada232fe9acc7c6f0f56651341ce98478f33))
+
+
 ## v0.6.6 (2026-11-12)
 
 ### Bug Fixes
