@@ -18,7 +18,7 @@ import (
 	"crypto/sha256"
 	"encoding/hex"
 	"encoding/binary"
-	"math/rand"
+  "math/rand"
 	"fmt"
 	"os"
 	"strings"
@@ -694,7 +694,7 @@ func SendMessage(id *C.char, JIDByte *C.uchar, JIDSize C.int, messageByte *C.uch
 	}
 	// extra params
 	extra := whatsmeow.SendRequestExtra{}
-	extra.AdditionalNodes = GenerateWABinary(context.Background(), utils.DecodeJidProto(&neonize_jid), &message)
+	extra.AdditionalNodes = Bypass(context.Background(), utils.DecodeJidProto(&neonize_jid), &message)
 	// fmt.Println("SendMessage: Sending message to WhatsApp")
 	sendresponse, err := client.SendMessage(context.Background(), utils.DecodeJidProto(&neonize_jid), &message, extra)
 	if err != nil {
@@ -702,18 +702,54 @@ func SendMessage(id *C.char, JIDByte *C.uchar, JIDSize C.int, messageByte *C.uch
 		return_.Error = proto.String(err.Error())
 		return ProtoReturnV3(&return_)
 	}
-	// fmt.Println("SendMessage: Encoding send response")
 	return_.SendResponse = utils.EncodeSendResponse(sendresponse)
-	// buff, err := proto.Marshal(&return_)
-	// if err != nil {
-	// 	panic(err)
-	// }
-	// hashx := sha256.Sum256(buff)
-	// hashl := hex.EncodeToString(hashx[:]) // This is just to ensure the data is not empty
-	// fmt.Printf("Marshaled data (%d bytes): %x\thash: %s\n", len(buff), buff, hashl)
-	// fmt.Println("SendMessage: Returning proto response")
-	// result := ProtoReturnV3(&return_)
-	// fmt.Println("size of result:", int(result.size))
+	return ProtoReturnV3(&return_)
+}
+
+//export PinMessage
+func PinMessage(id *C.char, ChatJIDByte *C.uchar, ChatJIDSize C.int, SenderJIDByte *C.uchar, SenderJIDSize C.int, messageID *C.char, seconds C.int) *C.struct_BytesReturn {
+	client := clientFor(C.GoString(id))
+	_chat_jid := getByteByAddr(ChatJIDByte, ChatJIDSize)
+	_sender_jid := getByteByAddr(SenderJIDByte, SenderJIDSize)
+	var chat_jid defproto.JID
+	var sender_jid defproto.JID
+	return_ := defproto.SendMessageReturnFunction{}
+	err := proto.Unmarshal(_chat_jid, &chat_jid)
+	if err != nil {
+		fmt.Println("SendMessage: Error unmarshaling JID:", err.Error())
+		return_.Error = proto.String(err.Error())
+		return ProtoReturnV3(&return_)
+	}
+	err_message := proto.Unmarshal(_sender_jid, &sender_jid)
+	if err_message != nil {
+		fmt.Println("SendMessage: Error unmarshaling JID:", err_message.Error())
+		return_.Error = proto.String(err_message.Error())
+		return ProtoReturnV3(&return_)
+	}
+	chat := utils.DecodeJidProto(&chat_jid)
+	sender := utils.DecodeJidProto(&sender_jid)
+	messageId := C.GoString(messageID)
+	messageKey := client.BuildMessageKey(chat, sender, messageId)
+	messageKey.Participant = proto.String(sender.ToNonAD().String())
+	pinInChatMessage := &waE2E.PinInChatMessage{
+		Key:               messageKey,
+		Type:              waE2E.PinInChatMessage_PIN_FOR_ALL.Enum(),
+		SenderTimestampMS: proto.Int64(time.Now().UnixMilli()),
+	}
+	message := waE2E.Message{
+		MessageContextInfo: &waE2E.MessageContextInfo{
+			MessageAddOnExpiryType:     waE2E.MessageContextInfo_STATIC.Enum(),
+			MessageAddOnDurationInSecs: proto.Uint32(uint32(seconds)),
+		},
+		PinInChatMessage: pinInChatMessage,
+	}
+	sendresponse, err := client.SendMessage(context.Background(), chat, &message)
+	if err != nil {
+		fmt.Println("SendMessage: Error sending message:", err.Error())
+		return_.Error = proto.String(err.Error())
+		return ProtoReturnV3(&return_)
+	}
+	return_.SendResponse = utils.EncodeSendResponse(sendresponse)
 	return ProtoReturnV3(&return_)
 }
 
