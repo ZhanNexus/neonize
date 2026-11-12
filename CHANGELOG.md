@@ -127,6 +127,9 @@ All notable changes to this project are documented in this file.
 
 <!-- version list -->
 
+## v0.6.3 (2026-11-12)
+
+
 ## v0.6.2 (2026-11-10)
 
 ### Bug Fixes
