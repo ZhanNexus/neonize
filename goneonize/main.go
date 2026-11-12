@@ -18,7 +18,7 @@ import (
 	"crypto/sha256"
 	"encoding/hex"
 	"encoding/binary"
-  "math/rand"
+	"math/rand"
 	"fmt"
 	"os"
 	"strings"
