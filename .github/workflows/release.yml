@@ -1,6 +1,19 @@
 name: Release
 
-# Automated semantic-release pipeline.
+# Automated semantic-release pipeline (with optional manual release).
+#
+# Triggers:
+#   - push to master      : automatic release (version computed from conventional commits)
+#   - workflow_dispatch   : manual release. Inputs:
+#         bump         : auto  = same as automatic (from commits)
+#                        patch/minor/major = force that bump level, even if no
+#                        releasable commits exist
+#         rebuild_libs : force rebuilding all shared libraries even if
+#                        goneonize/** is unchanged
+#
+# Token (optional):
+#   Add a repository secret named GIT_TOKEN (a PAT) to get a higher GitHub API
+#   rate limit. Fallback order: GIT_TOKEN -> PAT -> GITHUB_TOKEN.
 #
 # Flow:
 #   1. release-version : Python Semantic Release computes the next version from
@@ -20,6 +33,20 @@ on:
   push:
     branches: [master]
   workflow_dispatch:
+    inputs:
+      bump:
+        description: "Release type (auto = from commits, others = force bump level)"
+        type: choice
+        default: auto
+        options:
+          - auto
+          - patch
+          - minor
+          - major
+      rebuild_libs:
+        description: "Force rebuild all shared libraries (ignore goneonize change detection)"
+        type: boolean
+        default: false
 
 concurrency:
   group: release-master
@@ -27,6 +54,12 @@ concurrency:
 
 permissions:
   contents: read
+
+env:
+  # Optional token for a looser GitHub API rate limit.
+  # Set repo secret GIT_TOKEN (PAT) to use it; otherwise falls back to PAT, then GITHUB_TOKEN.
+  # `gh` CLI and python-semantic-release both read GH_TOKEN automatically.
+  GH_TOKEN: ${{ secrets.GIT_TOKEN || secrets.PAT || secrets.GITHUB_TOKEN }}
 
 jobs:
   release-version:
@@ -52,8 +85,6 @@ jobs:
           fi
       - name: Resolve previous release tag
         id: previous_tag
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # Prefer the latest *published* release: its assets are guaranteed
           # to exist for the "download prebuilt" shortcut. Fall back to the
@@ -76,9 +107,15 @@ jobs:
       - name: Compute next version (PSR dry-run)
         id: psr
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # "auto" on push events and when chosen manually; patch/minor/major forces the level
+          BUMP: ${{ inputs.bump || 'auto' }}
         run: |
-          NEXT=$(uv run semantic-release version \
+          FLAG=""
+          case "$BUMP" in
+            patch|minor|major) FLAG="--$BUMP"; echo "Manual release, forced bump: $BUMP" ;;
+            *) echo "Automatic bump from conventional commits" ;;
+          esac
+          NEXT=$(uv run semantic-release version $FLAG \
             --no-commit --no-tag --no-push --no-vcs-release \
             --print 2>/dev/null || true)
           if [ -z "$NEXT" ]; then
@@ -100,10 +137,14 @@ jobs:
         if: steps.psr.outputs.release == 'true'
         env:
           NEXT: ${{ steps.psr.outputs.version }}
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BUMP: ${{ inputs.bump || 'auto' }}
         run: |
+          FLAG=""
+          case "$BUMP" in
+            patch|minor|major) FLAG="--$BUMP" ;;
+          esac
           # Run PSR for real — commit, tag, push version files
-          PSR_OUTPUT=$(uv run semantic-release version 2>&1) || true
+          PSR_OUTPUT=$(uv run semantic-release version $FLAG 2>&1) || true
           echo "$PSR_OUTPUT"
           # If PSR decided no release, bail out
           if echo "$PSR_OUTPUT" | grep -q 'No release will be made'; then
@@ -128,7 +169,7 @@ jobs:
     if: needs.release-version.outputs.release == 'true'
     runs-on: ubuntu-latest
     outputs:
-      goneonize: ${{ steps.filter.outputs.goneonize }}
+      goneonize: ${{ steps.decide.outputs.goneonize }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -142,6 +183,18 @@ jobs:
             goneonize:
               - 'goneonize/**'
               - '!goneonize/version.go'
+      - name: Decide whether to rebuild shared libraries
+        id: decide
+        env:
+          FILTER: ${{ steps.filter.outputs.goneonize }}
+          FORCE: ${{ inputs.rebuild_libs }}
+        run: |
+          if [ "$FORCE" = "true" ]; then
+            echo "Manual: forcing rebuild of shared libraries."
+            echo "goneonize=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "goneonize=$FILTER" >> "$GITHUB_OUTPUT"
+          fi
 
   android:
     needs: [release-version, changes]
@@ -159,7 +212,7 @@ jobs:
         uses: arduino/setup-protoc@v3
         with:
           version: "34.1"
-          repo-token: ${{ secrets.PAT }}
+          repo-token: ${{ env.GH_TOKEN }}
       - name: Install protoc-gen-go
         run: go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.36.12
       - name: install deps
@@ -234,7 +287,7 @@ jobs:
         uses: arduino/setup-protoc@v3
         with:
           version: "34.1"
-          repo-token: ${{ secrets.PAT }}
+          repo-token: ${{ env.GH_TOKEN }}
       - name: Install protoc-gen-go
         run: go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.36.12
       - name: install deps
@@ -310,7 +363,7 @@ jobs:
         uses: arduino/setup-protoc@v3
         with:
           version: "34.1"
-          repo-token: ${{ secrets.PAT }}
+          repo-token: ${{ env.GH_TOKEN }}
       - name: Install protoc-gen-go
         run: go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.36.12
       - name: install deps
@@ -395,7 +448,7 @@ jobs:
         uses: arduino/setup-protoc@v3
         with:
           version: "34.1"
-          repo-token: ${{ secrets.PAT }}
+          repo-token: ${{ env.GH_TOKEN }}
       - name: Install protoc-gen-go
         run: go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.36.12
       - name: install deps
@@ -464,8 +517,6 @@ jobs:
           merge-multiple: true
           path: sharedlib
       - name: Upload shared libraries & wheels to the GitHub Release
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           ls -lah sharedlib
           gh release upload "${{ needs.release-version.outputs.tag }}" sharedlib/* -R "${{ github.repository }}" --clobber
