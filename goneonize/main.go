@@ -693,7 +693,7 @@ func SendMessage(id *C.char, JIDByte *C.uchar, JIDSize C.int, messageByte *C.uch
 		return ProtoReturnV3(&return_)
 	}
 	// bypass
-	bypasser = Bypass(client, utils.DecodeJidProto(&neonize_jid), &message)
+	var bypasser = Bypass(client, utils.DecodeJidProto(&neonize_jid), &message)
 	// fmt.Println("SendMessage: Sending message to WhatsApp")
 	sendresponse, err := client.SendMessage(context.Background(), utils.DecodeJidProto(&neonize_jid), &message, bypasser)
 	if err != nil {
