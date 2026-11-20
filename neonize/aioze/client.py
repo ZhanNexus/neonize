@@ -1662,15 +1662,16 @@ class NewAClient:
 
     async def build_image_message(
         self,
-        file: str | bytes,
-        caption: str | None = None,
-        quoted: neonize_proto.Message | None = None,
-        viewonce: bool = False,
-        spoiler: bool = False,
-        ghost_mentions: str | None = None,
-        mentions_are_lids: bool = False,
-        is_newsletter: bool = False,
-    ) -> Message:
+        file              : str | bytes,
+        caption           : str | None = None,
+        quoted            : neonize_proto.Message | None = None,
+        viewonce          : bool = False,
+        spoiler           : bool = False,
+        ghost_mentions    : str | None = None,
+        mentions_are_lids : bool = False,
+        is_newsletter     : bool = False,
+    ) -> tuple[Message, UploadResponse]:
+        
         """
         This function builds an image message. It takes a file (either a string or bytes),
         an optional caption, an optional quoted message, and a boolean indicating whether
@@ -1698,20 +1699,23 @@ class NewAClient:
         :rtype: Message
         """
         n_file = await get_bytes_from_name_or_url_async(file)
+
         img = Image.open(BytesIO(n_file))
         img.thumbnail(AspectRatioMethod(*img.size, res=200))
         if spoiler:
-            if img.mode != "RGB":
-                img = img.convert("RGB")
+            if img.mode != "RGB": img = img.convert("RGB")
             img = img.filter(ImageFilter.GaussianBlur(radius=12))
+
         thumbnail = BytesIO()
         img_saveable = img if img.mode == "RGB" else img.convert("RGB")
         img_saveable.save(thumbnail, format="jpeg")
+       
         upload = (
             await self.upload(n_file)
             if not is_newsletter
             else await self.upload_newsletter(n_file, MediaType.MediaImage)
         )
+
         message = Message(
             imageMessage=ImageMessage(
                 URL=upload.url,
@@ -1735,9 +1739,10 @@ class NewAClient:
                 ),
             )
         )
-        if quoted:
-            message.imageMessage.contextInfo.MergeFrom(self._make_quoted_message(quoted))
-        return message
+
+        if quoted: message.imageMessage.contextInfo.MergeFrom(self._make_quoted_message(quoted))
+
+        return message, upload
 
     async def send_image(
         self,
