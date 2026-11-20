@@ -347,6 +347,8 @@ func Bypass(client *whatsmeow.Client, chatJID types.JID, message *waE2E.Message)
 	}
 	extra.AdditionalNodes = GenerateWABinary(context.Background(), chatJID, message)
 
+	extra.MediaHandle = `json:"handle"`
+
 	return extra
 }
 
