@@ -7,7 +7,7 @@ from tqdm import tqdm
 from .utils.platform import generated_name
 
 __GONEONIZE_VERSION__ = "0.6.8"
-__GIT_RELEASE_URL__ = "https://github.com/ZhanNexus/neonize"
+__GIT_RELEASE_URL__ = "https://github.com/marcos-tulio/neonize"
 
 
 class UnsupportedPlatform(Exception):
