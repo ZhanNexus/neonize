@@ -52,7 +52,7 @@ def download_whatsmeow():
     name = WORKDIR / "whatsmeow.zip"
     print(f"{Fore.RED}[{Fore.GREEN}{name.name} {Fore.YELLOW}'HEAD'{Fore.RED}]{Fore.RESET}")
     resp = requests.get(
-        "https://github.com/tulir/whatsmeow/archive/refs/heads/main.zip", stream=True
+        "https://github.com/marcos-tulio/whatsmeow/archive/refs/heads/main.zip", stream=True
     )
     total = int(resp.headers.get("content-length", 0))
     with (
@@ -91,7 +91,7 @@ def download_whatsmeow():
     shutil.rmtree(WORKDIR / ".dest")
     print(f"{Fore.BLUE}[INFO] Work directory cleaned up successfully.")
     git_proto_sha = ""
-    last_sha_commit = requests.get("https://api.github.com/repos/tulir/whatsmeow/contents/").json()
+    last_sha_commit = requests.get("https://api.github.com/repos/marcos-tulio/whatsmeow/contents/").json()
     for result in filter(lambda item: item["name"] == "proto", last_sha_commit):
         git_proto_sha = result["sha"]
         break
@@ -101,7 +101,7 @@ def download_whatsmeow():
 
 def upgradable() -> ProtoCommit:
     git_proto_sha = ""
-    last_sha_commit = requests.get("https://api.github.com/repos/tulir/whatsmeow/contents/").json()
+    last_sha_commit = requests.get("https://api.github.com/repos/marcos-tulio/whatsmeow/contents/").json()
     for result in filter(lambda item: item["name"] == "proto", last_sha_commit):
         git_proto_sha = result["sha"]
         break
