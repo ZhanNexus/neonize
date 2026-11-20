@@ -127,6 +127,14 @@ All notable changes to this project are documented in this file.
 
 <!-- version list -->
 
+## v0.11.0 (2026-11-20)
+
+### Features
+
+- Replace whatsmeow download to my repo
+  ([`d60e667`](https://github.com/marcos-tulio/neonize/commit/d60e667d3dfd8d657c61a47a188716d0a222256c))
+
+
 ## v0.6.8 (2026-11-12)
 
 ### Bug Fixes
