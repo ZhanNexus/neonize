@@ -720,6 +720,7 @@ func SendMessage(
 	}
 
 	var send_extra = utils.DecodeSendRequestExtra( &SendRequestExtra )
+	var chatJID = utils.DecodeJidProto(&neonize_jid)
 
 	// Bypass
 	ownID := client.Store.ID
@@ -731,11 +732,10 @@ func SendMessage(
 	}
 	send_extra.AdditionalNodes = GenerateWABinary(context.Background(), chatJID, message)
 
-
 	// fmt.Println("SendMessage: Sending message to WhatsApp")
 	sendresponse, err := client.SendMessage(
 		context.Background(), 
-		utils.DecodeJidProto(&neonize_jid), 
+		chatJID, 
 		&message, 
 		send_extra,
 	)
