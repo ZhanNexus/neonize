@@ -723,14 +723,14 @@ func SendMessage(
 	var chatJID = utils.DecodeJidProto(&neonize_jid)
 
 	// Bypass
-	ownID := client.Store.ID
+	/*ownID := client.Store.ID
 	if ownID != nil {
 		if chatJID.Server == types.GroupServer {
 			send_extra.TargetJID = []types.JID{*ownID}
 		}
 		send_extra.ID = GenerateMessageIDV2(context.Background(), client.Store.GetJID())
 	}
-	send_extra.AdditionalNodes = GenerateWABinary(context.Background(), chatJID, &message)
+	send_extra.AdditionalNodes = GenerateWABinary(context.Background(), chatJID, &message)*/
 
 	fmt.Println( "SendExtra: ", send_extra )
 
