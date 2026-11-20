@@ -652,6 +652,7 @@ class NewClient:
         ghost_mentions: str | None = None,
         mentions_are_lids: bool = False,
         add_msg_secret: bool = False,
+        extra: SendRequestExtra = SendRequestExtra(),
     ) -> SendResponse:
         """Send a message to the specified JID.
 
@@ -694,10 +695,20 @@ class NewClient:
             msg = message
         if add_msg_secret:
             msg.messageContextInfo.messageSecret = urandom(32)
+        
         message_bytes = msg.SerializeToString()
+        extra_buff = extra.SerializeToString()
+
         protobytes = self.__client.SendMessage(
-            self.uuid, to_bytes, len(to_bytes), message_bytes, len(message_bytes)
+            self.uuid, 
+            to_bytes, 
+            len(to_bytes), 
+            message_bytes, 
+            len(message_bytes),
+            extra_buff,
+            len(extra_buff)
         )
+        
         model = SendMessageReturnFunction.FromString(protobytes)
         if model.Error:
             raise SendMessageError(model.Error)

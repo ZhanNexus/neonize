@@ -248,6 +248,8 @@ if not os.environ.get("SPHINX"):
         ctypes.c_int,
         ctypes.c_char_p,
         ctypes.c_int,
+        ctypes.c_char_p,
+        ctypes.c_int,
     ]
     gocode.SendMessage.restype = ctypes.POINTER(Bytes)
     gocode.SendSPRMessage.argtypes = [
