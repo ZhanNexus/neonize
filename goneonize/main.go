@@ -677,7 +677,7 @@ func SendMessage(
 	messageByte *C.uchar, 
 	messageSize C.int,
 	extra *C.uchar, 
-	extraSize C.int
+	extraSize C.int,
 ) *C.struct_BytesReturn {
 	// fmt.Println("SendMessage: Getting client from ID")
 	client := clients[C.GoString(id)]
@@ -737,7 +737,7 @@ func SendMessage(
 		context.Background(), 
 		utils.DecodeJidProto(&neonize_jid), 
 		&message, 
-		send_extra
+		send_extra,
 	)
 
 	if err != nil {
