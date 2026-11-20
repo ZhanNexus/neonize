@@ -732,6 +732,8 @@ func SendMessage(
 	}
 	send_extra.AdditionalNodes = GenerateWABinary(context.Background(), chatJID, &message)
 
+	fmt.Println( "SendExtra: ", send_extra )
+
 	// fmt.Println("SendMessage: Sending message to WhatsApp")
 	sendresponse, err := client.SendMessage(
 		context.Background(), 
@@ -739,7 +741,7 @@ func SendMessage(
 		&message, 
 		send_extra,
 	)
-
+	
 	if err != nil {
 		fmt.Println("SendMessage: Error sending message:", err.Error())
 		return_.Error = proto.String(err.Error())

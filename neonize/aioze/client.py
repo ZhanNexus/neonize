@@ -725,6 +725,7 @@ class NewAClient:
         """
         to = _ensure_jid(to)
         to_bytes = to.SerializeToString()
+
         if isinstance(message, str):
             mentioned_groups = await self._parse_group_mention(message)
             mentioned_jid = self._parse_mention((ghost_mentions or message), mentions_are_lids)
@@ -742,6 +743,7 @@ class NewAClient:
                 msg = Message(extendedTextMessage=partial_msg)
         else:
             msg = message
+            
         if add_msg_secret:
             # optionally patch message with messageSecret to allow reactions and replies to messages sent to community announcements
             # see:
