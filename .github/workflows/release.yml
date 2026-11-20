@@ -89,15 +89,28 @@ jobs:
       - name: Resolve previous release tag
         id: previous_tag
         run: |
-          # Prefer the latest *published* release: its assets are guaranteed
-          # to exist for the "download prebuilt" shortcut. Fall back to the
-          # newest pure-SemVer tag when no release exists yet.
-          PREV=$(gh api "repos/${{ github.repository }}/releases/latest" --jq .tag_name 2>/dev/null || true)
-          if [ -z "$PREV" ]; then
+          PREV=$(gh api "repos/${{ github.repository }}/releases/latest" --jq '.tag_name' 2>/dev/null || true)
+
+          if ! echo "$PREV" | grep -qE '^[0-9]+\.[0-9]+\.[0-9]+$'; then
             PREV=$(git ls-remote --tags origin \
               | grep -oE 'refs/tags/[0-9]+\.[0-9]+\.[0-9]+$' \
-              | sed 's|refs/tags/||' | sort -V | tail -1)
+              | sed 's|refs/tags/||' \
+              | sort -V \
+              | tail -1)
           fi
+
+          if [ -z "$PREV" ]; then
+            echo "::error::Could not determine previous release tag."
+            exit 1
+          fi
+
+          git fetch origin "refs/tags/$PREV:refs/tags/$PREV"
+
+          if ! git rev-parse --verify "refs/tags/$PREV^{commit}" >/dev/null 2>&1; then
+            echo "::error::Invalid previous tag: $PREV"
+            exit 1
+          fi
+
           echo "Using previous release/tag: $PREV"
           echo "previous_tag=$PREV" >> "$GITHUB_OUTPUT"
       - uses: astral-sh/setup-uv@v5
