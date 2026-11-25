@@ -102,3 +102,7 @@ jobs:
             goneonize
             automated pr
           assignees: krypton-byte
+
+permissions:
+  contents: write
+  pull-requests: write
